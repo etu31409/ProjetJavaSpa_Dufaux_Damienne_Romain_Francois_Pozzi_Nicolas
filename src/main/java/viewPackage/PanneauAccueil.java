@@ -208,6 +208,7 @@ public class PanneauAccueil extends JPanel {
         panneauBoutons.add(retour);
         validation = new JButton("Valider");
         panneauBoutons.add(validation);
+        validation.addActionListener(new EcouteurDeBouton());
         reinnitialiser = new JButton("Reinnitialiser");
         panneauBoutons.add(reinnitialiser);
     }
@@ -217,6 +218,27 @@ public class PanneauAccueil extends JPanel {
         private FenetreProprio fenetreProprio;
         public void actionPerformed(ActionEvent event){
             fenetreProprio = new FenetreProprio();
+        }
+    }
+
+    private class EcouteurDeBouton implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == validation){
+                Integer numeroCellule = 0;
+                try{
+                    numeroCellule = Integer.valueOf(cellule.getText());
+                }
+                catch (Exception error){
+                    numeroCellule = null;
+                }
+                finally {
+                   // if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
+                    if(numeroCellule == null || numeroCellule < 1){
+                        JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            }
         }
     }
 }
