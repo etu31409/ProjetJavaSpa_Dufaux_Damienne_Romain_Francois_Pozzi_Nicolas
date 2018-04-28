@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class DBDAOMedicament {
+public class DBDAOMedicament implements IMedicament{
     private Connection connectionUnique;
     private String sqlInstruction;
 
