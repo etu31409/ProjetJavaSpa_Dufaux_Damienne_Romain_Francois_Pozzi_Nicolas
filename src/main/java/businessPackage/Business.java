@@ -15,7 +15,11 @@ public class Business {
     IVeterinaire daoVeterinaire;
 
     public Business() {
+
         daoAnimal = new DBDAOAnimal();
+        daoMedicament = new DBDAOMedicament();
+        daoProprietaire = new DBDAOProprietaire();
+        daoVeterinaire = new DBDAOVeterinaire();
     }
 
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
