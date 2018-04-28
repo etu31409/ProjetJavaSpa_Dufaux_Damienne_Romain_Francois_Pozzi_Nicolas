@@ -109,5 +109,23 @@ public class DBDAO implements DAO{
             throw new AnimalException();
         }
     }
-    //test
+
+    /*public ArrayList<Animal>getAnimaux() throws AnimalException {
+        try {
+            Animal animal;
+            ArrayList<Animal> tousLesAnimaux = new ArrayList<Animal>();
+            while (data.next()) {
+                animal = new Animal();
+
+
+
+
+                tousLesAnimaux.add(animal);
+            }
+            return tousLesAnimaux;
+        }
+        catch(SQLException e){
+            throw new AnimalException();
+        }
+    }*/
 }
