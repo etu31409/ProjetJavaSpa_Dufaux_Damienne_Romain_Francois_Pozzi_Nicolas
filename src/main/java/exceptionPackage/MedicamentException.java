@@ -8,4 +8,9 @@ public class MedicamentException extends Exception  {
         message = "Erreur lors de la récuperation du médicament.";
 
     }
+
+    public String getMessage()
+    {
+        return message;
+    }
 }

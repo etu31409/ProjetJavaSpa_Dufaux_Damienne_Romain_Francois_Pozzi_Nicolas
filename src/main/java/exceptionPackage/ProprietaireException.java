@@ -8,4 +8,9 @@ public class ProprietaireException extends Exception {
         message = "Erreur lors de la récuperation du propriétaire.";
 
     }
+
+    public String getMessage()
+    {
+        return message;
+    }
 }
