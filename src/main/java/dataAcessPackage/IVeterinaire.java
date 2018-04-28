@@ -7,5 +7,6 @@ import modelPackage.Veterinaire;
 import java.util.ArrayList;
 
 public interface IVeterinaire {
-    ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException;
+    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException;
+    Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException;
 }

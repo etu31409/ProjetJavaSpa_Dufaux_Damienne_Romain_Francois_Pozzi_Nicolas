@@ -3,19 +3,19 @@ package modelPackage;
 import java.util.GregorianCalendar;
 
 public class Ordonnance {
-    private FicheDeSoins ficheDeSoins;
+    private SoinAvance ficheDeSoins;
     private Animal animal;
     private Medicament medicament;
     private GregorianCalendar dateOrdonnance;
 
-    public Ordonnance(FicheDeSoins ficheDeSoins, Animal animal, Medicament medicament, GregorianCalendar dateOrdonnance) {
+    public Ordonnance(SoinAvance ficheDeSoins, Animal animal, Medicament medicament, GregorianCalendar dateOrdonnance) {
         this.ficheDeSoins = ficheDeSoins;
         this.animal = animal;
         this.medicament = medicament;
         this.dateOrdonnance = dateOrdonnance;
     }
 
-    public FicheDeSoins getFicheDeSoins() {
+    public SoinAvance getFicheDeSoins() {
         return ficheDeSoins;
     }
 
@@ -31,7 +31,7 @@ public class Ordonnance {
         return dateOrdonnance;
     }
 
-    public void setFicheDeSoins(FicheDeSoins ficheDeSoins) {
+    public void setFicheDeSoins(SoinAvance ficheDeSoins) {
         this.ficheDeSoins = ficheDeSoins;
     }
 
