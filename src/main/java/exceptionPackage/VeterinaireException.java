@@ -8,4 +8,9 @@ public class VeterinaireException extends Exception {
         message = "Erreur lors de la récuperation du vétérinaire.";
 
     }
+
+    public String getMessage()
+    {
+        return message;
+    }
 }

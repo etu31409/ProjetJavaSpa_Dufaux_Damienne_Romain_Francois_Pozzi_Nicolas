@@ -41,7 +41,7 @@ public class DBDAOProprietaire implements IProprietaire{
                 tousLesProprietaires.add(proprietaire);
             }
 
-            connectionUnique.close();
+            //connectionUnique.close();
             return tousLesProprietaires;
 
         } catch (SQLException e) {
@@ -49,7 +49,12 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException {
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException
+    {
+       return getUnProprietaire(identifiantProprietaire, true);
+    }
+
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire, boolean fermerConnexion) throws SingletonConnectionException, ProprietaireException {
 
         try {
             if (connectionUnique == null) {
@@ -68,8 +73,9 @@ public class DBDAOProprietaire implements IProprietaire{
                 proprietaire.setNom(data.getString("nom"));
                 proprietaire.setPrenom(data.getString("prenom"));
             }
-
-            connectionUnique.close();
+            if (fermerConnexion) {
+                //connectionUnique.close();
+            }
             return proprietaire;
         }
         catch (SQLException e) {

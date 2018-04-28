@@ -22,7 +22,7 @@ public class Business {
     public ArrayList<String> getIdentifiantsAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
         ArrayList<String> identifiantsAnimaux = new ArrayList();
         for(Animal a :daoAnimal.getAnimaux()){
-            identifiantsAnimaux.add(a.getNom() +" " + a.getNumRegistre());
+            identifiantsAnimaux.add(" #" + a.getNumRegistre()+ " " + a.getNom());
         }
         return identifiantsAnimaux;
     }

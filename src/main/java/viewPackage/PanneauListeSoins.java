@@ -8,6 +8,7 @@ import exceptionPackage.SingletonConnectionException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class PanneauListeSoins extends JPanel {
 
@@ -121,9 +122,11 @@ public class PanneauListeSoins extends JPanel {
         public void actionPerformed(ActionEvent event) {
             listeIdentifiants.removeAllItems();
             if (event.getSource() == animaux){
-                listeIdentifiants.addItem("Animal  #01");
                 try {
-                    Object test = controller.getAnimaux();
+                    ArrayList<String> test = controller.getIdentifiantsAnimaux();
+                    for (String t: test){
+                        listeIdentifiants.addItem(t);
+                    }
                 }
                 catch (AnimalException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());

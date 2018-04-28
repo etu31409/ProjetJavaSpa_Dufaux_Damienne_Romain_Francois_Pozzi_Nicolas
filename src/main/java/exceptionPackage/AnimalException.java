@@ -9,5 +9,14 @@ public class AnimalException extends Exception{
             message = "Erreur lors de la récuperation de l'animal.";
 
     }
+
+    public AnimalException(String message){
+        this.message = message;
+    }
+
+    public String getMessage()
+    {
+        return message;
+    }
 }
 

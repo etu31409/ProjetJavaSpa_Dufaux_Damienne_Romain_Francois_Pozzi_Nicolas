@@ -42,7 +42,7 @@ public class DBDAOMedicament {
                 tousLesMedicaments.add(medicament);
             }
 
-            connectionUnique.close();
+            //connectionUnique.close();
             return tousLesMedicaments;
 
         } catch (SQLException e) {

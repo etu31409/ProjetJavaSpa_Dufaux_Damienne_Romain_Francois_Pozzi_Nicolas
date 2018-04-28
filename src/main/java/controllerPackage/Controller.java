@@ -18,4 +18,8 @@ public class Controller {
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
         return business.getAnimaux();
     }
+
+    public ArrayList<String> getIdentifiantsAnimaux() throws AnimalException, ProprietaireException, SingletonConnectionException {
+        return business.getIdentifiantsAnimaux();
+    }
 }

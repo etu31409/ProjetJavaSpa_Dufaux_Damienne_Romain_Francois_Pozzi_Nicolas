@@ -93,12 +93,12 @@ public class DBDAOAnimal implements IAnimal {
                 Integer identifiantProprio =  data.getInt("identifiantProprio");
                 if(!data.wasNull()){
                     IProprietaire propietaire = new DBDAOProprietaire();
-                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio));
+                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio,false));
                 }
 
                 tousLesAnimaux.add(animal);
             }
-            connectionUnique.close();
+            //connectionUnique.close();
             return tousLesAnimaux;
         }
         catch(SQLException e) {
