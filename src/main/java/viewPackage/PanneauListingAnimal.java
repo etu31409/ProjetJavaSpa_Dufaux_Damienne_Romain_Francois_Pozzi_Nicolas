@@ -1,5 +1,6 @@
 package viewPackage;
 
+import javax.swing.table.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ public class PanneauListingAnimal extends JPanel {
         this.setLayout(new BorderLayout());
         panneauBoutons = new JPanel();
         panneauRecherche = new JPanel();
-        this.add(panneauRecherche, BorderLayout.WEST);
+        this.add(panneauRecherche, BorderLayout.NORTH);
         this.add(panneauBoutons, BorderLayout.SOUTH);
         panneauRecherche.setLayout(new GridLayout(1, 2, 5, 5));
 
