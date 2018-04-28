@@ -95,7 +95,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheFiches){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauListeSoins());
+                frameContainer.add(new PanneauRechercheListeSoins());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

@@ -1,16 +1,17 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.AnimalException;
+import exceptionPackage.*;
+import modelPackage.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
-public class PanneauListeSoins extends JPanel {
+public class PanneauRechercheListeSoins extends JPanel {
 
     private Controller controller;
-
     private JPanel panneauRecherche, panneauListe;
     private JLabel champTitre, ficheSoin, vide;
     private PanneauSpinnerDate dateDebutRech, dateFinRech;
@@ -21,7 +22,8 @@ public class PanneauListeSoins extends JPanel {
     private JComboBox listeIdentifiants, listeFichesDeSoins;
     private char critère;
 
-    public PanneauListeSoins() {
+    public PanneauRechercheListeSoins() {
+        controller = new Controller();
         this.setLayout(new BorderLayout());
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
@@ -66,13 +68,13 @@ public class PanneauListeSoins extends JPanel {
         //Combo Box qui dépend du bouton radio coché
         //switch(critère){
         //case 'a':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des animauxcase 'a'
         //case 'v':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des vétérinaires
         //case 'm':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des médicaments
         //}
 
@@ -118,19 +120,49 @@ public class PanneauListeSoins extends JPanel {
         public void actionPerformed(ActionEvent event) {
             listeIdentifiants.removeAllItems();
             if (event.getSource() == animaux){
-                listeIdentifiants.addItem("Animal  #01");
                 try {
-                    Object test = controller.getAnimaux();
+                    for (Animal a: controller.getIdentifiantsAnimaux()){
+                        String s = " #" + a.getNumRegistre() + " " + a.getNom();
+                        listeIdentifiants.addItem(s);
+                    }
                 }
                 catch (AnimalException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (ProprietaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             else if (event.getSource() == vétérinaires){
-                listeIdentifiants.addItem("Vétérinaire  #01");
+                try {
+                    for (Veterinaire v: controller.getIdentifiantsVeterinaires()){
+                        String s = " #" + v.getIdentifiantVeto() + " " + v.getNom();
+                        listeIdentifiants.addItem(s);
+                    }
+                }
+                catch (VeterinaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             else if (event.getSource() == médicaments){
-                listeIdentifiants.addItem("Médicament #01");
+                try {
+                    for (Medicament m: controller.getIdentifiantsMedicaments()){
+                        String s = " #" + m.getIdentifiantMed() + " " + m.getNomMedic();
+                        listeIdentifiants.addItem(s);
+                    }
+                }
+                catch (MedicamentException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             panneauRecherche.repaint();
             panneauRecherche.validate();

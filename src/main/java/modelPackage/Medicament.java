@@ -9,6 +9,7 @@ public class Medicament {
     private String posologie;
     private String nomMedic;
 
+    public Medicament(){}
     public Medicament(Integer identifiantMed, GregorianCalendar datePreparation, String stockage, String posologie,
                       String nomMedic) {
         this.identifiantMed = identifiantMed;

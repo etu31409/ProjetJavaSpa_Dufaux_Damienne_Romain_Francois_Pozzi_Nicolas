@@ -10,27 +10,16 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.*;
 
-public class DBDAO implements DAO{
+public class DBDAOAnimal implements IAnimal {
 
     private Connection connectionUnique;
     private String sqlInstruction;
 
     private ResultSet data;
 
-    public  ArrayList<Animal> getAnimaux() throws AnimalException{
+    public  ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException{
         try{
-            String nom;
-            GregorianCalendar dateArrivee = new GregorianCalendar();
-            GregorianCalendar dateDepart = new GregorianCalendar();
-            GregorianCalendar dateNaissance = new GregorianCalendar();
-            Double numPuce;
-            String localisationPuce;
-            GregorianCalendar dateAttributionPuce = new GregorianCalendar();
-            Double numTatouage;
-            String localisationTatouage;
-            Proprietaire identifiantProprio;
-
-            if(connectionUnique == null){
+            if(connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
@@ -40,7 +29,10 @@ public class DBDAO implements DAO{
 
             ArrayList<Animal> tousLesAnimaux = new ArrayList<Animal>();
             while (data.next()) {
+                //Not NULL Values
                 Animal animal = new Animal();
+                GregorianCalendar dateArrivee = new GregorianCalendar();
+
                 animal.setNumRegistre(data.getInt("numRegistre"));
                 dateArrivee.setTime( data.getDate("dateArrivee"));
                 animal.setDateArrivee(dateArrivee);
@@ -51,81 +43,66 @@ public class DBDAO implements DAO{
                 animal.setCouleurDePeau(data.getString("couleurDePeau"));
                 animal.setPoids(data.getDouble("poids"));
 
-                nom = data.getString("nom");
+                //Nullable Values
+                String nom = data.getString("nom");
                 if(!data.wasNull()){
                     animal.setNom(nom);
                 }
 
-                java.sql.Date sqlDateDepart = data.getDate("dateDepart");
-                dateDepart.setTime(sqlDateDepart);
+                Date sqlDateDepart = data.getDate("dateDepart");
                 if(!data.wasNull()){
                     GregorianCalendar calendar = new GregorianCalendar();
                     calendar.setTime(sqlDateDepart);
                     animal.setDateDepart(calendar);
                 }
 
-                java.sql.Date sqlDateNaissance = data.getDate("dateNaissance");
-                dateNaissance.setTime(sqlDateNaissance);
+                Date sqlDateNaissance = data.getDate("dateNaissance");
                 if(!data.wasNull()){
                     GregorianCalendar calendar = new GregorianCalendar();
                     calendar.setTime(sqlDateNaissance);
                     animal.setDateNaissance(calendar);
                 }
 
-                numPuce = data.getDouble("numPuce");
+                Double numPuce = data.getDouble("numPuce");
                 if(!data.wasNull()){
                     animal.setNumPuce(numPuce);
                 }
 
-                localisationPuce = data.getString("localisationPuce");
+                String localisationPuce = data.getString("localisationPuce");
                 if(!data.wasNull()){
                     animal.setLocalisationPuce(localisationPuce);
                 }
 
                 java.sql.Date sqlDateAttributionPuce = data.getDate("dateAttributionPuce");
-                dateAttributionPuce.setTime(sqlDateAttributionPuce);
                 if(!data.wasNull()){
                     GregorianCalendar calendar = new GregorianCalendar();
                     calendar.setTime(sqlDateAttributionPuce);
                     animal.setDateAttributionPuce(calendar);
                 }
 
-                numTatouage = data.getDouble("numTatouage");
+                Double numTatouage = data.getDouble("numTatouage");
                 if(!data.wasNull()){
                     animal.setNumTatouage(numTatouage);
                 }
 
-                localisationTatouage = data.getString("localisationPuce");
+                String localisationTatouage = data.getString("localisationPuce");
                 if(!data.wasNull()){
                     animal.setLocalisationTatouage(localisationTatouage);
                 }
 
+                Integer identifiantProprio =  data.getInt("identifiantProprio");
+                if(!data.wasNull()){
+                    IProprietaire propietaire = new DBDAOProprietaire();
+                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio,false));
+                }
+
                 tousLesAnimaux.add(animal);
             }
-            connectionUnique.close();
+            //connectionUnique.close();
             return tousLesAnimaux;
         }
         catch(SQLException e) {
             throw new AnimalException();
         }
     }
-
-    /*public ArrayList<Animal>getAnimaux() throws AnimalException {
-        try {
-            Animal animal;
-            ArrayList<Animal> tousLesAnimaux = new ArrayList<Animal>();
-            while (data.next()) {
-                animal = new Animal();
-
-
-
-
-                tousLesAnimaux.add(animal);
-            }
-            return tousLesAnimaux;
-        }
-        catch(SQLException e){
-            throw new AnimalException();
-        }
-    }*/
 }

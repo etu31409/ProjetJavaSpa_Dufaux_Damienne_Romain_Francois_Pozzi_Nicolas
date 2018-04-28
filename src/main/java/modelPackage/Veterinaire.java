@@ -5,6 +5,7 @@ public class Veterinaire {
     private String nom;
     private String prenom;
 
+    public Veterinaire(){}
     public Veterinaire(Integer identifiantVeto, String nom, String prenom) {
         this.identifiantVeto = identifiantVeto;
         this.nom = nom;
