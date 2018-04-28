@@ -237,7 +237,18 @@ public class PanneauAccueil extends JPanel {
                         JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-
+                Integer numeroDeRegistre = 0;
+                try{
+                    numeroDeRegistre = Integer.valueOf(cellule.getText());
+                }
+                catch (Exception error){
+                    numeroDeRegistre = null;
+                }
+                finally {
+                    if(numeroDeRegistre == null || numeroDeRegistre< 1){
+                        JOptionPane.showMessageDialog(null, "Numéro de registre incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         }
     }
