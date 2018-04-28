@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface IProprietaire {
     ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException;
     Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, SQLException, ProprietaireException;
+    Proprietaire getUnProprietaire(Integer identifiantProprietaire, boolean fermerConnexion) throws SingletonConnectionException, SQLException, ProprietaireException;
 }

@@ -36,7 +36,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
                 tousLesVeterinaires.add(veteriniare);
             }
 
-            connectionUnique.close();
+            //connectionUnique.close();
             return tousLesVeterinaires;
 
         } catch (SQLException e) {
