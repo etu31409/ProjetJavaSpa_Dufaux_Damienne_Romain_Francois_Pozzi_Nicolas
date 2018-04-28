@@ -58,8 +58,6 @@ public class PanneauListingFicheDeSoins extends JPanel {
         reinnitialiser = new JButton("Reinnitialiser");
         reinnitialiser.addActionListener(new EcouteurBouton());
         panneauBoutons.add(reinnitialiser);
-
-        System.out.println("test !!");
     }
 
     private class EcouteurBouton implements ActionListener {
