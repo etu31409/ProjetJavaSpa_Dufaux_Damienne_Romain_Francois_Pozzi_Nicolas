@@ -44,4 +44,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
+    public ArrayList<Veterinaire> getIdentifiantsVeterinaires()throws VeterinaireException, SingletonConnectionException{
+        return null;
+    }
 }

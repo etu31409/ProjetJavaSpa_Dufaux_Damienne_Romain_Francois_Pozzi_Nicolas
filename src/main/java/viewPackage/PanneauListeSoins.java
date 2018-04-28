@@ -1,9 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.AnimalException;
-import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.*;
+import modelPackage.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 public class PanneauListeSoins extends JPanel {
 
     private Controller controller;
-
     private JPanel panneauRecherche, panneauListe;
     private JLabel champTitre, ficheSoin, vide;
     private PanneauSpinnerDate dateDebutRech, dateFinRech;
@@ -70,13 +68,13 @@ public class PanneauListeSoins extends JPanel {
         //Combo Box qui dépend du bouton radio coché
         //switch(critère){
         //case 'a':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des animauxcase 'a'
         //case 'v':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des vétérinaires
         //case 'm':
-        //listeIdentifiants = new JComboBox();
+        //listeIdentifiantsAnimaux = new JComboBox();
         //liste toString des médicaments
         //}
 
@@ -123,9 +121,9 @@ public class PanneauListeSoins extends JPanel {
             listeIdentifiants.removeAllItems();
             if (event.getSource() == animaux){
                 try {
-                    ArrayList<String> test = controller.getIdentifiantsAnimaux();
-                    for (String t: test){
-                        listeIdentifiants.addItem(t);
+                    for (Animal a: controller.getIdentifiantsAnimaux()){
+                        String s = " #" + a.getNumRegistre() + " " + a.getNom();
+                        listeIdentifiants.addItem(s);
                     }
                 }
                 catch (AnimalException e) {
@@ -139,10 +137,32 @@ public class PanneauListeSoins extends JPanel {
                 }
             }
             else if (event.getSource() == vétérinaires){
-                listeIdentifiants.addItem("Vétérinaire  #01");
+                try {
+                    for (Veterinaire v: controller.getIdentifiantsVeterinaires()){
+                        String s = " #" + v.getIdentifiantVeto() + " " + v.getNom();
+                        listeIdentifiants.addItem(s);
+                    }
+                }
+                catch (VeterinaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             else if (event.getSource() == médicaments){
-                listeIdentifiants.addItem("Médicament #01");
+                try {
+                    for (Medicament m: controller.getIdentifiantsMedicaments()){
+                        String s = " #" + m.getIdentifiantMed() + " " + m.getNomMedic();
+                        listeIdentifiants.addItem(s);
+                    }
+                }
+                catch (MedicamentException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             panneauRecherche.repaint();
             panneauRecherche.validate();
