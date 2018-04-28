@@ -44,31 +44,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
-    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
-
-        try {
-            if (connectionUnique == null) {
-                connectionUnique = SingletonConnection.getUniqueInstance();
-            }
-
-            Veterinaire veterinaire = new Veterinaire();
-
-            sqlInstruction = "select * from spabd.veterinaire where identifiantVeto = ?";
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, identifiantVeto);
-            data = statement.executeQuery();
-
-            while (data.next()) {
-                veterinaire.setIdentifiantVeto(data.getInt("identifiantVeto"));
-                veterinaire.setNom(data.getString("nom"));
-                veterinaire.setPrenom(data.getString("prenom"));
-            }
-
-            connectionUnique.close();
-            return veterinaire;
-        }
-        catch (SQLException e) {
-            throw new VeterinaireException();
-        }
+    public ArrayList<Veterinaire> getIdentifiantsVeterinaires()throws VeterinaireException, SingletonConnectionException{
+        return null;
     }
 }
