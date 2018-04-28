@@ -71,5 +71,4 @@ public class DBDAOVeterinaire implements IVeterinaire{
             throw new VeterinaireException();
         }
     }
-
 }

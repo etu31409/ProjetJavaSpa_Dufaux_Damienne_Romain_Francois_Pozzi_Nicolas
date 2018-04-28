@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class DBDAOMedicament implements IMedicament{
+public class DBDAOMedicament implements IMedicament {
     private Connection connectionUnique;
     private String sqlInstruction;
 
@@ -34,7 +34,7 @@ public class DBDAOMedicament implements IMedicament{
                 GregorianCalendar datePreparation = new GregorianCalendar();
 
                 medicament.setIdentifiantMed(data.getInt("identifiantMed"));
-                datePreparation.setTime( data.getDate("dateArrivee"));
+                datePreparation.setTime( data.getDate("datePreparation"));
                 medicament.setDatePreparation(datePreparation);
                 medicament.setStockage(data.getString("stockage"));
                 medicament.setPosologie(data.getString("posologie"));

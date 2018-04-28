@@ -1,10 +1,10 @@
 package controllerPackage;
 
 import businessPackage.Business;
-import exceptionPackage.AnimalException;
-import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.*;
 import modelPackage.Animal;
+import modelPackage.Medicament;
+import modelPackage.Veterinaire;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,15 @@ public class Controller {
         return business.getAnimaux();
     }
 
-    public ArrayList<String> getIdentifiantsAnimaux() throws AnimalException, ProprietaireException, SingletonConnectionException {
+    public ArrayList<Animal> getIdentifiantsAnimaux() throws AnimalException, ProprietaireException, SingletonConnectionException {
         return business.getIdentifiantsAnimaux();
+    }
+
+    public ArrayList<Veterinaire> getIdentifiantsVeterinaires() throws VeterinaireException, SingletonConnectionException {
+        return business.getIdentifiantsVeterinaires();
+    }
+
+    public ArrayList<Medicament> getIdentifiantsMedicaments() throws MedicamentException, SingletonConnectionException {
+        return business.getIdentifiantsMedicaments();
     }
 }
