@@ -4,22 +4,23 @@ public class Proprietaire {
     private int identifiantProprio;
     private String nom;
     private String prenom;
-    private String rue;
+    /*private String rue;
     private String numero;
     private String localite;
     private Integer codePostal;
-    private String pays;
+    private String pays;*/
 
-    public Proprietaire(int identifiantProprio, String nom, String prenom, String rue, String numero, String localite,
-                      Integer codePostal, String pays) {
+    public Proprietaire(){}
+    public Proprietaire(int identifiantProprio, String nom, String prenom/*, String rue, String numero, String localite,
+                      Integer codePostal, String pays*/) {
         this.identifiantProprio = identifiantProprio;
         this.nom = nom;
         this.prenom = prenom;
-        this.rue = rue;
+        /*this.rue = rue;
         this.numero = numero;
         this.localite = localite;
         this.codePostal = codePostal;
-        this.pays = pays;
+        this.pays = pays;*/
     }
 
     public int getIdentifiantProprio() {
@@ -34,7 +35,7 @@ public class Proprietaire {
         return prenom;
     }
 
-    public String getRue() {
+    /*public String getRue() {
         return rue;
     }
 
@@ -52,7 +53,7 @@ public class Proprietaire {
 
     public String getPays() {
         return pays;
-    }
+    }*/
 
     public void setIdentifiantProprio(int identifiantProprio) {
         this.identifiantProprio = identifiantProprio;
@@ -66,7 +67,7 @@ public class Proprietaire {
         this.prenom = prenom;
     }
 
-    public void setRue(String rue) {
+    /*public void setRue(String rue) {
         this.rue = rue;
     }
 
@@ -84,5 +85,5 @@ public class Proprietaire {
 
     public void setPays(String pays) {
         this.pays = pays;
-    }
+    }*/
 }

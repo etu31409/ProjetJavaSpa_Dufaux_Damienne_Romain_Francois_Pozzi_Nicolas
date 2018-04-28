@@ -2,28 +2,26 @@ package businessPackage;
 
 import dataAcessPackage.*;
 import exceptionPackage.AnimalException;
+import exceptionPackage.ProprietaireException;
+import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 
 import java.util.ArrayList;
 
 public class Business {
-    DAO dao;
+    IAnimal daoAnimal;
 
     public Business() {
-        dao = new DBDAO();
+        daoAnimal = new DBDAOAnimal();
     }
 
-    /*public Animal getUnAnimal(){
-        return dao.getUnAnimal();
-    }*/
-
-    public ArrayList<Animal>getAnimaux()throws AnimalException{
-        return dao.getAnimaux();
+    public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
+        return daoAnimal.getAnimaux();
     }
 
-    public ArrayList<String> getIdentifiantsAnimaux()throws AnimalException{
+    public ArrayList<String> getIdentifiantsAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
         ArrayList<String> identifiantsAnimaux = new ArrayList();
-        for(Animal a :dao.getAnimaux()){
+        for(Animal a :daoAnimal.getAnimaux()){
             identifiantsAnimaux.add(a.getNom() +" " + a.getNumRegistre());
         }
         return identifiantsAnimaux;

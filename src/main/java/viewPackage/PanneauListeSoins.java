@@ -2,6 +2,8 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
+import exceptionPackage.ProprietaireException;
+import exceptionPackage.SingletonConnectionException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class PanneauListeSoins extends JPanel {
     private char critère;
 
     public PanneauListeSoins() {
+        controller = new Controller();
         this.setLayout(new BorderLayout());
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
@@ -123,6 +126,12 @@ public class PanneauListeSoins extends JPanel {
                     Object test = controller.getAnimaux();
                 }
                 catch (AnimalException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+                catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }

@@ -6,7 +6,7 @@ public class SingletonConnectionException extends Exception{
 
     public SingletonConnectionException()
     {
-        message = "Erreur lors de la récuperation du singleton. Il semblerait que la connexion à la bd pose problème!";
+        message = "Erreur lors de la récuperation du singleton.\nIl semblerait que la connexion à la bd pose problème!";
     }
 
     public String getMessage()
