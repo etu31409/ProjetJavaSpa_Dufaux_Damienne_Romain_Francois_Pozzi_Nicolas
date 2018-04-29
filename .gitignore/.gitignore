@@ -2,4 +2,12 @@
 target/
 pom.xml
 ProjetJavaSpa_Dufaux_Damienne_Romain_Francois_Pozzi_Nicolas.iml
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
 
