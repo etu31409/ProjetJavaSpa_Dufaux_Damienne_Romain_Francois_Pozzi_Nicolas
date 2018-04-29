@@ -37,6 +37,6 @@ public class Veterinaire {
     }
 
     public String toString (){
-        return " #" + this.getIdentifiantVeto() + " " + this.getNom();
+        return " #" + this.getIdentifiantVeto() + " " + this.getPrenom() + " " + this.getNom();
     }
 }

@@ -116,7 +116,10 @@ public class Animal {
     }
 
     public String getNom() {
-        return nom;
+        if(nom.isEmpty())
+            return "'Inconnu'";
+        else
+            return nom;
     }
 
     public Integer getNumRegistre() {
