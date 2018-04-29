@@ -1,8 +1,13 @@
 package viewPackage;
 
+import exceptionPackage.AnimalException;
+import modelPackage.Animal;
+import modelPackage.Proprietaire;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.GregorianCalendar;
 
 public class PanneauAccueil extends JPanel {
     //private JLabel texte;
@@ -242,7 +247,7 @@ public class PanneauAccueil extends JPanel {
         }
     }
     public void validationFormulaire(){
-       /* //validation numero de cellule
+       //validation numero de cellule
         Integer numeroCellule = 0;
         try{
             numeroCellule = Integer.valueOf(cellule.getText());
@@ -312,13 +317,13 @@ public class PanneauAccueil extends JPanel {
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
             numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
-            /f(estIncertainLocalisationTatouage.isSelected()){
+            if(estIncertainLocalisationTatouage.isSelected()){
                 localisationTatouageAnimal = null;
-            }else localisationTatouageAnimal =
-                    poidsAnimal =
+            }else localisationTatouageAnimal = localisationTatouage.getText();
+            poidsAnimal = Double.valueOf(poids.getText());
 
             Animal animal = new Animal(numRegistreAnimal, nomAnimal, dateArriveeAnimal, dateDepartAnimal, especeAnimal, raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal, localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal, poidsAnimal, proprietaireAnimal);
         }
         catch (AnimalException exception){System.out.println(exception.getMessage());}
-    */}
+    }
 }
