@@ -291,10 +291,10 @@ public class PanneauAccueil extends JPanel {
             boolean estSteriliseAnimal;
             String couleurDePeauAnimal;
             GregorianCalendar dateNaissanceAnimal;
-            Integer numPuceAnimal;
+            Double numPuceAnimal;
             String localisationPuceAnimal;
             GregorianCalendar dateAttributionPuceAnimal;
-            Integer numTatouageAnimal;
+            Double numTatouageAnimal;
             String localisationTatouageAnimal;
             Double poidsAnimal;
             Proprietaire proprietaireAnimal;
@@ -313,10 +313,10 @@ public class PanneauAccueil extends JPanel {
             }else estSteriliseAnimal = false;
             couleurDePeauAnimal = pelagePeau.getText();
             dateNaissanceAnimal = dateNaissance.getDate();
-            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
+            numPuceAnimal = Double.valueOf(numeroPuce.getText());
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
-            numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
+            numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
             if(estIncertainLocalisationTatouage.isSelected()){
                 localisationTatouageAnimal = null;
             }else localisationTatouageAnimal = localisationTatouage.getText();

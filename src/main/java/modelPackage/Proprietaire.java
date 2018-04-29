@@ -1,5 +1,7 @@
 package modelPackage;
 
+import exceptionPackage.ProprietaireException;
+
 public class Proprietaire {
     private int identifiantProprio;
     private String nom;
@@ -12,10 +14,10 @@ public class Proprietaire {
 
     public Proprietaire(){}
     public Proprietaire(int identifiantProprio, String nom, String prenom/*, String rue, String numero, String localite,
-                      Integer codePostal, String pays*/) {
-        this.identifiantProprio = identifiantProprio;
-        this.nom = nom;
-        this.prenom = prenom;
+                      Integer codePostal, String pays*/) throws ProprietaireException{
+        setIdentifiantProprio(identifiantProprio);
+        setNom(nom);
+        setPrenom(prenom);
         /*this.rue = rue;
         this.numero = numero;
         this.localite = localite;
@@ -27,7 +29,7 @@ public class Proprietaire {
         return identifiantProprio;
     }
 
-    public String getNom() {
+    public String getNom(){
         return nom;
     }
 
@@ -55,16 +57,26 @@ public class Proprietaire {
         return pays;
     }*/
 
-    public void setIdentifiantProprio(int identifiantProprio) {
+    public void setIdentifiantProprio (int identifiantProprio) {
         this.identifiantProprio = identifiantProprio;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nom)throws ProprietaireException {
+        if(nom.isEmpty()){
+            throw new ProprietaireException();
+        }
+        else{
+            this.nom = nom;
+        }
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setPrenom(String prenom)throws ProprietaireException {
+        if(nom.isEmpty()){
+            throw new ProprietaireException();
+        }
+        else{
+            this.prenom = prenom;
+        }
     }
 
     /*public void setRue(String rue) {
