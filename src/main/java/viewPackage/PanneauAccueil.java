@@ -8,11 +8,11 @@ public class PanneauAccueil extends JPanel {
     //private JLabel texte;
     private JPanel panneauFormulaire;
     private JPanel panneauBoutons;
-    private JLabel nomLabel, lieuxSPALabel, celluleLabel, numeroRegistreLabel, rempliParLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
+    private JLabel nomLabel, lieuxSPALabel, celluleLabel, numeroRegistreLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
     private JLabel dateArriveLabel, dateDepartLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel;
     private JLabel attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel, dateTatouageLabel, titreProprietaireLabel;
     private JLabel remarqueLabel, localisationTatouageLabel;
-    private JTextField localisationTatouage, nom, lieuxSPA, cellule, numeroRegistre, rempliPar, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
+    private JTextField localisationTatouage, nom, lieuxSPA, cellule, numeroRegistre, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
     private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateDepart, dateNaissance, dateAttribution, dateTatouage;
     private JButton  retour, validation, reinnitialiser;
     private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
@@ -64,11 +64,11 @@ public class PanneauAccueil extends JPanel {
         numeroRegistre = new JTextField();
         panneauFormulaire.add(numeroRegistre);
 
-        rempliParLabel = new JLabel("Rempli par :");
-        rempliParLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(rempliParLabel);
-        rempliPar = new JTextField();
-        panneauFormulaire.add(rempliPar);
+        poidsLabel = new JLabel("Poids de l'animale :");
+        poidsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        panneauFormulaire.add(poidsLabel);
+        poids = new JTextField();
+        panneauFormulaire.add(poids);
 
         aEuthanasier = new JCheckBox("à euthanasier :");
         aEuthanasier.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -242,7 +242,7 @@ public class PanneauAccueil extends JPanel {
         }
     }
     public void validationFormulaire(){
-        //validation numero de cellule
+       /* //validation numero de cellule
         Integer numeroCellule = 0;
         try{
             numeroCellule = Integer.valueOf(cellule.getText());
@@ -275,5 +275,50 @@ public class PanneauAccueil extends JPanel {
         //validation sexe (ne peut pas etre null)
 
         //validation estSterilise (ne peut pas etre null)
-    }
+        try{
+            Integer numRegistreAnimal;
+            String nomAnimal;
+            GregorianCalendar dateArriveeAnimal;
+            GregorianCalendar dateDepartAnimal;
+            String especeAnimal;
+            String raceAnimal;
+            String sexeAnimal;
+            boolean estSteriliseAnimal;
+            String couleurDePeauAnimal;
+            GregorianCalendar dateNaissanceAnimal;
+            Integer numPuceAnimal;
+            String localisationPuceAnimal;
+            GregorianCalendar dateAttributionPuceAnimal;
+            Integer numTatouageAnimal;
+            String localisationTatouageAnimal;
+            Double poidsAnimal;
+            Proprietaire proprietaireAnimal;
+
+            numRegistreAnimal = Integer.valueOf(numeroRegistre.getText());
+            nomAnimal = nom.getText();
+            dateArriveeAnimal = dateArrive.getDate();
+            dateDepartAnimal = dateDepart.getDate();
+            especeAnimal = espece.getText();
+            raceAnimal = race.getText();
+            if(sexeGroupeBouton.getSelection() == boutonFemelle) {
+                sexeAnimal = "F";
+            }else sexeAnimal = "M";
+            if(steriliseGroupeBouton.getSelection() == boutonOuiSterilise){
+                estSteriliseAnimal = true;
+            }else estSteriliseAnimal = false;
+            couleurDePeauAnimal = pelagePeau.getText();
+            dateNaissanceAnimal = dateNaissance.getDate();
+            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
+            localisationPuceAnimal = localisation.getText();
+            dateAttributionPuceAnimal = dateAttribution.getDate();
+            numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
+            /f(estIncertainLocalisationTatouage.isSelected()){
+                localisationTatouageAnimal = null;
+            }else localisationTatouageAnimal =
+                    poidsAnimal =
+
+            Animal animal = new Animal(numRegistreAnimal, nomAnimal, dateArriveeAnimal, dateDepartAnimal, especeAnimal, raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal, localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal, poidsAnimal, proprietaireAnimal);
+        }
+        catch (AnimalException exception){System.out.println(exception.getMessage());}
+    */}
 }
