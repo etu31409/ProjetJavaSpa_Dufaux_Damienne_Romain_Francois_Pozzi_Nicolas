@@ -42,6 +42,7 @@ public class PanneauRechercheProprietaires extends JPanel {
         panneauRecherche.setLayout(new GridLayout(25, 1));
         rechercheContainer.add(panneauRecherche);
         panneauListe.setLayout(new GridLayout(2, 1));
+        LayoutManager test = panneauListe.getLayout();
         rechercheContainer.add(panneauListe);
 
 
@@ -90,8 +91,8 @@ public class PanneauRechercheProprietaires extends JPanel {
                     String[] columnNames = {"Identifiant de l'animal","Nom de l'animal","Identifiant du propriétaire", "Nom du propriétaire"};
                     resultatRecherche = new JTable(list, columnNames);
                     jScrollpane = new JScrollPane (resultatRecherche);
-                    panneauRecherche.add(jScrollpane, BorderLayout.CENTER);
-                    panneauRecherche.repaint();
+                    panneauListe.add(jScrollpane, BorderLayout.CENTER);
+                    panneauListe.repaint();
 
                 }
                 catch (SingletonConnectionException e) {
