@@ -65,19 +65,6 @@ public class PanneauRechercheListeSoins extends JPanel {
         critèreRecherche.add(vétérinaires);
         critèreRecherche.add(médicaments);
 
-        //Combo Box qui dépend du bouton radio coché
-        //switch(critère){
-        //case 'a':
-        //listeIdentifiantsAnimaux = new JComboBox();
-        //liste toString des animauxcase 'a'
-        //case 'v':
-        //listeIdentifiantsAnimaux = new JComboBox();
-        //liste toString des vétérinaires
-        //case 'm':
-        //listeIdentifiantsAnimaux = new JComboBox();
-        //liste toString des médicaments
-        //}
-
         listeIdentifiants = new JComboBox();
         panneauRecherche.add(listeIdentifiants);
 
@@ -104,9 +91,6 @@ public class PanneauRechercheListeSoins extends JPanel {
 
         panneauListe.add(vide);
 
-        //Combo Box qui dépend de la recherche
-        //liste toString fiches de soins des animaux
-
         listeFichesDeSoins = new JComboBox();
         panneauListe.add(listeFichesDeSoins);
 
@@ -122,8 +106,7 @@ public class PanneauRechercheListeSoins extends JPanel {
             if (event.getSource() == animaux){
                 try {
                     for (Animal a: controller.getIdentifiantsAnimaux()){
-                        String s = " #" + a.getNumRegistre() + " " + a.getNom();
-                        listeIdentifiants.addItem(s);
+                        listeIdentifiants.addItem(a);
                     }
                 }
                 catch (AnimalException e) {
@@ -139,8 +122,7 @@ public class PanneauRechercheListeSoins extends JPanel {
             else if (event.getSource() == vétérinaires){
                 try {
                     for (Veterinaire v: controller.getIdentifiantsVeterinaires()){
-                        String s = " #" + v.getIdentifiantVeto() + " " + v.getNom();
-                        listeIdentifiants.addItem(s);
+                        listeIdentifiants.addItem(v);
                     }
                 }
                 catch (VeterinaireException e) {
@@ -153,8 +135,7 @@ public class PanneauRechercheListeSoins extends JPanel {
             else if (event.getSource() == médicaments){
                 try {
                     for (Medicament m: controller.getIdentifiantsMedicaments()){
-                        String s = " #" + m.getIdentifiantMed() + " " + m.getNomMedic();
-                        listeIdentifiants.addItem(s);
+                        listeIdentifiants.addItem(m);
                     }
                 }
                 catch (MedicamentException e) {
