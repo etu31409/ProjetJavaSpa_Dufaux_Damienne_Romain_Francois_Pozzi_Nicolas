@@ -57,5 +57,10 @@ public class Business {
             throws AnimalException, SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
     }
+
+    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+            SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
+    }
     //tache metier
 }

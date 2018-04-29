@@ -15,7 +15,7 @@ public class FenetrePrincipale extends JFrame{
     private PanneauBienvenue panneauBienvenue;
 
     public FenetrePrincipale(){
-        super("Fenetre principale");
+        super("S.P.A, Société Protectrice des Animaux");
         setBounds(300, 0, 1200, 825);
         this.addWindowListener( new WindowAdapter() { public void windowClosing(WindowEvent e) { System.exit(0); } } );
         frameContainer = this.getContentPane();

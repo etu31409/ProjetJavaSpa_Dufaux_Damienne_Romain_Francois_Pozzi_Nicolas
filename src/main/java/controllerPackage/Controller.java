@@ -49,4 +49,9 @@ public class Controller {
             throws AnimalException, SingletonConnectionException{
         return business.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
     }
+
+    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+            SingletonConnectionException{
+        return business.getResultatRecherchAnimauxMedicament(selectionMedicament);
+    }
 }

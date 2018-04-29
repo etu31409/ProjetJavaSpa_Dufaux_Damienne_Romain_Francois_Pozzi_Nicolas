@@ -16,5 +16,7 @@ public interface IAnimal {
             SingletonConnectionException;
     String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
             throws AnimalException, SingletonConnectionException;
+    String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+            SingletonConnectionException;
 
 }
