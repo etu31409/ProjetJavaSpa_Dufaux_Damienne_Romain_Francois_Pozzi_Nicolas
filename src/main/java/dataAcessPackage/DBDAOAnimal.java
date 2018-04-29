@@ -63,7 +63,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setDateNaissance(calendar);
                 }
 
-                Double numPuce = data.getDouble("numPuce");
+                Integer numPuce = data.getInt("numPuce");
                 if(!data.wasNull()){
                     animal.setNumPuce(numPuce);
                 }
@@ -151,7 +151,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setDateNaissance(calendar);
                 }
 
-                Double numPuce = data.getDouble("numPuce");
+                Integer numPuce = data.getInt("numPuce");
                 if(!data.wasNull()){
                     animal.setNumPuce(numPuce);
                 }

@@ -15,7 +15,7 @@ public class Animal {
     private boolean estSterilise;
     private String couleurDePeau;
     private GregorianCalendar dateNaissance;
-    private Double numPuce;
+    private Integer numPuce;
     private String localisationPuce;
     private GregorianCalendar dateAttributionPuce;
     private Double numTatouage;
@@ -23,30 +23,30 @@ public class Animal {
     private Double poids;
     private Proprietaire proprietaire;
 
-    public Animal(){}
+    public Animal(Integer numRegistreAnimal, String nomAnimal, GregorianCalendar dateArriveeAnimal, GregorianCalendar dateDepartAnimal, String especeAnimal, String raceAnimal, String sexeAnimal, boolean estSteriliseAnimal, String couleurDePeauAnimal, GregorianCalendar dateNaissanceAnimal, Double numPuceAnimal, String localisationPuceAnimal, GregorianCalendar dateAttributionPuceAnimal, Double numTatouageAnimal, String localisationTatouageAnimal, Double poidsAnimal, Proprietaire proprietaireAnimal){}
 
     public Animal(Integer numRegistre, String nom, GregorianCalendar dateArrivee, GregorianCalendar dateDepart,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
-                  GregorianCalendar dateNaissance, Double numPuce, String localisationPuce,
+                  GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire) throws AnimalException {
-        this.numRegistre = numRegistre;
-        this.nom = nom;
-        this.dateArrivee = dateArrivee;
-        this.dateDepart = dateDepart;
+                  Proprietaire proprietaire)  {
+        setNumRegistre(numRegistre);
+        setNom(nom);
+        setDateArrivee(dateArrivee);
+        setDateDepart(dateDepart);
         setEspece(espece);
-        this.race = race;
-        this.sexe = sexe;
-        this.estSterilise = estSterilise;
-        this.couleurDePeau = couleurDePeau;
-        this.dateNaissance = dateNaissance;
-        this.numPuce = numPuce;
-        this.localisationPuce = localisationPuce;
-        this.dateAttributionPuce = dateAttributionPuce;
-        this.numTatouage = numTatouage;
-        this.localisationTatouage = localisationTatouage;
-        this.poids = poids;
-        this.proprietaire = proprietaire;
+        setRace(race);
+        setSexe(sexe);
+        setEstSterilise(estSterilise);
+        setCouleurDePeau(couleurDePeau);
+        setDateNaissance(dateNaissance);
+        setNumPuce(numPuce);
+        setLocalisationPuce(localisationPuce);
+        setDateAttributionPuce(dateAttributionPuce);
+        setNumTatouage(numTatouage);
+        setLocalisationTatouage(localisationTatouage);
+        setPoids(poids);
+        setProprietaire(proprietaire);
     }
 
     public void setNumRegistre(Integer numRegistre) {
@@ -65,10 +65,7 @@ public class Animal {
         this.dateDepart = dateDepart;
     }
 
-    public void setEspece(String espece)throws AnimalException {
-        if(espece.isEmpty()){
-            throw new AnimalException();
-        }
+    public void setEspece(String espece) {
         this.espece = espece;
     }
 
@@ -92,7 +89,7 @@ public class Animal {
         this.dateNaissance = dateNaissance;
     }
 
-    public void setNumPuce(Double numPuce) {
+    public void setNumPuce(Integer numPuce) {
         this.numPuce = numPuce;
     }
 
@@ -163,7 +160,7 @@ public class Animal {
         return dateNaissance;
     }
 
-    public Double getNumPuce() {
+    public Integer getNumPuce() {
         return numPuce;
     }
 

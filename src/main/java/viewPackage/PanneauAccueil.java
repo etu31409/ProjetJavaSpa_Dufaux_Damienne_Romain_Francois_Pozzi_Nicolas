@@ -322,8 +322,11 @@ public class PanneauAccueil extends JPanel {
             }else localisationTatouageAnimal = localisationTatouage.getText();
             poidsAnimal = Double.valueOf(poids.getText());
 
-            Animal animal = new Animal(numRegistreAnimal, nomAnimal, dateArriveeAnimal, dateDepartAnimal, especeAnimal, raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal, localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal, poidsAnimal, proprietaireAnimal);
+            Animal animal = new Animal(numRegistreAnimal, nomAnimal, dateArriveeAnimal, dateDepartAnimal, especeAnimal,
+                    raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
+                    localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
+                    poidsAnimal, proprietaireAnimal);
         }
-        catch (AnimalException exception){System.out.println(exception.getMessage());}
+        catch (Exception exception){System.out.println(exception.getMessage());}
     }
 }

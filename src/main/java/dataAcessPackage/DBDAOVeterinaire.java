@@ -5,6 +5,7 @@ import modelPackage.*;
 import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class DBDAOVeterinaire implements IVeterinaire{
@@ -91,8 +92,8 @@ public class DBDAOVeterinaire implements IVeterinaire{
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
 
-            statement.setTime(1, (Time) dateDebut.getTime());
-            statement.setTime(2, (Time) dateFin.getTime());
+            statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
+            statement.setDate(2, new Date(dateFin.getTimeInMillis()));
             data = statement.executeQuery();
 
             while (data.next()) {
