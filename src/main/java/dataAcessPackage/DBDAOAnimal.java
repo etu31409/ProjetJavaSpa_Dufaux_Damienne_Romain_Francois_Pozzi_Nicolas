@@ -105,4 +105,8 @@ public class DBDAOAnimal implements IAnimal {
             throw new AnimalException();
         }
     }
+
+    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
+        return null;
+    }
 }

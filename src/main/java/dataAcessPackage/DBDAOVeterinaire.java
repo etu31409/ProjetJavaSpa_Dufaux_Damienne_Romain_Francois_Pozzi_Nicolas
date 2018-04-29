@@ -28,12 +28,12 @@ public class DBDAOVeterinaire implements IVeterinaire{
 
             ArrayList<Veterinaire>  tousLesVeterinaires = new ArrayList<Veterinaire>();
             while (data.next()) {
-                Veterinaire veteriniare = new Veterinaire();
-                veteriniare.setIdentifiantVeto(data.getInt("identifiantVeto"));
-                veteriniare.setNom(data.getString("nom"));
-                veteriniare.setPrenom(data.getString("prenom"));
+                Veterinaire veterinaire = new Veterinaire();
+                veterinaire.setIdentifiantVeto(data.getInt("identifiantVeto"));
+                veterinaire.setNom(data.getString("nom"));
+                veterinaire.setPrenom(data.getString("prenom"));
 
-                tousLesVeterinaires.add(veteriniare);
+                tousLesVeterinaires.add(veterinaire);
             }
 
             //connectionUnique.close();
@@ -44,7 +44,32 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
-    public ArrayList<Veterinaire> getIdentifiantsVeterinaires()throws VeterinaireException, SingletonConnectionException{
-        return null;
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            Veterinaire veterinaire = new Veterinaire();
+            GregorianCalendar dateSoin = new GregorianCalendar();
+            GregorianCalendar heure = new GregorianCalendar();
+
+            sqlInstruction = "select * from spabd.veterinaire where identifiantVeto = ?";
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, identifiantVeto);
+            data = statement.executeQuery();
+
+            while (data.next()) {
+                veterinaire.setIdentifiantVeto(data.getInt("identifiantVeto"));
+                veterinaire.setNom(data.getString("nom"));
+                veterinaire.setPrenom(data.getString("prenom"));
+            }
+
+            return veterinaire;
+        }
+        catch (SQLException e) {
+            throw new VeterinaireException();
+        }
     }
 }
