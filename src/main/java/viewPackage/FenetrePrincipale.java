@@ -11,7 +11,7 @@ public class FenetrePrincipale extends JFrame{
     private JMenuBar barMenu;
     private JMenu acceuil, recherches, medicaments, listing, supprimer;
     private JMenuItem nouvelAccueil, nouvellePrescription, rechercheFiches, quitter, supprimerFicheDeSoin,
-            supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires;
+            supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
     private PanneauBienvenue panneauBienvenue;
 
     public FenetrePrincipale(){
@@ -48,6 +48,10 @@ public class FenetrePrincipale extends JFrame{
         rechercheVeterinaires = new JMenuItem("Recherche Veterinaire");
         rechercheVeterinaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheVeterinaires);
+
+        rechercheAnimaux = new JMenuItem("Recherche Animaux");
+        rechercheAnimaux.addActionListener(new EcouteurBarMenu());
+        recherches.add(rechercheAnimaux);
 
         rechercheProprietaires = new JMenuItem("Recherche Propriétaire");
         rechercheProprietaires.addActionListener(new EcouteurBarMenu());
@@ -137,6 +141,13 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheProprietaires(controller));
                 frameContainer.repaint();
+                frameContainer.validate();
+
+            }
+            else if(event.getSource() == rechercheAnimaux) {
+                frameContainer.removeAll();
+                frameContainer.add(new PanneauRechercheAnimaux(controller).getPanneauContainerPrincipal());
+                frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
 
