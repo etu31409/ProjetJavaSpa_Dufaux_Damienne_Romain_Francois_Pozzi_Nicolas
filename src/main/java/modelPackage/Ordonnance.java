@@ -14,6 +14,10 @@ public class Ordonnance {
         this.medicament = medicament;
         this.dateOrdonnance = dateOrdonnance;
     }
+    
+    public Ordonnance(){
+
+    }
 
     public SoinAvance getFicheDeSoins() {
         return ficheDeSoins;
