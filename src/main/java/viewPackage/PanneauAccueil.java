@@ -291,7 +291,7 @@ public class PanneauAccueil extends JPanel {
             boolean estSteriliseAnimal;
             String couleurDePeauAnimal;
             GregorianCalendar dateNaissanceAnimal;
-            Double numPuceAnimal;
+            Integer numPuceAnimal;
             String localisationPuceAnimal;
             GregorianCalendar dateAttributionPuceAnimal;
             Double numTatouageAnimal;
@@ -313,7 +313,7 @@ public class PanneauAccueil extends JPanel {
             }else estSteriliseAnimal = false;
             couleurDePeauAnimal = pelagePeau.getText();
             dateNaissanceAnimal = dateNaissance.getDate();
-            numPuceAnimal = Double.valueOf(numeroPuce.getText());
+            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
             numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
