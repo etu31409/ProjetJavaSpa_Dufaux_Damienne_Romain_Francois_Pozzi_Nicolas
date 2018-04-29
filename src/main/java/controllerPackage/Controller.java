@@ -6,8 +6,10 @@ import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 import modelPackage.modelJointure.AnimalProprietaireRecherche;
+import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Controller {
     private Business business;
@@ -34,5 +36,10 @@ public class Controller {
 
     public ArrayList<AnimalProprietaireRecherche> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
         return business.getResultatRechercheProprietaire(selectionVeterinaire);
+    }
+
+    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+                                                                                                   GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+        return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
 }
