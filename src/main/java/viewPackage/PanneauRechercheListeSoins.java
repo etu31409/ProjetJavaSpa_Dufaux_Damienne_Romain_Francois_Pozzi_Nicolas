@@ -25,6 +25,7 @@ public class PanneauRechercheListeSoins extends JPanel {
     public PanneauRechercheListeSoins() {
         controller = new Controller();
         this.setLayout(new BorderLayout());
+
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
 

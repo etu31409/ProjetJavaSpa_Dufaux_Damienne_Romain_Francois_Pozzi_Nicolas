@@ -5,8 +5,10 @@ import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
+import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Business {
     IAnimal daoAnimal;
@@ -42,5 +44,9 @@ public class Business {
         daoProprietaire.getResultatRechercheProprietaire(selectedVet);
     }
 
+    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+                    GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+        return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
+    }
     //tache metier
 }

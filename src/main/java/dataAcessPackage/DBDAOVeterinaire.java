@@ -2,11 +2,9 @@ package dataAcessPackage;
 
 import exceptionPackage.*;
 import modelPackage.*;
+import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class DBDAOVeterinaire implements IVeterinaire{
@@ -70,6 +68,47 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
         catch (SQLException e) {
             throw new VeterinaireException();
+        }
+    }
+
+    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+               GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRechercheParDate = new ArrayList<>();
+
+            sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
+                    "spabd.ordonnance.dateOrdonnance\n" +
+                    "from spabd.veterinaire\n" +
+                    "inner join spabd.soinAvance\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
+                    "inner join spabd.ordonnance\n" +
+                    "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
+                    "where spabd.ordonnance.dateOrdonnance between ? and ?";
+
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+
+            statement.setTime(1, (Time) dateDebut.getTime());
+            statement.setTime(2, (Time) dateFin.getTime());
+            data = statement.executeQuery();
+
+            while (data.next()) {
+                VeterinaireSoinAvanceOrdonnanceRecherche vso = new VeterinaireSoinAvanceOrdonnanceRecherche();
+                vso.setIdVeterinaire(data.getInt("identifiantVeto"));
+                vso.setNomVeterinaire(data.getString("nom"));
+                GregorianCalendar date = new GregorianCalendar();
+                date.setTime(data.getDate("dateOrdonnance"));
+                vso.setDateOrdonnance(date);
+
+                resultatRechercheParDate.add(vso);
+            }
+            return resultatRechercheParDate;
+
+        } catch (SQLException e) {
+            throw new VeterinaireException("Erreur lors de la récupération du résultat de la recherche");
         }
     }
 }
