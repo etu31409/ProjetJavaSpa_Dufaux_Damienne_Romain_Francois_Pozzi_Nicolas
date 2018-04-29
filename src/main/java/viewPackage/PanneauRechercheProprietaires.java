@@ -5,44 +5,42 @@ import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;
-import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class PanneauRechercheProprietaires extends JPanel {
 
     private Controller controller;
-    private JPanel panneauRecherche, panneauListe, rechercheContainer;
+    private JPanel panneauRecherche, panneauListe, panneauRechercheContainer;
     private JComboBox listeVeterinaire;
     private JButton boutonRecherche;
     private JLabel titreRechProprietaire, titreSelectionVeterinaire, titreResultat;
     private JTable resultatRecherche;
     private JScrollPane jScrollpane;
+
     public PanneauRechercheProprietaires(Controller controller) {
         this.controller = controller;
 
         this.setLayout(new BorderLayout());
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
+        panneauRechercheContainer = new JPanel();
+
+        panneauRechercheContainer.setLayout(new GridLayout(1, 2));
+        panneauRecherche.setLayout(new GridLayout(25, 1));
+        panneauListe.setLayout(new GridLayout(2, 1));
 
         titreRechProprietaire = new JLabel("<html><h1>Recherche des propriétaire selon un vétérinaire</h1></html>");
         titreRechProprietaire.setHorizontalAlignment(SwingConstants.CENTER);
 
-        rechercheContainer = new JPanel();
-        rechercheContainer.setLayout(new GridLayout(1, 2));
-
         this.add(titreRechProprietaire, BorderLayout.NORTH);
-        this.add(rechercheContainer, BorderLayout.CENTER);
+        this.add(panneauRechercheContainer, BorderLayout.CENTER);
 
-        panneauRecherche.setLayout(new GridLayout(25, 1));
-        rechercheContainer.add(panneauRecherche);
-        panneauListe.setLayout(new GridLayout(2, 1));
-        rechercheContainer.add(panneauListe);
+        panneauRechercheContainer.add(panneauRecherche);
+        panneauRechercheContainer.add(panneauListe);
 
 
         titreSelectionVeterinaire = new JLabel("<html><h3>Selection du vétérinaire</h3></html>");
@@ -70,11 +68,9 @@ public class PanneauRechercheProprietaires extends JPanel {
             for (Veterinaire v : controller.getIdentifiantsVeterinaires()) {
                 listeVeterinaire.addItem(v);
             }
-        }
-        catch (VeterinaireException e) {
+        } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        catch (SingletonConnectionException e) {
+        } catch (SingletonConnectionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
@@ -84,20 +80,19 @@ public class PanneauRechercheProprietaires extends JPanel {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == boutonRecherche) {
                 try {
-                    Veterinaire selectionVeterinaire = (Veterinaire)listeVeterinaire.getSelectedItem();
-                    String[][] list = controller.getResultatRechercheProprietaire(selectionVeterinaire);
+                    if (jScrollpane != null)
+                        panneauListe.remove(jScrollpane);
+                    Veterinaire selectionVeterinaire = (Veterinaire) listeVeterinaire.getSelectedItem();
+                    String[][] resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
 
-                    String[] columnNames = {"Identifiant de l'animal","Nom de l'animal","Identifiant du propriétaire", "Nom du propriétaire"};
-                    resultatRecherche = new JTable(list, columnNames);
-                    jScrollpane = new JScrollPane (resultatRecherche);
-                    panneauListe.add(jScrollpane, BorderLayout.CENTER);
-                    panneauListe.repaint();
-
-                }
-                catch (SingletonConnectionException e) {
+                    String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire", "Nom du propriétaire"};
+                    resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
+                    jScrollpane = new JScrollPane(resultatRecherche);
+                    panneauListe.add(jScrollpane);
+                    panneauListe.doLayout();
+                } catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-                catch (ProprietaireException e) {
+                } catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }

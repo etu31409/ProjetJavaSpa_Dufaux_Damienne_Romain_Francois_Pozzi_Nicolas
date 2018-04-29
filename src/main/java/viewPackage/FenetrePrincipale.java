@@ -1,7 +1,6 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
