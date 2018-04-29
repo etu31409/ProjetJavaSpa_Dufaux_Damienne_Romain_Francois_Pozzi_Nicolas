@@ -1,5 +1,7 @@
 package viewPackage;
 
+import modelPackage.Proprietaire;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,6 +9,7 @@ import java.awt.event.*;
 public class FenetreProprio extends JFrame {
     private Container frameContainer ;
     private PanneauProprio panneauProprio;
+    private Proprietaire proprietaire;
     public FenetreProprio(){
         super("Ajout d'un propriétaire");
         setBounds(300, 100, 500, 500);
@@ -22,5 +25,7 @@ public class FenetreProprio extends JFrame {
             dispose();
         }
     }
-
+    Proprietaire getProprietaire(){
+        return panneauProprio.getProprietaire();
+    }
 }

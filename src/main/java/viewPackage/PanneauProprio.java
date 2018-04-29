@@ -17,6 +17,7 @@ public class PanneauProprio extends JPanel {
     private JComboBox pays;
     private String paysValues[] = {"Belgique", "France"};;
     private JButton retour, valider, reinnitialiser;
+    private Proprietaire proprietaire;
 
     public PanneauProprio(FenetreProprio fen){
         fenetreProprio = fen;
@@ -123,7 +124,7 @@ public class PanneauProprio extends JPanel {
             }
         }
         try{
-            Proprietaire proprietaire;
+
             String nomProprio;
             String prenomProprio;
 
@@ -132,5 +133,8 @@ public class PanneauProprio extends JPanel {
             proprietaire = new Proprietaire(0,nomProprio, prenomProprio);
         }
         catch(ProprietaireException exception){System.out.println(exception.getMessage());}
+    }
+    Proprietaire getProprietaire(){
+        return proprietaire;
     }
 }

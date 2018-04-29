@@ -27,6 +27,7 @@ public class PanneauAccueil extends JPanel {
     private JButton ajoutProprio;
     private JTextArea remarque;
     private JScrollPane scroll;
+    private FenetreProprio fenetreProprio;
 
     public PanneauAccueil() {
         this.setLayout(new BorderLayout());
@@ -227,7 +228,6 @@ public class PanneauAccueil extends JPanel {
 
 
     private class NouveauProprio implements ActionListener {
-        private FenetreProprio fenetreProprio;
         public void actionPerformed(ActionEvent event){
             fenetreProprio = new FenetreProprio();
         }
@@ -297,7 +297,7 @@ public class PanneauAccueil extends JPanel {
             Double numTatouageAnimal;
             String localisationTatouageAnimal;
             Double poidsAnimal;
-            Proprietaire proprietaireAnimal;
+            Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
 
             numRegistreAnimal = Integer.valueOf(numeroRegistre.getText());
             nomAnimal = nom.getText();

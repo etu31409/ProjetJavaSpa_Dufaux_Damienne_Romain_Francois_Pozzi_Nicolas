@@ -1,5 +1,7 @@
 package modelPackage;
 
+import exceptionPackage.AnimalException;
+
 import java.util.GregorianCalendar;
 
 public class Animal {
@@ -27,12 +29,12 @@ public class Animal {
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Double numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire) {
+                  Proprietaire proprietaire) throws AnimalException {
         this.numRegistre = numRegistre;
         this.nom = nom;
         this.dateArrivee = dateArrivee;
         this.dateDepart = dateDepart;
-        this.espece = espece;
+        setEspece(espece);
         this.race = race;
         this.sexe = sexe;
         this.estSterilise = estSterilise;
@@ -63,7 +65,10 @@ public class Animal {
         this.dateDepart = dateDepart;
     }
 
-    public void setEspece(String espece) {
+    public void setEspece(String espece)throws AnimalException {
+        if(espece.isEmpty()){
+            throw new AnimalException();
+        }
         this.espece = espece;
     }
 
