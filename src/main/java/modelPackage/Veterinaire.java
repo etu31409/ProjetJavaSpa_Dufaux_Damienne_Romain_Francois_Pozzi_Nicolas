@@ -35,4 +35,8 @@ public class Veterinaire {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public String toString (){
+        return " #" + this.getIdentifiantVeto() + " " + this.getNom();
+    }
 }

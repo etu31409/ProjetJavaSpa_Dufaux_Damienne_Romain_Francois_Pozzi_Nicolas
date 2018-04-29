@@ -58,4 +58,8 @@ public class Medicament {
     public void setNomMedic(String nomMedic) {
         this.nomMedic = nomMedic;
     }
+
+    public String toString (){
+       return " #" + this.getIdentifiantMed() + " " + this.getNomMedic();
+    }
 }

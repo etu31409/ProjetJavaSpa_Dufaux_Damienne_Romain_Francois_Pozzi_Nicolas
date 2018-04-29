@@ -182,4 +182,8 @@ public class Animal {
     public Proprietaire getProprietaire() {
         return proprietaire;
     }
+
+    public String toString(){
+        return " #" + this.getNumRegistre() + " " + this.getNom();
+    }
 }
