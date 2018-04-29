@@ -85,7 +85,8 @@ public class PanneauRechercheProprietaires extends JPanel {
                     Veterinaire selectionVeterinaire = (Veterinaire) listeVeterinaire.getSelectedItem();
                     String[][] resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
 
-                    String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire", "Nom du propriétaire"};
+                    String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire",
+                            "Nom du propriétaire"};
                     resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
                     jScrollpane = new JScrollPane(resultatRecherche);
                     panneauListe.add(jScrollpane);

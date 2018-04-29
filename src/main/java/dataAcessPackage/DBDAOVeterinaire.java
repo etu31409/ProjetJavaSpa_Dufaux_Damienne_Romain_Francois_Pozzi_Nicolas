@@ -2,11 +2,9 @@ package dataAcessPackage;
 
 import exceptionPackage.*;
 import modelPackage.*;
-import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.sql.*;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.util.*;
 
 public class DBDAOVeterinaire implements IVeterinaire{

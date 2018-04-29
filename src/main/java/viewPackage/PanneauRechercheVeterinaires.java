@@ -1,19 +1,13 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.OrdonnanceException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
-import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PanneauRechercheVeterinaires  extends JPanel {

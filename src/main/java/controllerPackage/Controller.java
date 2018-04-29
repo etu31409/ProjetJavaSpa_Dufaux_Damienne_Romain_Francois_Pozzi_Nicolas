@@ -5,7 +5,6 @@ import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
-import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

@@ -1,10 +1,8 @@
 package dataAcessPackage;
 
-import exceptionPackage.OrdonnanceException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;
-import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
