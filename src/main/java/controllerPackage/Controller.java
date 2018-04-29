@@ -40,4 +40,13 @@ public class Controller {
             throws SingletonConnectionException, VeterinaireException {
         return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
+    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+            SingletonConnectionException{
+        return business.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
+    }
+
+    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+            throws AnimalException, SingletonConnectionException{
+        return business.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
+    }
 }

@@ -47,5 +47,15 @@ public class Business {
                     GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
         return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
+
+    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+            SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
+    }
+
+    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+            throws AnimalException, SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
+    }
     //tache metier
 }
