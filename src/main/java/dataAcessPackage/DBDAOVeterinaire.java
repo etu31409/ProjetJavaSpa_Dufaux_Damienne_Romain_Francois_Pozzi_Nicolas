@@ -78,7 +78,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRechercheParDate = new ArrayList<>();
+            ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRechercheParDate = new ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche>();
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
                     "spabd.ordonnance.dateOrdonnance\n" +

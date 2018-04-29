@@ -8,6 +8,7 @@ import modelPackage.Veterinaire;
 import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +21,10 @@ public class PanneauRechercheProprietaires extends JPanel {
     private JComboBox listeVeterinaire;
     private JButton boutonRecherche;
     private JLabel titreRechProprietaire, titreSelectionVeterinaire, titreResultat;
-
+    private JTable resultatRecherche;
+    private JScrollPane jScrollpane;
     public PanneauRechercheProprietaires(Controller controller) {
-        this.controller = new Controller();
+        this.controller = controller;
 
         this.setLayout(new BorderLayout());
         panneauRecherche = new JPanel();
@@ -83,8 +85,14 @@ public class PanneauRechercheProprietaires extends JPanel {
             if (event.getSource() == boutonRecherche) {
                 try {
                     Veterinaire selectionVeterinaire = (Veterinaire)listeVeterinaire.getSelectedItem();
-                    ArrayList<AnimalProprietaireRecherche> list =  controller.getResultatRechercheProprietaire(selectionVeterinaire);
-                    String t= "";
+                    String[][] list = controller.getResultatRechercheProprietaire(selectionVeterinaire);
+
+                    String[] columnNames = {"Identifiant de l'animal","Nom de l'animal","Identifiant du propriétaire", "Nom du propriétaire"};
+                    resultatRecherche = new JTable(list, columnNames);
+                    jScrollpane = new JScrollPane (resultatRecherche);
+                    panneauRecherche.add(jScrollpane, BorderLayout.CENTER);
+                    panneauRecherche.repaint();
+
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
