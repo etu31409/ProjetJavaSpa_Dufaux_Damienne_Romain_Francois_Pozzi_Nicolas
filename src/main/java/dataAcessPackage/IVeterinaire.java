@@ -1,5 +1,6 @@
 package dataAcessPackage;
 
+import exceptionPackage.AnimalException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;

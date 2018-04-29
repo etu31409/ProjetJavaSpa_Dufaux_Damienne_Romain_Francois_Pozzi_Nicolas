@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 public class PanneauRechercheVeterinaires  extends JPanel {
     private Controller controller;
     private JPanel panneauRecherche, panneauListe, panneauTitre;
-    private JLabel champTitre, vide, titre;
+    private JLabel champTitre, vide;
     private PanneauSpinnerDate dateDebutRech,dateFinRech;
     private JButton rechercher;
     private JCheckBox dateDebut, dateFin;
@@ -28,9 +28,7 @@ public class PanneauRechercheVeterinaires  extends JPanel {
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
         panneauTitre = new JPanel();
-        //titre = new JLabel();
 
-        //this.add(titre, BorderLayout.NORTH);
         this.add(panneauRecherche, BorderLayout.WEST);
         this.add(panneauListe, BorderLayout.CENTER);
         this.add(panneauTitre, BorderLayout.NORTH);

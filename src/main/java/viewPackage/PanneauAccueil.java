@@ -274,12 +274,10 @@ public class PanneauAccueil extends JPanel {
             }
         }
         //validation espece (ne peut pas etre null)
-
         //valiation race (ne peut pas etre null)
-
         //validation sexe (ne peut pas etre null)
-
         //validation estSterilise (ne peut pas etre null)
+
         try{
             Integer numRegistreAnimal;
             String nomAnimal;

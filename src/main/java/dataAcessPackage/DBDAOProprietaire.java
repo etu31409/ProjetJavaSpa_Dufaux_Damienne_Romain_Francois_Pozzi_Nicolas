@@ -121,18 +121,15 @@ public class DBDAOProprietaire implements IProprietaire{
             int i = 0;
             while (data.next()) {
                 listeResultatRecherche[i] = new String[4];
-                listeResultatRecherche[i][0] =  Integer.toString(data.getInt(1));
+                listeResultatRecherche[i][0] = Integer.toString(data.getInt(1));
                 listeResultatRecherche[i][1] = data.getString(2);
                 listeResultatRecherche[i][2] = Integer.toString(data.getInt(3));
                 listeResultatRecherche[i][3] = data.getString(4);
                 i++;
             }
             return listeResultatRecherche;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");
         }
-
     }
-
 }
