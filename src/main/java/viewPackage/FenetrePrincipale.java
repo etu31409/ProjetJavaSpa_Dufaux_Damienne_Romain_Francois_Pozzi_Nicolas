@@ -1,14 +1,18 @@
 package viewPackage;
 
+import controllerPackage.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class FenetrePrincipale extends JFrame{
+    private Controller controller;
     private Container frameContainer;
     private JMenuBar barMenu;
     private JMenu acceuil, recherches, medicaments, listing, supprimer;
-    private JMenuItem nouvelAccueil, nouvellePrescription, rechercheFiches, quitter, supprimerFicheDeSoin, supprimerAnimale, listingFicheDeSoin, listingAnimaux;
+    private JMenuItem nouvelAccueil, nouvellePrescription, rechercheFiches, quitter, supprimerFicheDeSoin,
+            supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires;
     private PanneauBienvenue panneauBienvenue;
 
     public FenetrePrincipale(){
@@ -42,6 +46,14 @@ public class FenetrePrincipale extends JFrame{
         rechercheFiches.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheFiches);
 
+        rechercheVeterinaires = new JMenuItem("Recherche Veterinaire");
+        rechercheVeterinaires.addActionListener(new EcouteurBarMenu());
+        recherches.add(rechercheVeterinaires);
+
+        rechercheProprietaires = new JMenuItem("Recherche Propriétaire");
+        rechercheProprietaires.addActionListener(new EcouteurBarMenu());
+        recherches.add(rechercheProprietaires);
+
         medicaments = new JMenu("Medicaments");
         medicaments.setMnemonic('M');
         barMenu.add(medicaments);
@@ -74,6 +86,7 @@ public class FenetrePrincipale extends JFrame{
         listing.add(listingAnimaux);
         listingAnimaux.addActionListener(new EcouteurBarMenu());
 
+        controller = new Controller();
         setVisible(true);
     }
 
@@ -113,6 +126,21 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.add(new PanneauListingAnimal());
                 frameContainer.repaint();
                 frameContainer.validate();
+            }
+            else if(event.getSource() == rechercheVeterinaires) {
+                frameContainer.removeAll();
+                frameContainer.add(new PanneauRechercheVeterinaires(controller));
+                frameContainer.repaint();
+                frameContainer.validate();
+
+            }
+            else if(event.getSource() == rechercheProprietaires) {
+                frameContainer.removeAll();
+                frameContainer.add(new PanneauRechercheProprietaires(controller));
+                frameContainer.repaint();
+                frameContainer.repaint();
+                frameContainer.validate();
+
             }
         }
     }
