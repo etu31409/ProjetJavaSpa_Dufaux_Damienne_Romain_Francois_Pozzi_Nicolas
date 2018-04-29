@@ -89,8 +89,7 @@ public class DBDAOProprietaire implements IProprietaire{
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
+            sqlInstruction = "select count(*)" +
                     "from spabd.animal\n" +
                     "inner join spabd.proprietaire\n" +
                     "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
@@ -102,10 +101,27 @@ public class DBDAOProprietaire implements IProprietaire{
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
-            String[][] list = new String[3][];
+            data.next();
+            Integer nombreDeLignes = data.getInt(1);
+
+            String[][] list = new String[nombreDeLignes][];
+
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
+                    "from spabd.animal\n" +
+                    "inner join spabd.proprietaire\n" +
+                    "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
+                    "inner join spabd.soinAvance\n" +
+                    "on (spabd.soinAvance.numRegistre = spabd.animal.numRegistre)\n" +
+                    "inner join spabd.veterinaire\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
+                    "where spabd.veterinaire.identifiantVeto = ?;";
+            statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
+            data = statement.executeQuery();
             int i = 0;
             while (data.next()) {
-                list[i][0] = Integer.toString(data.getInt(1));
+                list[i] = new String[4];
+                list[i][0] =  Integer.toString(data.getInt(1));
                 list[i][1] = data.getString(2);
                 list[i][2] = Integer.toString(data.getInt(3));
                 list[i][3] = data.getString(4);

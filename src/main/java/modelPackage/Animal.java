@@ -23,7 +23,7 @@ public class Animal {
     private Double poids;
     private Proprietaire proprietaire;
 
-    public Animal(Integer numRegistreAnimal, String nomAnimal, GregorianCalendar dateArriveeAnimal, GregorianCalendar dateDepartAnimal, String especeAnimal, String raceAnimal, String sexeAnimal, boolean estSteriliseAnimal, String couleurDePeauAnimal, GregorianCalendar dateNaissanceAnimal, Double numPuceAnimal, String localisationPuceAnimal, GregorianCalendar dateAttributionPuceAnimal, Double numTatouageAnimal, String localisationTatouageAnimal, Double poidsAnimal, Proprietaire proprietaireAnimal){}
+    public Animal(){}
 
     public Animal(Integer numRegistre, String nom, GregorianCalendar dateArrivee, GregorianCalendar dateDepart,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
