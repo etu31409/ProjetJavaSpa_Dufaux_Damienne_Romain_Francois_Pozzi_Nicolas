@@ -5,6 +5,7 @@ import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
+import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import java.util.ArrayList;
 
@@ -38,8 +39,8 @@ public class Business {
         return daoVeterinaire.getVeterinaires();
     }
 
-    public void getResultatRechercheProprietaire(Veterinaire selectedVet) throws SingletonConnectionException, ProprietaireException {
-        daoProprietaire.getResultatRechercheProprietaire(selectedVet);
+    public ArrayList<AnimalProprietaireRecherche> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
+        return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
     //tache metier
