@@ -195,7 +195,7 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "select count(*)" +
+            sqlInstruction = "select count(*)\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
@@ -210,10 +210,10 @@ public class DBDAOAnimal implements IAnimal {
 
             String[][] listeResultatRecherche = new String[nombreDeLignes][];
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinsAvance.identifiantVeto)\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
@@ -297,10 +297,10 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "select count(*)" +
+            sqlInstruction = "select count(*)\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinsAvance.identifiantVeto)\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.medicament.identifiantMed = ?;";
@@ -313,7 +313,7 @@ public class DBDAOAnimal implements IAnimal {
 
             String[][] listeResultatRecherche = new String[nombreDeLignes][];
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
                     "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
