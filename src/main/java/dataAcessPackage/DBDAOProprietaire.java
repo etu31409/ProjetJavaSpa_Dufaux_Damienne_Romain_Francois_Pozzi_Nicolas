@@ -2,7 +2,6 @@ package dataAcessPackage;
 
 import exceptionPackage.*;
 import modelPackage.*;
-import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,12 +84,12 @@ public class DBDAOProprietaire implements IProprietaire{
     }
 
     @Override
-    public ArrayList<AnimalProprietaireRecherche> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
+    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            ArrayList<AnimalProprietaireRecherche> resultatRecherche = new ArrayList<AnimalProprietaireRecherche>();
+
             sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
                     "from spabd.animal\n" +
                     "inner join spabd.proprietaire\n" +
@@ -103,13 +102,16 @@ public class DBDAOProprietaire implements IProprietaire{
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
-
+            String[][] list = new String[3][];
+            int i = 0;
             while (data.next()) {
-                AnimalProprietaireRecherche element = new AnimalProprietaireRecherche();
-
-                resultatRecherche.add(element);
+                list[i][0] = Integer.toString(data.getInt(1));
+                list[i][1] = data.getString(2);
+                list[i][2] = Integer.toString(data.getInt(3));
+                list[i][3] = data.getString(4);
+                i++;
             }
-            return resultatRecherche;
+            return list;
         }
         catch (SQLException e){
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");

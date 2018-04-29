@@ -72,10 +72,10 @@ public class PanneauRechercheVeterinaires  extends JPanel {
             resultatRecherche.addColumn(dateOrdonnance);
             //par sécurité
             if(event.getSource() == rechercher){
-                try {
-                    /*for (){
+               /* try {
+                    *//*for (){
                         resultatRecherche;
-                    }*/
+                    }*//*
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
@@ -85,7 +85,7 @@ public class PanneauRechercheVeterinaires  extends JPanel {
                 }
                 catch (VeterinaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
+                }*/
             }
         }
     }
