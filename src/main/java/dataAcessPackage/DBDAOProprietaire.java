@@ -2,6 +2,7 @@ package dataAcessPackage;
 
 import exceptionPackage.*;
 import modelPackage.*;
+import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -84,22 +85,36 @@ public class DBDAOProprietaire implements IProprietaire{
     }
 
     @Override
-    public void getResultatRechercheProprietaire(Veterinaire selectedVet) throws ProprietaireException, SingletonConnectionException {
-
+    public ArrayList<AnimalProprietaireRecherche> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-
-            Proprietaire proprietaire = new Proprietaire();
-
-            sqlInstruction = "select * from spabd.proprietaire where identifiantProprio = ?";
+            ArrayList<AnimalProprietaireRecherche> resultatRecherche = new ArrayList<AnimalProprietaireRecherche>();
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
+                    "from spabd.animal\n" +
+                    "inner join spabd.proprietaire\n" +
+                    "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
+                    "inner join spabd.soinAvance\n" +
+                    "on (spabd.soinAvance.numRegistre = spabd.animal.numRegistre)\n" +
+                    "inner join spabd.veterinaire\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
+                    "where spabd.veterinaire.identifiantVeto = ?;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
+
+            while (data.next()) {
+                AnimalProprietaireRecherche element = new AnimalProprietaireRecherche();
+
+                resultatRecherche.add(element);
+            }
+            return resultatRecherche;
         }
         catch (SQLException e){
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");
         }
+
     }
 
 }
