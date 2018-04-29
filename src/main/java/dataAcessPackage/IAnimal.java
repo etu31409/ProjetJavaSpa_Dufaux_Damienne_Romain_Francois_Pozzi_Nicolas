@@ -10,4 +10,5 @@ import java.util.ArrayList;
 
 public interface IAnimal {
     ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException, SingletonConnectionException, ProprietaireException;
+    Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException, ProprietaireException;
 }

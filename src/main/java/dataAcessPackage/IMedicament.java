@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface IMedicament {
     ArrayList<Medicament> getMedicaments() throws MedicamentException, SingletonConnectionException;
+    public Medicament getUnMedicament(int identifiantMed)throws SingletonConnectionException, MedicamentException;
 }

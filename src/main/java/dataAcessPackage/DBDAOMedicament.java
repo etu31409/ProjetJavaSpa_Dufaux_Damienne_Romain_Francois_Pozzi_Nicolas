@@ -49,4 +49,34 @@ public class DBDAOMedicament implements IMedicament {
             throw new MedicamentException();
         }
     }
+
+    public Medicament getUnMedicament(int identifiantMed)throws SingletonConnectionException, MedicamentException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            sqlInstruction = "select * from spabd.medicament where identifiantMed = ?";
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, identifiantMed);
+            data = statement.executeQuery();
+
+            Medicament medicament = new Medicament();
+            GregorianCalendar datePreparation = new GregorianCalendar();
+
+            while (data.next()) {
+                medicament.setIdentifiantMed(data.getInt("identifiantMed"));
+                datePreparation.setTime( data.getDate("datePreparation"));
+                medicament.setDatePreparation(datePreparation);
+                medicament.setStockage(data.getString("stockage"));
+                medicament.setPosologie(data.getString("posologie"));
+                medicament.setNomMedic(data.getString("nomMedic"));
+            }
+            return medicament;
+        }
+        catch (SQLException e) {
+            throw new MedicamentException();
+        }
+
+    }
 }

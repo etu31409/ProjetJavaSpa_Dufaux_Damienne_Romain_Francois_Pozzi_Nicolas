@@ -14,7 +14,7 @@ public class Ordonnance {
         this.medicament = medicament;
         this.dateOrdonnance = dateOrdonnance;
     }
-    
+
     public Ordonnance(){
 
     }
