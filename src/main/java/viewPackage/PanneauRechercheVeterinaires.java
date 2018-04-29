@@ -20,11 +20,11 @@ public class PanneauRechercheVeterinaires  extends JPanel {
     private Controller controller;
     private JPanel panneauRecherche, panneauListe, panneauTitre;
     private JLabel champTitre, vide, titre;
-    private PanneauSpinnerDate dateDebutRech, dateFinRech;
+    private PanneauSpinnerDate dateDebutRech,dateFinRech;
     private JButton rechercher;
     private JCheckBox dateDebut, dateFin;
     private JTable resultatRecherche;
-    //private TableColumn IDVeto, nomVeto, dateOrdonnance;
+    private JScrollPane jScrollPane;
     private GregorianCalendar dateDebutZoneRecherche, dateFinZoneRecherche;
 
 
@@ -34,17 +34,19 @@ public class PanneauRechercheVeterinaires  extends JPanel {
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
         panneauTitre = new JPanel();
-        titre = new JLabel();
+        //titre = new JLabel();
 
-        this.add(titre, BorderLayout.NORTH);
+        //this.add(titre, BorderLayout.NORTH);
         this.add(panneauRecherche, BorderLayout.WEST);
         this.add(panneauListe, BorderLayout.CENTER);
-        this.add(panneauTitre, BorderLayout.CENTER);
+        this.add(panneauTitre, BorderLayout.NORTH);
 
-        panneauRecherche.setLayout(new GridLayout(20, 2, 10, 5));
-        panneauListe.setLayout(new GridLayout(20, 1, 10, 5));
+        panneauRecherche.setLayout(new GridLayout(20, 2));
+        panneauListe.setLayout(new GridLayout(3, 1));
+        panneauTitre.setLayout(new GridLayout(1, 1));
 
         vide = new JLabel("");
+        panneauListe.add(vide);
 
         champTitre = new JLabel("<html><h1>Recherche des vétérinaires qui ont préscrit des ordonnances</h1></html>");
         champTitre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -72,11 +74,8 @@ public class PanneauRechercheVeterinaires  extends JPanel {
 
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
-            //resultatRecherche.clearSelection();
-            //resultatRecherche.addColumn(IDVeto);
-            //resultatRecherche.addColumn(nomVeto);
-            //resultatRecherche.addColumn(dateOrdonnance);
-            //par sécurité
+            if(jScrollPane != null)
+                panneauListe.remove(jScrollPane);
             if(event.getSource() == rechercher){
                 try {
                     if(!dateDebut.isSelected()){
@@ -96,13 +95,16 @@ public class PanneauRechercheVeterinaires  extends JPanel {
                         JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
                         return;
                     }
-                    ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
+
+                    String[][] selectionRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
+                    String[] nomDesColonnes = {"Identifiant du vétérinaire", "Nom du vétérinaire", "Date de l'ordonnance"};
+                    resultatRecherche = new JTable(selectionRecherche, nomDesColonnes);
+                    jScrollPane = new JScrollPane(resultatRecherche);
+                    panneauListe.add(jScrollPane);
+                    panneauListe.doLayout();
                 }
                 catch (SingletonConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-                catch (OrdonnanceException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (VeterinaireException e) {

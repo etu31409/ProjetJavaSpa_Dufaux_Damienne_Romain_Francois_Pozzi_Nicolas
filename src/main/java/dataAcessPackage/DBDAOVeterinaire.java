@@ -6,6 +6,7 @@ import modelPackage.modelJointure.VeterinaireSoinAvanceOrdonnanceRecherche;
 
 import java.sql.*;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.util.*;
 
 public class DBDAOVeterinaire implements IVeterinaire{
@@ -72,14 +73,29 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
-    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-               GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+               GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRechercheParDate = new ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche>();
+            sqlInstruction = "select count(*)" +
+                    "from spabd.veterinaire\n" +
+                    "inner join spabd.soinAvance\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
+                    "inner join spabd.ordonnance\n" +
+                    "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
+                    "where spabd.ordonnance.dateOrdonnance between ? and ?";
+
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
+            statement.setDate(2, new Date(dateFin.getTimeInMillis()));
+            data = statement.executeQuery();
+            data.next();
+            Integer nombreDeLignes = data.getInt(1);
+
+            String[][] listeResultatRechercheParDate = new String[nombreDeLignes][];
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
                     "spabd.ordonnance.dateOrdonnance\n" +
@@ -90,26 +106,24 @@ public class DBDAOVeterinaire implements IVeterinaire{
                     "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
                     "where spabd.ordonnance.dateOrdonnance between ? and ?";
 
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-
+            statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
             statement.setDate(2, new Date(dateFin.getTimeInMillis()));
             data = statement.executeQuery();
+            int i = 0;
 
             while (data.next()) {
-                VeterinaireSoinAvanceOrdonnanceRecherche vso = new VeterinaireSoinAvanceOrdonnanceRecherche();
-                vso.setIdVeterinaire(data.getInt("identifiantVeto"));
-                vso.setNomVeterinaire(data.getString("nom"));
-                GregorianCalendar date = new GregorianCalendar();
-                date.setTime(data.getDate("dateOrdonnance"));
-                vso.setDateOrdonnance(date);
-
-                resultatRechercheParDate.add(vso);
+                listeResultatRechercheParDate[i] = new String[3];
+                listeResultatRechercheParDate[i][0] = Integer.toString(data.getInt(1));
+                listeResultatRechercheParDate[i][2] = data.getString(2);
+                listeResultatRechercheParDate[i][1] = data.getDate(3).toString();
+                i++;
             }
-            return resultatRechercheParDate;
+            return listeResultatRechercheParDate;
 
         } catch (SQLException e) {
-            throw new VeterinaireException("Erreur lors de la récupération du résultat de la recherche");
+            throw new VeterinaireException("Erreur lors de la récupération du résultat de la recherche des vétérinaires" +
+                    " en fonction de deux dates");
         }
     }
 }

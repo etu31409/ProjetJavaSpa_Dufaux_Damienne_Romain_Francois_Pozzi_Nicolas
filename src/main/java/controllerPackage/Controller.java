@@ -37,8 +37,8 @@ public class Controller {
         return business.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
-    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-                                                                                                   GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+            throws SingletonConnectionException, VeterinaireException {
         return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
 }

@@ -44,8 +44,8 @@ public class Business {
         return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
-    public ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-                    GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException {
+    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+                    GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
         return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
     //tache metier

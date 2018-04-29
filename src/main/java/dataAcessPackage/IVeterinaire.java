@@ -12,6 +12,6 @@ import java.util.GregorianCalendar;
 public interface IVeterinaire {
     ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException;
     Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException;
-    ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-                GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException, OrdonnanceException;
+    String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+                GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException;
 }
