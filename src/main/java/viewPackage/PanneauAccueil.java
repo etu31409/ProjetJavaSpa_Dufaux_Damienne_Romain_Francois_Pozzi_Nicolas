@@ -8,11 +8,11 @@ public class PanneauAccueil extends JPanel {
     //private JLabel texte;
     private JPanel panneauFormulaire;
     private JPanel panneauBoutons;
-    private JLabel lieuxSPALabel, celluleLabel, numeroRegistreLabel, rempliParLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
+    private JLabel nomLabel, lieuxSPALabel, celluleLabel, numeroRegistreLabel, rempliParLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
     private JLabel dateArriveLabel, dateDepartLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel;
     private JLabel attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel, dateTatouageLabel, titreProprietaireLabel;
-    private JLabel remarqueLabel;
-    private JTextField lieuxSPA, cellule, numeroRegistre, rempliPar, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
+    private JLabel remarqueLabel, localisationTatouageLabel;
+    private JTextField localisationTatouage, nom, lieuxSPA, cellule, numeroRegistre, rempliPar, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
     private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateDepart, dateNaissance, dateAttribution, dateTatouage;
     private JButton  retour, validation, reinnitialiser;
     private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
@@ -40,8 +40,11 @@ public class PanneauAccueil extends JPanel {
         dateRemplissage = new PanneauSpinnerDate();
         panneauFormulaire.add(dateRemplissage);
 
-        panneauFormulaire.add(new JLabel(""));
-        panneauFormulaire.add(new JLabel(""));
+        nomLabel = new JLabel("Nom de l'animal :");
+        nomLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        panneauFormulaire.add(nomLabel);
+        nom = new JTextField();
+        panneauFormulaire.add(nom);
 
         lieuxSPALabel = new JLabel("SPA de :");
         lieuxSPALabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -173,8 +176,11 @@ public class PanneauAccueil extends JPanel {
         dateTatouage = new PanneauSpinnerDate();
         panneauFormulaire.add(dateTatouage);
 
-        panneauFormulaire.add(new JLabel(""));
-        panneauFormulaire.add(new JLabel(""));
+        localisationTatouageLabel = new JLabel("Localisation du tatouage :");
+        localisationTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        panneauFormulaire.add(localisationTatouageLabel);
+        localisationTatouage = new JTextField();
+        panneauFormulaire.add(localisationTatouage);
 
         incertainDateTatouageLabel = new JLabel("Incertain :");
         incertainDateTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -206,6 +212,7 @@ public class PanneauAccueil extends JPanel {
         panneauBoutons.setLayout(new FlowLayout());
         retour = new JButton("Retour");
         panneauBoutons.add(retour);
+        retour.addActionListener(new EcouteurDeBouton());
         validation = new JButton("Valider");
         panneauBoutons.add(validation);
         validation.addActionListener(new EcouteurDeBouton());
@@ -224,32 +231,49 @@ public class PanneauAccueil extends JPanel {
     private class EcouteurDeBouton implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validation){
-                Integer numeroCellule = 0;
-                try{
-                    numeroCellule = Integer.valueOf(cellule.getText());
-                }
-                catch (Exception error){
-                    numeroCellule = null;
-                }
-                finally {
-                   // if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
-                    if(numeroCellule == null || numeroCellule < 1){
-                        JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                Integer numeroDeRegistre = 0;
-                try{
-                    numeroDeRegistre = Integer.valueOf(cellule.getText());
-                }
-                catch (Exception error){
-                    numeroDeRegistre = null;
-                }
-                finally {
-                    if(numeroDeRegistre == null || numeroDeRegistre< 1){
-                        JOptionPane.showMessageDialog(null, "Numéro de registre incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
+                validationFormulaire();
+            }
+            if(e.getSource() == retour){
+                PanneauAccueil.this.removeAll();
+                PanneauBienvenue panneauBienvenue= new PanneauBienvenue();
+                PanneauAccueil.this.repaint();
+                PanneauAccueil.this.validate();
             }
         }
+    }
+    public void validationFormulaire(){
+        //validation numero de cellule
+        Integer numeroCellule = 0;
+        try{
+            numeroCellule = Integer.valueOf(cellule.getText());
+        }
+        catch (Exception error){
+            numeroCellule = null;
+        }
+        finally {
+            if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
+                JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        //validation numero de registre
+        Integer numeroDeRegistre = 0;
+        try{
+            numeroDeRegistre = Integer.valueOf(cellule.getText());
+        }
+        catch (Exception error){
+            numeroDeRegistre = null;
+        }
+        finally {
+            if(numeroDeRegistre == null || numeroDeRegistre< 1){
+                JOptionPane.showMessageDialog(null, "Numéro de registre incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        //validation espece (ne peut pas etre null)
+
+        //valiation race (ne peut pas etre null)
+
+        //validation sexe (ne peut pas etre null)
+
+        //validation estSterilise (ne peut pas etre null)
     }
 }
