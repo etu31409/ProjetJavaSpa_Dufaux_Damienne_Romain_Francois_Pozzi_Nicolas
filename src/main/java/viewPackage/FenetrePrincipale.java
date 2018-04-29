@@ -129,7 +129,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheVeterinaires) {
                 frameContainer.removeAll();
-                //frameContainer.add(new PanneauRechercheVeterinaires(controller));
+                frameContainer.add(new PanneauRechercheVeterinaires(controller));
                 frameContainer.repaint();
                 frameContainer.validate();
 

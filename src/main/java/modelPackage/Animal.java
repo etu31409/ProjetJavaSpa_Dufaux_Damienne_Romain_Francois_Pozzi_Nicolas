@@ -13,7 +13,7 @@ public class Animal {
     private boolean estSterilise;
     private String couleurDePeau;
     private GregorianCalendar dateNaissance;
-    private Double numPuce;
+    private Integer numPuce;
     private String localisationPuce;
     private GregorianCalendar dateAttributionPuce;
     private Double numTatouage;
@@ -25,20 +25,20 @@ public class Animal {
 
     public Animal(Integer numRegistre, String nom, GregorianCalendar dateArrivee, GregorianCalendar dateDepart,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
-                  GregorianCalendar dateNaissance, Double numPuce, String localisationPuce,
+                  GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
                   Proprietaire proprietaire) {
-        this.numRegistre = numRegistre;
-        this.nom = nom;
-        this.dateArrivee = dateArrivee;
-        this.dateDepart = dateDepart;
-        this.espece = espece;
-        this.race = race;
-        this.sexe = sexe;
-        this.estSterilise = estSterilise;
-        this.couleurDePeau = couleurDePeau;
-        this.dateNaissance = dateNaissance;
-        this.numPuce = numPuce;
+        setNumRegistre(numRegistre);
+        setNom(nom);
+        setDateArrivee(dateArrivee);
+        setDateDepart(dateDepart);
+        setEspece(espece);
+        setRace(race);
+        setSexe(sexe);
+        setEstSterilise(estSterilise);
+        setCouleurDePeau(couleurDePeau);
+        setDateNaissance(dateNaissance);
+        setNumPuce(numPuce);
         this.localisationPuce = localisationPuce;
         this.dateAttributionPuce = dateAttributionPuce;
         this.numTatouage = numTatouage;
@@ -87,7 +87,7 @@ public class Animal {
         this.dateNaissance = dateNaissance;
     }
 
-    public void setNumPuce(Double numPuce) {
+    public void setNumPuce(Integer numPuce) {
         this.numPuce = numPuce;
     }
 
@@ -158,7 +158,7 @@ public class Animal {
         return dateNaissance;
     }
 
-    public Double getNumPuce() {
+    public Integer getNumPuce() {
         return numPuce;
     }
 
