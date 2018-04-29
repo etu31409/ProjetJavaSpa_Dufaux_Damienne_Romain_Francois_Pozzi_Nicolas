@@ -104,7 +104,7 @@ public class DBDAOProprietaire implements IProprietaire{
             data.next();
             Integer nombreDeLignes = data.getInt(1);
 
-            String[][] listeResultatRecherche = new String[nombreDeLignes][];
+            String[][] list = new String[nombreDeLignes][];
 
             sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
                     "from spabd.animal\n" +
@@ -120,14 +120,14 @@ public class DBDAOProprietaire implements IProprietaire{
             data = statement.executeQuery();
             int i = 0;
             while (data.next()) {
-                listeResultatRecherche[i] = new String[4];
-                listeResultatRecherche[i][0] =  Integer.toString(data.getInt(1));
-                listeResultatRecherche[i][1] = data.getString(2);
-                listeResultatRecherche[i][2] = Integer.toString(data.getInt(3));
-                listeResultatRecherche[i][3] = data.getString(4);
+                list[i] = new String[4];
+                list[i][0] =  Integer.toString(data.getInt(1));
+                list[i][1] = data.getString(2);
+                list[i][2] = Integer.toString(data.getInt(3));
+                list[i][3] = data.getString(4);
                 i++;
             }
-            return listeResultatRecherche;
+            return list;
         }
         catch (SQLException e){
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");

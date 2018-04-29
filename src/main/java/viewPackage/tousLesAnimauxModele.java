@@ -10,7 +10,7 @@ public class tousLesAnimauxModele extends AbstractTableModel {
     private ArrayList<Animal> contenu;
 
     public tousLesAnimauxModele(ArrayList<Animal> animaux) {
-        nomDesColonnes = new ArrayList<String>();
+        nomDesColonnes = new ArrayList<>();
         nomDesColonnes.add("numRegistre");
         nomDesColonnes.add("nom");
         nomDesColonnes.add("dateArrivee");
