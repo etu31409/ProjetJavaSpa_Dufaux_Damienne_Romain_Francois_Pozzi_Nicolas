@@ -91,9 +91,11 @@ public class PanneauRechercheProprietaires extends JPanel {
                     jScrollpane = new JScrollPane(resultatRecherche);
                     panneauListe.add(jScrollpane);
                     panneauListe.doLayout();
-                } catch (SingletonConnectionException e) {
+                }
+                catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (ProprietaireException e) {
+                }
+                catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }

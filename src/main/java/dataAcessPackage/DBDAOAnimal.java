@@ -239,7 +239,7 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "select count(*)" +
+            sqlInstruction = "select count(*)\n" +
                     "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
@@ -261,7 +261,7 @@ public class DBDAOAnimal implements IAnimal {
 
             String[][] listeResultatRecherche = new String[nombreDeLignes][];
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
                     "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
