@@ -1,5 +1,8 @@
 package viewPackage;
 
+import exceptionPackage.ProprietaireException;
+import modelPackage.Proprietaire;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +17,7 @@ public class PanneauProprio extends JPanel {
     private JComboBox pays;
     private String paysValues[] = {"Belgique", "France"};;
     private JButton retour, valider, reinnitialiser;
+    private Proprietaire proprietaire;
 
     public PanneauProprio(FenetreProprio fen){
         fenetreProprio = fen;
@@ -85,11 +89,52 @@ public class PanneauProprio extends JPanel {
         public void actionPerformed(ActionEvent event){
             fenetreProprio.dispose();
             if (event.getSource() == valider){
-
+                validationFormulaire();
             }
             else if (event.getSource() == reinnitialiser){
                 fenetreProprio = new FenetreProprio();
             }
         }
+    }
+
+    public void validationFormulaire(){
+        Integer numero = 0;
+        try{
+            numero= Integer.valueOf(numeroAdresse.getText());
+        }
+        catch (Exception error){
+            numero = null;
+        }
+        finally {
+            if(numeroAdresse.getText().isEmpty() || numero == null || numero < 1){
+                JOptionPane.showMessageDialog(null, "Numero invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        Integer codePostalPrevu = 0;
+        try{
+            codePostalPrevu= Integer.valueOf(codePostal.getText());
+        }
+        catch (Exception error){
+            codePostalPrevu = null;
+        }
+        finally {
+            if(codePostal.getText().isEmpty() || codePostalPrevu== null || codePostalPrevu< 1){
+                JOptionPane.showMessageDialog(null, "Code postale invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        try{
+
+            String nomProprio;
+            String prenomProprio;
+
+            nomProprio = nom.getText();
+            prenomProprio = prenom.getText();
+            proprietaire = new Proprietaire(0,nomProprio, prenomProprio);
+        }
+        catch(ProprietaireException exception){System.out.println(exception.getMessage());}
+    }
+    Proprietaire getProprietaire(){
+        return proprietaire;
     }
 }

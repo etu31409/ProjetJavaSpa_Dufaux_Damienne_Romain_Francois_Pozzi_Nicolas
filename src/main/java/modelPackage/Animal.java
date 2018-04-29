@@ -1,5 +1,7 @@
 package modelPackage;
 
+import exceptionPackage.AnimalException;
+
 import java.util.GregorianCalendar;
 
 public class Animal {
@@ -21,13 +23,13 @@ public class Animal {
     private Double poids;
     private Proprietaire proprietaire;
 
-    public Animal(){}
+    public Animal(Integer numRegistreAnimal, String nomAnimal, GregorianCalendar dateArriveeAnimal, GregorianCalendar dateDepartAnimal, String especeAnimal, String raceAnimal, String sexeAnimal, boolean estSteriliseAnimal, String couleurDePeauAnimal, GregorianCalendar dateNaissanceAnimal, Double numPuceAnimal, String localisationPuceAnimal, GregorianCalendar dateAttributionPuceAnimal, Double numTatouageAnimal, String localisationTatouageAnimal, Double poidsAnimal, Proprietaire proprietaireAnimal){}
 
     public Animal(Integer numRegistre, String nom, GregorianCalendar dateArrivee, GregorianCalendar dateDepart,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire) {
+                  Proprietaire proprietaire)  {
         setNumRegistre(numRegistre);
         setNom(nom);
         setDateArrivee(dateArrivee);
@@ -39,12 +41,12 @@ public class Animal {
         setCouleurDePeau(couleurDePeau);
         setDateNaissance(dateNaissance);
         setNumPuce(numPuce);
-        this.localisationPuce = localisationPuce;
-        this.dateAttributionPuce = dateAttributionPuce;
-        this.numTatouage = numTatouage;
-        this.localisationTatouage = localisationTatouage;
-        this.poids = poids;
-        this.proprietaire = proprietaire;
+        setLocalisationPuce(localisationPuce);
+        setDateAttributionPuce(dateAttributionPuce);
+        setNumTatouage(numTatouage);
+        setLocalisationTatouage(localisationTatouage);
+        setPoids(poids);
+        setProprietaire(proprietaire);
     }
 
     public void setNumRegistre(Integer numRegistre) {

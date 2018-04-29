@@ -98,7 +98,6 @@ public class PanneauRechercheVeterinaires  extends JPanel {
                     }
                     ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
-
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
