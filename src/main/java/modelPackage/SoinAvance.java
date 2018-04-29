@@ -2,18 +2,19 @@ package modelPackage;
 
 import java.util.GregorianCalendar;
 
-public class FicheDeSoins {
+public class SoinAvance {
     private Integer numRegistre;
     private String intitule;
     private String partieDuCorps;
     private GregorianCalendar dateSoin;
     private GregorianCalendar heure;
-    private Proprietaire veterinaire;
+    private Veterinaire veterinaire;
     private Boolean estUrgent;
     private String remarque;
 
-    public FicheDeSoins(Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
-                        GregorianCalendar heure, Proprietaire veterinaire, Boolean estUrgent, String remarque) {
+    public SoinAvance(){}
+    public SoinAvance(Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
+                      GregorianCalendar heure, Veterinaire veterinaire, Boolean estUrgent, String remarque) {
         this.numRegistre = numRegistre;
         this.intitule = intitule;
         this.partieDuCorps = partieDuCorps;
@@ -44,7 +45,7 @@ public class FicheDeSoins {
         return heure;
     }
 
-    public Proprietaire getVeterinaire() {
+    public Veterinaire getVeterinaire() {
         return veterinaire;
     }
 
@@ -76,7 +77,7 @@ public class FicheDeSoins {
         this.heure = heure;
     }
 
-    public void setVeterinaire(Proprietaire veterinaire) {
+    public void setVeterinaire(Veterinaire veterinaire) {
         this.veterinaire = veterinaire;
     }
 
