@@ -9,6 +9,12 @@ public class ProprietaireException extends Exception {
 
     }
 
+    public ProprietaireException(String message){
+
+        this.message = message;
+
+    }
+
     public String getMessage()
     {
         return message;

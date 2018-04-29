@@ -38,5 +38,9 @@ public class Business {
         return daoVeterinaire.getVeterinaires();
     }
 
+    public void getResultatRechercheProprietaire(Veterinaire selectedVet) throws SingletonConnectionException, ProprietaireException {
+        daoProprietaire.getResultatRechercheProprietaire(selectedVet);
+    }
+
     //tache metier
 }

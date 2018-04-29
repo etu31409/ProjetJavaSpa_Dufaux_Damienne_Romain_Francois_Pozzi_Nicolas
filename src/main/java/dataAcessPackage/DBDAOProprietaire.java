@@ -82,4 +82,24 @@ public class DBDAOProprietaire implements IProprietaire{
             throw new ProprietaireException();
         }
     }
+
+    @Override
+    public void getResultatRechercheProprietaire(Veterinaire selectedVet) throws ProprietaireException, SingletonConnectionException {
+
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            Proprietaire proprietaire = new Proprietaire();
+
+            sqlInstruction = "select * from spabd.proprietaire where identifiantProprio = ?";
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            data = statement.executeQuery();
+        }
+        catch (SQLException e){
+            throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");
+        }
+    }
+
 }

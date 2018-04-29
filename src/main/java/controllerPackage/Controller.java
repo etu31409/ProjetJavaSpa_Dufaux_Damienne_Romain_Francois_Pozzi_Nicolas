@@ -30,4 +30,8 @@ public class Controller {
     public ArrayList<Medicament> getIdentifiantsMedicaments() throws MedicamentException, SingletonConnectionException {
         return business.getIdentifiantsMedicaments();
     }
+
+    public void getResultatRechercheProprietaire(Veterinaire selectedVet) throws SingletonConnectionException, ProprietaireException {
+        business.getResultatRechercheProprietaire(selectedVet);
+    }
 }
