@@ -89,14 +89,14 @@ public class PanneauRechercheVeterinaires  extends JPanel {
                         dateFinZoneRecherche = new GregorianCalendar();
                         dateFinZoneRecherche.setTime(GregorianCalendar.getInstance().getTime());
                     }
-                    else {
+                    else{
                         dateFinZoneRecherche = dateFinRech.getDate();
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
                         JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
                         return;
                     }
-                    ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
+                    ArrayList<VeterinaireSoinAvanceOrdonnanceRecherche> resultatRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
                 }
                 catch (SingletonConnectionException e) {
