@@ -116,7 +116,7 @@ public class Animal {
     }
 
     public String getNom() {
-        if(nom.isEmpty())
+        if(nom == null || nom.isEmpty())
             return "'Inconnu'";
         else
             return nom;
