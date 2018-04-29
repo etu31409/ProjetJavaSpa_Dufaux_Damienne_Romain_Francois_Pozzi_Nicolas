@@ -5,11 +5,13 @@ import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;
+import modelPackage.modelJointure.AnimalProprietaireRecherche;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PanneauRechercheProprietaires extends JPanel {
 
@@ -50,6 +52,7 @@ public class PanneauRechercheProprietaires extends JPanel {
         panneauRecherche.add(listeVeterinaire);
 
         boutonRecherche = new JButton("Rechercher");
+        boutonRecherche.addActionListener(new rechercheListener());
         panneauRecherche.add(boutonRecherche);
 
         titreResultat = new JLabel("<html><h3>Resultat de la recherche</h3></html>");
@@ -79,9 +82,9 @@ public class PanneauRechercheProprietaires extends JPanel {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == boutonRecherche) {
                 try {
-                    Veterinaire selectedVet = (Veterinaire)listeVeterinaire.getSelectedItem();
-                    controller.getResultatRechercheProprietaire(selectedVet);
-
+                    Veterinaire selectionVeterinaire = (Veterinaire)listeVeterinaire.getSelectedItem();
+                    ArrayList<AnimalProprietaireRecherche> list =  controller.getResultatRechercheProprietaire(selectionVeterinaire);
+                    String t= "";
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());

@@ -2,14 +2,14 @@ package modelPackage.modelJointure;
 
 import java.util.GregorianCalendar;
 
-public class VeterinaireSoinAvanceOrdonnance {
+public class VeterinaireSoinAvanceOrdonnanceRecherche {
     Integer idVeterinaire;
     String nomVeterinaire;
     GregorianCalendar dateOrdonnance;
 
-    public VeterinaireSoinAvanceOrdonnance(){}
+    public VeterinaireSoinAvanceOrdonnanceRecherche(){}
 
-    public VeterinaireSoinAvanceOrdonnance(Integer idVeterinaire, String nomVeterinaire, GregorianCalendar dateOrdonnance) {
+    public VeterinaireSoinAvanceOrdonnanceRecherche(Integer idVeterinaire, String nomVeterinaire, GregorianCalendar dateOrdonnance) {
         this.idVeterinaire = idVeterinaire;
         this.nomVeterinaire = nomVeterinaire;
         this.dateOrdonnance = dateOrdonnance;

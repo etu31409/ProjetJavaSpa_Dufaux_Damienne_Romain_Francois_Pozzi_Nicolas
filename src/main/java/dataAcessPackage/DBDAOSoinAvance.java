@@ -101,7 +101,7 @@ public class DBDAOSoinAvance implements ISoinAvance{
                 String remarque = data.getString("remarque");
                 if(!data.wasNull()){
                     soin.setRemarque(remarque);
-                };
+                }
             }
             return soin;
         }
