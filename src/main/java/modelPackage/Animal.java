@@ -188,6 +188,6 @@ public class Animal {
     }
 
     public String toString(){
-        return " #" + this.getNumRegistre() + " " + this.getNom() + " " + this.getEspece() + " " + this.getRace();
+        return " #" + this.getNumRegistre() + " " + this.getNom() + " (" + this.getEspece() + " " + this.getRace() +")";
     }
 }

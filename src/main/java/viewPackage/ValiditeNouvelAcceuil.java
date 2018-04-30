@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ValiditeNouvelAcceuil {
-    private ArrayList<String> couleursPelage;
-    private ArrayList<String> partiesDuCorps;
+    private static ArrayList<String> couleursPelage;
+    private static ArrayList<String> partiesDuCorps;
 
     public ValiditeNouvelAcceuil() {
         this.couleursPelage = new ArrayList<String>(Arrays.asList("Acajou", "Amande","Ambre","Améthyste","Anthracite",
@@ -16,6 +16,7 @@ public class ValiditeNouvelAcceuil {
                 "Magenta","Mandarine","Marron","Mauve","Menthe","Moutarde","Noir","Noisette","Olive","Or","Orange","Pistache",
                 "Prune","Rose","Rouge","Rouille","Roux", "Rubis", "Sable", "Saphir", "Saumon","Soufre","Taupe","Turquoise",
                 "Vanille","Vermeil","Vert","Violet" ));
+
         this.partiesDuCorps = new ArrayList<String>(Arrays.asList("Abdomen","Aisselles","Aorte abdominale","Aorte thoracique",
                 "Appendice","Aréole","Artère fémorale","Artère vertébrale","Avant-bras","Axis","Barbe","Bassin","Biceps brachial",
                 "Bioceps fémoral","Bouche","Bras","Bulbe rachidien","Cage thoracique","Canine","Cerveau","Cervelet","Cheveux",
@@ -35,5 +36,9 @@ public class ValiditeNouvelAcceuil {
     }
     public ArrayList<String>getCouleursPelage(){
         return this.couleursPelage;
+    }
+
+    public ArrayList<String>getPartiesDuCorps(){
+        return this.partiesDuCorps;
     }
 }
