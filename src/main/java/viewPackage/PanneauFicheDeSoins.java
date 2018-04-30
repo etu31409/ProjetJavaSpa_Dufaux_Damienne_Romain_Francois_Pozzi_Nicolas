@@ -13,8 +13,7 @@ public class PanneauFicheDeSoins extends JPanel {
     private JPanel panneauFormulaire, panneauBoutons;
     private JLabel nouvellePrescription, veterinaireResponsableLabel,
             datePrescriptionLabel, heurePrescriptionLabel,
-            numeroAnimalLabel, especeLabel, raceLabel, poidLabel,
-            medicamentLabel;
+            numeroAnimalLabel, medicamentLabel;
     private JLabel titreSelectionPosologie, titreSelectionStockage, titreSelectionMedicament, remarqueLabel;
     private PanneauSpinnerDate datePrescription, heurePrescription;
     private JComboBox veterinaires;
