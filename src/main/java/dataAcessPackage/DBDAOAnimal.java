@@ -14,10 +14,9 @@ public class DBDAOAnimal implements IAnimal {
 
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
-    public ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
+    public ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -29,7 +28,7 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> tousLesAnimaux = new ArrayList<Animal>();
             while (data.next()) {
-                //Not NULL Values
+
                 Animal animal = new Animal();
                 GregorianCalendar dateArrivee = new GregorianCalendar();
 
@@ -43,7 +42,6 @@ public class DBDAOAnimal implements IAnimal {
                 animal.setCouleurDePeau(data.getString("couleurDePeau"));
                 animal.setPoids(data.getDouble("poids"));
 
-                //Nullable Values
                 String nom = data.getString("nom");
                 if (!data.wasNull()) {
                     animal.setNom(nom);
@@ -98,14 +96,15 @@ public class DBDAOAnimal implements IAnimal {
 
                 tousLesAnimaux.add(animal);
             }
-            //connectionUnique.close();
             return tousLesAnimaux;
         } catch (SQLException e) {
             throw new AnimalException();
+        } catch (ProprietaireException e) {
+            throw new AnimalException("Erreur lors de la récupération du propriétaire de l'animal");
         }
     }
 
-    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException, ProprietaireException {
+    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -186,6 +185,8 @@ public class DBDAOAnimal implements IAnimal {
             return animal;
         } catch (SQLException e) {
             throw new AnimalException();
+        } catch (ProprietaireException e) {
+            throw new AnimalException("Erreur lors de la récupération du propriétaire de l'animal");
         }
     }
 
@@ -350,8 +351,7 @@ public class DBDAOAnimal implements IAnimal {
             sqlInstruction = "insert into animal() values (?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
 
-            }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new AnimalException("Erreur lors de l'inserttion de l'animal !");
         }
     }

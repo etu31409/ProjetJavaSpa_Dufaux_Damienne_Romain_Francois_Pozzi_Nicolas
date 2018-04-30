@@ -9,10 +9,12 @@ public class FenetrePrincipale extends JFrame{
     private Controller controller;
     private Container frameContainer;
     private JMenuBar barMenu;
-    private JMenu acceuil, recherches, medicaments, listing, supprimer;
-    private JMenuItem nouvelAccueil, nouvellePrescription, rechercheFiches, quitter, supprimerFicheDeSoin,
+    private JMenu acceuil, recherches, soins, listing, supprimer;
+    private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, rechercheFiches, quitter, supprimerFicheDeSoin,
             supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
     private PanneauBienvenue panneauBienvenue;
+    private
+    FenetreFicheDeSoins fenetreFicheDeSoins;
 
     public FenetrePrincipale(){
         super("S.P.A, Société Protectrice des Animaux");
@@ -57,13 +59,13 @@ public class FenetrePrincipale extends JFrame{
         rechercheProprietaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheProprietaires);
 
-        medicaments = new JMenu("Soins");
-        medicaments.setMnemonic('S');
-        barMenu.add(medicaments);
+        soins = new JMenu("Soins");
+        soins.setMnemonic('S');
+        barMenu.add(soins);
 
-        nouvellePrescription = new JMenuItem("Nouvelle fiche de soins");
-        medicaments.add(nouvellePrescription);
-        nouvellePrescription.addActionListener(new EcouteurBarMenu());
+        nouvelleFicheDeSoins = new JMenuItem("Nouvelle fiche de soins");
+        soins.add(nouvelleFicheDeSoins);
+        nouvelleFicheDeSoins.addActionListener(new EcouteurBarMenu());
 
         listing = new JMenu("Listings");
         listing.setMnemonic('L');
@@ -115,8 +117,11 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.repaint();
                 frameContainer.validate();
             }
-            else if(event.getSource() == nouvellePrescription){
-                FenetreFicheDeSoins fenetreFicheDeSoins = new FenetreFicheDeSoins();
+            else if(event.getSource() == nouvelleFicheDeSoins){
+                frameContainer.removeAll();
+                frameContainer.add(new PanneauFicheDeSoins(fenetreFicheDeSoins, controller));
+                frameContainer.repaint();
+                frameContainer.validate();
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();

@@ -10,8 +10,8 @@ import modelPackage.Veterinaire;
 import java.util.ArrayList;
 
 public interface IAnimal {
-    ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException, SingletonConnectionException, ProprietaireException;
-    Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException, ProprietaireException;
+    ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException;
+    Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException;
     String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
             SingletonConnectionException;
     String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)

@@ -1,4 +1,6 @@
 package viewPackage;
+import controllerPackage.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -7,6 +9,7 @@ import java.awt.event.WindowEvent;
 public class FenetreFicheDeSoins extends JFrame {
     //private Animal animal;
     private Container frameContainer;
+    private Controller controller;
     private PanneauFicheDeSoins panneauFicheDeSoins;
 
     public FenetreFicheDeSoins() {
@@ -14,7 +17,7 @@ public class FenetreFicheDeSoins extends JFrame {
         setBounds(300, 0, 600, 600);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
-        panneauFicheDeSoins = new PanneauFicheDeSoins(this);
+        panneauFicheDeSoins = new PanneauFicheDeSoins(this, controller);
         frameContainer.add(panneauFicheDeSoins, BorderLayout.CENTER);
         this.addWindowListener(new ClosingListener());
         setVisible(true);

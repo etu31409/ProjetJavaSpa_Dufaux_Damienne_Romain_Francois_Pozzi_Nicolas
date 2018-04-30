@@ -1,5 +1,12 @@
 package viewPackage;
 
+import controllerPackage.Controller;
+import exceptionPackage.AnimalException;
+import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.VeterinaireException;
+import modelPackage.Animal;
+import modelPackage.Veterinaire;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,15 +15,16 @@ import java.awt.event.ActionListener;
 
 
 public class PanneauFicheDeSoins extends JPanel {
+    private final Controller controller;
     private FenetreFicheDeSoins fenetreFicheDeSoins;
     private JButton retour, confirmerFiche, reinnitialiser;
     private JPanel panneauFormulaire, panneauBoutons;
     private JLabel nouvellePrescription, veterinaireResponsableLabel,
             datePrescriptionLabel, heurePrescriptionLabel,
-            numeroAnimalLabel, medicamentLabel;
+            animal, medicamentLabel, animalConcerne;
     private JLabel titreSelectionPosologie, titreSelectionStockage, titreSelectionMedicament, remarqueLabel;
     private PanneauSpinnerDate datePrescription, heurePrescription;
-    private JComboBox veterinaires;
+    private JComboBox veterinaires, animaux;
     private ComboBoxPosologie posologie;
     private ComboBoxStockage stockage;
     private ComboBoxMedicament medicaments;
@@ -24,7 +32,8 @@ public class PanneauFicheDeSoins extends JPanel {
     private JButton ajouterMedicament;
     private JTextArea remarque;
 
-    public PanneauFicheDeSoins(FenetreFicheDeSoins fenetreFicheDeSoins) {
+    public PanneauFicheDeSoins(FenetreFicheDeSoins fenetreFicheDeSoins, Controller controller) {
+        this.controller = controller;
         this.fenetreFicheDeSoins = fenetreFicheDeSoins;
         this.setLayout(new BorderLayout());
         panneauBoutons = new JPanel();
@@ -37,17 +46,14 @@ public class PanneauFicheDeSoins extends JPanel {
         nouvellePrescription.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(nouvellePrescription);
 
-        //nouvellePrescription = new JLabel("");
-        //nouvellePrescription.setHorizontalAlignment(SwingConstants.CENTER);
-        //panneauFormulaire.add(nouvellePrescription);
 
-        vide = new JLabel("");
-        panneauFormulaire.add(vide);
 
         veterinaireResponsableLabel = new JLabel("Vétérinaire responsable :");
         veterinaireResponsableLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(veterinaireResponsableLabel);
+
         veterinaires = new JComboBox();
+        instancieListeVeterinaire();
         panneauFormulaire.add(veterinaires);
 
         datePrescriptionLabel = new JLabel("Date :");
@@ -62,14 +68,23 @@ public class PanneauFicheDeSoins extends JPanel {
         heurePrescription = new PanneauSpinnerDate();
         panneauFormulaire.add(heurePrescription);
 
-        numeroAnimalLabel = new JLabel("<html><h5>Animal</h5></html>");
-        numeroAnimalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauFormulaire.add(numeroAnimalLabel);
-        numeroAnimalLabel = new JLabel("");
-        numeroAnimalLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauFormulaire.add(numeroAnimalLabel);
+        animal = new JLabel("<html><h3>Animal</h3></html>");
+        animal.setHorizontalAlignment(SwingConstants.CENTER);
+        panneauFormulaire.add(animal);
 
-        medicamentLabel = new JLabel("<html><h1>Médicament</h1></html>");
+        JLabel animalConcerne = new JLabel("Animal concerné :");
+        animalConcerne.setHorizontalAlignment(SwingConstants.CENTER);
+        panneauFormulaire.add(animalConcerne);
+
+        animaux = new JComboBox();
+        instancieListeAnimaux();
+        panneauFormulaire.add(animaux);
+
+
+
+        //animaux.addActionListener(new RechercheListener());
+
+        /*medicamentLabel = new JLabel("<html><h1>Médicament</h1></html>");
         medicamentLabel.setHorizontalAlignment(SwingConstants.CENTER);;
         panneauFormulaire.add(medicamentLabel);
         medicamentLabel = new JLabel("");
@@ -81,9 +96,6 @@ public class PanneauFicheDeSoins extends JPanel {
         panneauFormulaire.add(titreSelectionMedicament);
         medicaments = new ComboBoxMedicament();
         panneauFormulaire.add(medicaments);
-
-        /*vide = new JLabel("");
-        panneauFormulaire.add(vide);*/
 
         titreSelectionStockage = new JLabel("Selection du stockage");
         titreSelectionStockage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -112,7 +124,33 @@ public class PanneauFicheDeSoins extends JPanel {
         panneauBoutons.add(confirmerFiche);
         reinnitialiser = new JButton("Reinnitialiser");
         reinnitialiser.addActionListener(new EcouteurBouton());
-        panneauBoutons.add(reinnitialiser);
+        panneauBoutons.add(reinnitialiser);*/
+    }
+
+    public void instancieListeVeterinaire() {
+        veterinaires.removeAllItems();
+        try {
+            for (Veterinaire v : controller.getVeterinaires()) {
+                veterinaires.addItem(v);
+            }
+        } catch (VeterinaireException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void instancieListeAnimaux() {
+        animaux.removeAllItems();
+        try {
+            for (Animal a : controller.getAnimaux()) {
+                animaux.addItem(a);
+            }
+        } catch (AnimalException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     private class EcouteurBouton implements ActionListener

@@ -23,20 +23,16 @@ public class Business {
         daoVeterinaire = new DBDAOVeterinaire();
     }
 
-    public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
+    public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
         return daoAnimal.getAnimaux();
     }
 
-    public ArrayList<Animal> getIdentifiantsAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
-        return daoAnimal.getAnimaux();
-    }
-
-    public ArrayList<Medicament> getIdentifiantsMedicaments() throws MedicamentException, SingletonConnectionException {
-        return daoMedicament.getMedicaments();
-    }
-
-    public ArrayList<Veterinaire> getIdentifiantsVeterinaires() throws VeterinaireException, SingletonConnectionException {
+    public ArrayList<Veterinaire>getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         return daoVeterinaire.getVeterinaires();
+    }
+
+    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
+        return daoMedicament.getMedicaments();
     }
 
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {

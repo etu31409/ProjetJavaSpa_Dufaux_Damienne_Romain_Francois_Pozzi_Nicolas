@@ -106,7 +106,7 @@ public class PanneauRechercheListeSoins extends JPanel {
             listeIdentifiants.removeAllItems();
             if (event.getSource() == animaux){
                 try {
-                    for (Animal a: controller.getIdentifiantsAnimaux()){
+                    for (Animal a: controller.getAnimaux()){
                         listeIdentifiants.addItem(a);
                     }
                 }
@@ -116,13 +116,10 @@ public class PanneauRechercheListeSoins extends JPanel {
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-                catch (ProprietaireException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
             }
             else if (event.getSource() == vétérinaires){
                 try {
-                    for (Veterinaire v: controller.getIdentifiantsVeterinaires()){
+                    for (Veterinaire v: controller.getVeterinaires()){
                         listeIdentifiants.addItem(v);
                     }
                 }
@@ -135,7 +132,7 @@ public class PanneauRechercheListeSoins extends JPanel {
             }
             else if (event.getSource() == médicaments){
                 try {
-                    for (Medicament m: controller.getIdentifiantsMedicaments()){
+                    for (Medicament m: controller.getMedicaments()){
                         listeIdentifiants.addItem(m);
                     }
                 }

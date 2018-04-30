@@ -42,7 +42,6 @@ public class PanneauRechercheProprietaires extends JPanel {
         panneauRechercheContainer.add(panneauRecherche);
         panneauRechercheContainer.add(panneauListe);
 
-
         titreSelectionVeterinaire = new JLabel("<html><h3>Selection du vétérinaire</h3></html>");
         titreSelectionVeterinaire.setHorizontalAlignment(SwingConstants.CENTER);
         panneauRecherche.add(titreSelectionVeterinaire);
@@ -59,13 +58,12 @@ public class PanneauRechercheProprietaires extends JPanel {
         titreResultat.setVerticalAlignment(SwingConstants.TOP);
         panneauListe.add(titreResultat);
 
-
     }
 
     public void instancieListeVeterinaire() {
         listeVeterinaire.removeAllItems();
         try {
-            for (Veterinaire v : controller.getIdentifiantsVeterinaires()) {
+            for (Veterinaire v : controller.getVeterinaires()){
                 listeVeterinaire.addItem(v);
             }
         } catch (VeterinaireException e) {
@@ -73,7 +71,6 @@ public class PanneauRechercheProprietaires extends JPanel {
         } catch (SingletonConnectionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-
     }
 
     private class rechercheListener implements ActionListener {

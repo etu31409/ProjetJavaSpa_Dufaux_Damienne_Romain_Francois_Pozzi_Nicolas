@@ -17,11 +17,6 @@ public class DBDAOProprietaire implements IProprietaire{
 
     public  ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException {
         try {
-            /*String rue;
-            String numero;
-            String localite;
-            Integer codePostal;
-            String pays;*/
 
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -41,7 +36,6 @@ public class DBDAOProprietaire implements IProprietaire{
                 tousLesProprietaires.add(proprietaire);
             }
 
-            //connectionUnique.close();
             return tousLesProprietaires;
 
         } catch (SQLException e) {

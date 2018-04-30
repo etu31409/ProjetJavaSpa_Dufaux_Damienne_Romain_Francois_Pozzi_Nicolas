@@ -16,20 +16,16 @@ public class Controller {
         business = new Business();
     }
 
-    public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException, ProprietaireException {
+    public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
         return business.getAnimaux();
     }
 
-    public ArrayList<Animal> getIdentifiantsAnimaux() throws AnimalException, ProprietaireException, SingletonConnectionException {
-        return business.getIdentifiantsAnimaux();
+    public ArrayList<Veterinaire>getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+        return business.getVeterinaires();
     }
 
-    public ArrayList<Veterinaire> getIdentifiantsVeterinaires() throws VeterinaireException, SingletonConnectionException {
-        return business.getIdentifiantsVeterinaires();
-    }
-
-    public ArrayList<Medicament> getIdentifiantsMedicaments() throws MedicamentException, SingletonConnectionException {
-        return business.getIdentifiantsMedicaments();
+    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
+        return business.getMedicaments();
     }
 
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
