@@ -113,8 +113,8 @@ public class DBDAOVeterinaire implements IVeterinaire{
             while (data.next()) {
                 listeResultatRechercheParDate[i] = new String[3];
                 listeResultatRechercheParDate[i][0] = Integer.toString(data.getInt(1));
-                listeResultatRechercheParDate[i][2] = data.getString(2);
-                listeResultatRechercheParDate[i][1] = data.getDate(3).toString();
+                listeResultatRechercheParDate[i][1] = data.getString(2);
+                listeResultatRechercheParDate[i][2] = data.getDate(3).toString();
                 i++;
             }
             return listeResultatRechercheParDate;

@@ -96,7 +96,7 @@ public class PanneauRechercheAnimaux {
                     }
                 }
                 catch(Exception e){
-                        JOptionPane.showMessageDialog(null, e.getMessage());
+                        JOptionPane.showMessageDialog(null, "Erreur affichage de la table");
                     }
                 }
             }

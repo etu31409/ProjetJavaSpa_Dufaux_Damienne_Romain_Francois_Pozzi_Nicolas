@@ -249,7 +249,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
-                    "where spabd.veterinaire.identifiantVeto = ?" +
+                    "where spabd.veterinaire.identifiantVeto = ?\n" +
                     "AND spabd.medicament.identifiantMed = ?;";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
@@ -271,7 +271,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
-                    "where spabd.veterinaire.identifiantVeto = ?" +
+                    "where spabd.veterinaire.identifiantVeto = ?\n" +
                     "AND spabd.medicament.identifiantMed = ?;";
             statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionMedicament.getIdentifiantMed());
@@ -298,11 +298,13 @@ public class DBDAOAnimal implements IAnimal {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
             sqlInstruction = "select count(*)\n" +
-                    "from spabd.veterinaire\n" +
+                    "from spabd.medicament\n" +
+                    "inner join spabd.ordonnance\n" +
+                    "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
+                    "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
                     "inner join spabd.animal\n" +
-                    "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
+                    "on spabd.animal.numRegistre = spabd.soinAvance.numRegistre\n" +
                     "where spabd.medicament.identifiantMed = ?;";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
@@ -319,8 +321,8 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
-                    "inner join spabd.animal" +
-                    "on spabd.animal.numRegistre = spabd.soinAvance.numRegistre" +
+                    "inner join spabd.animal\n" +
+                    "on spabd.animal.numRegistre = spabd.soinAvance.numRegistre\n" +
                     "where spabd.medicament.identifiantMed = ?;";
 
             statement = connectionUnique.prepareStatement(sqlInstruction);

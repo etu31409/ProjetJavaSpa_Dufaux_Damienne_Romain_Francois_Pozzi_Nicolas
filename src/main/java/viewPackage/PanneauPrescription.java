@@ -10,15 +10,15 @@ import java.awt.event.ActionListener;
 public class PanneauPrescription extends JPanel {
     private FenetrePrescription fenetrePrescription;
     private JButton retour, confirmerPrescription, reinnitialiser;
-    private JPanel panneauFormulaire;
-    private JPanel panneauBoutons;
+    private JPanel panneauFormulaire, panneauBoutons;
     private JLabel nouvellePrescription, veterinaireResponsableLabel, datePrescriptionLabel, numeroAnimalLabel, especeLabel, raceLabel, poidLabel, medicamentLabel;
-    private JLabel remarqueLabel;
+    private JLabel titreSelectionPosologie, titreSelectionStockage, remarqueLabel;
     private PanneauSpinnerDate datePrescription;
-    private ComboBoxMedicamentPannel comboBoxMedicamentPannel;
-    private ComboBoxVeterinairePannel comboBoxVeterinairePannel;
+    private JComboBox medicaments, veterinaires;
+    private ComboBoxPosologie posologie;
+    private ComboBoxStockage stockage;
     private JLabel vide;
-    private JButton stockage, posologie, ajouterMedicament;
+    private JButton ajouterMedicament;
     private JTextArea remarque;
 
     public PanneauPrescription(FenetrePrescription fenetrePrescription) {
@@ -28,7 +28,7 @@ public class PanneauPrescription extends JPanel {
         panneauFormulaire = new JPanel();
         this.add(panneauFormulaire, BorderLayout.CENTER);
         this.add(panneauBoutons, BorderLayout.SOUTH);
-        panneauFormulaire.setLayout(new GridLayout(12, 2, 5, 5));
+        panneauFormulaire.setLayout(new GridLayout(16, 2, 5, 5));
 
         nouvellePrescription = new JLabel("<html><h1>Nouvelle prescription");
         nouvellePrescription.setHorizontalAlignment(SwingConstants.CENTER);
@@ -40,8 +40,8 @@ public class PanneauPrescription extends JPanel {
         veterinaireResponsableLabel = new JLabel("Vétérinaire responsable :");
         veterinaireResponsableLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(veterinaireResponsableLabel);
-        comboBoxVeterinairePannel = new ComboBoxVeterinairePannel();
-        panneauFormulaire.add(comboBoxVeterinairePannel);
+        veterinaires = new JComboBox();
+        panneauFormulaire.add(veterinaires);
 
         datePrescriptionLabel = new JLabel("Date :");
         datePrescriptionLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,14 +84,21 @@ public class PanneauPrescription extends JPanel {
         medicamentLabel.setHorizontalAlignment(SwingConstants.CENTER);;
         panneauFormulaire.add(medicamentLabel);
 
-        comboBoxMedicamentPannel = new ComboBoxMedicamentPannel();
-        panneauFormulaire.add(comboBoxMedicamentPannel);
+        medicaments = new JComboBox();
+        panneauFormulaire.add(medicaments);
         vide = new JLabel("");
         panneauFormulaire.add(vide);
 
-        stockage = new JButton("Stokage");
+        titreSelectionStockage = new JLabel("<html><h3>Selection du stockage</h3></html>");
+        titreSelectionStockage.setHorizontalAlignment(SwingConstants.CENTER);
+        panneauFormulaire.add(titreSelectionStockage);
+        stockage = new ComboBoxStockage();
         panneauFormulaire.add(stockage);
-        posologie = new JButton("Posologie");
+
+        titreSelectionPosologie = new JLabel("<html><h3>Selection de la posologie</h3></html>");
+        titreSelectionPosologie.setHorizontalAlignment(SwingConstants.CENTER);
+        panneauFormulaire.add(titreSelectionPosologie);
+        posologie = new ComboBoxPosologie();
         panneauFormulaire.add(posologie);
 
         ajouterMedicament = new JButton("Ajouter un médicament");
