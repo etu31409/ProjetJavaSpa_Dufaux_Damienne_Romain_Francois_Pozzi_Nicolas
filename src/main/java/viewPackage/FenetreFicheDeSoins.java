@@ -1,23 +1,21 @@
 package viewPackage;
-import modelPackage.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
-public class FenetrePrescription extends JFrame {
+public class FenetreFicheDeSoins extends JFrame {
     //private Animal animal;
     private Container frameContainer;
-    private PanneauPrescription panneauPrescription;
+    private PanneauFicheDeSoins panneauFicheDeSoins;
 
-    public FenetrePrescription() {
+    public FenetreFicheDeSoins() {
         super("Ajouter une nouvelle prescription");
         setBounds(300, 0, 600, 600);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
-        panneauPrescription = new PanneauPrescription(this);
-        frameContainer.add(panneauPrescription, BorderLayout.CENTER);
+        panneauFicheDeSoins = new PanneauFicheDeSoins(this);
+        frameContainer.add(panneauFicheDeSoins, BorderLayout.CENTER);
         this.addWindowListener(new ClosingListener());
         setVisible(true);
     }

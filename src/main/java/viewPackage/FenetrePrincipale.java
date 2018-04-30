@@ -116,7 +116,7 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.validate();
             }
             else if(event.getSource() == nouvellePrescription){
-                FenetrePrescription fenetrePrescription = new FenetrePrescription();
+                FenetreFicheDeSoins fenetreFicheDeSoins = new FenetreFicheDeSoins();
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();
