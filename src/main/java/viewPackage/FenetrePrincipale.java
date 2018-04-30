@@ -10,7 +10,7 @@ public class FenetrePrincipale extends JFrame{
     private Container frameContainer;
     private JMenuBar barMenu;
     private JMenu acceuil, recherches, soins, listing, supprimer;
-    private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, rechercheFiches, quitter, supprimerFicheDeSoin,
+    private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, quitter, supprimerFicheDeSoin,
             supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
     private PanneauBienvenue panneauBienvenue;
     private
@@ -34,6 +34,7 @@ public class FenetrePrincipale extends JFrame{
         nouvelAccueil = new JMenuItem("Nouvel accueil");
         acceuil.add(nouvelAccueil);
         nouvelAccueil.addActionListener(new EcouteurBarMenu());
+
         quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new ExitListener());
         quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,InputEvent.CTRL_MASK));
@@ -42,10 +43,6 @@ public class FenetrePrincipale extends JFrame{
         recherches = new JMenu("Recherches");
         recherches.setMnemonic('R');
         barMenu.add(recherches);
-
-        rechercheFiches = new JMenuItem("Fiches de soins");
-        rechercheFiches.addActionListener(new EcouteurBarMenu());
-        recherches.add(rechercheFiches);
 
         rechercheVeterinaires = new JMenuItem("Recherche Veterinaire");
         rechercheVeterinaires.addActionListener(new EcouteurBarMenu());
@@ -71,6 +68,14 @@ public class FenetrePrincipale extends JFrame{
         listing.setMnemonic('L');
         barMenu.add(listing);
 
+        listingFicheDeSoin = new JMenuItem("Lister fiches de soins");
+        listing.add(listingFicheDeSoin);
+        listingFicheDeSoin.addActionListener(new EcouteurBarMenu());
+
+        listingAnimaux = new JMenuItem("Lister tous les animaux");
+        listing.add(listingAnimaux);
+        listingAnimaux.addActionListener(new EcouteurBarMenu());
+
         supprimer = new JMenu("Supprimer");
         supprimer.setMnemonic('S');
         barMenu.add(supprimer);
@@ -82,14 +87,6 @@ public class FenetrePrincipale extends JFrame{
         supprimerAnimale = new JMenuItem("Supprimer un animal");
         supprimer.add(supprimerAnimale);
         supprimerAnimale.addActionListener(new EcouteurBarMenu());
-
-        listingFicheDeSoin = new JMenuItem("Lister fiches de soins");
-        listing.add(listingFicheDeSoin);
-        listingFicheDeSoin.addActionListener(new EcouteurBarMenu());
-
-        listingAnimaux = new JMenuItem("Lister tous les animaux");
-        listing.add(listingAnimaux);
-        listingAnimaux.addActionListener(new EcouteurBarMenu());
 
         controller = new Controller();
         setVisible(true);
@@ -106,14 +103,7 @@ public class FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == nouvelAccueil){
                 frameContainer.removeAll();
-                //pour ajouter une barre de défilement (marche pas)
-                frameContainer.add(new JScrollPane(new PanneauAccueil()), BorderLayout.CENTER);
-                frameContainer.repaint();
-                frameContainer.validate();
-            }
-            else if(event.getSource() == rechercheFiches){
-                frameContainer.removeAll();
-                frameContainer.add(new PanneauRechercheListeSoins());
+                frameContainer.add(new PanneauAccueil());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

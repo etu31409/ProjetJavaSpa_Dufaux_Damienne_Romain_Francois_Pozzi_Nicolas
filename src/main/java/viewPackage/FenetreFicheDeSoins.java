@@ -7,14 +7,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class FenetreFicheDeSoins extends JFrame {
-    //private Animal animal;
+
     private Container frameContainer;
     private Controller controller;
     private PanneauFicheDeSoins panneauFicheDeSoins;
 
     public FenetreFicheDeSoins() {
         super("Ajouter une nouvelle prescription");
-        setBounds(300, 0, 600, 600);
+        setBounds(300, 0, 300, 600);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
         panneauFicheDeSoins = new PanneauFicheDeSoins(this, controller);
@@ -28,4 +28,5 @@ public class FenetreFicheDeSoins extends JFrame {
             dispose();
         }
     }
+
 }
