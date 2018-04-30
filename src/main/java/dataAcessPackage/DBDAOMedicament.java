@@ -42,7 +42,6 @@ public class DBDAOMedicament implements IMedicament {
                 tousLesMedicaments.add(medicament);
             }
 
-            //connectionUnique.close();
             return tousLesMedicaments;
 
         } catch (SQLException e) {

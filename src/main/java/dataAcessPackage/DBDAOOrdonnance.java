@@ -48,7 +48,6 @@ public class DBDAOOrdonnance implements IOrdonnance{
 
             connectionUnique.close();
             return toutesLesOrdonnances;
-
         }
         catch (SQLException e) {
             throw new OrdonnanceException();
