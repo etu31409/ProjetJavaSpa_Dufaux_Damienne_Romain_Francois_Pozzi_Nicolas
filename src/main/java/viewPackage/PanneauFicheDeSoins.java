@@ -27,9 +27,6 @@ public class PanneauFicheDeSoins extends JPanel {
             intitulePartieDuCorps;
     private PanneauSpinnerDate datePrescription, heurePrescription;
     private JComboBox veterinaires, animaux;
-    private ComboBoxPosologie posologie;
-    private ComboBoxStockage stockage;
-    private ComboBoxMedicament medicaments;
     private JLabel vide;
     private JTextArea remarque;
     private JTextField intitule, partieDuCorps;
@@ -112,20 +109,14 @@ public class PanneauFicheDeSoins extends JPanel {
         titreSelectionMedicament = new JLabel("Selection du médicament");
         titreSelectionMedicament.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(titreSelectionMedicament);
-        medicaments = new ComboBoxMedicament();
-        panneauFormulaire.add(medicaments);
 
         titreSelectionStockage = new JLabel("Selection du stockage");
         titreSelectionStockage.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(titreSelectionStockage);
-        stockage = new ComboBoxStockage();
-        panneauFormulaire.add(stockage);
 
         titreSelectionPosologie = new JLabel("Selection de la posologie");
         titreSelectionPosologie.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(titreSelectionPosologie);
-        posologie = new ComboBoxPosologie();
-        panneauFormulaire.add(posologie);
 
         remarqueLabel = new JLabel("Remarque :");
         remarqueLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -188,7 +179,6 @@ public class PanneauFicheDeSoins extends JPanel {
                 //si pas de vétérinaire choisi erreur
 
                 //si pas de médicament choisi erreur
-
             }
         }
     }

@@ -76,7 +76,7 @@ public class FenetrePrincipale extends JFrame{
         listing.add(listingAnimaux);
         listingAnimaux.addActionListener(new EcouteurBarMenu());
 
-        supprimer = new JMenu("Supprimer");
+        supprimer = new JMenu("Suppressions");
         supprimer.setMnemonic('S');
         barMenu.add(supprimer);
 
