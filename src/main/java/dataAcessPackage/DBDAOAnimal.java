@@ -91,7 +91,7 @@ public class DBDAOAnimal implements IAnimal {
                 Integer identifiantProprio = data.getInt("identifiantProprio");
                 if (!data.wasNull()) {
                     IProprietaire propietaire = new DBDAOProprietaire();
-                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio, false));
+                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio));
                 }
 
                 tousLesAnimaux.add(animal);
@@ -179,7 +179,7 @@ public class DBDAOAnimal implements IAnimal {
                 Integer identifiantProprio = data.getInt("identifiantProprio");
                 if (!data.wasNull()) {
                     IProprietaire propietaire = new DBDAOProprietaire();
-                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio, false));
+                    animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio));
                 }
             }
             return animal;

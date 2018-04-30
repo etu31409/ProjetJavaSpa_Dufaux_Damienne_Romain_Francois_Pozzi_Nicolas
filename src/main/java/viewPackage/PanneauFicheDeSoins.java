@@ -17,20 +17,22 @@ import java.awt.event.ActionListener;
 public class PanneauFicheDeSoins extends JPanel {
     private final Controller controller;
     private FenetreFicheDeSoins fenetreFicheDeSoins;
-    private JButton retour, confirmerFiche, reinnitialiser;
-    private JPanel panneauFormulaire, panneauBoutons;
+    private JButton retour, confirmerFiche, reinnitialiser, ajouterMedicament;
+    private JRadioButton boutonUrgent;
+    private JPanel panneauFormulaire, panneauBoutons, panneauTitre;
     private JLabel nouvellePrescription, veterinaireResponsableLabel,
             datePrescriptionLabel, heurePrescriptionLabel,
             animal, medicamentLabel, animalConcerne;
-    private JLabel titreSelectionPosologie, titreSelectionStockage, titreSelectionMedicament, remarqueLabel;
+    private JLabel titreSelectionPosologie, titreSelectionStockage, titreSelectionMedicament, remarqueLabel, intituleSoin,
+            intitulePartieDuCorps;
     private PanneauSpinnerDate datePrescription, heurePrescription;
     private JComboBox veterinaires, animaux;
     private ComboBoxPosologie posologie;
     private ComboBoxStockage stockage;
     private ComboBoxMedicament medicaments;
     private JLabel vide;
-    private JButton ajouterMedicament;
     private JTextArea remarque;
+    private JTextField intitule, partieDuCorps;
 
     public PanneauFicheDeSoins(FenetreFicheDeSoins fenetreFicheDeSoins, Controller controller) {
         this.controller = controller;
@@ -38,15 +40,18 @@ public class PanneauFicheDeSoins extends JPanel {
         this.setLayout(new BorderLayout());
         panneauBoutons = new JPanel();
         panneauFormulaire = new JPanel();
+        panneauTitre = new JPanel();
+
         this.add(panneauFormulaire, BorderLayout.CENTER);
         this.add(panneauBoutons, BorderLayout.SOUTH);
+        this.add(panneauTitre, BorderLayout.NORTH);
+
         panneauFormulaire.setLayout(new GridLayout(16, 2, 5, 5));
+        panneauTitre.setLayout(new GridLayout());
 
         nouvellePrescription = new JLabel("<html><h1>Nouvelle fiche de soins");
         nouvellePrescription.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauFormulaire.add(nouvellePrescription);
-
-
+        panneauTitre.add(nouvellePrescription);
 
         veterinaireResponsableLabel = new JLabel("Vétérinaire responsable :");
         veterinaireResponsableLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -72,7 +77,7 @@ public class PanneauFicheDeSoins extends JPanel {
         animal.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(animal);
 
-        JLabel animalConcerne = new JLabel("Animal concerné :");
+        animalConcerne = new JLabel("Animal concerné :");
         animalConcerne.setHorizontalAlignment(SwingConstants.CENTER);
         panneauFormulaire.add(animalConcerne);
 
@@ -80,11 +85,24 @@ public class PanneauFicheDeSoins extends JPanel {
         instancieListeAnimaux();
         panneauFormulaire.add(animaux);
 
+        boutonUrgent = new JRadioButton("Fiche urgente");
+        boutonUrgent.setHorizontalAlignment(SwingConstants.LEFT);
+        panneauFormulaire.add(boutonUrgent);
+        panneauFormulaire.add(boutonUrgent);
 
+        intituleSoin = new JLabel("Intitle du soin");
+        intituleSoin.setHorizontalAlignment(SwingConstants.RIGHT);
+        panneauFormulaire.add(intituleSoin);
+        intitule = new JTextField();
+        panneauFormulaire.add(intitule);
 
-        //animaux.addActionListener(new RechercheListener());
+        intitulePartieDuCorps = new JLabel("Partie du corps");
+        intitulePartieDuCorps.setHorizontalAlignment(SwingConstants.RIGHT);
+        panneauFormulaire.add(intitulePartieDuCorps);
+        partieDuCorps = new JTextField();
+        panneauFormulaire.add(partieDuCorps);
 
-        /*medicamentLabel = new JLabel("<html><h1>Médicament</h1></html>");
+        medicamentLabel = new JLabel("<html><h1>Médicament</h1></html>");
         medicamentLabel.setHorizontalAlignment(SwingConstants.CENTER);;
         panneauFormulaire.add(medicamentLabel);
         medicamentLabel = new JLabel("");
@@ -116,15 +134,18 @@ public class PanneauFicheDeSoins extends JPanel {
         panneauFormulaire.add(remarque);
 
         panneauBoutons.setLayout(new FlowLayout());
+
         retour = new JButton("Retour");
         retour.addActionListener(new EcouteurBouton());
         panneauBoutons.add(retour);
+
         confirmerFiche = new JButton("Confirmer");
         confirmerFiche.addActionListener(new EcouteurBouton());
         panneauBoutons.add(confirmerFiche);
+
         reinnitialiser = new JButton("Reinnitialiser");
         reinnitialiser.addActionListener(new EcouteurBouton());
-        panneauBoutons.add(reinnitialiser);*/
+        panneauBoutons.add(reinnitialiser);
     }
 
     public void instancieListeVeterinaire() {

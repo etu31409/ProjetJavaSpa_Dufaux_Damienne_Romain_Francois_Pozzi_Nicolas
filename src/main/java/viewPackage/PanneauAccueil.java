@@ -2,6 +2,8 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
+import exceptionPackage.ProprietaireException;
+import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 import modelPackage.Proprietaire;
 
@@ -14,27 +16,26 @@ public class PanneauAccueil extends JPanel {
     //private JLabel texte;
     private Controller controller;
 
-    private JPanel panneauFormulaire;
-    private JPanel panneauBoutons;
-    private JLabel nomLabel, lieuxSPALabel, celluleLabel, numeroRegistreLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
-    private JLabel dateArriveLabel, dateDepartLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel;
-    private JLabel attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel, dateTatouageLabel, titreProprietaireLabel;
-    private JLabel remarqueLabel, localisationTatouageLabel;
-    private JTextField localisationTatouage, nom, lieuxSPA, cellule, numeroRegistre, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
-    private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateDepart, dateNaissance, dateAttribution, dateTatouage;
+    private JPanel panneauFormulaire, panneauBoutons;
+    private JLabel nomLabel, celluleLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel,
+            dateArriveLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel,
+            attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel,
+            dateTatouageLabel, titreProprietaireLabel, remarqueLabel, localisationTatouageLabel;
+    private JTextField localisationTatouage, nom, cellule, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
+    private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
     private JButton  retour, validation, reinnitialiser;
     private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
     private ButtonGroup sexeGroupeBouton, steriliseGroupeBouton;
     private JRadioButton boutonMale, boutonFemelle, boutonOuiSterilise, boutonNonSterilise;
-    private JComboBox listeProprios;
+    private JComboBox proprietaires;
     private JButton ajoutProprio;
     private JTextArea remarque;
     private JScrollPane scroll;
     private FenetreProprio fenetreProprio;
 
-    public PanneauAccueil() {
+    public PanneauAccueil(Controller controller) {
+        this.controller = controller;
         this.setLayout(new BorderLayout());
-
         panneauFormulaire = new JPanel();
         panneauBoutons = new JPanel();
         this.add(panneauFormulaire, BorderLayout.CENTER);
@@ -55,24 +56,12 @@ public class PanneauAccueil extends JPanel {
         nom = new JTextField();
         panneauFormulaire.add(nom);
 
-        /*lieuxSPALabel = new JLabel("SPA de :");
-        lieuxSPALabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(lieuxSPALabel);
-        lieuxSPA = new JTextField();
-        panneauFormulaire.add(lieuxSPA);
-*/
         celluleLabel = new JLabel("N° de cellule :");
         celluleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(celluleLabel);
         cellule = new JTextField();
         panneauFormulaire.add(cellule);
 
-        /*numeroRegistreLabel = new JLabel("N° de registre :");
-        numeroRegistreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(numeroRegistreLabel);
-        numeroRegistre = new JTextField();
-        panneauFormulaire.add(numeroRegistre);
-*/
         poidsLabel = new JLabel("Poids de l'animal :");
         poidsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(poidsLabel);
@@ -84,7 +73,7 @@ public class PanneauAccueil extends JPanel {
         aEuthanasier.addItemListener(new EcouteurDeCheckBox());
         panneauFormulaire.add(aEuthanasier);
 
-        aEuthanasierLabel = new JLabel("prévu pour le :");
+        aEuthanasierLabel = new JLabel("Prévu pour le :");
         dateEuthanasie = new PanneauSpinnerDate();
         panneauFormulaire.add(dateEuthanasie);
 
@@ -102,12 +91,6 @@ public class PanneauAccueil extends JPanel {
         dateArrive = new PanneauSpinnerDate();
         panneauFormulaire.add(dateArrive);
 
-        /*dateDepartLabel = new JLabel("Date de départ :");
-        dateDepartLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(dateDepartLabel);
-        dateDepart = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateDepart);
-*/
         especeLabel = new JLabel("Espèce :");
         especeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(especeLabel);
@@ -204,15 +187,13 @@ public class PanneauAccueil extends JPanel {
         titreProprietaireLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(titreProprietaireLabel);
 
-        String values[] = {"Faire la recherche dans la BD"};
-        listeProprios = new JComboBox(values);
-        panneauFormulaire.add(listeProprios);
+        proprietaires = new JComboBox();
+        instancieListeProprietaires();
+        panneauFormulaire.add(proprietaires);
 
         ajoutProprio = new JButton("Ajouter un propriétaire");
         ajoutProprio.addActionListener(new NouveauProprio());
         panneauFormulaire.add(ajoutProprio);
-
-        panneauFormulaire.add(new JLabel(""));
 
         remarqueLabel = new JLabel("<html><h1>Remarques</h1></html>");
         remarqueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -230,6 +211,19 @@ public class PanneauAccueil extends JPanel {
         validation.addActionListener(new EcouteurDeBouton());
         reinnitialiser = new JButton("Reinnitialiser");
         panneauBoutons.add(reinnitialiser);
+    }
+
+    public void instancieListeProprietaires() {
+        proprietaires.removeAllItems();
+        try {
+            for (Proprietaire p : controller.getProprietaires()) {
+                proprietaires.addItem(p);
+            }
+        } catch (ProprietaireException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     private class EcouteurDeCheckBox implements ItemListener
@@ -284,19 +278,7 @@ public class PanneauAccueil extends JPanel {
                 JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
-        //validation numero de registre
-        Integer numeroDeRegistre = 0;
-        try{
-            numeroDeRegistre = Integer.valueOf(cellule.getText());
-        }
-        catch (Exception error){
-            numeroDeRegistre = null;
-        }
-        finally {
-            if(numeroDeRegistre == null || numeroDeRegistre< 1){
-                JOptionPane.showMessageDialog(null, "Numéro de registre incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+
         //validation espece (ne peut pas etre null)
         if(espece.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Le champ ESPECE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -314,10 +296,8 @@ public class PanneauAccueil extends JPanel {
             JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         try{
-            Integer numRegistreAnimal;
             String nomAnimal;
             GregorianCalendar dateArriveeAnimal;
-            GregorianCalendar dateDepartAnimal;
             String especeAnimal;
             String raceAnimal;
             String sexeAnimal;
@@ -332,33 +312,44 @@ public class PanneauAccueil extends JPanel {
             Double poidsAnimal;
             Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
 
-            numRegistreAnimal = Integer.valueOf(numeroRegistre.getText());
             nomAnimal = nom.getText();
             dateArriveeAnimal = dateArrive.getDate();
-            dateDepartAnimal = dateDepart.getDate();
             especeAnimal = espece.getText();
             raceAnimal = race.getText();
+
             if(sexeGroupeBouton.getSelection() == boutonFemelle) {
                 sexeAnimal = "F";
-            }else sexeAnimal = "M";
+            }
+            else {
+                sexeAnimal = "M";
+            }
             if(steriliseGroupeBouton.getSelection() == boutonOuiSterilise){
                 estSteriliseAnimal = true;
-            }else estSteriliseAnimal = false;
+            }
+            else {
+                estSteriliseAnimal = false;
+            }
             couleurDePeauAnimal = pelagePeau.getText();
             dateNaissanceAnimal = dateNaissance.getDate();
             numPuceAnimal = Integer.valueOf(numeroPuce.getText());
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
             numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
+
             if(estIncertainLocalisationTatouage.isSelected()){
                 localisationTatouageAnimal = null;
-            }else localisationTatouageAnimal = localisationTatouage.getText();
+            }
+            else{
+                localisationTatouageAnimal = localisationTatouage.getText();
+            }
+
             poidsAnimal = Double.valueOf(poids.getText());
 
-            Animal animal = new Animal(numRegistreAnimal, nomAnimal, dateArriveeAnimal, dateDepartAnimal, especeAnimal,
+            Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
                     raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
                     localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
                     poidsAnimal, proprietaireAnimal);
+
             controller.ajouterAnimal(animal);
         }
         catch (Exception exception){System.out.println(exception.getMessage());}

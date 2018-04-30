@@ -40,6 +40,14 @@ public class FenetrePrincipale extends JFrame{
         quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,InputEvent.CTRL_MASK));
         acceuil.add(quitter);
 
+        soins = new JMenu("Soins");
+        soins.setMnemonic('S');
+        barMenu.add(soins);
+
+        nouvelleFicheDeSoins = new JMenuItem("Nouvelle fiche de soins");
+        soins.add(nouvelleFicheDeSoins);
+        nouvelleFicheDeSoins.addActionListener(new EcouteurBarMenu());
+
         recherches = new JMenu("Recherches");
         recherches.setMnemonic('R');
         barMenu.add(recherches);
@@ -55,14 +63,6 @@ public class FenetrePrincipale extends JFrame{
         rechercheProprietaires = new JMenuItem("Recherche Propriétaire");
         rechercheProprietaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheProprietaires);
-
-        soins = new JMenu("Soins");
-        soins.setMnemonic('S');
-        barMenu.add(soins);
-
-        nouvelleFicheDeSoins = new JMenuItem("Nouvelle fiche de soins");
-        soins.add(nouvelleFicheDeSoins);
-        nouvelleFicheDeSoins.addActionListener(new EcouteurBarMenu());
 
         listing = new JMenu("Listings");
         listing.setMnemonic('L');
@@ -103,7 +103,7 @@ public class FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == nouvelAccueil){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauAccueil());
+                frameContainer.add(new PanneauAccueil(controller));
                 frameContainer.repaint();
                 frameContainer.validate();
             }
@@ -130,14 +130,12 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.add(new PanneauRechercheVeterinaires(controller));
                 frameContainer.repaint();
                 frameContainer.validate();
-
             }
             else if(event.getSource() == rechercheProprietaires) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheProprietaires(controller));
                 frameContainer.repaint();
                 frameContainer.validate();
-
             }
             else if(event.getSource() == rechercheAnimaux) {
                 frameContainer.removeAll();
@@ -145,7 +143,6 @@ public class FenetrePrincipale extends JFrame{
                 frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
-
             }
         }
     }

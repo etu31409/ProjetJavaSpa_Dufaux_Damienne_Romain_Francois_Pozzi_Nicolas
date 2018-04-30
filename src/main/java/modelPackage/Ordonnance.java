@@ -15,9 +15,7 @@ public class Ordonnance {
         this.dateOrdonnance = dateOrdonnance;
     }
 
-    public Ordonnance(){
-
-    }
+    public Ordonnance(){}
 
     public SoinAvance getSoinAvance() {
         return soinAvance;

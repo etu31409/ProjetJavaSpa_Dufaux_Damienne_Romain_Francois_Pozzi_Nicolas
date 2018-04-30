@@ -17,7 +17,6 @@ public class DBDAOProprietaire implements IProprietaire{
 
     public  ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException {
         try {
-
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
@@ -39,16 +38,12 @@ public class DBDAOProprietaire implements IProprietaire{
             return tousLesProprietaires;
 
         } catch (SQLException e) {
-            throw new ProprietaireException();
+            throw new ProprietaireException("Erreur lors de la récupération des propriétaires");
         }
     }
 
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException
-    {
-       return getUnProprietaire(identifiantProprietaire, true);
-    }
-
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire, boolean fermerConnexion) throws SingletonConnectionException, ProprietaireException {
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
+            throws SingletonConnectionException, ProprietaireException {
 
         try {
             if (connectionUnique == null) {
@@ -66,9 +61,6 @@ public class DBDAOProprietaire implements IProprietaire{
                 proprietaire.setIdentifiantProprio(data.getInt("identifiantProprio"));
                 proprietaire.setNom(data.getString("nom"));
                 proprietaire.setPrenom(data.getString("prenom"));
-            }
-            if (fermerConnexion) {
-                //connectionUnique.close();
             }
             return proprietaire;
         }
@@ -92,7 +84,6 @@ public class DBDAOProprietaire implements IProprietaire{
                     "inner join spabd.veterinaire\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
-
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
@@ -110,7 +101,6 @@ public class DBDAOProprietaire implements IProprietaire{
                     "inner join spabd.veterinaire\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
-
             statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();

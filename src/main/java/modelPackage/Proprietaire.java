@@ -25,7 +25,7 @@ public class Proprietaire {
         return prenom;
     }
 
-    public void setIdentifiantProprio (int identifiantProprio) {
+    public void setIdentifiantProprio(int identifiantProprio) {
         this.identifiantProprio = identifiantProprio;
     }
 
@@ -45,5 +45,9 @@ public class Proprietaire {
         else{
             this.prenom = prenom;
         }
+    }
+
+    public String toString(){
+        return " #" + this.getIdentifiantProprio() + " " + this.getNom() + " " + this.getPrenom();
     }
 }

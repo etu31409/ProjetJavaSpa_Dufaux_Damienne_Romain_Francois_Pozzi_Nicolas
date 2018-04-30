@@ -4,6 +4,7 @@ import businessPackage.Business;
 import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Medicament;
+import modelPackage.Proprietaire;
 import modelPackage.Veterinaire;
 
 import java.util.ArrayList;
@@ -20,12 +21,16 @@ public class Controller {
         return business.getAnimaux();
     }
 
-    public ArrayList<Veterinaire>getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
+        return business.getMedicaments();
+    }
+
+    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         return business.getVeterinaires();
     }
 
-    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
-        return business.getMedicaments();
+    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
+        return business.getProprietaires();
     }
 
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {

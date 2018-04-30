@@ -4,6 +4,7 @@ import dataAcessPackage.*;
 import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Medicament;
+import modelPackage.Proprietaire;
 import modelPackage.Veterinaire;
 
 import java.util.ArrayList;
@@ -33,6 +34,10 @@ public class Business {
 
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
         return daoMedicament.getMedicaments();
+    }
+
+    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
+        return daoProprietaire.getProprietaires();
     }
 
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {

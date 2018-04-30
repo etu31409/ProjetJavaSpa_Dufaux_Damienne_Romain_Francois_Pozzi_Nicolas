@@ -10,9 +10,8 @@ public class Medicament {
     private String nomMedic;
 
     public Medicament(){}
-    public Medicament(Integer identifiantMed, GregorianCalendar datePreparation, String stockage, String posologie,
+    public Medicament(GregorianCalendar datePreparation, String stockage, String posologie,
                       String nomMedic) {
-        this.identifiantMed = identifiantMed;
         this.datePreparation = datePreparation;
         this.stockage = stockage;
         this.posologie = posologie;
@@ -39,10 +38,6 @@ public class Medicament {
         return nomMedic;
     }
 
-    public void setIdentifiantMed(Integer identifiantMed) {
-        this.identifiantMed = identifiantMed;
-    }
-
     public void setDatePreparation(GregorianCalendar datePreparation) {
         this.datePreparation = datePreparation;
     }
@@ -57,6 +52,10 @@ public class Medicament {
 
     public void setNomMedic(String nomMedic) {
         this.nomMedic = nomMedic;
+    }
+
+    public void setIdentifiantMed(Integer identifiantMed) {
+        this.identifiantMed = identifiantMed;
     }
 
     public String toString (){

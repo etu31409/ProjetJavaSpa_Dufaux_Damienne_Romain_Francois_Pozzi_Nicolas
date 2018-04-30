@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 
 public class Animal {
     private Integer numRegistre;
+
     private String nom;
     private GregorianCalendar dateArrivee;
     private GregorianCalendar dateDepart;
@@ -25,14 +26,12 @@ public class Animal {
 
     public Animal(){}
 
-    public Animal(Integer numRegistre, String nom, GregorianCalendar dateArrivee, GregorianCalendar dateDepart,
+    public Animal(String nom, GregorianCalendar dateArrivee,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
                   Proprietaire proprietaire)  {
-        setNumRegistre(numRegistre);
         setNom(nom);
-        setDateArrivee(dateArrivee);
         setDateDepart(dateDepart);
         setEspece(espece);
         setRace(race);
@@ -47,10 +46,6 @@ public class Animal {
         setLocalisationTatouage(localisationTatouage);
         setPoids(poids);
         setProprietaire(proprietaire);
-    }
-
-    public void setNumRegistre(Integer numRegistre) {
-        this.numRegistre = numRegistre;
     }
 
     public void setNom(String nom) {
@@ -122,6 +117,10 @@ public class Animal {
             return "'Inconnu'";
         else
             return nom;
+    }
+
+    public void setNumRegistre(Integer numRegistre) {
+        this.numRegistre = numRegistre;
     }
 
     public Integer getNumRegistre() {

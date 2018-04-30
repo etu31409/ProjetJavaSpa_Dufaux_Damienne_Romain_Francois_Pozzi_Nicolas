@@ -6,8 +6,7 @@ public class Veterinaire {
     private String prenom;
 
     public Veterinaire(){}
-    public Veterinaire(Integer identifiantVeto, String nom, String prenom) {
-        this.identifiantVeto = identifiantVeto;
+    public Veterinaire(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
     }
@@ -24,16 +23,16 @@ public class Veterinaire {
         return prenom;
     }
 
-    public void setIdentifiantVeto(Integer identifiantVeto) {
-        this.identifiantVeto = identifiantVeto;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public void setIdentifiantVeto(Integer identifiantVeto) {
+        this.identifiantVeto = identifiantVeto;
     }
 
     public String toString (){

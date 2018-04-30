@@ -12,7 +12,7 @@ public class SingletonConnection {
             try{
                 connectionUnique = DriverManager.getConnection("jdbc:mysql://localhost:3306/spabd?useSSL=false",
                         "root", "root");
-                // Créer l'instruction SQL avec ? pour éviter injection SQL
+
             }catch (SQLException exception)
             {
                 throw new SingletonConnectionException();
