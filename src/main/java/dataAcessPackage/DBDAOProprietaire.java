@@ -98,6 +98,7 @@ public class DBDAOProprietaire implements IProprietaire{
                     "inner join spabd.veterinaire\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
+
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
@@ -115,6 +116,7 @@ public class DBDAOProprietaire implements IProprietaire{
                     "inner join spabd.veterinaire\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
+
             statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();

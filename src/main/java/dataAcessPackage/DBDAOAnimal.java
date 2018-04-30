@@ -273,6 +273,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?\n" +
                     "AND spabd.medicament.identifiantMed = ?;";
+
             statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionMedicament.getIdentifiantMed());
             statement.setInt(2, selectionVeterinaire.getIdentifiantVeto());

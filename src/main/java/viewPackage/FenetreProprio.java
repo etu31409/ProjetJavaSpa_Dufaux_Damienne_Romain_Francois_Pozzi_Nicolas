@@ -12,7 +12,7 @@ public class FenetreProprio extends JFrame {
     private Proprietaire proprietaire;
     public FenetreProprio(){
         super("Ajout d'un propriétaire");
-        setBounds(300, 100, 500, 500);
+        setBounds(500, 100, 300, 200);
         panneauProprio = new PanneauProprio(this);
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
