@@ -234,7 +234,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament,
-                   Veterinaire selectionVeterinaire) throws AnimalException, SingletonConnectionException {
+                                                               Veterinaire selectionVeterinaire) throws AnimalException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -336,6 +336,20 @@ public class DBDAOAnimal implements IAnimal {
             return listeResultatRecherche;
         } catch (SQLException e) {
             throw new AnimalException("Erreur lors de la récupération de la recherche des animaux en fonction du médicament!");
+        }
+    }
+
+    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "insert into animal() values (?, ?, ?);";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
+            }
+        catch (SQLException e) {
+            throw new AnimalException("Erreur lors de l'inserttion de l'animal !");
         }
     }
 }

@@ -1,5 +1,6 @@
 package viewPackage;
 
+import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
 import modelPackage.Animal;
 import modelPackage.Proprietaire;
@@ -11,6 +12,8 @@ import java.util.GregorianCalendar;
 
 public class PanneauAccueil extends JPanel {
     //private JLabel texte;
+    private Controller controller;
+
     private JPanel panneauFormulaire;
     private JPanel panneauBoutons;
     private JLabel nomLabel, lieuxSPALabel, celluleLabel, numeroRegistreLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel;
@@ -356,6 +359,7 @@ public class PanneauAccueil extends JPanel {
                     raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
                     localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
                     poidsAnimal, proprietaireAnimal);
+            controller.ajouterAnimal(animal);
         }
         catch (Exception exception){System.out.println(exception.getMessage());}
     }

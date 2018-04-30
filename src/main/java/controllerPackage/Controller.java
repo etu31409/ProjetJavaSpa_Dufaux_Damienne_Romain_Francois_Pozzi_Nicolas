@@ -54,4 +54,7 @@ public class Controller {
             SingletonConnectionException{
         return business.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
+    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        business.ajouterAnimal(animal);
+    }
 }

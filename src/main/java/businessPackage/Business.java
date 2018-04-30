@@ -62,5 +62,8 @@ public class Business {
             SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
+    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
+        daoAnimal.ajouterAnimal(animal);
+    }
     //tache metier
 }
