@@ -12,11 +12,12 @@ public class PanneauPrescription extends JPanel {
     private JButton retour, confirmerPrescription, reinnitialiser;
     private JPanel panneauFormulaire, panneauBoutons;
     private JLabel nouvellePrescription, veterinaireResponsableLabel, datePrescriptionLabel, numeroAnimalLabel, especeLabel, raceLabel, poidLabel, medicamentLabel;
-    private JLabel titreSelectionPosologie, titreSelectionStockage, remarqueLabel;
+    private JLabel titreSelectionPosologie, titreSelectionStockage, titreSelectionMedicament, remarqueLabel;
     private PanneauSpinnerDate datePrescription;
-    private JComboBox medicaments, veterinaires;
+    private JComboBox veterinaires;
     private ComboBoxPosologie posologie;
     private ComboBoxStockage stockage;
+    private ComboBoxMedicament medicaments;
     private JLabel vide;
     private JButton ajouterMedicament;
     private JTextArea remarque;
@@ -84,10 +85,17 @@ public class PanneauPrescription extends JPanel {
         medicamentLabel.setHorizontalAlignment(SwingConstants.CENTER);;
         panneauFormulaire.add(medicamentLabel);
 
-        medicaments = new JComboBox();
+        /*vide = new JLabel("");
+        panneauFormulaire.add(vide);*/
+
+        titreSelectionMedicament = new JLabel("<html><h3>Selection du médicament</h3></html>");
+        titreSelectionMedicament.setHorizontalAlignment(SwingConstants.CENTER);
+        panneauFormulaire.add(titreSelectionMedicament);
+        medicaments = new ComboBoxMedicament();
         panneauFormulaire.add(medicaments);
-        vide = new JLabel("");
-        panneauFormulaire.add(vide);
+
+        /*vide = new JLabel("");
+        panneauFormulaire.add(vide);*/
 
         titreSelectionStockage = new JLabel("<html><h3>Selection du stockage</h3></html>");
         titreSelectionStockage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -100,11 +108,6 @@ public class PanneauPrescription extends JPanel {
         panneauFormulaire.add(titreSelectionPosologie);
         posologie = new ComboBoxPosologie();
         panneauFormulaire.add(posologie);
-
-        ajouterMedicament = new JButton("Ajouter un médicament");
-        panneauFormulaire.add(ajouterMedicament);
-        vide = new JLabel("");
-        panneauFormulaire.add(vide);
 
         remarqueLabel = new JLabel("Remarque :");
         remarqueLabel.setHorizontalAlignment(SwingConstants.CENTER);

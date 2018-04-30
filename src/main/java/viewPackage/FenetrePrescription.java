@@ -13,7 +13,7 @@ public class FenetrePrescription extends JFrame {
 
     public FenetrePrescription() {
         super("Ajouter une nouvelle prescription");
-        setBounds(300, 0, 800, 825);
+        setBounds(300, 0, 600, 600);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
         panneauPrescription = new PanneauPrescription(this);

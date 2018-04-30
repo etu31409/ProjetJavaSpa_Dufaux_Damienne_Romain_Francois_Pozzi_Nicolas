@@ -57,11 +57,11 @@ public class FenetrePrincipale extends JFrame{
         rechercheProprietaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheProprietaires);
 
-        medicaments = new JMenu("Medicaments");
-        medicaments.setMnemonic('M');
+        medicaments = new JMenu("Soins");
+        medicaments.setMnemonic('S');
         barMenu.add(medicaments);
 
-        nouvellePrescription = new JMenuItem("Nouvelle prescription");
+        nouvellePrescription = new JMenuItem("Nouvelle fiche de soins");
         medicaments.add(nouvellePrescription);
         nouvellePrescription.addActionListener(new EcouteurBarMenu());
 
