@@ -44,10 +44,10 @@ public class PanneauRechercheAnimaux {
         veterinairesComboBox.removeAllItems();
         medicamentsComboBox.removeAllItems();
         try {
-            for (Veterinaire v : controller.getIdentifiantsVeterinaires()) {
+            for (Veterinaire v : controller.getVeterinaires()) {
                 veterinairesComboBox.addItem(v);
             }
-            for (Medicament m : controller.getIdentifiantsMedicaments()) {
+            for (Medicament m : controller.getMedicaments()) {
                 medicamentsComboBox.addItem(m);
             }
         } catch (VeterinaireException e) {
