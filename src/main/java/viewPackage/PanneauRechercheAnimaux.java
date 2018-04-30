@@ -67,32 +67,42 @@ public class PanneauRechercheAnimaux {
                 String titrefacteur = "";
                 String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
                 try {
-                    if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected()) {
+                    if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
+                    {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxVeterinaire(veterinaireChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                    } else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
+                    }
+                    else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
+                    {
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicament(medicamentChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                    } else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
+                    }
+                    else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
+                    {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicamentVeto(medicamentChoisi, veterinaireChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                    } else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected()) {
-                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères!");
-                        return;
                     }
-                } catch (AnimalException e) {
+                    else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
+                    {
+                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères!");
+                    }
+                }
+                catch (AnimalException e)
+                {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (SingletonConnectionException e) {
+                }
+                catch (SingletonConnectionException e)
+                {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
