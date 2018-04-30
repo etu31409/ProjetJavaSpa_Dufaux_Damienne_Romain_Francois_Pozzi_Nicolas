@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class FenetrePrescription extends JFrame {
-    private Animal animal;
+    //private Animal animal;
     private Container frameContainer;
     private PanneauPrescription panneauPrescription;
 
