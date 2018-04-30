@@ -17,7 +17,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
     private ResultSet data;
 
     public ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
-            MedicamentException, AnimalException, ProprietaireException, VeterinaireException, SoinException {
+            MedicamentException, AnimalException, VeterinaireException, SoinException {
         try {
 
             if (connectionUnique == null) {

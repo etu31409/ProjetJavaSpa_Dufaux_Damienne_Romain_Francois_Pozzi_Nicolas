@@ -93,7 +93,6 @@ public class DBDAOAnimal implements IAnimal {
                     IProprietaire propietaire = new DBDAOProprietaire();
                     animal.setProprietaire(propietaire.getUnProprietaire(identifiantProprio));
                 }
-
                 tousLesAnimaux.add(animal);
             }
             return tousLesAnimaux;
@@ -235,7 +234,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament,
-                                                               Veterinaire selectionVeterinaire) throws AnimalException, SingletonConnectionException {
+                               Veterinaire selectionVeterinaire) throws AnimalException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -247,7 +246,7 @@ public class DBDAOAnimal implements IAnimal {
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
                     "inner join spabd.veterinaire\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?\n" +
@@ -269,7 +268,7 @@ public class DBDAOAnimal implements IAnimal {
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
                     "inner join spabd.veterinaire\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto\n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?\n" +

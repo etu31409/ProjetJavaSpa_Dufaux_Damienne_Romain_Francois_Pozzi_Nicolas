@@ -33,8 +33,6 @@ public class DBDAOVeterinaire implements IVeterinaire{
 
                 tousLesVeterinaires.add(veterinaire);
             }
-
-            //connectionUnique.close();
             return tousLesVeterinaires;
 
         } catch (SQLException e) {
