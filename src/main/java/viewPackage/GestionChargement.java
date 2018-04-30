@@ -1,4 +1,4 @@
-/*package viewPackage;
+package viewPackage;
 
 import javax.swing.*;
 
@@ -7,9 +7,8 @@ public class GestionChargement {
     private JFrame fen;
     private PanneauFicheDeSoins panFicheSoins;
 
-    public GestionChargement(JProgressBar barre, JFrame fen, PanneauFicheDeSoins panFicheSoins)
+    public GestionChargement(JProgressBar barre, PanneauFicheDeSoins panFicheSoins)
     {
-        this.barre = barre;
         this.fen = fen;
         this.panFicheSoins = panFicheSoins;
     }
@@ -35,4 +34,4 @@ public class GestionChargement {
         panFicheSoins.setVisible(true);
     }
 }
-*/
+

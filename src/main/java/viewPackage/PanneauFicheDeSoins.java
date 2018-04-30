@@ -18,7 +18,7 @@ public class PanneauFicheDeSoins extends JPanel {
     private final Controller controller;
     private FenetreFicheDeSoins fenetreFicheDeSoins;
     private JButton retour, confirmerFiche, reinnitialiser, ajouterMedicament;
-    private JRadioButton boutonUrgent;
+    private JCheckBox boutonUrgent;
     private JPanel panneauFormulaire, panneauBoutons, panneauTitre;
     private JLabel nouvellePrescription, veterinaireResponsableLabel,
             datePrescriptionLabel, heurePrescriptionLabel,
@@ -85,7 +85,7 @@ public class PanneauFicheDeSoins extends JPanel {
         instancieListeAnimaux();
         panneauFormulaire.add(animaux);
 
-        boutonUrgent = new JRadioButton("Fiche urgente");
+        boutonUrgent = new JCheckBox("Fiche urgente");
         boutonUrgent.setHorizontalAlignment(SwingConstants.LEFT);
         panneauFormulaire.add(boutonUrgent);
         panneauFormulaire.add(boutonUrgent);

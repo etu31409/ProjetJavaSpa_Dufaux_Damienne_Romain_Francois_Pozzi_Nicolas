@@ -13,7 +13,6 @@ import java.awt.event.*;
 import java.util.GregorianCalendar;
 
 public class PanneauAccueil extends JPanel {
-    //private JLabel texte;
     private Controller controller;
 
     private JPanel panneauFormulaire, panneauBoutons;
@@ -67,6 +66,7 @@ public class PanneauAccueil extends JPanel {
         panneauFormulaire.add(poidsLabel);
         poids = new JTextField();
         panneauFormulaire.add(poids);
+        //box model ?
 
         aEuthanasier = new JCheckBox("à euthanasier :");
         aEuthanasier.setHorizontalAlignment(SwingConstants.RIGHT);
