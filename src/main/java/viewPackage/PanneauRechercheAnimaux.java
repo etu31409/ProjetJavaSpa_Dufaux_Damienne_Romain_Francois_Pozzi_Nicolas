@@ -8,6 +8,7 @@ import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,6 +31,7 @@ public class PanneauRechercheAnimaux {
         this.controller = controller;
         rechercherButton.addActionListener(new RechercheListener());
         titreFacteurRecherche = new JLabel("Aucune recherche sélectionnée");
+
         instanciationComboBox();
     }
 
@@ -61,9 +63,6 @@ public class PanneauRechercheAnimaux {
         @Override
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == rechercherButton) {
-                if (scrollPane != null) {
-                    panneauListeRecherche.remove(scrollPane);
-                }
                 String titrefacteur = "";
                 String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
                 try {
@@ -71,34 +70,33 @@ public class PanneauRechercheAnimaux {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxVeterinaire(veterinaireChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        scrollPane = new JScrollPane(tableResultat);
-                        panneauListeRecherche.add(scrollPane);
-                        panneauListeRecherche.doLayout();
-                    } else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
+                        tableResultat.setFillsViewportHeight(true);
+                        scrollPane.setViewportView(tableResultat);
+                    }
+                    else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicament(medicamentChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        scrollPane = new JScrollPane(tableResultat);
-                        panneauListeRecherche.add(scrollPane);
-                        panneauListeRecherche.doLayout();
-                    } else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
+                        tableResultat.setFillsViewportHeight(true);
+                        scrollPane.setViewportView(tableResultat);
+                    }
+                    else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected()) {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
                         String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicamentVeto(medicamentChoisi, veterinaireChoisi);
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        scrollPane = new JScrollPane(tableResultat);
-                        panneauListeRecherche.add(scrollPane);
-                        panneauListeRecherche.doLayout();
-                    } else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected()) {
-
+                        tableResultat.setFillsViewportHeight(true);
+                        scrollPane.setViewportView(tableResultat);
+                    }
+                    else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
+                    {
                         JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères!");
                         return;
                     }
-                }
-                catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Erreur affichage de la table");
-                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erreur affichage de la table");
                 }
             }
         }
     }
+}
