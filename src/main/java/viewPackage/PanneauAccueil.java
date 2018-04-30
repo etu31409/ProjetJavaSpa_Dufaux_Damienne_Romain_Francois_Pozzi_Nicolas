@@ -52,25 +52,25 @@ public class PanneauAccueil extends JPanel {
         nom = new JTextField();
         panneauFormulaire.add(nom);
 
-        lieuxSPALabel = new JLabel("SPA de :");
+        /*lieuxSPALabel = new JLabel("SPA de :");
         lieuxSPALabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(lieuxSPALabel);
         lieuxSPA = new JTextField();
         panneauFormulaire.add(lieuxSPA);
-
+*/
         celluleLabel = new JLabel("N° de cellule :");
         celluleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(celluleLabel);
         cellule = new JTextField();
         panneauFormulaire.add(cellule);
 
-        numeroRegistreLabel = new JLabel("N° de registre :");
+        /*numeroRegistreLabel = new JLabel("N° de registre :");
         numeroRegistreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(numeroRegistreLabel);
         numeroRegistre = new JTextField();
         panneauFormulaire.add(numeroRegistre);
-
-        poidsLabel = new JLabel("Poids de l'animale :");
+*/
+        poidsLabel = new JLabel("Poids de l'animal :");
         poidsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(poidsLabel);
         poids = new JTextField();
@@ -78,6 +78,7 @@ public class PanneauAccueil extends JPanel {
 
         aEuthanasier = new JCheckBox("à euthanasier :");
         aEuthanasier.setHorizontalAlignment(SwingConstants.RIGHT);
+        aEuthanasier.addItemListener(new EcouteurDeCheckBox());
         panneauFormulaire.add(aEuthanasier);
 
         aEuthanasierLabel = new JLabel("prévu pour le :");
@@ -88,6 +89,8 @@ public class PanneauAccueil extends JPanel {
         raisonEuthanasieLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(raisonEuthanasieLabel);
         raisonEuthanasie = new JTextField();
+        raisonEuthanasie.setEnabled(false);
+        raisonEuthanasie.setBackground(Color.gray);
         panneauFormulaire.add(raisonEuthanasie);
 
         dateArriveLabel = new JLabel("Date d'arrivée :");
@@ -96,12 +99,12 @@ public class PanneauAccueil extends JPanel {
         dateArrive = new PanneauSpinnerDate();
         panneauFormulaire.add(dateArrive);
 
-        dateDepartLabel = new JLabel("Date de départ :");
+        /*dateDepartLabel = new JLabel("Date de départ :");
         dateDepartLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(dateDepartLabel);
         dateDepart = new PanneauSpinnerDate();
         panneauFormulaire.add(dateDepart);
-
+*/
         especeLabel = new JLabel("Espèce :");
         especeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(especeLabel);
@@ -226,6 +229,24 @@ public class PanneauAccueil extends JPanel {
         panneauBoutons.add(reinnitialiser);
     }
 
+    private class EcouteurDeCheckBox implements ItemListener
+    {
+        public void itemStateChanged(ItemEvent e){
+            if(e.getSource() == aEuthanasier){
+                if(e.getStateChange() == e.SELECTED){
+                    aEuthanasier.isSelected();
+                }
+            }
+            if(aEuthanasier.isSelected()){
+                raisonEuthanasie.setEnabled(true);
+                raisonEuthanasie.setBackground(Color.white);
+            }
+            if(!aEuthanasier.isSelected()){
+                raisonEuthanasie.setEnabled(false);
+                raisonEuthanasie.setBackground(Color.GRAY);
+            }
+        }
+    }
 
     private class NouveauProprio implements ActionListener {
         public void actionPerformed(ActionEvent event){
@@ -274,10 +295,21 @@ public class PanneauAccueil extends JPanel {
             }
         }
         //validation espece (ne peut pas etre null)
+        if(espece.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Le champ ESPECE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         //valiation race (ne peut pas etre null)
+        if(race.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Le champ RACE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         //validation sexe (ne peut pas etre null)
+        if(!boutonFemelle.isSelected() || !boutonMale.isSelected()){
+            JOptionPane.showMessageDialog(null, "Vous devez choisir un sexe !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         //validation estSterilise (ne peut pas etre null)
-
+        if(!boutonNonSterilise.isSelected() || !boutonOuiSterilise.isSelected()){
+            JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         try{
             Integer numRegistreAnimal;
             String nomAnimal;
