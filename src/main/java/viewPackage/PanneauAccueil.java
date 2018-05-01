@@ -26,34 +26,17 @@ public class PanneauAccueil extends JPanel {
     private JTextField numCelluleTextField;
     private JTextField especeTextField;
     private JTextField raceTextField;
-    private JTextField couleurTextField;
-    private JTextField numPuceTextField;
-    private JTextField localisationPuceTextField;
     private JTextField raisonTextField;
     private JTextField numTatouageTextField;
     private JTextField localisationTatouageTextField;
+    private JTextField couleurTextField;
+    private JTextField numPuceTextField;
+    private JTextField localisationPuceTextField;
 
     private JRadioButton femelleRadioButton, maleRadioButton, steriliseRadioButton, nonSteriliseRadioButton;
     private JButton ajouterUnPropriétaireButton, validerButton, reinitialiserButton, retourButton;
     private JCheckBox aEuthanasierCheckBox;
     private JComboBox comboBoxListeProprietaires;
-
-
-    private JPanel panneauFormulaire, panneauBoutons;
-    private JLabel nomLabel, celluleLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel,
-            dateArriveLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel,
-            attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel,
-            dateTatouageLabel, titreProprietaireLabel, remarqueLabel, localisationTatouageLabel;
-    private JTextField localisationTatouage, nom, cellule, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
-    private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
-    private JButton  retour, validation, reinnitialiser;
-    private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
-    private ButtonGroup sexeGroupeBouton, steriliseGroupeBouton;
-    private JRadioButton boutonMale, boutonFemelle, boutonOuiSterilise, boutonNonSterilise;
-    private JComboBox proprietaires;
-    private JButton ajoutProprio;
-    private JTextArea remarque;
-    private JScrollPane scroll;
 
     public PanneauAccueil(Controller controller) {
         this.controller = controller;
@@ -72,6 +55,7 @@ public class PanneauAccueil extends JPanel {
         instanciationSpinnerDate(spinnerDateTatouage);
         instancieListeProprietaires();
     }
+
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
     }
@@ -120,15 +104,16 @@ public class PanneauAccueil extends JPanel {
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
                 validationFormulaire();
+
             }
             if(e.getSource() == retourButton){
+
                 PanneauBienvenue panneauBienvenue = new PanneauBienvenue();
                 panneauBienvenue.repaint();
-                panneauBienvenue.validate();
             }
             if(e.getSource() == reinitialiserButton){
-                panneauContainerPrincipal.removeAll();
-                panneauContainerPrincipal.repaint();
+                reinitialisation();
+                panneauContainerPrincipal = new PanneauAccueil(controller).getPanneauContainerPrincipal();
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
                 fenetreProprio = new FenetreProprio();
@@ -187,7 +172,7 @@ public class PanneauAccueil extends JPanel {
         especeAnimal = especeTextField.getText();
         raceAnimal = raceTextField.getText();
 
-        Proprietaire proprietaireAnimal = (Proprietaire) proprietaires.getSelectedItem();
+        //Proprietaire proprietaireAnimal = (Proprietaire) proprietaires.getSelectedItem();
 
         if(femelleRadioButton.isSelected()) {
             sexeAnimal = "F";
@@ -202,27 +187,10 @@ public class PanneauAccueil extends JPanel {
         else {
             estSteriliseAnimal = false;
         }
-        couleurDePeauAnimal = pelagePeau.getText();
-        dateNaissanceAnimal = dateNaissance.getDate();
 
-        try{
-            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
-        }
-        catch (Exception error){
-            numPuceAnimal  = null;
-        }
-        finally {
-            if(numeroPuce.getText().isEmpty() || numeroPuce == null ||  Integer.valueOf(numeroPuce.getText()) < 0){
-                JOptionPane.showMessageDialog(null, "Numéro de puce invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        localisationPuceAnimal = localisation.getText();
+        /*localisationPuceAnimal = localisation.getText();
         dateAttributionPuceAnimal = dateAttribution.getDate();
-
-
         numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
-
-
         couleurDePeauAnimal = couleurTextField.getText();
         //dateNaissanceAnimal = spinnerDateNaissance.getDate();
         numPuceAnimal = Integer.valueOf(numPuceTextField.getText());
@@ -230,7 +198,7 @@ public class PanneauAccueil extends JPanel {
         //dateAttributionPuceAnimal = spinnerDatePuce.getDate();
         numTatouageAnimal = Integer.valueOf(numTatouageTextField.getText());
         localisationTatouageAnimal = localisationTatouageTextField.getText();
-        poidsAnimal = Double.valueOf((Double) spinnerPoids.getValue());
+        poidsAnimal = Double.valueOf((Double) spinnerPoids.getValue());*/
 
         //Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
                 //raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
@@ -239,4 +207,28 @@ public class PanneauAccueil extends JPanel {
 
         //controller.ajouterAnimal(animal);
     }
+
+    public void reinitialisation(){
+        nomTextField.setText("");
+        numCelluleTextField.setText("");
+        especeTextField.setText("");
+        raceTextField.setText("");
+        raisonTextField.setText("");
+        numTatouageTextField.setText("");
+        localisationTatouageTextField.setText("");
+        couleurTextField.setText("");
+        numPuceTextField.setText("");
+        localisationPuceTextField.setText("");
+
+        femelleRadioButton.setSelected(false);
+        maleRadioButton.setSelected(false);;
+        steriliseRadioButton.setSelected(false);;
+        nonSteriliseRadioButton.setSelected(false);
+        aEuthanasierCheckBox.setSelected(false);;
+        comboBoxListeProprietaires.removeAllItems();
+    }
 }
+
+
+
+
