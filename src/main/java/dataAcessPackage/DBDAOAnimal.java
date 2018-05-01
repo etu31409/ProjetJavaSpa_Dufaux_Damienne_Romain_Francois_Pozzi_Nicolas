@@ -71,7 +71,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setDateAttributionPuce(calendar);
                 }
 
-                Double numTatouage = data.getDouble("numTatouage");
+                Integer numTatouage = data.getInt("numTatouage");
                 if (!data.wasNull()) {
                     animal.setNumTatouage(numTatouage);
                 }
@@ -151,7 +151,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setDateAttributionPuce(calendar);
                 }
 
-                Double numTatouage = data.getDouble("numTatouage");
+                Integer numTatouage = data.getInt("numTatouage");
                 if (!data.wasNull()) {
                     animal.setNumTatouage(numTatouage);
                 }
@@ -333,11 +333,28 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into animal() values (?, ?, ?);";
+            sqlInstruction = "insert into animal values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, animal.getNom());
+            preparedStatement.setDate(2, new java.sql.Date(animal.getDateArrivee().getTimeInMillis()));
+            preparedStatement.setString(3, animal.getEspece());
+            preparedStatement.setString(4, animal.getRace());
+            preparedStatement.setString(5, animal.getSexe());
+            preparedStatement.setBoolean(6, animal.isEstSterilise());
+            preparedStatement.setString(7, animal.getCouleurDePeau());
+            preparedStatement.setDate(8, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
+            preparedStatement.setInt(9, animal.getNumPuce());
+            preparedStatement.setString(10, animal.getLocalisationPuce());
+            preparedStatement.setDate(11, new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
+            preparedStatement.setInt(12, animal.getNumTatouage());
+            preparedStatement.setString(13, animal.getLocalisationTatouage());
+            preparedStatement.setDouble(14, animal.getPoids());
+            preparedStatement.setInt(15, animal.getProprietaire().getIdentifiantProprio());
+
+            data = preparedStatement.executeQuery();
 
         } catch (SQLException e) {
-            throw new AnimalException("Erreur lors de l'inserttion de l'animal !");
+            throw new AnimalException("Erreur lors de l'insertion de l'animal !");
         }
     }
 }
