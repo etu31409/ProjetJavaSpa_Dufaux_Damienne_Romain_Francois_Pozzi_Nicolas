@@ -9,7 +9,6 @@ public class Animal {
 
     private String nom;
     private GregorianCalendar dateArrivee;
-    private GregorianCalendar dateDepart;
     private String espece;
     private String race;
     private String sexe;
@@ -32,7 +31,7 @@ public class Animal {
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
                   Proprietaire proprietaire)  {
         setNom(nom);
-        setDateDepart(dateDepart);
+        setDateArrivee(dateArrivee);
         setEspece(espece);
         setRace(race);
         setSexe(sexe);
@@ -54,10 +53,6 @@ public class Animal {
 
     public void setDateArrivee(GregorianCalendar dateArrivee) {
         this.dateArrivee = dateArrivee;
-    }
-
-    public void setDateDepart(GregorianCalendar dateDepart) {
-        this.dateDepart = dateDepart;
     }
 
     public void setEspece(String espece) {
@@ -129,10 +124,6 @@ public class Animal {
 
     public GregorianCalendar getDateArrivee() {
         return dateArrivee;
-    }
-
-    public GregorianCalendar getDateDepart() {
-        return dateDepart;
     }
 
     public String getEspece() {

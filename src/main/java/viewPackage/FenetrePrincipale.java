@@ -13,8 +13,7 @@ public class FenetrePrincipale extends JFrame{
     private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, quitter, supprimerFicheDeSoin,
             supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
     private PanneauBienvenue panneauBienvenue;
-    private
-    FenetreFicheDeSoins fenetreFicheDeSoins;
+    private FenetreFicheDeSoins fenetreFicheDeSoins;
 
     public FenetrePrincipale(){
         super("S.P.A, Société Protectrice des Animaux");
@@ -130,7 +129,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheVeterinaires) {
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauRechercheVeterinaires(controller));
+                frameContainer.add(new PanneauRechercheVeterinaires(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

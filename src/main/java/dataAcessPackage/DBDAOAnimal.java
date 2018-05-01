@@ -45,13 +45,6 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setNom(nom);
                 }
 
-                Date sqlDateDepart = data.getDate("dateDepart");
-                if (!data.wasNull()) {
-                    GregorianCalendar calendar = new GregorianCalendar();
-                    calendar.setTime(sqlDateDepart);
-                    animal.setDateDepart(calendar);
-                }
-
                 Date sqlDateNaissance = data.getDate("dateNaissance");
                 if (!data.wasNull()) {
                     GregorianCalendar calendar = new GregorianCalendar();
@@ -130,13 +123,6 @@ public class DBDAOAnimal implements IAnimal {
                 String nom = data.getString("nom");
                 if (!data.wasNull()) {
                     animal.setNom(nom);
-                }
-
-                Date sqlDateDepart = data.getDate("dateDepart");
-                if (!data.wasNull()) {
-                    GregorianCalendar calendar = new GregorianCalendar();
-                    calendar.setTime(sqlDateDepart);
-                    animal.setDateDepart(calendar);
                 }
 
                 Date sqlDateNaissance = data.getDate("dateNaissance");

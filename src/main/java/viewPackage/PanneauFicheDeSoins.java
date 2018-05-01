@@ -27,7 +27,6 @@ public class PanneauFicheDeSoins extends JPanel {
             intitulePartieDuCorps;
     private PanneauSpinnerDate datePrescription, heurePrescription;
     private JComboBox veterinaires, animaux;
-    private JLabel vide;
     private JTextArea remarque;
     private JTextField intitule, partieDuCorps;
 

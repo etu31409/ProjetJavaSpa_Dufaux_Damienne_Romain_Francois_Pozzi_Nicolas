@@ -5,7 +5,6 @@ import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -46,6 +45,7 @@ public class PanneauRechercheVeterinaires  extends JPanel {
             dateDeDébutSpinner.setModel(new SpinnerDateModel());
             dateDeDébutSpinner.setEditor(new JSpinner.DateEditor(dateDeDébutSpinner, "dd/MM/yyyy"));
             dateDeDébutSpinner.setValue(date);
+
             dateDeFinSpinner.setModel(new SpinnerDateModel());
             dateDeFinSpinner.setEditor(new JSpinner.DateEditor(dateDeFinSpinner, "dd/MM/yyyy"));
             dateDeFinSpinner.setValue(GregorianCalendar.getInstance().getTime());
