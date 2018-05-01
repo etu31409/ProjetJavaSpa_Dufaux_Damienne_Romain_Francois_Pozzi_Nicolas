@@ -1,14 +1,12 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.AnimalException;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 import modelPackage.Proprietaire;
 
 import javax.swing.*;
-import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.GregorianCalendar;
@@ -16,230 +14,58 @@ import java.util.GregorianCalendar;
 public class PanneauAccueil {
     private Controller controller;
 
-    private JPanel panneauFormulaire, panneauBoutons;
-    private JLabel nomLabel, celluleLabel, poidsLabel, aEuthanasierLabel, raisonEuthanasieLabel,
-            dateArriveLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel,
-            attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel,
-            dateTatouageLabel, titreProprietaireLabel, remarqueLabel, localisationTatouageLabel;
-    private JTextField localisationTatouage, nom, cellule, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
-    private PanneauSpinnerDate dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
-    private JButton  retour, validation, reinnitialiser;
-    private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
-    private ButtonGroup sexeGroupeBouton, steriliseGroupeBouton;
-    private JRadioButton boutonMale, boutonFemelle, boutonOuiSterilise, boutonNonSterilise;
-    private JComboBox proprietaires;
-    private JButton ajoutProprio;
-    private JTextArea remarque;
-    private JScrollPane scroll;
     private FenetreProprio fenetreProprio;
     private JPanel panneauContainerPrincipal;
+
+    private JSpinner spinnerPoids;
+    private JSpinner spinnerDateEuthanasie;
+    private JSpinner spinnerDateNaissance;
+    private JSpinner spinnerDatePuce;
+    private JSpinner spinnerDateTatouage;
     private JTextField nomTextField;
-    private JTextField textField2;
-    private JSpinner spinner1;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JRadioButton femelleRadioButton;
-    private JRadioButton mâleRadioButton;
-    private JCheckBox àEuthanasierCheckBox;
-    private JSpinner spinner2;
-    private JTextField textField5;
-    private JRadioButton stériliséERadioButton;
-    private JRadioButton nonStériliséERadioButton;
-    private JSpinner spinner3;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JSpinner spinner4;
-    private JTextField textField9;
-    private JTextField textField10;
-    private JSpinner spinner5;
-    private JComboBox comboBox1;
-    private JButton ajouterUnPropriétaireButton;
-    private JTextPane textPane1;
-    private JButton validerButton;
-    private JButton reinitialiserButton;
-    private JButton retourButton;
+    private JTextField numCelluleTextField;
+    private JTextField especeTextField;
+    private JTextField raceTextField;
+    private JTextField couleurTextField;
+    private JTextField numPuceTextField;
+    private JTextField localisationPuceTextField;
+    private JTextField raisonTextField;
+    private JTextField numTatouageTextField;
+    private JTextField localisationTatouageTextField;
+
+    private JRadioButton femelleRadioButton, maleRadioButton, steriliseRadioButton, nonSteriliseRadioButton;
+    private JButton ajouterUnPropriétaireButton, validerButton, reinitialiserButton, retourButton;
+    private JCheckBox aEuthanasierCheckBox;
+    private JComboBox comboBoxListeProprietaires;
+
 
     public PanneauAccueil(Controller controller) {
         this.controller = controller;
-        /*this.setLayout(new BorderLayout());
-        panneauFormulaire = new JPanel();
-        panneauBoutons = new JPanel();
-        this.add(panneauFormulaire, BorderLayout.CENTER);
-        this.add(panneauBoutons, BorderLayout.SOUTH);
-        panneauFormulaire.setLayout(new GridLayout(15,3,5,5));
-        scroll = new JScrollPane();
-        this.add(scroll, BorderLayout.EAST);
+        raisonTextField.setEnabled(false);
+        raisonTextField.setBackground(Color.GRAY);
+        aEuthanasierCheckBox.addActionListener(new EcouteurDeCheckBox());
+        validerButton.addActionListener(new EcouteurDeBoutons());
+        reinitialiserButton.addActionListener(new EcouteurDeBoutons());
+        retourButton.addActionListener(new EcouteurDeBoutons());
+        ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
 
-        nomLabel = new JLabel("Nom de l'animal :");
-        nomLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(nomLabel);
-        nom = new JTextField();
-        panneauFormulaire.add(nom);
-
-        celluleLabel = new JLabel("N° de cellule :");
-        celluleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(celluleLabel);
-        cellule = new JTextField();
-        panneauFormulaire.add(cellule);
-
-        poidsLabel = new JLabel("Poids de l'animal :");
-        poidsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(poidsLabel);
-        poids = new JTextField();
-        panneauFormulaire.add(poids);
-        //box model ?
-
-        aEuthanasier = new JCheckBox("à euthanasier :");
-        aEuthanasier.setHorizontalAlignment(SwingConstants.RIGHT);
-        aEuthanasier.addItemListener(new EcouteurDeCheckBox());
-        panneauFormulaire.add(aEuthanasier);
-
-        aEuthanasierLabel = new JLabel("Prévu pour le :");
-        dateEuthanasie = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateEuthanasie);
-
-        raisonEuthanasieLabel = new JLabel("Raison de l'ethanasie :");
-        raisonEuthanasieLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(raisonEuthanasieLabel);
-        raisonEuthanasie = new JTextField();
-        raisonEuthanasie.setEnabled(false);
-        raisonEuthanasie.setBackground(Color.gray);
-        panneauFormulaire.add(raisonEuthanasie);
-
-        dateArriveLabel = new JLabel("Date d'arrivée :");
-        dateArriveLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(dateArriveLabel);
-        dateArrive = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateArrive);
-
-        especeLabel = new JLabel("Espèce :");
-        especeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(especeLabel);
-        espece = new JTextField();
-        panneauFormulaire.add(espece);
-
-        raceLabel = new JLabel("Race :");
-        raceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(raceLabel);
-        race = new JTextField();
-        panneauFormulaire.add(race);
-
-        boutonMale = new JRadioButton("Male");
-        boutonMale.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(boutonMale);
-        boutonFemelle = new JRadioButton("Femelle");
-        boutonFemelle.setHorizontalAlignment(SwingConstants.LEFT);
-        panneauFormulaire.add(boutonFemelle);
-        sexeGroupeBouton = new ButtonGroup();
-        sexeGroupeBouton.add(boutonMale);
-        sexeGroupeBouton.add(boutonFemelle);
-
-        boutonOuiSterilise = new JRadioButton("Stérilisé.e");
-        boutonOuiSterilise.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(boutonOuiSterilise);
-        boutonNonSterilise = new JRadioButton("Non stérilisé.e");
-        boutonNonSterilise.setHorizontalAlignment(SwingConstants.LEFT);
-        panneauFormulaire.add(boutonNonSterilise);
-        steriliseGroupeBouton = new ButtonGroup();
-        steriliseGroupeBouton.add(boutonOuiSterilise);
-        steriliseGroupeBouton.add(boutonNonSterilise);
-
-        dateNaissanceLabel = new JLabel("Date de naissance :");
-        dateNaissanceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        dateNaissance = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateNaissanceLabel);
-        panneauFormulaire.add(dateNaissance);
-
-        pelagePeauLabel = new JLabel("Pelage/Peau :");
-        pelagePeauLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(pelagePeauLabel);
-        pelagePeau = new JTextField();
-        panneauFormulaire.add(pelagePeau);
-
-        numeroPuceLabel = new JLabel("Numéro de puce :");
-        numeroPuceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(numeroPuceLabel);
-        numeroPuce = new JTextField();
-        panneauFormulaire.add(numeroPuce);
-
-        numeroTatouageLabel = new JLabel("Numéro de tatouage :");
-        numeroTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(numeroTatouageLabel);
-        numeroTatouage = new JTextField();
-        panneauFormulaire.add(numeroTatouage);
-
-        localisationLabel = new JLabel("Localisation de la puce:");
-        localisationLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(localisationLabel);
-        localisation = new JTextField();
-        panneauFormulaire.add(localisation);
-
-        incertainLocalisationTatouageLabel = new JLabel("Incertain :");
-        incertainLocalisationTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(incertainLocalisationTatouageLabel);
-        estIncertainLocalisationTatouage = new JCheckBox();
-        panneauFormulaire.add(estIncertainLocalisationTatouage);
-
-        attributionLabel = new JLabel("Date d'attribution de la puce :");
-        attributionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(attributionLabel);
-        dateAttribution = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateAttribution);
-
-        dateTatouageLabel = new JLabel("Date d'attribution du tatouage :");
-        dateTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(dateTatouageLabel);
-        dateTatouage = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateTatouage);
-
-        localisationTatouageLabel = new JLabel("Localisation du tatouage :");
-        localisationTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(localisationTatouageLabel);
-        localisationTatouage = new JTextField();
-        panneauFormulaire.add(localisationTatouage);
-
-        incertainDateTatouageLabel = new JLabel("Incertain :");
-        incertainDateTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(incertainDateTatouageLabel);
-        estIncertainDateTatouage = new JCheckBox();
-        panneauFormulaire.add(estIncertainDateTatouage);
-
-        titreProprietaireLabel = new JLabel("<html><h1>Propriétaire (si connu)</h1></html>");
-        titreProprietaireLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(titreProprietaireLabel);
-
-        proprietaires = new JComboBox();
+        instanciationSpinnerPoids();
+        instanciationSpinnerDate(spinnerDateEuthanasie);
+        instanciationSpinnerDate(spinnerDateNaissance);
+        instanciationSpinnerDate(spinnerDatePuce);
+        instanciationSpinnerDate(spinnerDateTatouage);
         instancieListeProprietaires();
-        panneauFormulaire.add(proprietaires);
 
-        ajoutProprio = new JButton("Ajouter un propriétaire");
-        ajoutProprio.addActionListener(new NouveauProprio());
-        panneauFormulaire.add(ajoutProprio);
-
-        remarqueLabel = new JLabel("<html><h1>Remarques</h1></html>");
-        remarqueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(remarqueLabel);
-
-        remarque = new JTextArea(1,15);
-        panneauFormulaire.add(remarque);
-
-        panneauBoutons.setLayout(new FlowLayout());
-        retour = new JButton("Retour");
-        panneauBoutons.add(retour);
-        retour.addActionListener(new EcouteurDeBouton());
-        validation = new JButton("Valider");
-        panneauBoutons.add(validation);
-        validation.addActionListener(new EcouteurDeBouton());
-        reinnitialiser = new JButton("Reinnitialiser");
-        panneauBoutons.add(reinnitialiser);*/
+    }
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     public void instancieListeProprietaires() {
-        proprietaires.removeAllItems();
+        comboBoxListeProprietaires.removeAllItems();
         try {
             for (Proprietaire p : controller.getProprietaires()) {
-                proprietaires.addItem(p);
+                comboBoxListeProprietaires.addItem(p);
             }
         } catch (ProprietaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -248,84 +74,82 @@ public class PanneauAccueil {
         }
     }
 
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
+    private void instanciationSpinnerDate(JSpinner spinnerDate) {
+        spinnerDate.setModel(new SpinnerDateModel());
+        spinnerDate.setEditor(new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy"));
+        spinnerDate.setValue(GregorianCalendar.getInstance().getTime());
     }
 
-    private class EcouteurDeCheckBox implements ItemListener
-    {
-        public void itemStateChanged(ItemEvent e){
-            if(e.getSource() == aEuthanasier){
-                if(e.getStateChange() == e.SELECTED){
-                    aEuthanasier.isSelected();
-                }
+    private void instanciationSpinnerPoids() {
+        spinnerPoids.setModel(new SpinnerNumberModel(0.00, 0.00, 10000, 0.10));
+    }
+
+    private class EcouteurDeCheckBox implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == aEuthanasierCheckBox){
+                aEuthanasierCheckBox.isSelected();
             }
-            if(aEuthanasier.isSelected()){
-                raisonEuthanasie.setEnabled(true);
-                raisonEuthanasie.setBackground(Color.white);
+            if(aEuthanasierCheckBox.isSelected()){
+                raisonTextField.setEnabled(true);
+                raisonTextField.setBackground(Color.white);
             }
-            if(!aEuthanasier.isSelected()){
-                raisonEuthanasie.setEnabled(false);
-                raisonEuthanasie.setBackground(Color.GRAY);
+            else{
+                raisonTextField.setEnabled(false);
+                raisonTextField.setBackground(Color.GRAY);
             }
         }
     }
 
-    private class NouveauProprio implements ActionListener {
-        public void actionPerformed(ActionEvent event){
-            fenetreProprio = new FenetreProprio();
-        }
-    }
-
-    /*private class EcouteurDeBouton implements ActionListener{
+    private class EcouteurDeBoutons implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            if(e.getSource() == validation){
+            if(e.getSource() == validerButton){
                 validationFormulaire();
+
             }
-            if(e.getSource() == retour){
-                PanneauAccueil.this.removeAll();
-                PanneauBienvenue panneauBienvenue= new PanneauBienvenue();
-                PanneauAccueil.this.repaint();
-                PanneauAccueil.this.validate();
+            if(e.getSource() == retourButton){
+                PanneauBienvenue panneauBienvenue = new PanneauBienvenue();
+                panneauBienvenue.repaint();
+                panneauBienvenue.validate();
+            }
+            if(e.getSource() == reinitialiserButton){
+                panneauContainerPrincipal.removeAll();
+                panneauContainerPrincipal.repaint();
+            }
+            if(e.getSource() == ajouterUnPropriétaireButton){
+                fenetreProprio = new FenetreProprio();
             }
         }
-    }*/
+    }
+
     public void validationFormulaire(){
        //validation numero de cellule
         Integer numeroCellule = 0;
         try{
-            numeroCellule = Integer.valueOf(cellule.getText());
+            numeroCellule = Integer.valueOf(numCelluleTextField.getText());
         }
         catch (Exception error){
             numeroCellule = null;
         }
         finally {
-            if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
-                //JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
-                //cellule.setHighlighter(new Highlighter());
+            if(numCelluleTextField.getText().isEmpty() || numCelluleTextField == null || numeroCellule < 1){
                 // mettre la case en rouge(Color.RED);
             }
         }
-
         //validation espece (ne peut pas etre null)
-        if(espece.getText().isEmpty()){
-            //JOptionPane.showMessageDialog(null, "Le champ ESPECE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            //mettre la case en rouge
+        if(especeTextField.getText().isEmpty()){
+
         }
         //valiation race (ne peut pas etre null)
-        if(race.getText().isEmpty()){
-            //JOptionPane.showMessageDialog(null, "Le champ RACE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            //mettre la case en rouge
+        if(raceTextField.getText().isEmpty()){
+
         }
         //validation sexe (ne peut pas etre null)
-        if(!boutonFemelle.isSelected() || !boutonMale.isSelected()){
-            //JOptionPane.showMessageDialog(null, "Vous devez choisir un sexe !", "Erreur", JOptionPane.ERROR_MESSAGE);
-            //mettre la case en rouge
+        if(!femelleRadioButton.isSelected() || !maleRadioButton.isSelected()){
+
         }
         //validation estSterilise (ne peut pas etre null)
-        if(!boutonNonSterilise.isSelected() || !boutonOuiSterilise.isSelected()){
-            //JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur",
-                    //JOptionPane.ERROR_MESSAGE);
+        if(!steriliseRadioButton.isSelected() || !nonSteriliseRadioButton.isSelected()){
             //mettre la case en rouge
         }
         try{
@@ -345,45 +169,41 @@ public class PanneauAccueil {
             Double poidsAnimal;
             Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
 
-            nomAnimal = nom.getText();
-            dateArriveeAnimal = dateArrive.getDate();
-            especeAnimal = espece.getText();
-            raceAnimal = race.getText();
+            nomAnimal = nomTextField.getText();
+            //dateArriveeAnimal = GregorianCalendar.getInstance().getTime();
+            especeAnimal = especeTextField.getText();
+            raceAnimal = raceTextField.getText();
 
-            if(sexeGroupeBouton.getSelection() == boutonFemelle) {
+            if(femelleRadioButton.isSelected()) {
                 sexeAnimal = "F";
             }
             else {
                 sexeAnimal = "M";
             }
-            if(steriliseGroupeBouton.getSelection() == boutonOuiSterilise){
+            if(steriliseRadioButton.isSelected()){
                 estSteriliseAnimal = true;
             }
             else {
                 estSteriliseAnimal = false;
             }
-            couleurDePeauAnimal = pelagePeau.getText();
-            dateNaissanceAnimal = dateNaissance.getDate();
-            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
-            localisationPuceAnimal = localisation.getText();
-            dateAttributionPuceAnimal = dateAttribution.getDate();
-            numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
 
-            if(estIncertainLocalisationTatouage.isSelected()){
-                localisationTatouageAnimal = null;
-            }
-            else{
-                localisationTatouageAnimal = localisationTatouage.getText();
-            }
+            couleurDePeauAnimal = couleurTextField.getText();
+            //dateNaissanceAnimal = spinnerDateNaissance.getDate();
+            numPuceAnimal = Integer.valueOf(numPuceTextField.getText());
+            localisationPuceAnimal = localisationPuceTextField.getText();
+            //dateAttributionPuceAnimal = spinnerDatePuce.getDate();
+            numTatouageAnimal = Integer.valueOf(numTatouageTextField.getText());
+            localisationTatouageAnimal = localisationTatouageTextField.getText();
 
-            poidsAnimal = Double.valueOf(poids.getText());
 
-            Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
-                    raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
-                    localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
-                    poidsAnimal, proprietaireAnimal);
+            poidsAnimal = Double.valueOf((Double) spinnerPoids.getValue());
 
-            controller.ajouterAnimal(animal);
+            //Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
+                    //raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
+                    //localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
+                    //poidsAnimal, proprietaireAnimal);
+
+            //controller.ajouterAnimal(animal);
         }
         catch (Exception exception){System.out.println(exception.getMessage());}
     }
