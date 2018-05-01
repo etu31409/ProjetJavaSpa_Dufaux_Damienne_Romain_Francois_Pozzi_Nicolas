@@ -1,3 +1,4 @@
+/*
 package viewPackage;
 
 import modelPackage.Animal;
@@ -81,3 +82,4 @@ public class tousLesAnimauxModele extends AbstractTableModel {
         }
     }
 }
+ */

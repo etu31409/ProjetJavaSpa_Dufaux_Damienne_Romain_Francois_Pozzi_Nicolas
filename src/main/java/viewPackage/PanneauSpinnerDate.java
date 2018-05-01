@@ -2,6 +2,7 @@ package viewPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,16 +10,15 @@ import java.util.GregorianCalendar;
 public class PanneauSpinnerDate extends JPanel
 {
     private JSpinner spinnerDate;
-    private SpinnerDateModel spinnerDateModel;
     private Calendar calendar;
 
     public PanneauSpinnerDate() {
         this.setLayout(new BorderLayout());
-        //Version avec un modelDate
+
+        SimpleDateFormat model = new SimpleDateFormat("dd/MM/yy");
+        spinnerDate = new JSpinner(new SpinnerDateModel());
+        spinnerDate.setEditor(new JSpinner.DateEditor(spinnerDate, model.toPattern()));
         calendar = Calendar.getInstance();
-        spinnerDateModel = new SpinnerDateModel();
-        spinnerDateModel.setValue(calendar.getTime());
-        spinnerDate = new JSpinner(spinnerDateModel);
         this.add(spinnerDate, BorderLayout.WEST);
     }
 

@@ -64,7 +64,7 @@ public class PanneauRechercheAnimaux {
         @Override
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == rechercherButton) {
-                String titrefacteur = "";
+                //String titrefacteur = "";
                 String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
                 try {
                     if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
@@ -74,7 +74,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("recherche pour le medicament " + veterinaireChoisi.getNom());
+                        titreFacteurRecherche.setText("Recherche pour le médicament " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
@@ -83,7 +83,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("recherche pour le veterinaire " + medicamentChoisi.getNomMedic());
+                        titreFacteurRecherche.setText("Recherche pour le vétérinaire " + medicamentChoisi.getNomMedic());
                     }
                     else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
@@ -93,12 +93,12 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("recherche pour pour le medicament " + medicamentChoisi.getNomMedic()
-                                + " et le veterinaire " + veterinaireChoisi.getPrenom()+  " " + veterinaireChoisi.getNom());
+                        titreFacteurRecherche.setText("Recherche pour pour le médicament " + medicamentChoisi.getNomMedic()
+                                + " et le vétérinaire " + veterinaireChoisi.getPrenom()+  " " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
                     {
-                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères!");
+                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères !");
                     }
                 }
                 catch (AnimalException e)
