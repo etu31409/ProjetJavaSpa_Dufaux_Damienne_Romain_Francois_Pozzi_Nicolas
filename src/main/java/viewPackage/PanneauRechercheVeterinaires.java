@@ -14,22 +14,16 @@ import java.util.GregorianCalendar;
 
 public class PanneauRechercheVeterinaires  extends JPanel {
     private Controller controller;
-    private JPanel panneauRecherche, panneauListe, panneauTitre;
-    private JLabel champTitre, vide;
-    private PanneauSpinnerDate dateDebutRech,dateFinRech;
-    private JButton rechercher;
-    private JCheckBox dateDebut, dateFin;
     private JTable resultatRecherche;
-    private JScrollPane jScrollPane;
     private GregorianCalendar dateDebutZoneRecherche, dateFinZoneRecherche;
-    private JCheckBox dateDeDébutCheckBox;
+    private JCheckBox dateDeDebutCheckBox;
     private JCheckBox dateDeFinCheckBox;
     private JPanel panneauContainerPrincipal;
-    private JSpinner dateDeDébutSpinner;
+    private JSpinner dateDeDebutSpinner;
     private JSpinner dateDeFinSpinner;
-    private JLabel titreFacteurRecherche;
     private JPanel panneauListeRecherche;
     private JButton rechercherButton;
+    private JScrollPane scrollPane;
 
 
     public PanneauRechercheVeterinaires(Controller controller){
@@ -42,9 +36,9 @@ public class PanneauRechercheVeterinaires  extends JPanel {
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1950");
 
-            dateDeDébutSpinner.setModel(new SpinnerDateModel());
-            dateDeDébutSpinner.setEditor(new JSpinner.DateEditor(dateDeDébutSpinner, "dd/MM/yyyy"));
-            dateDeDébutSpinner.setValue(date);
+            dateDeDebutSpinner.setModel(new SpinnerDateModel());
+            dateDeDebutSpinner.setEditor(new JSpinner.DateEditor(dateDeDebutSpinner, "dd/MM/yyyy"));
+            dateDeDebutSpinner.setValue(date);
 
             dateDeFinSpinner.setModel(new SpinnerDateModel());
             dateDeFinSpinner.setEditor(new JSpinner.DateEditor(dateDeFinSpinner, "dd/MM/yyyy"));
@@ -61,22 +55,21 @@ public class PanneauRechercheVeterinaires  extends JPanel {
 
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
-            if(jScrollPane != null)
-                panneauListe.remove(jScrollPane);
-            if(event.getSource() == rechercher){
+            if(event.getSource() == rechercherButton){
                 try {
-                    if(!dateDebut.isSelected()){
-                        dateDebutZoneRecherche = new GregorianCalendar(1700, 01, 01);
+                    dateDebutZoneRecherche = new GregorianCalendar();
+                    dateFinZoneRecherche = new GregorianCalendar();
+                    if(!dateDeDebutCheckBox.isSelected()){
+                        dateDebutZoneRecherche = new GregorianCalendar(1950, 01, 01);
                     }
                     else{
-                        dateDebutZoneRecherche = dateDebutRech.getDate();
+                        dateDebutZoneRecherche.setTime((Date)dateDeDebutSpinner.getValue());
                     }
-                    if(!dateFin.isSelected()){
-                        dateFinZoneRecherche = new GregorianCalendar();
+                    if(!dateDeFinCheckBox.isSelected()){
                         dateFinZoneRecherche.setTime(GregorianCalendar.getInstance().getTime());
                     }
                     else{
-                        dateFinZoneRecherche = dateFinRech.getDate();
+                        dateFinZoneRecherche.setTime((Date)dateDeFinSpinner.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
                         JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
@@ -87,9 +80,8 @@ public class PanneauRechercheVeterinaires  extends JPanel {
                             dateFinZoneRecherche);
                     String[] nomDesColonnes = {"Identifiant du vétérinaire", "Nom du vétérinaire", "Date de l'ordonnance"};
                     resultatRecherche = new JTable(selectionRecherche, nomDesColonnes);
-                    jScrollPane = new JScrollPane(resultatRecherche);
-                    panneauListe.add(jScrollPane);
-                    panneauListe.doLayout();
+                    resultatRecherche.setFillsViewportHeight(true);
+                    scrollPane.setViewportView(resultatRecherche);
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
