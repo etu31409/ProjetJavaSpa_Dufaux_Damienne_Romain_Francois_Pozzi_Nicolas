@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PanneauRechercheVeterinaires  extends JPanel {
@@ -20,48 +23,40 @@ public class PanneauRechercheVeterinaires  extends JPanel {
     private JTable resultatRecherche;
     private JScrollPane jScrollPane;
     private GregorianCalendar dateDebutZoneRecherche, dateFinZoneRecherche;
+    private JCheckBox dateDeDébutCheckBox;
+    private JCheckBox dateDeFinCheckBox;
+    private JPanel panneauContainerPrincipal;
+    private JSpinner dateDeDébutSpinner;
+    private JSpinner dateDeFinSpinner;
+    private JLabel titreFacteurRecherche;
+    private JPanel panneauListeRecherche;
+    private JButton rechercherButton;
 
 
     public PanneauRechercheVeterinaires(Controller controller){
         this.controller = controller;
-        this.setLayout(new BorderLayout());
-        panneauRecherche = new JPanel();
-        panneauListe = new JPanel();
-        panneauTitre = new JPanel();
+        rechercherButton.addActionListener(new RechercheListener());
+        instanciationSpinner();
+    }
 
-        this.add(panneauRecherche, BorderLayout.WEST);
-        this.add(panneauListe, BorderLayout.CENTER);
-        this.add(panneauTitre, BorderLayout.NORTH);
+    private void instanciationSpinner() {
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1950");
 
-        panneauRecherche.setLayout(new GridLayout(20, 2));
-        panneauListe.setLayout(new GridLayout(3, 1));
-        panneauTitre.setLayout(new GridLayout(1, 1));
+            dateDeDébutSpinner.setModel(new SpinnerDateModel());
+            dateDeDébutSpinner.setEditor(new JSpinner.DateEditor(dateDeDébutSpinner, "dd/MM/yyyy"));
+            dateDeDébutSpinner.setValue(date);
+            dateDeFinSpinner.setModel(new SpinnerDateModel());
+            dateDeFinSpinner.setEditor(new JSpinner.DateEditor(dateDeFinSpinner, "dd/MM/yyyy"));
+            dateDeFinSpinner.setValue(GregorianCalendar.getInstance().getTime());
 
-        vide = new JLabel("");
-        panneauListe.add(vide);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Erreur lors du découpage de la date!", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-        champTitre = new JLabel("<html><h1>Recherche des vétérinaires qui ont préscrit des ordonnances</h1></html>");
-        champTitre.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauTitre.add(champTitre);
-        panneauRecherche.add(vide);
-
-        dateDebut = new JCheckBox("Date début");
-        dateDebut.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauRecherche.add(dateDebut);
-
-        dateDebutRech = new PanneauSpinnerDate();
-        panneauRecherche.add(dateDebutRech);
-
-        dateFin = new JCheckBox("Date fin");
-        dateFin.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauRecherche.add(dateFin);
-
-        dateFinRech = new PanneauSpinnerDate();
-        panneauRecherche.add(dateFinRech);
-
-        rechercher = new JButton("Rechercher");
-        panneauRecherche.add(rechercher);
-        rechercher.addActionListener(new RechercheListener());
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class RechercheListener implements ActionListener {

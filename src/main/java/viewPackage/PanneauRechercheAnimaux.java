@@ -31,7 +31,7 @@ public class PanneauRechercheAnimaux {
     public PanneauRechercheAnimaux(Controller controller) {
         this.controller = controller;
         rechercherButton.addActionListener(new RechercheListener());
-        titreFacteurRecherche = new JLabel("Aucune recherche sélectionnée");
+        titreFacteurRecherche.setText("Aucune recherche sélectionnée");
 
         instanciationComboBox();
     }
@@ -74,6 +74,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
+                        titreFacteurRecherche.setText("recherche pour le medicament " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
@@ -82,6 +83,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
+                        titreFacteurRecherche.setText("recherche pour le veterinaire " + medicamentChoisi.getNomMedic());
                     }
                     else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
@@ -91,6 +93,8 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
+                        titreFacteurRecherche.setText("recherche pour pour le medicament " + medicamentChoisi.getNomMedic()
+                                + " et le veterinaire " + veterinaireChoisi.getPrenom()+  " " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
                     {
