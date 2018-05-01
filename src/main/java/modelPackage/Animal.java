@@ -28,7 +28,7 @@ public class Animal {
     public Animal(String nom, GregorianCalendar dateArrivee,
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
-                  GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
+                  GregorianCalendar dateAttributionPuce, Integer numTatouage, String localisationTatouage, Double poids,
                   Proprietaire proprietaire)  {
         setNom(nom);
         setDateArrivee(dateArrivee);
