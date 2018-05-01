@@ -51,7 +51,7 @@ public class FenetrePrincipale extends JFrame{
         recherches.setMnemonic('R');
         barMenu.add(recherches);
 
-        rechercheVeterinaires = new JMenuItem("Recherche Veterinaire");
+        rechercheVeterinaires = new JMenuItem("Recherche Vétérinaires");
         rechercheVeterinaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheVeterinaires);
 
@@ -59,7 +59,7 @@ public class FenetrePrincipale extends JFrame{
         rechercheAnimaux.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheAnimaux);
 
-        rechercheProprietaires = new JMenuItem("Recherche Propriétaire");
+        rechercheProprietaires = new JMenuItem("Recherche Propriétaires");
         rechercheProprietaires.addActionListener(new EcouteurBarMenu());
         recherches.add(rechercheProprietaires);
 
@@ -67,11 +67,11 @@ public class FenetrePrincipale extends JFrame{
         listing.setMnemonic('L');
         barMenu.add(listing);
 
-        listingFicheDeSoin = new JMenuItem("Lister fiches de soins");
+        listingFicheDeSoin = new JMenuItem("Listing fiches de soins");
         listing.add(listingFicheDeSoin);
         listingFicheDeSoin.addActionListener(new EcouteurBarMenu());
 
-        listingAnimaux = new JMenuItem("Lister tous les animaux");
+        listingAnimaux = new JMenuItem("Listing tous les animaux");
         listing.add(listingAnimaux);
         listingAnimaux.addActionListener(new EcouteurBarMenu());
 

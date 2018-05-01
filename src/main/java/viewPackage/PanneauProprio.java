@@ -20,6 +20,7 @@ public class PanneauProprio extends JPanel {
     public PanneauProprio(FenetreProprio fen){
         fenetreProprio = fen;
         this.setLayout(new BorderLayout());
+        //this.setBackground();
 
         panneauFormulaire = new JPanel();
         panneauBouton = new JPanel();
