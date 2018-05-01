@@ -3,10 +3,8 @@ package dataAcessPackage;
 import exceptionPackage.*;
 import modelPackage.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.*;
 
@@ -333,7 +331,8 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into animal values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+            /*sqlInstruction = "insert into animal values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, animal.getNom());
             preparedStatement.setDate(2, new java.sql.Date(animal.getDateArrivee().getTimeInMillis()));
@@ -351,7 +350,45 @@ public class DBDAOAnimal implements IAnimal {
             preparedStatement.setDouble(14, animal.getPoids());
             preparedStatement.setInt(15, animal.getProprietaire().getIdentifiantProprio());
 
-            data = preparedStatement.executeQuery();
+            data = preparedStatement.executeQuery();*/
+
+            sqlInstruction = "insert into animal(nom," +
+                    " dateArrivee," +
+                    " dateDepart," +
+                    " espece," +
+                    " race," +
+                    " sexe," +
+                    "estSterilise," +
+                    " couleurDePeau," +
+                    " dateNaissance," +
+                    " numPuce," +
+                    " localisationPuce," +
+                    " dateAttributionPuce," +
+                    " numTatouage," +
+                    " localisationTatouage," +
+                    " poids," +
+                    " identifiantProprio) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, animal.getNom());
+            java.sql.Date sqlDateAttivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
+            preparedStatement.setDate(2, sqlDateAttivee);
+            preparedStatement.setString(4, animal.getEspece());
+            preparedStatement.setString(5, animal.getRace());
+            preparedStatement.setString(6, animal.getSexe());
+            preparedStatement.setBoolean(7, animal.isEstSterilise());
+            java.sql.Date sqlDateNaissance = new java.sql.Date(animal.getDateNaissance().getTimeInMillis());
+            preparedStatement.setDate(8, sqlDateNaissance);
+            preparedStatement.setInt(9, animal.getNumPuce());
+            preparedStatement.setString(10, animal.getLocalisationPuce());
+            java.sql.Date sqlDateAttributionPuce = new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis());
+            preparedStatement.setDate(11, sqlDateAttributionPuce);
+            preparedStatement.setDouble(12, animal.getNumTatouage());
+            preparedStatement.setString(13, animal.getLocalisationTatouage());
+            preparedStatement.setDouble(14, animal.getPoids());
+            preparedStatement.setNull(15, Types.INTEGER);
+            preparedStatement.executeUpdate();
+            //preparedStatement.setInt(15, animal.getProprietaire());
 
         } catch (SQLException e) {
             throw new AnimalException("Erreur lors de l'insertion de l'animal !");
