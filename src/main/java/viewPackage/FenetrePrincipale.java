@@ -102,7 +102,7 @@ public class FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == nouvelAccueil){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauAccueil(controller));
+                frameContainer.add(new PanneauAccueil(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

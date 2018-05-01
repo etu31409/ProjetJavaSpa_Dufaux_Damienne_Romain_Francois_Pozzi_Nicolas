@@ -8,11 +8,12 @@ import modelPackage.Animal;
 import modelPackage.Proprietaire;
 
 import javax.swing.*;
+import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.GregorianCalendar;
 
-public class PanneauAccueil extends JPanel {
+public class PanneauAccueil {
     private Controller controller;
 
     private JPanel panneauFormulaire, panneauBoutons;
@@ -31,10 +32,37 @@ public class PanneauAccueil extends JPanel {
     private JTextArea remarque;
     private JScrollPane scroll;
     private FenetreProprio fenetreProprio;
+    private JPanel panneauContainerPrincipal;
+    private JTextField nomTextField;
+    private JTextField textField2;
+    private JSpinner spinner1;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JRadioButton femelleRadioButton;
+    private JRadioButton mâleRadioButton;
+    private JCheckBox àEuthanasierCheckBox;
+    private JSpinner spinner2;
+    private JTextField textField5;
+    private JRadioButton stériliséERadioButton;
+    private JRadioButton nonStériliséERadioButton;
+    private JSpinner spinner3;
+    private JTextField textField6;
+    private JTextField textField7;
+    private JTextField textField8;
+    private JSpinner spinner4;
+    private JTextField textField9;
+    private JTextField textField10;
+    private JSpinner spinner5;
+    private JComboBox comboBox1;
+    private JButton ajouterUnPropriétaireButton;
+    private JTextPane textPane1;
+    private JButton validerButton;
+    private JButton reinitialiserButton;
+    private JButton retourButton;
 
     public PanneauAccueil(Controller controller) {
         this.controller = controller;
-        this.setLayout(new BorderLayout());
+        /*this.setLayout(new BorderLayout());
         panneauFormulaire = new JPanel();
         panneauBoutons = new JPanel();
         this.add(panneauFormulaire, BorderLayout.CENTER);
@@ -204,7 +232,7 @@ public class PanneauAccueil extends JPanel {
         panneauBoutons.add(validation);
         validation.addActionListener(new EcouteurDeBouton());
         reinnitialiser = new JButton("Reinnitialiser");
-        panneauBoutons.add(reinnitialiser);
+        panneauBoutons.add(reinnitialiser);*/
     }
 
     public void instancieListeProprietaires() {
@@ -218,6 +246,10 @@ public class PanneauAccueil extends JPanel {
         } catch (SingletonConnectionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class EcouteurDeCheckBox implements ItemListener
@@ -245,7 +277,7 @@ public class PanneauAccueil extends JPanel {
         }
     }
 
-    private class EcouteurDeBouton implements ActionListener{
+    /*private class EcouteurDeBouton implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validation){
                 validationFormulaire();
@@ -257,7 +289,7 @@ public class PanneauAccueil extends JPanel {
                 PanneauAccueil.this.validate();
             }
         }
-    }
+    }*/
     public void validationFormulaire(){
        //validation numero de cellule
         Integer numeroCellule = 0;
@@ -270,7 +302,8 @@ public class PanneauAccueil extends JPanel {
         finally {
             if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
                 //JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
-                //mettre la case en rouge
+                //cellule.setHighlighter(new Highlighter());
+                // mettre la case en rouge(Color.RED);
             }
         }
 

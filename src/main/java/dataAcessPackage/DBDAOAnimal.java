@@ -354,7 +354,6 @@ public class DBDAOAnimal implements IAnimal {
 
             sqlInstruction = "insert into animal(nom," +
                     " dateArrivee," +
-                    " dateDepart," +
                     " espece," +
                     " race," +
                     " sexe," +
@@ -369,7 +368,9 @@ public class DBDAOAnimal implements IAnimal {
                     " poids," +
                     " identifiantProprio) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
             preparedStatement.setString(1, animal.getNom());
             java.sql.Date sqlDateAttivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
             preparedStatement.setDate(2, sqlDateAttivee);
