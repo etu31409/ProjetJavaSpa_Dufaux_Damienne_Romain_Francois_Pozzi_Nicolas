@@ -48,6 +48,7 @@
           </grid>
         </constraints>
         <properties>
+          <opaque value="false"/>
           <text value="Date de début"/>
         </properties>
       </component>
@@ -58,6 +59,7 @@
           </grid>
         </constraints>
         <properties>
+          <opaque value="false"/>
           <text value="Date de fin"/>
         </properties>
       </component>
