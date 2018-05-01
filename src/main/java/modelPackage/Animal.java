@@ -18,7 +18,7 @@ public class Animal {
     private Integer numPuce;
     private String localisationPuce;
     private GregorianCalendar dateAttributionPuce;
-    private Double numTatouage;
+    private Integer numTatouage;
     private String localisationTatouage;
     private Double poids;
     private Proprietaire proprietaire;
@@ -29,7 +29,7 @@ public class Animal {
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire)  throws AnimalException{
+                  Proprietaire proprietaire)  {
         setNom(nom);
         setDateArrivee(dateArrivee);
         setEspece(espece);
@@ -55,9 +55,7 @@ public class Animal {
         this.dateArrivee = dateArrivee;
     }
 
-    public void setEspece(String espece) throws AnimalException{
-        if(espece.isEmpty())
-            throw new AnimalException();
+    public void setEspece(String espece) {
         this.espece = espece;
     }
 
@@ -93,7 +91,7 @@ public class Animal {
         this.dateAttributionPuce = dateAttributionPuce;
     }
 
-    public void setNumTatouage(Double numTatouage) {
+    public void setNumTatouage(Integer numTatouage) {
         this.numTatouage = numTatouage;
     }
 
@@ -164,7 +162,7 @@ public class Animal {
         return dateAttributionPuce;
     }
 
-    public Double getNumTatouage() {
+    public Integer getNumTatouage() {
         return numTatouage;
     }
 

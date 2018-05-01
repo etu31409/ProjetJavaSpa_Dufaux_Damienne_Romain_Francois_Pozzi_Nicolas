@@ -14,17 +14,19 @@ import java.awt.event.ActionListener;
 public class PanneauRechercheProprietaires extends JPanel {
 
     private Controller controller;
-    private JPanel panneauRecherche, panneauListe, panneauRechercheContainer;
-    private JComboBox listeVeterinaire;
-    private JButton boutonRecherche;
-    private JLabel titreRechProprietaire, titreSelectionVeterinaire, titreResultat;
     private JTable resultatRecherche;
-    private JScrollPane jScrollpane;
+    private JComboBox veterinaireComboBox;
+    private JButton rechercheButton;
+    private JPanel panneauContainerPrincipal;
+    private JPanel panneauListeRecherche;
+    private JScrollPane scrollPane;
 
     public PanneauRechercheProprietaires(Controller controller) {
         this.controller = controller;
+        instancieListeVeterinaire();
+        rechercheButton.addActionListener(new rechercheListener());
 
-        this.setLayout(new BorderLayout());
+        /*this.setLayout(new BorderLayout());
         panneauRecherche = new JPanel();
         panneauListe = new JPanel();
         panneauRechercheContainer = new JPanel();
@@ -56,15 +58,15 @@ public class PanneauRechercheProprietaires extends JPanel {
 
         titreResultat = new JLabel("<html><h3>Resultat de la recherche</h3></html>");
         titreResultat.setVerticalAlignment(SwingConstants.TOP);
-        panneauListe.add(titreResultat);
+        panneauListe.add(titreResultat);*/
 
     }
 
     public void instancieListeVeterinaire() {
-        listeVeterinaire.removeAllItems();
+        veterinaireComboBox.removeAllItems();
         try {
             for (Veterinaire v : controller.getVeterinaires()){
-                listeVeterinaire.addItem(v);
+                veterinaireComboBox.addItem(v);
             }
         } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -73,21 +75,22 @@ public class PanneauRechercheProprietaires extends JPanel {
         }
     }
 
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
+    }
+
     private class rechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            if (event.getSource() == boutonRecherche) {
+            if (event.getSource() == rechercheButton) {
                 try {
-                    if (jScrollpane != null)
-                        panneauListe.remove(jScrollpane);
-                    Veterinaire selectionVeterinaire = (Veterinaire) listeVeterinaire.getSelectedItem();
+                    Veterinaire selectionVeterinaire = (Veterinaire) veterinaireComboBox.getSelectedItem();
                     String[][] resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
 
                     String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire",
                             "Nom du propriétaire"};
                     resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                    jScrollpane = new JScrollPane(resultatRecherche);
-                    panneauListe.add(jScrollpane);
-                    panneauListe.doLayout();
+                    resultatRecherche.setFillsViewportHeight(true);
+                    scrollPane.setViewportView(resultatRecherche);
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());

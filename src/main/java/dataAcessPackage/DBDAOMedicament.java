@@ -78,4 +78,18 @@ public class DBDAOMedicament implements IMedicament {
         }
 
     }
+
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "insert into animal values (?, ?, ?);";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
+        } catch (SQLException e) {
+            throw new MedicamentException("Erreur lors de l'insertion du médicament !");
+        }
+    }
 }
+

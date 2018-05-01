@@ -2,10 +2,7 @@ package controllerPackage;
 
 import businessPackage.Business;
 import exceptionPackage.*;
-import modelPackage.Animal;
-import modelPackage.Medicament;
-import modelPackage.Proprietaire;
-import modelPackage.Veterinaire;
+import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -58,4 +55,12 @@ public class Controller {
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         business.ajouterAnimal(animal);
     }
+
+    /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+        business.ajouterOrdonnance(ordonnance);
+    }
+
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
+        business.ajouterMedicament(medicament);
+    }*/
 }

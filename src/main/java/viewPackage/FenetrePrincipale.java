@@ -102,7 +102,7 @@ public class FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == nouvelAccueil){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauAccueil(controller));
+                frameContainer.add(new PanneauAccueil(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
@@ -135,7 +135,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheProprietaires) {
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauRechercheProprietaires(controller));
+                frameContainer.add(new PanneauRechercheProprietaires(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
