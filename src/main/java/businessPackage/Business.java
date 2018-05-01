@@ -2,10 +2,7 @@ package businessPackage;
 
 import dataAcessPackage.*;
 import exceptionPackage.*;
-import modelPackage.Animal;
-import modelPackage.Medicament;
-import modelPackage.Proprietaire;
-import modelPackage.Veterinaire;
+import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -15,9 +12,9 @@ public class Business {
     IMedicament daoMedicament;
     IProprietaire daoProprietaire;
     IVeterinaire daoVeterinaire;
+    IOrdonnance daoOrdonnance;
 
     public Business() {
-
         daoAnimal = new DBDAOAnimal();
         daoMedicament = new DBDAOMedicament();
         daoProprietaire = new DBDAOProprietaire();
@@ -66,5 +63,13 @@ public class Business {
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
         daoAnimal.ajouterAnimal(animal);
     }
+
+    /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+        daoOrdonnance.ajouterOrdonnance(ordonnance);
+    }
+
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
+        daoMedicament.ajouterMedicament(medicament);
+    }*/
     //tache metier
 }

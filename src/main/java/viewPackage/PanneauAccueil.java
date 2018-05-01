@@ -16,12 +16,12 @@ public class PanneauAccueil extends JPanel {
     private Controller controller;
 
     private JPanel panneauFormulaire, panneauBoutons;
-    private JLabel nomLabel, celluleLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel,
+    private JLabel nomLabel, celluleLabel, poidsLabel, aEuthanasierLabel, raisonEuthanasieLabel,
             dateArriveLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel,
             attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel,
             dateTatouageLabel, titreProprietaireLabel, remarqueLabel, localisationTatouageLabel;
     private JTextField localisationTatouage, nom, cellule, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
-    private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
+    private PanneauSpinnerDate dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
     private JButton  retour, validation, reinnitialiser;
     private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
     private ButtonGroup sexeGroupeBouton, steriliseGroupeBouton;
@@ -39,15 +39,9 @@ public class PanneauAccueil extends JPanel {
         panneauBoutons = new JPanel();
         this.add(panneauFormulaire, BorderLayout.CENTER);
         this.add(panneauBoutons, BorderLayout.SOUTH);
-        panneauFormulaire.setLayout(new GridLayout(15,4,5,5));
+        panneauFormulaire.setLayout(new GridLayout(15,3,5,5));
         scroll = new JScrollPane();
         this.add(scroll, BorderLayout.EAST);
-
-        dateRemplissageLabel = new JLabel("Date actuelle :");
-        dateRemplissageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panneauFormulaire.add(dateRemplissageLabel);
-        dateRemplissage = new PanneauSpinnerDate();
-        panneauFormulaire.add(dateRemplissage);
 
         nomLabel = new JLabel("Nom de l'animal :");
         nomLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -275,25 +269,31 @@ public class PanneauAccueil extends JPanel {
         }
         finally {
             if(cellule.getText().isEmpty() || cellule == null || numeroCellule < 1){
-                JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Numero de cellule incorrecte !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                //mettre la case en rouge
             }
         }
 
         //validation espece (ne peut pas etre null)
         if(espece.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Le champ ESPECE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Le champ ESPECE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //mettre la case en rouge
         }
         //valiation race (ne peut pas etre null)
         if(race.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Le champ RACE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Le champ RACE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //mettre la case en rouge
         }
         //validation sexe (ne peut pas etre null)
         if(!boutonFemelle.isSelected() || !boutonMale.isSelected()){
-            JOptionPane.showMessageDialog(null, "Vous devez choisir un sexe !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Vous devez choisir un sexe !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //mettre la case en rouge
         }
         //validation estSterilise (ne peut pas etre null)
         if(!boutonNonSterilise.isSelected() || !boutonOuiSterilise.isSelected()){
-            JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur",
+                    //JOptionPane.ERROR_MESSAGE);
+            //mettre la case en rouge
         }
         try{
             String nomAnimal;
@@ -301,13 +301,13 @@ public class PanneauAccueil extends JPanel {
             String especeAnimal;
             String raceAnimal;
             String sexeAnimal;
-            boolean estSteriliseAnimal;
+            Boolean estSteriliseAnimal;
             String couleurDePeauAnimal;
             GregorianCalendar dateNaissanceAnimal;
             Integer numPuceAnimal;
             String localisationPuceAnimal;
             GregorianCalendar dateAttributionPuceAnimal;
-            Double numTatouageAnimal;
+            Integer numTatouageAnimal;
             String localisationTatouageAnimal;
             Double poidsAnimal;
             Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
@@ -334,7 +334,7 @@ public class PanneauAccueil extends JPanel {
             numPuceAnimal = Integer.valueOf(numeroPuce.getText());
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
-            numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
+            numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
 
             if(estIncertainLocalisationTatouage.isSelected()){
                 localisationTatouageAnimal = null;

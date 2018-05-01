@@ -9,6 +9,10 @@ public class MedicamentException extends Exception  {
 
     }
 
+    public MedicamentException(String message){
+        this.message = message;
+    }
+
     public String getMessage()
     {
         return message;
