@@ -6,15 +6,15 @@ public class Medicament {
     private Integer identifiantMed;
     private GregorianCalendar datePreparation;
     private String stockage;
-    private String posologie;
+    private String dosage;
     private String nomMedic;
 
     public Medicament(){}
-    public Medicament(GregorianCalendar datePreparation, String stockage, String posologie,
+    public Medicament(GregorianCalendar datePreparation, String stockage, String dosage,
                       String nomMedic) {
         this.datePreparation = datePreparation;
         this.stockage = stockage;
-        this.posologie = posologie;
+        this.dosage = dosage;
         this.nomMedic = nomMedic;
     }
 
@@ -30,8 +30,8 @@ public class Medicament {
         return stockage;
     }
 
-    public String getPosologie() {
-        return posologie;
+    public String getDosage() {
+        return dosage;
     }
 
     public String getNomMedic() {
@@ -46,8 +46,8 @@ public class Medicament {
         this.stockage = stockage;
     }
 
-    public void setPosologie(String posologie) {
-        this.posologie = posologie;
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
     }
 
     public void setNomMedic(String nomMedic) {

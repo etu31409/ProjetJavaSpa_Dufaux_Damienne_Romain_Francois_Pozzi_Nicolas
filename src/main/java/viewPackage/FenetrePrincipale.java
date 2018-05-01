@@ -115,9 +115,12 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauListingFicheDeSoins());
+                PanneauChargement test = new PanneauChargement(new PanneauListingFicheDeSoins());
+                frameContainer.add(test);
+                //frameContainer.add(new PanneauListingFicheDeSoins());
                 frameContainer.repaint();
                 frameContainer.validate();
+                test.getG().run();
             }
             else if(event.getSource() == listingAnimaux){
                 frameContainer.removeAll();

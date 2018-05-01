@@ -37,7 +37,7 @@ public class DBDAOMedicament implements IMedicament {
                 datePreparation.setTime( data.getDate("datePreparation"));
                 medicament.setDatePreparation(datePreparation);
                 medicament.setStockage(data.getString("stockage"));
-                medicament.setPosologie(data.getString("posologie"));
+                medicament.setDosage(data.getString("dosage"));
                 medicament.setNomMedic(data.getString("nomMedic"));
                 tousLesMedicaments.add(medicament);
             }
@@ -68,7 +68,7 @@ public class DBDAOMedicament implements IMedicament {
                 datePreparation.setTime( data.getDate("datePreparation"));
                 medicament.setDatePreparation(datePreparation);
                 medicament.setStockage(data.getString("stockage"));
-                medicament.setPosologie(data.getString("posologie"));
+                medicament.setDosage(data.getString("dosage"));
                 medicament.setNomMedic(data.getString("nomMedic"));
             }
             return medicament;

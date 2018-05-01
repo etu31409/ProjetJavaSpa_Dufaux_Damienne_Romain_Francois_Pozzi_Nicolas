@@ -4,13 +4,13 @@ import javax.swing.*;
 
 public class GestionChargement {
     private JProgressBar barre;
-    private JFrame fen;
-    private PanneauFicheDeSoins panFicheSoins;
+    private JPanel panneauCharge, fen;
 
-    public GestionChargement(JProgressBar barre, PanneauFicheDeSoins panFicheSoins)
+    public GestionChargement(JProgressBar barre, JPanel panneauCharge, JPanel fen)
     {
+        this.barre = barre;
+        this.panneauCharge = panneauCharge;
         this.fen = fen;
-        this.panFicheSoins = panFicheSoins;
     }
 
     public void run()
@@ -20,18 +20,21 @@ public class GestionChargement {
             try
             {
                 String msg = "";
-                Thread.sleep(40);
-                if(i<70)msg += "Envoi des requêtes... ";
-                else msg = "Vérification... ";
+                Thread.sleep(20);
+
+                msg += "Traitement de la requête... ";
+
                 barre.setValue(i);
                 barre.setString(msg + i + " %");
+                panneauCharge.repaint();
+                panneauCharge.doLayout();
             }
             catch(InterruptedException e)
             {
                 e.printStackTrace();
             }
         }
-        panFicheSoins.setVisible(true);
+        panneauCharge.setVisible(true);
     }
 }
 

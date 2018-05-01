@@ -16,12 +16,13 @@ public class PanneauListingFicheDeSoins extends JPanel {
     private JComboBox listeNomsAnimaux, listeIdentifiantsAnimaux;
 
     public PanneauListingFicheDeSoins() {
+
         this.setLayout(new BorderLayout());
         panneauBoutons = new JPanel();
         panneauRecherche = new JPanel();
         this.add(panneauRecherche, BorderLayout.NORTH);
         this.add(panneauBoutons, BorderLayout.SOUTH);
-        //panneauRecherche.setLayout(new GridLayout(5, 2, 5, 5));
+
         panneauRecherche.setLayout(new FlowLayout());
 
         intituleLabel = new JLabel("<html><h1>Selectionner un animal :</h1></html>");

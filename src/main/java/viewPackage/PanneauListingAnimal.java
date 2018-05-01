@@ -7,12 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanneauListingAnimal extends JPanel {
-    private JPanel panneauRecherche;
-    private JPanel panneauBoutons;
+    private JPanel panneauRecherche, panneauBoutons;
+    private JProgressBar barreChargement;
     private JButton retour;
     private JLabel intituleLabel, videLabel;
 
     public PanneauListingAnimal() {
+        barreChargement = new JProgressBar();
+
         this.setLayout(new BorderLayout());
         panneauBoutons = new JPanel();
         panneauRecherche = new JPanel();
