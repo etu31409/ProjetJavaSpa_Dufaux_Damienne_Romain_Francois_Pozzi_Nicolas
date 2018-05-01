@@ -29,7 +29,7 @@ public class Animal {
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Double numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire)  {
+                  Proprietaire proprietaire)  throws AnimalException{
         setNom(nom);
         setDateArrivee(dateArrivee);
         setEspece(espece);
@@ -55,7 +55,9 @@ public class Animal {
         this.dateArrivee = dateArrivee;
     }
 
-    public void setEspece(String espece) {
+    public void setEspece(String espece) throws AnimalException{
+        if(espece.isEmpty())
+            throw new AnimalException();
         this.espece = espece;
     }
 

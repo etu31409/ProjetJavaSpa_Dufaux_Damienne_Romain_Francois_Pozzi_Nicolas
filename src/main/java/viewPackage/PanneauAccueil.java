@@ -153,7 +153,7 @@ public class PanneauAccueil extends JPanel {
         localisation = new JTextField();
         panneauFormulaire.add(localisation);
 
-        incertainLocalisationTatouageLabel = new JLabel("Incertain :");
+        incertainLocalisationTatouageLabel = new JLabel("Incertain de l'endroit du tatouage :");
         incertainLocalisationTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(incertainLocalisationTatouageLabel);
         estIncertainLocalisationTatouage = new JCheckBox();
@@ -177,7 +177,7 @@ public class PanneauAccueil extends JPanel {
         localisationTatouage = new JTextField();
         panneauFormulaire.add(localisationTatouage);
 
-        incertainDateTatouageLabel = new JLabel("Incertain :");
+        incertainDateTatouageLabel = new JLabel("Incertain de la date du tatouage :");
         incertainDateTatouageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panneauFormulaire.add(incertainDateTatouageLabel);
         estIncertainDateTatouage = new JCheckBox();
@@ -288,11 +288,12 @@ public class PanneauAccueil extends JPanel {
             JOptionPane.showMessageDialog(null, "Le champ RACE est obligatoire !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         //validation sexe (ne peut pas etre null)
-        if(!boutonFemelle.isSelected() || !boutonMale.isSelected()){
+        if(!boutonFemelle.isSelected() && !boutonMale.isSelected()){
             JOptionPane.showMessageDialog(null, "Vous devez choisir un sexe !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
+
         //validation estSterilise (ne peut pas etre null)
-        if(!boutonNonSterilise.isSelected() || !boutonOuiSterilise.isSelected()){
+        if(!boutonNonSterilise.isSelected() && !boutonOuiSterilise.isSelected()){
             JOptionPane.showMessageDialog(null, "Vous devez indiquer si l'animal est stérilisé !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         try{
@@ -310,8 +311,8 @@ public class PanneauAccueil extends JPanel {
             Double numTatouageAnimal;
             String localisationTatouageAnimal;
             Double poidsAnimal;
-            Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
-
+//            Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
+            Proprietaire proprietaireAnimal = (Proprietaire) proprietaires.getSelectedItem();
             nomAnimal = nom.getText();
             dateArriveeAnimal = dateArrive.getDate();
             especeAnimal = espece.getText();
@@ -323,7 +324,7 @@ public class PanneauAccueil extends JPanel {
             else {
                 sexeAnimal = "M";
             }
-            if(steriliseGroupeBouton.getSelection() == boutonOuiSterilise){
+            if(boutonOuiSterilise.isSelected()){
                 estSteriliseAnimal = true;
             }
             else {
@@ -331,10 +332,32 @@ public class PanneauAccueil extends JPanel {
             }
             couleurDePeauAnimal = pelagePeau.getText();
             dateNaissanceAnimal = dateNaissance.getDate();
-            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
+
+            try{
+                numPuceAnimal = Integer.valueOf(numeroPuce.getText());
+            }
+            catch (Exception error){
+                numPuceAnimal  = null;
+            }
+            finally {
+                if(numeroPuce.getText().isEmpty() || numeroPuce == null ||  Integer.valueOf(numeroPuce.getText()) < 0){
+                    JOptionPane.showMessageDialog(null, "Numéro de puce invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             localisationPuceAnimal = localisation.getText();
             dateAttributionPuceAnimal = dateAttribution.getDate();
-            numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
+
+            try{
+                numTatouageAnimal = Double.valueOf(numeroTatouage.getText());
+            }
+            catch (Exception error){
+                numTatouageAnimal = null;
+            }
+            finally {
+                if(numeroTatouage.getText().isEmpty() || numeroTatouage == null || Double.valueOf(numeroTatouage.getText()) < 0){
+                    JOptionPane.showMessageDialog(null, "Numéro de tatouage invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
             if(estIncertainLocalisationTatouage.isSelected()){
                 localisationTatouageAnimal = null;
@@ -344,7 +367,6 @@ public class PanneauAccueil extends JPanel {
             }
 
             poidsAnimal = Double.valueOf(poids.getText());
-
             Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
                     raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
                     localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
@@ -352,6 +374,10 @@ public class PanneauAccueil extends JPanel {
 
             controller.ajouterAnimal(animal);
         }
-        catch (Exception exception){System.out.println(exception.getMessage());}
+        catch(AnimalException e){JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);}
+        catch(SingletonConnectionException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        //catch (Exception exception){System.out.println(exception.getMessage());}
     }
 }
