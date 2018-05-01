@@ -331,69 +331,38 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-
-            /*sqlInstruction = "insert into animal values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setString(1, animal.getNom());
-            preparedStatement.setDate(2, new java.sql.Date(animal.getDateArrivee().getTimeInMillis()));
-            preparedStatement.setString(3, animal.getEspece());
-            preparedStatement.setString(4, animal.getRace());
-            preparedStatement.setString(5, animal.getSexe());
-            preparedStatement.setBoolean(6, animal.isEstSterilise());
-            preparedStatement.setString(7, animal.getCouleurDePeau());
-            preparedStatement.setDate(8, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
-            preparedStatement.setInt(9, animal.getNumPuce());
-            preparedStatement.setString(10, animal.getLocalisationPuce());
-            preparedStatement.setDate(11, new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
-            preparedStatement.setInt(12, animal.getNumTatouage());
-            preparedStatement.setString(13, animal.getLocalisationTatouage());
-            preparedStatement.setDouble(14, animal.getPoids());
-            preparedStatement.setInt(15, animal.getProprietaire().getIdentifiantProprio());
-
-            data = preparedStatement.executeQuery();*/
-
-            sqlInstruction = "insert into animal(nom," +
+            sqlInstruction = "insert into spabd.animal(numRegistre," +
                     " dateArrivee," +
                     " espece," +
                     " race," +
                     " sexe," +
                     "estSterilise," +
                     " couleurDePeau," +
-                    " dateNaissance," +
-                    " numPuce," +
-                    " localisationPuce," +
-                    " dateAttributionPuce," +
-                    " numTatouage," +
-                    " localisationTatouage," +
-                    " poids," +
-                    " identifiantProprio) " +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
+                    " poids)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-
-            preparedStatement.setString(1, animal.getNom());
+            preparedStatement.setNull(1, 0);
             java.sql.Date sqlDateAttivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
             preparedStatement.setDate(2, sqlDateAttivee);
-            preparedStatement.setString(4, animal.getEspece());
-            preparedStatement.setString(5, animal.getRace());
-            preparedStatement.setString(6, animal.getSexe());
-            preparedStatement.setBoolean(7, animal.isEstSterilise());
-            java.sql.Date sqlDateNaissance = new java.sql.Date(animal.getDateNaissance().getTimeInMillis());
-            preparedStatement.setDate(8, sqlDateNaissance);
-            preparedStatement.setInt(9, animal.getNumPuce());
-            preparedStatement.setString(10, animal.getLocalisationPuce());
-            java.sql.Date sqlDateAttributionPuce = new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis());
-            preparedStatement.setDate(11, sqlDateAttributionPuce);
-            preparedStatement.setDouble(12, animal.getNumTatouage());
-            preparedStatement.setString(13, animal.getLocalisationTatouage());
-            preparedStatement.setDouble(14, animal.getPoids());
-            preparedStatement.setNull(15, Types.INTEGER);
-            preparedStatement.executeUpdate();
-            //preparedStatement.setInt(15, animal.getProprietaire());
+            preparedStatement.setString(3, animal.getEspece());
+            preparedStatement.setString(4, animal.getRace());
+            preparedStatement.setString(5, animal.getSexe());
+            preparedStatement.setBoolean(6, animal.isEstSterilise());
+            preparedStatement.setString(7, animal.getCouleurDePeau());
+            preparedStatement.setDouble(8, animal.getPoids());
+            //facultatifs
 
+            preparedStatement.executeUpdate();
+            //colonnes facultatives (j'arrive pas à faire comme dans les slides (il faudrait récupérer l'identifiant courant pour cela...))
+           /* if(animal.getNom() != null){
+                sqlInstruction = "update animal set nom = ? where numRegistre =  'animal'";
+            }
+            */
         } catch (SQLException e) {
-            throw new AnimalException("Erreur lors de l'insertion de l'animal !");
+            //throw new AnimalException("Erreur lors de l'insertion de l'animal !");
+            System.out.println(e.getMessage());
         }
+       // catch (AnimalException exception){exception.getMessage();}
     }
 }
 

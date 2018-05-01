@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.GregorianCalendar;
 
-public class PanneauAccueil {
+public class PanneauAccueil extends JPanel {
     private Controller controller;
 
     private FenetreProprio fenetreProprio;
@@ -39,6 +39,22 @@ public class PanneauAccueil {
     private JComboBox comboBoxListeProprietaires;
 
 
+    private JPanel panneauFormulaire, panneauBoutons;
+    private JLabel nomLabel, celluleLabel, poidsLabel, dateRemplissageLabel, aEuthanasierLabel, raisonEuthanasieLabel,
+            dateArriveLabel, especeLabel, raceLabel, pelagePeauLabel, dateNaissanceLabel, numeroPuceLabel, localisationLabel,
+            attributionLabel, numeroTatouageLabel, incertainLocalisationTatouageLabel, incertainDateTatouageLabel,
+            dateTatouageLabel, titreProprietaireLabel, remarqueLabel, localisationTatouageLabel;
+    private JTextField localisationTatouage, nom, cellule, poids, raisonEuthanasie, espece, race, pelagePeau, numeroPuce, localisation, numeroTatouage;
+    private PanneauSpinnerDate dateRemplissage, dateEuthanasie, dateArrive, dateNaissance, dateAttribution, dateTatouage;
+    private JButton  retour, validation, reinnitialiser;
+    private JCheckBox aEuthanasier, estIncertainDateTatouage, estIncertainLocalisationTatouage;
+    private ButtonGroup sexeGroupeBouton, steriliseGroupeBouton;
+    private JRadioButton boutonMale, boutonFemelle, boutonOuiSterilise, boutonNonSterilise;
+    private JComboBox proprietaires;
+    private JButton ajoutProprio;
+    private JTextArea remarque;
+    private JScrollPane scroll;
+
     public PanneauAccueil(Controller controller) {
         this.controller = controller;
         raisonTextField.setEnabled(false);
@@ -55,7 +71,6 @@ public class PanneauAccueil {
         instanciationSpinnerDate(spinnerDatePuce);
         instanciationSpinnerDate(spinnerDateTatouage);
         instancieListeProprietaires();
-
     }
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
@@ -105,7 +120,6 @@ public class PanneauAccueil {
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
                 validationFormulaire();
-
             }
             if(e.getSource() == retourButton){
                 PanneauBienvenue panneauBienvenue = new PanneauBienvenue();
@@ -148,63 +162,81 @@ public class PanneauAccueil {
         if(!femelleRadioButton.isSelected() || !maleRadioButton.isSelected()){
 
         }
+
         //validation estSterilise (ne peut pas etre null)
         if(!steriliseRadioButton.isSelected() || !nonSteriliseRadioButton.isSelected()){
             //mettre la case en rouge
         }
-        try{
-            String nomAnimal;
-            GregorianCalendar dateArriveeAnimal;
-            String especeAnimal;
-            String raceAnimal;
-            String sexeAnimal;
-            Boolean estSteriliseAnimal;
-            String couleurDePeauAnimal;
-            GregorianCalendar dateNaissanceAnimal;
-            Integer numPuceAnimal;
-            String localisationPuceAnimal;
-            GregorianCalendar dateAttributionPuceAnimal;
-            Integer numTatouageAnimal;
-            String localisationTatouageAnimal;
-            Double poidsAnimal;
-            Proprietaire proprietaireAnimal = fenetreProprio.getProprietaire();
+        String nomAnimal;
+        GregorianCalendar dateArriveeAnimal;
+        String especeAnimal;
+        String raceAnimal;
+        String sexeAnimal;
+        boolean estSteriliseAnimal;
+        String couleurDePeauAnimal;
+        GregorianCalendar dateNaissanceAnimal;
+        Integer numPuceAnimal;
+        String localisationPuceAnimal;
+        GregorianCalendar dateAttributionPuceAnimal;
+        Integer numTatouageAnimal;
+        String localisationTatouageAnimal;
+        Double poidsAnimal;
 
-            nomAnimal = nomTextField.getText();
-            //dateArriveeAnimal = GregorianCalendar.getInstance().getTime();
-            especeAnimal = especeTextField.getText();
-            raceAnimal = raceTextField.getText();
+        nomAnimal = nomTextField.getText();
+        //dateArriveeAnimal = GregorianCalendar.getInstance().getTime();
+        especeAnimal = especeTextField.getText();
+        raceAnimal = raceTextField.getText();
 
-            if(femelleRadioButton.isSelected()) {
-                sexeAnimal = "F";
-            }
-            else {
-                sexeAnimal = "M";
-            }
-            if(steriliseRadioButton.isSelected()){
-                estSteriliseAnimal = true;
-            }
-            else {
-                estSteriliseAnimal = false;
-            }
+        Proprietaire proprietaireAnimal = (Proprietaire) proprietaires.getSelectedItem();
 
-            couleurDePeauAnimal = couleurTextField.getText();
-            //dateNaissanceAnimal = spinnerDateNaissance.getDate();
-            numPuceAnimal = Integer.valueOf(numPuceTextField.getText());
-            localisationPuceAnimal = localisationPuceTextField.getText();
-            //dateAttributionPuceAnimal = spinnerDatePuce.getDate();
-            numTatouageAnimal = Integer.valueOf(numTatouageTextField.getText());
-            localisationTatouageAnimal = localisationTatouageTextField.getText();
-
-
-            poidsAnimal = Double.valueOf((Double) spinnerPoids.getValue());
-
-            //Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
-                    //raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
-                    //localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
-                    //poidsAnimal, proprietaireAnimal);
-
-            //controller.ajouterAnimal(animal);
+        if(femelleRadioButton.isSelected()) {
+            sexeAnimal = "F";
         }
-        catch (Exception exception){System.out.println(exception.getMessage());}
+        else {
+            sexeAnimal = "M";
+        }
+        if(steriliseRadioButton.isSelected()){
+
+            estSteriliseAnimal = true;
+        }
+        else {
+            estSteriliseAnimal = false;
+        }
+        couleurDePeauAnimal = pelagePeau.getText();
+        dateNaissanceAnimal = dateNaissance.getDate();
+
+        try{
+            numPuceAnimal = Integer.valueOf(numeroPuce.getText());
+        }
+        catch (Exception error){
+            numPuceAnimal  = null;
+        }
+        finally {
+            if(numeroPuce.getText().isEmpty() || numeroPuce == null ||  Integer.valueOf(numeroPuce.getText()) < 0){
+                JOptionPane.showMessageDialog(null, "Numéro de puce invalide !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        localisationPuceAnimal = localisation.getText();
+        dateAttributionPuceAnimal = dateAttribution.getDate();
+
+
+        numTatouageAnimal = Integer.valueOf(numeroTatouage.getText());
+
+
+        couleurDePeauAnimal = couleurTextField.getText();
+        //dateNaissanceAnimal = spinnerDateNaissance.getDate();
+        numPuceAnimal = Integer.valueOf(numPuceTextField.getText());
+        localisationPuceAnimal = localisationPuceTextField.getText();
+        //dateAttributionPuceAnimal = spinnerDatePuce.getDate();
+        numTatouageAnimal = Integer.valueOf(numTatouageTextField.getText());
+        localisationTatouageAnimal = localisationTatouageTextField.getText();
+        poidsAnimal = Double.valueOf((Double) spinnerPoids.getValue());
+
+        //Animal animal = new Animal(nomAnimal, dateArriveeAnimal, especeAnimal,
+                //raceAnimal, sexeAnimal, estSteriliseAnimal, couleurDePeauAnimal, dateNaissanceAnimal, numPuceAnimal,
+                //localisationPuceAnimal, dateAttributionPuceAnimal, numTatouageAnimal, localisationTatouageAnimal,
+                //poidsAnimal, proprietaireAnimal);
+
+        //controller.ajouterAnimal(animal);
     }
 }
