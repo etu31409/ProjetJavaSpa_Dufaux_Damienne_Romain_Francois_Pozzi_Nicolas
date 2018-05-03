@@ -44,6 +44,7 @@ public class PanneauAccueil extends JPanel {
 
     public PanneauAccueil(Controller controller) {
         this.controller = controller;
+
         raisonTextField.setEnabled(false);
         raisonTextField.setBackground(Color.GRAY);
         aEuthanasierCheckBox.addActionListener(new EcouteurDeCheckBox());
@@ -108,19 +109,15 @@ public class PanneauAccueil extends JPanel {
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
                 validationFormulaire();
-
             }
             if(e.getSource() == retourButton){
 
-                PanneauBienvenue panneauBienvenue = new PanneauBienvenue();
-                panneauBienvenue.repaint();
             }
             if(e.getSource() == reinitialiserButton){
-                reinitialisation();
-                panneauContainerPrincipal = new PanneauAccueil(controller).getPanneauContainerPrincipal();
+
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
-                fenetreProprio = new FenetreProprio();
+
             }
         }
     }

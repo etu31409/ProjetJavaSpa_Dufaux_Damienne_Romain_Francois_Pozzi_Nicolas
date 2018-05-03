@@ -9,7 +9,6 @@ import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -57,14 +56,12 @@ public class PanneauRechercheAnimaux {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+    }
     }
 
     private class RechercheListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == rechercherButton) {
-                //String titrefacteur = "";
                 String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
                 try {
                     if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())

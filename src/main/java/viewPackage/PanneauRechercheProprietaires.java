@@ -25,41 +25,6 @@ public class PanneauRechercheProprietaires extends JPanel {
         this.controller = controller;
         instancieListeVeterinaire();
         rechercheButton.addActionListener(new rechercheListener());
-
-        /*this.setLayout(new BorderLayout());
-        panneauRecherche = new JPanel();
-        panneauListe = new JPanel();
-        panneauRechercheContainer = new JPanel();
-
-        panneauRechercheContainer.setLayout(new GridLayout(1, 2));
-        panneauRecherche.setLayout(new GridLayout(25, 1));
-        panneauListe.setLayout(new GridLayout(2, 1));
-
-        titreRechProprietaire = new JLabel("<html><h1>Recherche des propriétaire selon un vétérinaire</h1></html>");
-        titreRechProprietaire.setHorizontalAlignment(SwingConstants.CENTER);
-
-        this.add(titreRechProprietaire, BorderLayout.NORTH);
-        this.add(panneauRechercheContainer, BorderLayout.CENTER);
-
-        panneauRechercheContainer.add(panneauRecherche);
-        panneauRechercheContainer.add(panneauListe);
-
-        titreSelectionVeterinaire = new JLabel("<html><h3>Selection du vétérinaire</h3></html>");
-        titreSelectionVeterinaire.setHorizontalAlignment(SwingConstants.CENTER);
-        panneauRecherche.add(titreSelectionVeterinaire);
-
-        listeVeterinaire = new JComboBox();
-        instancieListeVeterinaire();
-        panneauRecherche.add(listeVeterinaire);
-
-        boutonRecherche = new JButton("Rechercher");
-        boutonRecherche.addActionListener(new rechercheListener());
-        panneauRecherche.add(boutonRecherche);
-
-        titreResultat = new JLabel("<html><h3>Resultat de la recherche</h3></html>");
-        titreResultat.setVerticalAlignment(SwingConstants.TOP);
-        panneauListe.add(titreResultat);*/
-
     }
 
     public void instancieListeVeterinaire() {

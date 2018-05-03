@@ -20,7 +20,6 @@ public class PanneauProprio extends JPanel {
     public PanneauProprio(FenetreProprio fen){
         fenetreProprio = fen;
         this.setLayout(new BorderLayout());
-        //this.setBackground();
 
         panneauFormulaire = new JPanel();
         panneauBouton = new JPanel();
@@ -78,7 +77,7 @@ public class PanneauProprio extends JPanel {
         }
         catch(ProprietaireException exception){System.out.println(exception.getMessage());}
     }
-    Proprietaire getProprietaire(){
+    public Proprietaire getProprietaire(){
         return proprietaire;
     }
 }

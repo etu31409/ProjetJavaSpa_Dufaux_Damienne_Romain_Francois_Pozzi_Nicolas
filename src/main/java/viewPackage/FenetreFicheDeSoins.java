@@ -10,15 +10,15 @@ public class FenetreFicheDeSoins extends JFrame {
 
     private Container frameContainer;
     private Controller controller;
-    private PanneauFicheDeSoins panneauFicheDeSoins;
+    private PanneauFicheDeSoin panneauFicheDeSoin;
 
     public FenetreFicheDeSoins() {
         super("Ajouter une nouvelle prescription");
         setBounds(300, 0, 300, 600);
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
-        panneauFicheDeSoins = new PanneauFicheDeSoins(this, controller);
-        frameContainer.add(panneauFicheDeSoins, BorderLayout.CENTER);
+        panneauFicheDeSoin = new PanneauFicheDeSoin(controller);
+        frameContainer.add(panneauFicheDeSoin, BorderLayout.CENTER);
         this.addWindowListener(new ClosingListener());
         setVisible(true);
     }

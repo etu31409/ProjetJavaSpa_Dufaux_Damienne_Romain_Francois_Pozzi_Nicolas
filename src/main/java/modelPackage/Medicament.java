@@ -4,15 +4,13 @@ import java.util.GregorianCalendar;
 
 public class Medicament {
     private Integer identifiantMed;
-    private GregorianCalendar datePreparation;
     private String stockage;
     private String dosage;
     private String nomMedic;
 
     public Medicament(){}
-    public Medicament(GregorianCalendar datePreparation, String stockage, String dosage,
+    public Medicament(String stockage, String dosage,
                       String nomMedic) {
-        this.datePreparation = datePreparation;
         this.stockage = stockage;
         this.dosage = dosage;
         this.nomMedic = nomMedic;
@@ -20,10 +18,6 @@ public class Medicament {
 
     public Integer getIdentifiantMed() {
         return identifiantMed;
-    }
-
-    public GregorianCalendar getDatePreparation() {
-        return datePreparation;
     }
 
     public String getStockage() {
@@ -36,10 +30,6 @@ public class Medicament {
 
     public String getNomMedic() {
         return nomMedic;
-    }
-
-    public void setDatePreparation(GregorianCalendar datePreparation) {
-        this.datePreparation = datePreparation;
     }
 
     public void setStockage(String stockage) {

@@ -6,7 +6,6 @@ public class MedicamentException extends Exception  {
     public MedicamentException(){
 
         message = "Erreur lors de la récuperation du médicament.";
-
     }
 
     public MedicamentException(String message){

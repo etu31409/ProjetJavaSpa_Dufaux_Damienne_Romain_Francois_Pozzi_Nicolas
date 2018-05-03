@@ -108,7 +108,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == nouvelleFicheDeSoins){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauFicheDeSoins(fenetreFicheDeSoins, controller));
+                frameContainer.add(new PanneauFicheDeSoin(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

@@ -34,8 +34,6 @@ public class DBDAOMedicament implements IMedicament {
                 GregorianCalendar datePreparation = new GregorianCalendar();
 
                 medicament.setIdentifiantMed(data.getInt("identifiantMed"));
-                datePreparation.setTime( data.getDate("datePreparation"));
-                medicament.setDatePreparation(datePreparation);
                 medicament.setStockage(data.getString("stockage"));
                 medicament.setDosage(data.getString("dosage"));
                 medicament.setNomMedic(data.getString("nomMedic"));
@@ -65,8 +63,6 @@ public class DBDAOMedicament implements IMedicament {
 
             while (data.next()) {
                 medicament.setIdentifiantMed(data.getInt("identifiantMed"));
-                datePreparation.setTime( data.getDate("datePreparation"));
-                medicament.setDatePreparation(datePreparation);
                 medicament.setStockage(data.getString("stockage"));
                 medicament.setDosage(data.getString("dosage"));
                 medicament.setNomMedic(data.getString("nomMedic"));
