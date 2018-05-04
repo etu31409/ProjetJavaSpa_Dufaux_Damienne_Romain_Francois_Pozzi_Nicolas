@@ -91,8 +91,7 @@ public class  FenetrePrincipale extends JFrame{
         setVisible(true);
     }
 
-    public void accueil()
-    {
+    public void accueil(){
         frameContainer.removeAll();
         frameContainer.setLayout(new FlowLayout());
         panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
@@ -101,8 +100,6 @@ public class  FenetrePrincipale extends JFrame{
         frameContainer.repaint();
         FenetrePrincipale.this.setVisible(true);
     }
-
-
 
     private class ExitListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
@@ -127,12 +124,12 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();
-                PanneauChargement test = new PanneauChargement(new PanneauListingFicheDeSoins());
-                frameContainer.add(test);
-                //frameContainer.add(new PanneauListingFicheDeSoins());
+                //PanneauChargement test = new PanneauChargement(new PanneauListingFicheDeSoins());
+                //frameContainer.add(test);
+                frameContainer.add(new PanneauListingFichesDeSoin(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-                test.getG().run();
+                //test.getG().run();
             }
             else if(event.getSource() == listingAnimaux){
                 frameContainer.removeAll();

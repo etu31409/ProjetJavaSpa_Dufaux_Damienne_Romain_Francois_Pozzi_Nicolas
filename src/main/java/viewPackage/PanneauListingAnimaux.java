@@ -20,6 +20,7 @@ public class PanneauListingAnimaux extends JPanel {
 
     public PanneauListingAnimaux(Controller controller){
         this.controller = controller;
+        buttonTri.addActionListener(new EcouteurBouton());
         instanciationComboBox();
     }
 
@@ -29,14 +30,16 @@ public class PanneauListingAnimaux extends JPanel {
 
     private void instanciationComboBox() {
         comboBoxTriAnimaux.removeAllItems();
-        try {
-            for (Animal v : controller.getAnimaux()) {
-                comboBoxTriAnimaux.addItem(v);
+        String[] listeCritères = {"Numéro de registre", "Nom", "Date d'arrivée", "Espèce", "Race", "Date de naissance",
+                "Poids"};
+        comboBoxTriAnimaux = new JComboBox(listeCritères);
+    }
+
+    private class EcouteurBouton implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == buttonTri){
+
             }
-        } catch (AnimalException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 }
