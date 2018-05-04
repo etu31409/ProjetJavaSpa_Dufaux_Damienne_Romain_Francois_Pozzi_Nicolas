@@ -13,8 +13,8 @@
     <rowspec value="top:5dlu:noGrow"/>
     <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:5dlu:noGrow"/>
-    <rowspec value="center:32px:noGrow"/>
-    <colspec value="fill:71dlu:grow"/>
+    <rowspec value="center:28px:noGrow"/>
+    <colspec value="fill:36dlu:grow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:5dlu:noGrow"/>
@@ -22,7 +22,7 @@
     <colspec value="left:5dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="344" height="249"/>
+      <xy x="20" y="20" width="288" height="245"/>
     </constraints>
     <properties>
       <background color="-4793107"/>
@@ -47,6 +47,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
+          <font size="14"/>
           <text value="Nom :"/>
         </properties>
       </component>
@@ -56,6 +57,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
+          <font size="14"/>
           <text value="Prénom :"/>
         </properties>
       </component>
