@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class PanneauRechercheVeterinaires  extends JPanel {
+public class PanneauRechercheVeterinaires{
     private Controller controller;
     private JTable resultatRecherche;
     private GregorianCalendar dateDebutZoneRecherche, dateFinZoneRecherche;

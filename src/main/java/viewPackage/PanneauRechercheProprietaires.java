@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanneauRechercheProprietaires extends JPanel {
+public class PanneauRechercheProprietaires{
 
     private Controller controller;
     private JTable resultatRecherche;
@@ -54,6 +54,7 @@ public class PanneauRechercheProprietaires extends JPanel {
                     String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire",
                             "Nom du propriétaire"};
                     resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
+                    resultatRecherche.setRowSelectionAllowed(false);
                     resultatRecherche.setFillsViewportHeight(true);
                     scrollPane.setViewportView(resultatRecherche);
                 }
