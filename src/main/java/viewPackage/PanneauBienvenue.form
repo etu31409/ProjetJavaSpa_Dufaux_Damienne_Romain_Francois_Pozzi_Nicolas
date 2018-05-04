@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="viewPackage.PanneauBienvenue">
-<<<<<<< HEAD
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
-=======
   <grid id="27dc6" binding="panneauContainerPrincipal" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
     <colspec value="fill:d:grow"/>
->>>>>>> 982d219509e46b6777aa6c5e7103e18e91640189
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties>
-      <background color="-4793107"/>
-    </properties>
+    <properties/>
     <border type="none"/>
-<<<<<<< HEAD
-    <children/>
-=======
     <children>
       <component id="91eba" class="javax.swing.JLabel">
         <constraints>
@@ -28,6 +19,5 @@
         </properties>
       </component>
     </children>
->>>>>>> 982d219509e46b6777aa6c5e7103e18e91640189
   </grid>
 </form>

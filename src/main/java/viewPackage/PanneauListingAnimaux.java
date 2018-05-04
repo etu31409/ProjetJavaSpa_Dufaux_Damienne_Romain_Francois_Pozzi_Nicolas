@@ -14,18 +14,17 @@ import java.awt.event.ActionListener;
 public class PanneauListingAnimaux extends JPanel {
     private Controller controller;
 
-    private JPanel panneauRecherche, panneauBoutons;
-    private JButton retour;
-    private JLabel intituleLabel, videLabel;
     private JPanel panneauContainerPrincipal;
     private JComboBox comboBoxTriAnimaux;
-    private JTable tableListingAnimaux;
+    private JButton buttonTri;
 
     public PanneauListingAnimaux(Controller controller){
         this.controller = controller;
         instanciationComboBox();
+    }
 
-
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private void instanciationComboBox() {
@@ -40,5 +39,4 @@ public class PanneauListingAnimaux extends JPanel {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
 }
