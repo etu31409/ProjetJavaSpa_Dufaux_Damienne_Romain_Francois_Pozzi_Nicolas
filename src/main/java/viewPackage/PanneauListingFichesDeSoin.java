@@ -25,9 +25,10 @@ public class PanneauListingFichesDeSoin extends JPanel {
 
     private void instanciationComboBox() {
         comboBoxListingFiches.removeAllItems();
-        String[] listeCritères = {"Numero de soin", "Numero de registre de l'animal", "Date du soin", "Heure du soin",
-            "Identifiant du vétérinaire responsable"};
-        comboBoxListingFiches = new JComboBox(listeCritères);
+        String[] listeCritères = {"Date du soin", "Heure du soin", "Identifiant du vétérinaire",
+                "Numéro de registre de l'animal", "Numéro de soin"};
+        for(int i = 0; i < listeCritères.length; ++i)
+            comboBoxListingFiches.addItem(listeCritères[i]);
     }
 
     private class EcouteurBouton implements ActionListener {

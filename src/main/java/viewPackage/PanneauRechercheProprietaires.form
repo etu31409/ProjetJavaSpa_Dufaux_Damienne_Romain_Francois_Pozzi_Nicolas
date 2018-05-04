@@ -61,6 +61,7 @@
           </grid>
         </constraints>
         <properties>
+          <background color="-2565928"/>
           <text value="Recherche"/>
         </properties>
       </component>
