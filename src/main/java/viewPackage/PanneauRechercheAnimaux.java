@@ -56,7 +56,7 @@ public class PanneauRechercheAnimaux {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-    }
+        }
     }
 
     private class RechercheListener implements ActionListener {
