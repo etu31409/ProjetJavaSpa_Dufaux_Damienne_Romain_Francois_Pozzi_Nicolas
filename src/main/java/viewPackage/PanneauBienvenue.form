@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="viewPackage.PanneauBienvenue">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
+  <grid id="27dc6" binding="panneauContainerPrincipal" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
@@ -11,11 +11,11 @@
     <children>
       <component id="91eba" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <text value="COUCOU BIENVENEW"/>
         </properties>
       </component>
     </children>

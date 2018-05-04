@@ -42,7 +42,10 @@ public class PanneauAccueil extends JPanel {
     private JCheckBox aEuthanasierCheckBox;
     private JComboBox comboBoxListeProprietaires;
 
-    public PanneauAccueil(Controller controller) {
+    private FenetrePrincipale fenetre;
+
+    public PanneauAccueil(Controller controller, FenetrePrincipale fenetre) {
+        this.fenetre = fenetre;
         this.controller = controller;
 
         raisonTextField.setEnabled(false);
@@ -111,10 +114,28 @@ public class PanneauAccueil extends JPanel {
                 validationFormulaire();
             }
             if(e.getSource() == retourButton){
-
+                fenetre.accueil();
             }
             if(e.getSource() == reinitialiserButton){
-
+                instanciationSpinnerPoids();
+                instanciationSpinnerDate(spinnerDateEuthanasie);
+                instanciationSpinnerDate(spinnerDateNaissance);
+                instanciationSpinnerDate(spinnerDatePuce);
+                instanciationSpinnerDate(spinnerDateTatouage);
+                instancieListeProprietaires();
+                aEuthanasierCheckBox.setSelected(false);
+                raisonTextField.setText("");
+                raisonTextField.setEnabled(false);
+                raisonTextField.setBackground(Color.GRAY);
+                nomTextField.setText("");
+                numCelluleTextField.setText("");
+                especeTextField.setText("");
+                raceTextField.setText("");
+                numTatouageTextField.setText("");
+                localisationTatouageTextField.setText("");
+                couleurTextField.setText("");
+                numPuceTextField.setText("");
+                localisationPuceTextField.setText("");
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
                 fenetreProprio = new FenetreProprio();
