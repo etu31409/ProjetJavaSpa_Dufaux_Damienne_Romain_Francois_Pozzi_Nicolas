@@ -7,7 +7,7 @@ import modelPackage.Medicament;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class PanneauMedicament extends JPanel {
+public class PanneauMedicament{
 
     private FenetreMedicament fenetreMedicament;
     private Controller controller;

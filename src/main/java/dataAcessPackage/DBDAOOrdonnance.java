@@ -29,7 +29,6 @@ public class DBDAOOrdonnance implements IOrdonnance{
             data = statement.executeQuery();
 
             ArrayList<Ordonnance> toutesLesOrdonnances = new ArrayList<Ordonnance>();
-            GregorianCalendar dateOrdonnance = new GregorianCalendar();
 
             while (data.next()) {
                 Ordonnance ordonnance = new Ordonnance();
@@ -39,9 +38,6 @@ public class DBDAOOrdonnance implements IOrdonnance{
                 ordonnance.setAnimal(animal.getUnAnimal(data.getInt("numRegistre")));
                 IMedicament medicament = new DBDAOMedicament();
                 ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")));
-
-                dateOrdonnance.setTime(data.getDate("dateOrdonnance"));
-                ordonnance.setDateOrdonnance(dateOrdonnance);
 
                 toutesLesOrdonnances.add(ordonnance);
             }

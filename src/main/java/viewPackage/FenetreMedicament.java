@@ -12,16 +12,18 @@ import java.awt.event.WindowEvent;
 public class FenetreMedicament extends JFrame {
     private Controller controller;
     private Container frameContainer ;
-    private PanneauMedicament panneauMedicament;
-    private Medicament medicament;
+    private JPanel panneauMedicament;
 
     public FenetreMedicament(){
         super("Ajout d'un médicament");
-        setBounds(500, 100, 300, 400);
+        setBounds(500, 100, 330, 372);
         panneauMedicament = new PanneauMedicament(controller).getPanneauContainerMedicament();
-        /*frameContainer = getContentPane();
+        frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
-        frameContainer.add(panneauMedicament, BorderLayout.CENTER);*/
+        frameContainer.add(panneauMedicament, BorderLayout.CENTER);
+        frameContainer.repaint();
+        frameContainer.validate();
+
         this.addWindowListener(new ClosingListener());
         setVisible(true);
     }
@@ -29,8 +31,5 @@ public class FenetreMedicament extends JFrame {
         public void windowClosing(WindowEvent e) {
             dispose();
         }
-    }
-    Medicament getMedicament(){
-        return panneauMedicament.getMedicament();
     }
 }

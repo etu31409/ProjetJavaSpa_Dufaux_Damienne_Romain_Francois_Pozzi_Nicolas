@@ -31,7 +31,6 @@ public class DBDAOMedicament implements IMedicament {
             ArrayList<Medicament> tousLesMedicaments = new ArrayList<Medicament>();
             while (data.next()) {
                 Medicament medicament = new Medicament();
-                GregorianCalendar datePreparation = new GregorianCalendar();
 
                 medicament.setIdentifiantMed(data.getInt("identifiantMed"));
                 medicament.setStockage(data.getString("stockage"));
