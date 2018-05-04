@@ -26,7 +26,7 @@ public class FenetrePrincipale extends JFrame{
         barMenu = new JMenuBar();
         setJMenuBar(barMenu);
 
-        acceuil = new JMenu("Acceuil");
+        acceuil = new JMenu("Accueil");
         acceuil.setMnemonic('A');
         barMenu.add(acceuil);
 
