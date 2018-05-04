@@ -5,23 +5,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class FenetrePrincipale extends JFrame{
+public class  FenetrePrincipale extends JFrame{
     private Controller controller;
     private Container frameContainer;
     private JMenuBar barMenu;
     private JMenu acceuil, recherches, soins, listing, supprimer;
     private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, quitter, supprimerFicheDeSoin,
             supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
-    private PanneauBienvenue panneauBienvenue;
+    private JPanel panneauBienvenue;
     private FenetreFicheDeSoins fenetreFicheDeSoins;
 
-    public FenetrePrincipale(){
+    public  FenetrePrincipale(){
         super("S.P.A, Société Protectrice des Animaux");
         setBounds(100, 0, 1200, 750);
         this.addWindowListener( new WindowAdapter() { public void windowClosing(WindowEvent e) { System.exit(0); } } );
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
-        panneauBienvenue = new PanneauBienvenue();
+        panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
         frameContainer.add(panneauBienvenue, BorderLayout.CENTER);
         barMenu = new JMenuBar();
         setJMenuBar(barMenu);
@@ -91,6 +91,19 @@ public class FenetrePrincipale extends JFrame{
         setVisible(true);
     }
 
+    public void accueil()
+    {
+        frameContainer.removeAll();
+        frameContainer.setLayout(new FlowLayout());
+        panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
+        panneauBienvenue.setVisible(true);
+        frameContainer.add(panneauBienvenue);
+        frameContainer.repaint();
+        FenetrePrincipale.this.setVisible(true);
+    }
+
+
+
     private class ExitListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             System.exit(0);
@@ -102,7 +115,7 @@ public class FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == nouvelAccueil){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauAccueil(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauAccueil(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
@@ -129,7 +142,7 @@ public class FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheVeterinaires) {
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauRechercheVeterinaires(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauRechercheVeterinaires(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
