@@ -117,7 +117,7 @@ public class PanneauAccueil extends JPanel {
 
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
-
+                fenetreProprio = new FenetreProprio();
             }
         }
     }

@@ -13,7 +13,7 @@ public class PanneauMedicament{
     private Controller controller;
     private Medicament medicament;
 
-    private JPanel panneauContainerMedicament;
+    private JPanel panneauContainerPrincipal;
 
     private JButton buttonAnnuler;
     private JButton buttonValider;
@@ -27,8 +27,8 @@ public class PanneauMedicament{
         buttonValider.addActionListener(new ButtonListener());
     }
 
-    public JPanel getPanneauContainerMedicament() {
-        return panneauContainerMedicament;
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class ButtonListener implements ActionListener {

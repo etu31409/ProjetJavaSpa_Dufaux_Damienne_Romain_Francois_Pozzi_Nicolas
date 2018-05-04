@@ -1,7 +1,6 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import modelPackage.Medicament;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +16,7 @@ public class FenetreMedicament extends JFrame {
     public FenetreMedicament(){
         super("Ajout d'un médicament");
         setBounds(500, 100, 330, 372);
-        panneauMedicament = new PanneauMedicament(controller).getPanneauContainerMedicament();
+        panneauMedicament = new PanneauMedicament(controller).getPanneauContainerPrincipal();
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
         frameContainer.add(panneauMedicament, BorderLayout.CENTER);

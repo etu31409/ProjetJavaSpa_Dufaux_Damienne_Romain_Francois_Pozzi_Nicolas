@@ -1,5 +1,6 @@
 package viewPackage;
 
+import controllerPackage.Controller;
 import modelPackage.Proprietaire;
 
 import javax.swing.*;
@@ -8,13 +9,14 @@ import java.awt.event.*;
 
 public class FenetreProprio extends JFrame {
     private Container frameContainer ;
-    private PanneauProprio panneauProprio;
+    private Controller controller;
+    private JPanel panneauProprio;
     private Proprietaire proprietaire;
 
     public FenetreProprio(){
         super("Ajout d'un propriétaire");
-        setBounds(500, 100, 300, 200);
-        panneauProprio = new PanneauProprio(this);
+        setBounds(500, 100, 400, 472);
+        panneauProprio = new PanneauProprio(controller).getPanneauContainerPrincipal();
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
         frameContainer.add(panneauProprio, BorderLayout.CENTER);
@@ -28,7 +30,4 @@ public class FenetreProprio extends JFrame {
         }
     }
 
-    Proprietaire getProprietaire(){
-        return panneauProprio.getProprietaire();
-    }
 }
