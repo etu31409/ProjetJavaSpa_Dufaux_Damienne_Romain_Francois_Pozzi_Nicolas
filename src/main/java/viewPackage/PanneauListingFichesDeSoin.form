@@ -47,9 +47,9 @@
           <text value="Listing de toutes les fiches de soin"/>
         </properties>
       </component>
-      <scrollpane id="1a47c">
+      <scrollpane id="1a47c" binding="listingScrollPane">
         <constraints>
-         <grid row="8" column="1" row-span="1" col-span="8" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="8" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>

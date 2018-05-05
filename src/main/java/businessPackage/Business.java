@@ -12,6 +12,7 @@ public class Business {
     IMedicament daoMedicament;
     IProprietaire daoProprietaire;
     IVeterinaire daoVeterinaire;
+    ISoinAvance daoSoinAvance;
     IOrdonnance daoOrdonnance;
 
     public Business() {
@@ -19,6 +20,7 @@ public class Business {
         daoMedicament = new DBDAOMedicament();
         daoProprietaire = new DBDAOProprietaire();
         daoVeterinaire = new DBDAOVeterinaire();
+        daoSoinAvance = new DBDAOSoinAvance();
     }
 
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
@@ -60,8 +62,13 @@ public class Business {
             SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
+
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
         daoAnimal.ajouterAnimal(animal);
+    }
+
+    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+        return daoSoinAvance.getSoinsTries(critere);
     }
 
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
