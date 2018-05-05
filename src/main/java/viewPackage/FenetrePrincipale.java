@@ -13,7 +13,6 @@ public class  FenetrePrincipale extends JFrame{
     private JMenuItem nouvelAccueil, nouvelleFicheDeSoins, quitter, supprimerFicheDeSoin,
             supprimerAnimale, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires, rechercheProprietaires, rechercheAnimaux;
     private JPanel panneauBienvenue;
-    private FenetreFicheDeSoins fenetreFicheDeSoins;
 
     public  FenetrePrincipale(){
         super("S.P.A, Société Protectrice des Animaux");
@@ -93,10 +92,10 @@ public class  FenetrePrincipale extends JFrame{
 
     public void accueil(){
         frameContainer.removeAll();
-        frameContainer.setLayout(new FlowLayout());
+        frameContainer.setLayout(new BorderLayout());
         panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
-        panneauBienvenue.setVisible(true);
-        frameContainer.add(panneauBienvenue);
+        panneauBienvenue.setVisible(true);;
+        frameContainer.add(panneauBienvenue, BorderLayout.CENTER);
         frameContainer.repaint();
         FenetrePrincipale.this.setVisible(true);
     }
@@ -118,18 +117,15 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == nouvelleFicheDeSoins){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauFicheDeSoin(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauFicheDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();
-                //PanneauChargement test = new PanneauChargement(new PanneauListingFicheDeSoins());
-                //frameContainer.add(test);
                 frameContainer.add(new PanneauListingFichesDeSoin(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-                //test.getG().run();
             }
             else if(event.getSource() == listingAnimaux){
                 frameContainer.removeAll();

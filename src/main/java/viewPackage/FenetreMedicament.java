@@ -31,4 +31,9 @@ public class FenetreMedicament extends JFrame {
             dispose();
         }
     }
+
+    public void fermerFenetre(){
+
+    }
+
 }

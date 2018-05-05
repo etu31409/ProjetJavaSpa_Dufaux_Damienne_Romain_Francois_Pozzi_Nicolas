@@ -2,35 +2,43 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
+import exceptionPackage.MedicamentException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Animal;
+import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PanneauFicheDeSoin extends JPanel {
     private final Controller controller;
-    private FenetreFicheDeSoins fenetreFicheDeSoins;
     private FenetreMedicament fenetreMedicament;
+    private FenetrePrincipale fenetre;
+    private ArrayList<Medicament> medicamentsArrayList;
+    private DefaultListModel medicamentsDisposModele, medicamentsChoisisModele;
 
-    private JTextArea remarque;
     private JPanel panneauContainerPrincipal;
     private JCheckBox urgenceCheckBox;
     private JComboBox comboBoxAnimaux, comboBoxVeterinaires;
     private JTextArea textAreaIntituleSoin, textAreaPartieDuCorps, textAreaRemarque;
     private JList listMedicamentsDispos, listMdicamentsChoisis;
     private JButton ajouterButton, retirerButton, ajouterUnMédicamentButton, validerButton, réinitialiserButton, retourButton;
+    private JPanel listeMedicamentsDisposJPanel;
+    private JPanel listeMedicamentsChoisisJPanel;
+    private JScrollPane listeMedicamentsChoisisJScrollPane, listeMedicamentsDisposJScrollPane;
 
 
-    public PanneauFicheDeSoin(Controller controller) {
+    public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre) {
+        this.fenetre = fenetre;
         this.controller = controller;
 
         instancieListeAnimaux();
         instancieListeVeterinaire();
+        instancieListeMedicamentsDispos();
 
         ajouterButton.addActionListener(new EcouteurBouton());
         retirerButton.addActionListener(new EcouteurBouton());
@@ -71,25 +79,62 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    private class EcouteurBouton implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == ajouterButton){
+    public void instancieListeMedicamentsDispos() {
+        try {
+
+            medicamentsArrayList = controller.getMedicaments();
+            medicamentsDisposModele = new DefaultListModel();
+            for (Medicament medicament: medicamentsArrayList) {
+                medicamentsDisposModele.addElement(medicament);
+            }
+            listMedicamentsDispos = new JList(medicamentsDisposModele);
+            listeMedicamentsDisposJScrollPane.setViewportView(listMedicamentsDispos);
+
+            medicamentsChoisisModele = new DefaultListModel();
+            listMdicamentsChoisis = new JList(medicamentsChoisisModele);
+            listeMedicamentsChoisisJScrollPane.setViewportView(listMdicamentsChoisis);
+
+        } catch (MedicamentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    private class EcouteurBouton implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == ajouterButton) {
+                Medicament elementSelectionne = (Medicament) listMedicamentsDispos.getSelectedValue();
+                medicamentsDisposModele.removeElement(elementSelectionne);
+                medicamentsChoisisModele.addElement(elementSelectionne);
+
+            }
+            if (event.getSource() == retirerButton) {
+                Medicament elementSelectionne = (Medicament) listMdicamentsChoisis.getSelectedValue();
+                medicamentsChoisisModele.removeElement(elementSelectionne);
+                medicamentsDisposModele.addElement(elementSelectionne);
+            }
+            if (event.getSource() == validerButton) {
                 //TODO
             }
-            if(e.getSource() == retirerButton) {
-                //TODO
+            if (event.getSource() == réinitialiserButton) {
+                urgenceCheckBox.setSelected(false);
+                instancieListeVeterinaire();
+                instancieListeAnimaux();
+                textAreaIntituleSoin.setText("");
+                textAreaPartieDuCorps.setText("");
+                instancieListeMedicamentsDispos();
+                listMdicamentsChoisis.removeAll();
+                textAreaRemarque.setText("");
+                if (fenetreMedicament != null){
+                    fenetreMedicament.dispose();
+                    fenetreMedicament = null;
+                }
             }
-            if(e.getSource() == validerButton){
-                //TODO
+            if (event.getSource() == retourButton) {
+                fenetre.accueil();
             }
-            if(e.getSource() == réinitialiserButton){
-                //TODO
-            }
-            if(e.getSource() == retourButton){
-                //TODO
-            }
-            if(e.getSource() == ajouterUnMédicamentButton){
+            if (event.getSource() == ajouterUnMédicamentButton) {
                 fenetreMedicament = new FenetreMedicament();
             }
         }
