@@ -2,47 +2,44 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="viewPackage.PanneauListingFichesDeSoin">
   <grid id="27dc6" binding="panneauContainerPrincipal" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:28px:noGrow"/>
-    <rowspec value="top:6dlu:noGrow"/>
-    <rowspec value="center:35px:noGrow"/>
     <rowspec value="top:6dlu:noGrow"/>
     <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:6dlu:noGrow"/>
-    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="center:35px:noGrow"/>
+    <rowspec value="top:5dlu:noGrow"/>
+    <rowspec value="center:14px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:383px:noGrow"/>
-    <rowspec value="top:max(m;4px):noGrow"/>
+    <rowspec value="center:270px:grow"/>
+    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
-    <colspec value="fill:18dlu:grow"/>
+    <colspec value="left:19dlu:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
-    <colspec value="fill:203dlu:noGrow"/>
-    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:203px:noGrow"/>
+    <colspec value="left:5dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
-    <colspec value="fill:69dlu:noGrow"/>
-    <colspec value="left:201dlu:noGrow"/>
-    <colspec value="left:min(p;100px):noGrow"/>
+    <colspec value="fill:69px:grow"/>
+    <colspec value="fill:200px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="897" height="545"/>
+      <xy x="20" y="20" width="596" height="409"/>
     </constraints>
     <properties>
       <background color="-5911588"/>
     </properties>
     <border type="none"/>
     <children>
-      <hspacer id="265ff">
+      <hspacer id="3ed6a">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="11" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="10" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
-      <component id="e872e" class="javax.swing.JLabel">
+      <component id="42f4c" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="12" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="11" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -50,9 +47,9 @@
           <text value="Listing de toutes les fiches de soin"/>
         </properties>
       </component>
-      <scrollpane id="1a47c">
+      <scrollpane id="1a47c" binding="listingScrollPane">
         <constraints>
-          <grid row="10" column="1" row-span="1" col-span="9" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="8" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -81,6 +78,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
+          <background color="-2565928"/>
           <text value="Trier"/>
         </properties>
       </component>

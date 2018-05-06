@@ -98,12 +98,10 @@ public class PanneauRechercheAnimaux {
                         JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères !");
                     }
                 }
-                catch (AnimalException e)
-                {
+                catch (AnimalException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-                catch (SingletonConnectionException e)
-                {
+                catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }

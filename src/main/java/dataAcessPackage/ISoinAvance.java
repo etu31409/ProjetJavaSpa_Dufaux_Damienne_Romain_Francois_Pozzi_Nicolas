@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface ISoinAvance {
     ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException;
     SoinAvance getUnSoinAvance(Integer numSoin) throws SingletonConnectionException, SoinException, VeterinaireException;
+    String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException;
 }

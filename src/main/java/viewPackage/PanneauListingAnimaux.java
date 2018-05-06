@@ -30,9 +30,10 @@ public class PanneauListingAnimaux extends JPanel {
 
     private void instanciationComboBox() {
         comboBoxTriAnimaux.removeAllItems();
-        String[] listeCritères = {"Numéro de registre", "Nom", "Date d'arrivée", "Espèce", "Race", "Date de naissance",
-                "Poids"};
-        comboBoxTriAnimaux = new JComboBox(listeCritères);
+        String[] listeCritères = new String[] {"Date d'arrivée", "Date de naissance", "Espèce",  "Nom",
+                "Numéro de registre", "Poids", "Race"};
+        for(int i = 0; i < listeCritères.length; ++i)
+            comboBoxTriAnimaux.addItem(listeCritères[i]);
     }
 
     private class EcouteurBouton implements ActionListener {

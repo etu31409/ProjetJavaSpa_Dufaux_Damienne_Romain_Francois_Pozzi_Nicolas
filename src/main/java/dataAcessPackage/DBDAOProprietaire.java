@@ -69,7 +69,6 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
-    @Override
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
