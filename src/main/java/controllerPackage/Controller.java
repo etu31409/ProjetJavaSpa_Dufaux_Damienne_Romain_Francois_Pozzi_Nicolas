@@ -61,6 +61,10 @@ public class Controller {
         return business.getSoinsTries(critere);
     }
 
+    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        return business.getAnimauxTries(critere);
+    }
+
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         business.ajouterOrdonnance(ordonnance);
     }

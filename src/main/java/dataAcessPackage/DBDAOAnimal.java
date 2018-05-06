@@ -364,5 +364,60 @@ public class DBDAOAnimal implements IAnimal {
         }
        // catch (AnimalException exception){exception.getMessage();}
     }
+
+    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            sqlInstruction = "select count(*) from spabd.animal";
+
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            data = statement.executeQuery();
+            data.next();
+            Integer nombreDeLignes = data.getInt(1);
+            String[][] tousLesAnimauxTries = new String[nombreDeLignes][];
+            if (critere.equals("")){
+                critere = "\"\"";
+            }
+            sqlInstruction = "select * from spabd.animal order by "+ critere + " asc;";
+            statement = connectionUnique.prepareStatement(sqlInstruction);
+            data = statement.executeQuery();
+
+            int i = 0;
+            while (data.next()) {
+                tousLesAnimauxTries[i] = new String[16];
+                tousLesAnimauxTries[i][0] = Integer.toString(data.getInt("numRegistre"));
+                tousLesAnimauxTries[i][1] = data.getDate("dateArrivee").toString();
+                tousLesAnimauxTries[i][2] = data.getString("nom");
+                tousLesAnimauxTries[i][3] = data.getString("espece");
+                tousLesAnimauxTries[i][4] = data.getString("race");
+                tousLesAnimauxTries[i][5] = data.getString("sexe");
+                tousLesAnimauxTries[i][6] = Boolean.toString(data.getBoolean("estSterilise"));
+                tousLesAnimauxTries[i][7] = data.getString("couleurDePeau");
+                Date dateNaissance= data.getDate("dateNaissance");
+                if(!data.wasNull())
+                    tousLesAnimauxTries[i][8] = data.getDate("dateNaissance").toString();
+                else
+                    tousLesAnimauxTries[i][8] = null;
+                tousLesAnimauxTries[i][9] = Double.toString(data.getDouble("poids"));
+                tousLesAnimauxTries[i][10] = Integer.toString(data.getInt("identifiantProprio"));
+                tousLesAnimauxTries[i][11] = Integer.toString(data.getInt("numPuce"));
+                tousLesAnimauxTries[i][12] = data.getString("localisationPuce");
+                Date dateAttributionPuce = data.getDate("dateAttributionPuce");
+                if(!data.wasNull())
+                    tousLesAnimauxTries[i][13] = data.getDate("dateAttributionPuce").toString();
+                else
+                    tousLesAnimauxTries[i][13] = null;
+                tousLesAnimauxTries[i][14] = Integer.toString(data.getInt("numTatouage"));
+                tousLesAnimauxTries[i][15] = data.getString("localisationTatouage");
+                i++;
+            }
+            return tousLesAnimauxTries;
+        } catch (SQLException e) {
+            throw new AnimalException();
+        }
+    }
 }
 

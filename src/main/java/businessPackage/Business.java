@@ -71,6 +71,10 @@ public class Business {
         return daoSoinAvance.getSoinsTries(critere);
     }
 
+    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        return daoAnimal.getAnimauxTries(critere);
+    }
+
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }
