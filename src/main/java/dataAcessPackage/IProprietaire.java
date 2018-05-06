@@ -14,4 +14,6 @@ public interface IProprietaire {
             throws SingletonConnectionException, ProprietaireException;
 
     String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException;
+
+    void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException;
 }

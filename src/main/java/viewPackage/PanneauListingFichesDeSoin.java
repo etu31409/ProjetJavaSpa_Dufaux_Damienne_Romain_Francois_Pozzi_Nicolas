@@ -16,6 +16,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private JPanel panneauContainerPrincipal;
     private JComboBox comboBoxListingFiches;
     private JButton trierButton;
+    private JButton supprimerButton;
+    private JButton modifierButton;
     private JScrollPane listingScrollPane;
     private JTable resultatRecherche;
     private static HashMap<String, String> listeCriteres = new HashMap<String, String>();
@@ -44,6 +46,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
         for (String key: listeCriteres.keySet()) {
             comboBoxListingFiches.addItem(key);
         }
+        comboBoxListingFiches.setSelectedItem("Aucun tri");
     }
 
     private class EcouteurBouton implements ActionListener {
@@ -69,6 +72,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     JOptionPane.showMessageDialog(null, s.getMessage());
                 }
             }
+
         }
     }
 }

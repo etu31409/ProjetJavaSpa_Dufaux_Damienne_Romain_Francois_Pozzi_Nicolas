@@ -2,6 +2,7 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.ProprietaireException;
+import exceptionPackage.SingletonConnectionException;
 import modelPackage.Proprietaire;
 
 import javax.swing.*;
@@ -61,15 +62,17 @@ public class PanneauProprio {
                     textFieldPrenom.setBorder(null);
                     if (validationFormulaire()) {
                         proprietaire = new Proprietaire(textFieldNom.getText(), textFieldPrenom.getText());
-                        //controller.ajouterNouveauProprio(proprietaire); //TODO
-                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
-                        panneauAnimal.instancieListeProprietaires();
+                        controller.ajouterNouveauProprio(proprietaire);
+                        JOptionPane.showMessageDialog(null, "Le propriétaire a été correctement ajouté à la base de données !");
+                        panneauAnimal.instanciationListeProprietaires();
                         fenetreProprio.dispose();
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
                     }
                 } catch (ProprietaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             } else if (event.getSource() == annulerButton) {

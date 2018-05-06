@@ -23,14 +23,12 @@ public class PanneauAnimal extends JPanel {
     private JPanel panneauContainerPrincipal;
 
     private JSpinner spinnerPoids;
-    private JSpinner spinnerDateEuthanasie;
     private JSpinner spinnerDateNaissance;
     private JSpinner spinnerDatePuce;
 
     private JTextField nomTextField;
     private JTextField especeTextField;
     private JTextField raceTextField;
-    private JTextField raisonTextField;
     private JTextField numTatouageTextField;
     private JTextField localisationTatouageTextField;
     private JTextField couleurTextField;
@@ -43,7 +41,6 @@ public class PanneauAnimal extends JPanel {
 
     private JComboBox comboBoxListeProprietaires;
 
-    private JCheckBox aEuthanasierCheckBox;
     private JCheckBox dateDeNaissanceCheckBox;
     private JCheckBox dateDAttributionPuceCheckBox;
     private JCheckBox proprioCheckBox;
@@ -56,11 +53,6 @@ public class PanneauAnimal extends JPanel {
     public PanneauAnimal(Controller controller, FenetrePrincipale fenetre) {
         this.fenetre = fenetre;
         this.controller = controller;
-
-        raisonTextField.setEnabled(false);
-        raisonTextField.setBackground(Color.GRAY);
-        spinnerDateEuthanasie.setEnabled(false);
-        aEuthanasierCheckBox.addActionListener(new EcouteurDeCheckBox());
 
         ajouterUnPropriétaireButton.setEnabled(false);
         comboBoxListeProprietaires.setEnabled(false);
@@ -79,7 +71,6 @@ public class PanneauAnimal extends JPanel {
         ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
 
         instanciationSpinnerPoids();
-        instanciationSpinnerDate(spinnerDateEuthanasie);
         instanciationSpinnerDate(spinnerDateNaissance);
         instanciationSpinnerDate(spinnerDatePuce);
         instanciationListeProprietaires();
@@ -96,13 +87,11 @@ public class PanneauAnimal extends JPanel {
     private void reinitialiserBorder(){
         spinnerDatePuce.setBorder(baseBorder);
         spinnerDateNaissance.setBorder(baseBorder);
-        spinnerDateEuthanasie.setBorder(baseBorder);
         spinnerPoids.setBorder(baseBorder);
         femelleRadioButton.setBorder(baseBorder);
         maleRadioButton.setBorder(baseBorder);
         especeTextField.setBorder(baseBorder);
         raceTextField.setBorder(baseBorder);
-        raisonTextField.setBorder(baseBorder);
         couleurTextField.setBorder(baseBorder);
         numPuceTextField.setBorder(baseBorder);
         localisationPuceTextField.setBorder(baseBorder);
@@ -135,12 +124,6 @@ public class PanneauAnimal extends JPanel {
             estValide = false;
             raceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        }
-        if (aEuthanasierCheckBox.isSelected() && raisonTextField.getText().isEmpty()){
-            estValide = false;
-            raisonTextField.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            erreurMessage += "Le champ de la raison d'euthanasie ne peut être vide\n";
         }
         if (!steriliseRadioButton.isSelected() && !nonSteriliseRadioButton.isSelected())
         {
@@ -196,14 +179,6 @@ public class PanneauAnimal extends JPanel {
     private Boolean verifierDateLogique(){
         Boolean estValide = true;
         Border border = BorderFactory.createLineBorder(Color.red);
-        if (aEuthanasierCheckBox.isSelected()){
-            if (((Date)spinnerDateEuthanasie.getValue()).before(GregorianCalendar.getInstance().getTime())){
-                estValide = false;
-                spinnerDateEuthanasie.setBorder(BorderFactory.createCompoundBorder(border,
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                erreurMessage += "La date d'euthanasie ne peut être antérieur à la date du jour!\n";
-            }
-        }
         if (dateDeNaissanceCheckBox.isSelected()){
             if (((Date)spinnerDateNaissance.getValue()).after(GregorianCalendar.getInstance().getTime())){
                 estValide = false;
@@ -234,15 +209,9 @@ public class PanneauAnimal extends JPanel {
     private void reinitialisation(){
         reinitialiserBorder();
         instanciationSpinnerPoids();
-        instanciationSpinnerDate(spinnerDateEuthanasie);
         instanciationSpinnerDate(spinnerDateNaissance);
         instanciationSpinnerDate(spinnerDatePuce);
         instanciationListeProprietaires();
-        aEuthanasierCheckBox.setSelected(false);
-        spinnerDateEuthanasie.setEnabled(false);
-        raisonTextField.setText("");
-        raisonTextField.setEnabled(false);
-        raisonTextField.setBackground(Color.GRAY);
         nomTextField.setText("");
         especeTextField.setText("");
         raceTextField.setText("");
@@ -318,19 +287,6 @@ public class PanneauAnimal extends JPanel {
     private class EcouteurDeCheckBox implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == aEuthanasierCheckBox){
-                if(aEuthanasierCheckBox.isSelected()){
-                    raisonTextField.setEnabled(true);
-                    raisonTextField.setBackground(Color.white);
-                    spinnerDateEuthanasie.setEnabled(true);
-                }
-                else{
-                    raisonTextField.setEnabled(false);
-                    raisonTextField.setBackground(Color.GRAY);
-                    raisonTextField.setText("");
-                    spinnerDateEuthanasie.setEnabled(false);
-                }
-            }
             if(e.getSource() == proprioCheckBox){
                 if(proprioCheckBox.isSelected()){
                     ajouterUnPropriétaireButton.setEnabled(true);
@@ -353,7 +309,6 @@ public class PanneauAnimal extends JPanel {
                     spinnerDatePuce.setEnabled(true);
                 else
                     spinnerDatePuce.setEnabled(false);
-
             }
         }
     }

@@ -65,6 +65,10 @@ public class Controller {
         return business.getAnimauxTries(critere);
     }
 
+    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
+        business.ajouterNouveauProprio(proprietaire);
+    }
+
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         business.ajouterOrdonnance(ordonnance);
     }

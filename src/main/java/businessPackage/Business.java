@@ -75,6 +75,10 @@ public class Business {
         return daoAnimal.getAnimauxTries(critere);
     }
 
+    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
+        daoProprietaire.ajouterNouveauProprio(proprietaire);
+    }
+
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }

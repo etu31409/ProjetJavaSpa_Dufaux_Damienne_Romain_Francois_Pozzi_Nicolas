@@ -114,8 +114,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             if (critere.equals("")){
                 critere = "\"\"";
             }
-            sqlInstruction = "select numSoin, numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque " +
-                    "from spabd.soinAvance order by "+ critere + " asc;";
+            sqlInstruction = "select * from spabd.soinAvance order by "+ critere + " asc;";
             statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 

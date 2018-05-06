@@ -233,6 +233,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
+                    "AND (spabd.ordonnance.numRegistre = spabd.animal.numregistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?\n" +
                     "AND spabd.medicament.identifiantMed = ?;";
 
@@ -255,6 +256,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
+                    "AND (spabd.ordonnance.numRegistre = spabd.animal.numregistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?\n" +
                     "AND spabd.medicament.identifiantMed = ?;";
 
@@ -290,6 +292,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
                     "inner join spabd.animal\n" +
                     "on spabd.animal.numRegistre = spabd.soinAvance.numRegistre\n" +
+                    "AND (spabd.ordonnance.numRegistre = spabd.animal.numregistre)\n" +
                     "where spabd.medicament.identifiantMed = ?;";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
@@ -308,6 +311,7 @@ public class DBDAOAnimal implements IAnimal {
                     "on (spabd.ordonnance.numSoin = spabd.soinAvance.numSoin)\n" +
                     "inner join spabd.animal\n" +
                     "on spabd.animal.numRegistre = spabd.soinAvance.numRegistre\n" +
+                    "AND (spabd.ordonnance.numRegistre = spabd.animal.numregistre)\n" +
                     "where spabd.medicament.identifiantMed = ?;";
 
             statement = connectionUnique.prepareStatement(sqlInstruction);

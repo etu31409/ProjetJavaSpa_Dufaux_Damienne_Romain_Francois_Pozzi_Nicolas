@@ -67,6 +67,9 @@ public class DBDAOProprietaire implements IProprietaire{
         catch (SQLException e) {
             throw new ProprietaireException();
         }
+        catch (SingletonConnectionException e){
+            throw new SingletonConnectionException();
+        }
     }
 
     public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
@@ -115,6 +118,26 @@ public class DBDAOProprietaire implements IProprietaire{
             return listeResultatRecherche;
         } catch (SQLException e) {
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");
+        }
+    }
+
+    public void ajouterNouveauProprio(Proprietaire proprietaire) throws SingletonConnectionException, ProprietaireException{
+        try {
+            if (proprietaire != null && !proprietaire.getPrenom().isEmpty() && !proprietaire.getNom().isEmpty()) {
+                if (connectionUnique == null) {
+                    connectionUnique = SingletonConnection.getUniqueInstance();
+                }
+                sqlInstruction = "insert into spabd.proprietaire(nom, prenom) values (?, ?);";
+                PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+                statement.setString(1, proprietaire.getNom());
+                statement.setString(2, proprietaire.getPrenom());
+                statement.executeUpdate();
+            }
+            else{
+                throw new ProprietaireException("Les informations reçues semblent incorrectes...");
+            }
+        }catch(SQLException e){
+            throw  new ProprietaireException("Erreur lors de l'insertion du nouveau propriétaire");
         }
     }
 }

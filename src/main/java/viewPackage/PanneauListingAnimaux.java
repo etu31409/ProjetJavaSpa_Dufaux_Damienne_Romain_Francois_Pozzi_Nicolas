@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.*;
 
 public class PanneauListingAnimaux extends JPanel {
     private Controller controller;
@@ -19,10 +19,12 @@ public class PanneauListingAnimaux extends JPanel {
     private JPanel panneauContainerPrincipal;
     private JComboBox comboBoxTriAnimaux;
     private JButton buttonTri;
+    private JButton supprimerButton;
+    private JButton modifierButton;
     private JScrollPane listingScrollPane;
 
     private JTable resultatRecherche;
-    private static HashMap<String, String> listeCriteres = new HashMap<String, String>();
+    private static HashMap<String, String> listeCriteres = new HashMap<>();;
 
     public PanneauListingAnimaux(Controller controller){
         this.controller = controller;
@@ -30,6 +32,7 @@ public class PanneauListingAnimaux extends JPanel {
         instanciationComboBox();
         buttonTri.addActionListener(new EcouteurBouton());
     }
+
 
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
@@ -49,6 +52,7 @@ public class PanneauListingAnimaux extends JPanel {
         for (String key: listeCriteres.keySet()) {
             comboBoxTriAnimaux.addItem(key);
         }
+        comboBoxTriAnimaux.setSelectedItem("Aucun tri");
     }
 
     private class EcouteurBouton implements ActionListener {
