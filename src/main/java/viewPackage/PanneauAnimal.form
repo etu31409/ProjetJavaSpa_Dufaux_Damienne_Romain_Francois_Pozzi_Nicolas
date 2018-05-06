@@ -49,8 +49,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:max(m;4px):noGrow"/>
-    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="left:76dlu:noGrow"/>
     <colspec value="fill:0px:grow"/>
     <colspec value="left:5dlu:noGrow"/>
     <colspec value="fill:67px:noGrow"/>
@@ -70,54 +69,27 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="eb6f8" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Nom :"/>
-        </properties>
-      </component>
       <component id="3458b" class="javax.swing.JTextField" binding="nomTextField">
         <constraints>
-          <grid row="3" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="3" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="446ca" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="4" row-span="3" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Poids (kg) :"/>
-        </properties>
-      </component>
       <component id="3a1b6" class="javax.swing.JSpinner" binding="spinnerPoids">
         <constraints>
-          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
           <font size="14"/>
         </properties>
       </component>
-      <component id="f2178" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="8" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Espèce :"/>
-        </properties>
-      </component>
       <component id="9726a" class="javax.swing.JTextField" binding="especeTextField">
         <constraints>
-          <grid row="8" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -126,7 +98,7 @@
       </component>
       <component id="3feaa" class="javax.swing.JLabel">
         <constraints>
-          <grid row="8" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -135,7 +107,7 @@
       </component>
       <component id="a7186" class="javax.swing.JTextField" binding="raceTextField">
         <constraints>
-          <grid row="8" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -144,7 +116,7 @@
       </component>
       <component id="143ba" class="javax.swing.JRadioButton" binding="femelleRadioButton" default-binding="true">
         <constraints>
-          <grid row="5" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -154,7 +126,7 @@
       </component>
       <component id="9fd97" class="javax.swing.JRadioButton" binding="maleRadioButton" default-binding="true">
         <constraints>
-          <grid row="5" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -162,19 +134,9 @@
           <text value="Mâle"/>
         </properties>
       </component>
-      <component id="932dd" class="javax.swing.JCheckBox" binding="aEuthanasierCheckBox" default-binding="true">
-        <constraints>
-          <grid row="10" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <background color="-5911588"/>
-          <text value="à euthanasier"/>
-        </properties>
-      </component>
       <component id="61c84" class="javax.swing.JSpinner" binding="spinnerDateEuthanasie">
         <constraints>
-          <grid row="10" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -187,7 +149,7 @@
       </component>
       <component id="df6bb" class="javax.swing.JLabel">
         <constraints>
-          <grid row="10" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -196,7 +158,7 @@
       </component>
       <component id="4ec56" class="javax.swing.JTextField" binding="raisonTextField">
         <constraints>
-          <grid row="10" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="10" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -205,7 +167,7 @@
       </component>
       <component id="59d03" class="javax.swing.JRadioButton" binding="steriliseRadioButton" default-binding="true">
         <constraints>
-          <grid row="14" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -215,7 +177,7 @@
       </component>
       <component id="f2fe4" class="javax.swing.JRadioButton" binding="nonSteriliseRadioButton" default-binding="true">
         <constraints>
-          <grid row="14" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -223,37 +185,18 @@
           <text value="Non-stérilisé.e"/>
         </properties>
       </component>
-      <component id="528aa" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="14" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <text value="Date de naissance :"/>
-        </properties>
-      </component>
       <component id="d036e" class="javax.swing.JSpinner" binding="spinnerDateNaissance">
         <constraints>
-          <grid row="14" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
           <font size="14"/>
         </properties>
       </component>
-      <component id="39210" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="18" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <requestFocusEnabled value="false"/>
-          <text value="Couleur/pelage :"/>
-        </properties>
-      </component>
       <component id="819ef" class="javax.swing.JTextField" binding="couleurTextField">
         <constraints>
-          <grid row="18" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="18" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -262,22 +205,13 @@
       </component>
       <hspacer id="86658">
         <constraints>
-          <grid row="20" column="4" row-span="1" col-span="14" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="4" row-span="1" col-span="13" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
-      <component id="3eba6" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="22" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="N° de puce :"/>
-        </properties>
-      </component>
       <component id="b1bd9" class="javax.swing.JTextField" binding="numPuceTextField">
         <constraints>
-          <grid row="22" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="22" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -286,7 +220,7 @@
       </component>
       <component id="9b576" class="javax.swing.JLabel">
         <constraints>
-          <grid row="22" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="22" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -295,25 +229,16 @@
       </component>
       <component id="eae4d" class="javax.swing.JTextField" binding="localisationPuceTextField">
         <constraints>
-          <grid row="22" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="22" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="7576f" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="26" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Date d'attribution :"/>
-        </properties>
-      </component>
       <component id="7e5ac" class="javax.swing.JSpinner" binding="spinnerDatePuce">
         <constraints>
-          <grid row="26" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="26" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -322,22 +247,13 @@
       </component>
       <hspacer id="6a3bf">
         <constraints>
-          <grid row="28" column="4" row-span="1" col-span="13" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="28" column="4" row-span="1" col-span="12" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
-      <component id="2f42d" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="30" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="N° de tatouage :"/>
-        </properties>
-      </component>
       <component id="c998d" class="javax.swing.JTextField" binding="numTatouageTextField">
         <constraints>
-          <grid row="30" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="30" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -346,7 +262,7 @@
       </component>
       <component id="dcf8e" class="javax.swing.JLabel">
         <constraints>
-          <grid row="30" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="30" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -355,7 +271,7 @@
       </component>
       <component id="3ea10" class="javax.swing.JTextField" binding="localisationTatouageTextField">
         <constraints>
-          <grid row="30" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="30" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -364,20 +280,20 @@
       </component>
       <hspacer id="44bf7">
         <constraints>
-          <grid row="35" column="4" row-span="1" col-span="14" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="35" column="4" row-span="1" col-span="13" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
       <component id="bcb06" class="javax.swing.JComboBox" binding="comboBoxListeProprietaires">
         <constraints>
-          <grid row="37" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="37" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="679df" class="javax.swing.JButton" binding="ajouterUnPropriétaireButton" default-binding="true">
         <constraints>
-          <grid row="37" column="15" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="37" column="14" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -387,7 +303,7 @@
       </component>
       <component id="6a203" class="javax.swing.JButton" binding="reinitialiserButton" default-binding="true">
         <constraints>
-          <grid row="41" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="41" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -397,7 +313,7 @@
       </component>
       <component id="fca6a" class="javax.swing.JButton" binding="validerButton" default-binding="true">
         <constraints>
-          <grid row="41" column="8" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="41" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -407,7 +323,7 @@
       </component>
       <component id="70bce" class="javax.swing.JButton" binding="retourButton" default-binding="true">
         <constraints>
-          <grid row="41" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="41" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -415,18 +331,9 @@
           <text value="Retour"/>
         </properties>
       </component>
-      <component id="4b71a" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="37" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Propriétaire :"/>
-        </properties>
-      </component>
       <component id="8844e" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="4" row-span="1" col-span="13" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="4" row-span="1" col-span="12" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -436,19 +343,19 @@
       </component>
       <vspacer id="824f9">
         <constraints>
-          <grid row="3" column="12" row-span="16" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="11" row-span="16" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
       <vspacer id="5758f">
         <constraints>
-          <grid row="22" column="12" row-span="5" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="22" column="11" row-span="5" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
       <vspacer id="36bb0">
         <constraints>
-          <grid row="30" column="12" row-span="4" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="30" column="11" row-span="4" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -458,24 +365,109 @@
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
-      <component id="5fb42" class="javax.swing.JCheckBox" binding="proprioCheckBox">
+      <component id="eb6f8" class="javax.swing.JLabel">
         <constraints>
-          <grid row="37" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Nom :"/>
+        </properties>
+      </component>
+      <component id="446ca" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Poids (kg) :"/>
+        </properties>
+      </component>
+      <component id="f2178" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Espèce :"/>
+        </properties>
+      </component>
+      <component id="932dd" class="javax.swing.JCheckBox" binding="aEuthanasierCheckBox" default-binding="true">
+        <constraints>
+          <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
           <background color="-5911588"/>
-          <text value=""/>
+          <text value="a euthanasier"/>
+        </properties>
+      </component>
+      <component id="6cd63" class="javax.swing.JCheckBox" binding="dateDeNaissanceCheckBox">
+        <constraints>
+          <grid row="14" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-5911588"/>
+          <text value="Date de naissance :"/>
+        </properties>
+      </component>
+      <component id="39210" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="18" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <requestFocusEnabled value="false"/>
+          <text value="Couleur/pelage :"/>
+        </properties>
+      </component>
+      <component id="3eba6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="22" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="N° de puce :"/>
+        </properties>
+      </component>
+      <component id="e5ace" class="javax.swing.JCheckBox" binding="dateDAttributionPuceCheckBox">
+        <constraints>
+          <grid row="26" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-5911588"/>
+          <text value="Date d'attribution :"/>
+        </properties>
+      </component>
+      <component id="2f42d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="30" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="N° de tatouage :"/>
+        </properties>
+      </component>
+      <component id="69305" class="javax.swing.JCheckBox" binding="proprioCheckBox">
+        <constraints>
+          <grid row="37" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-5911588"/>
+          <text value="Propriétaire :"/>
         </properties>
       </component>
     </children>
   </grid>
   <buttonGroups>
-    <group name="buttonGroupeSterilise">
+    <group name="buttonGroupeSterilise" bound="true">
       <member id="59d03"/>
       <member id="f2fe4"/>
     </group>
-    <group name="buttonGroupeSexe">
+    <group name="buttonGroupeSexe" bound="true">
       <member id="9fd97"/>
       <member id="143ba"/>
     </group>
