@@ -10,7 +10,7 @@ public class  FenetrePrincipale extends JFrame{
     private Container frameContainer;
     private JMenuBar barMenu;
     private JMenu  spa, recherches, ajout, listing;
-    private JMenuItem accueil, quitter, nouvelAnimal, nouvelleFicheDeSoins, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires,
+    private JMenuItem accueil, quitter, nouvelAnimal, nouvelleFicheDeSoin, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires,
             rechercheProprietaires, rechercheAnimaux;
     private JPanel panneauBienvenue;
 
@@ -52,9 +52,9 @@ public class  FenetrePrincipale extends JFrame{
         ajout.add(nouvelAnimal);
         nouvelAnimal.addActionListener(new EcouteurBarMenu());
 
-        nouvelleFicheDeSoins = new JMenuItem("Nouvelle fiche de ajout");
-        ajout.add(nouvelleFicheDeSoins);
-        nouvelleFicheDeSoins.addActionListener(new EcouteurBarMenu());
+        nouvelleFicheDeSoin = new JMenuItem("Nouvelle fiche de soin");
+        ajout.add(nouvelleFicheDeSoin);
+        nouvelleFicheDeSoin.addActionListener(new EcouteurBarMenu());
 
         recherches = new JMenu("Recherches");
         recherches.setMnemonic('R');
@@ -119,7 +119,7 @@ public class  FenetrePrincipale extends JFrame{
                 frameContainer.repaint();
                 frameContainer.validate();
             }
-            else if(event.getSource() == nouvelleFicheDeSoins){
+            else if(event.getSource() == nouvelleFicheDeSoin){
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauFicheDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
