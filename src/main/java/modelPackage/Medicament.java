@@ -2,8 +2,6 @@ package modelPackage;
 
 import exceptionPackage.MedicamentException;
 
-import java.util.GregorianCalendar;
-
 public class Medicament {
     private Integer identifiantMed;
     private String stockage;
@@ -59,7 +57,7 @@ public class Medicament {
     }
 
     public String toString (){
-       return " #" + this.getIdentifiantMed() + " " + this.getNomMedic() + " " + this.getStockage() + " " +
+       return this.getNomMedic() + " " + this.getStockage() + " " +
          this.getDosage();
     }
 }
