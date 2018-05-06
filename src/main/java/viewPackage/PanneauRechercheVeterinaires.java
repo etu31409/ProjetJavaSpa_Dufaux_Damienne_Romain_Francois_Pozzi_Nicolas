@@ -25,11 +25,9 @@ public class PanneauRechercheVeterinaires{
     private JButton rechercherButton;
     private JScrollPane scrollPane;
 
-    private FenetrePrincipale fenetre;
 
 
-    public PanneauRechercheVeterinaires(Controller controller, FenetrePrincipale fenetre){
-        this.fenetre = fenetre;
+    public PanneauRechercheVeterinaires(Controller controller){
         this.controller = controller;
         rechercherButton.addActionListener(new RechercheListener());
         instanciationSpinner();

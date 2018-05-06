@@ -143,7 +143,7 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == rechercheVeterinaires) {
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauRechercheVeterinaires(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauRechercheVeterinaires(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }
@@ -162,7 +162,7 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
-                //frameContainer.add(new PanneauStatistiquesMedic(controller).getPanneauContainerPrincipal());
+                //frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
                 frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
