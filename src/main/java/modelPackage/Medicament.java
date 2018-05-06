@@ -1,5 +1,7 @@
 package modelPackage;
 
+import exceptionPackage.MedicamentException;
+
 import java.util.GregorianCalendar;
 
 public class Medicament {
@@ -9,11 +11,10 @@ public class Medicament {
     private String nomMedic;
 
     public Medicament(){}
-    public Medicament(String stockage, String dosage,
-                      String nomMedic) {
-        this.stockage = stockage;
-        this.dosage = dosage;
-        this.nomMedic = nomMedic;
+    public Medicament(String stockage, String dosage,String nomMedic) throws MedicamentException {
+        setStockage(stockage);
+        setDosage(dosage);
+        setNomMedic(nomMedic);
     }
 
     public Integer getIdentifiantMed() {
@@ -32,20 +33,29 @@ public class Medicament {
         return nomMedic;
     }
 
-    public void setStockage(String stockage) {
+    public void setStockage(String stockage) throws MedicamentException {
+        if (stockage.isEmpty())
+            throw new MedicamentException("Le nom du stockage du medicament est incorrect");
         this.stockage = stockage;
     }
 
-    public void setDosage(String dosage) {
+    public void setDosage(String dosage) throws MedicamentException {
+        if (dosage.isEmpty())
+            throw new MedicamentException("Le nom du dosage du medicament est incorrect");
         this.dosage = dosage;
     }
 
-    public void setNomMedic(String nomMedic) {
+    public void setNomMedic(String nomMedic) throws MedicamentException {
+        if (nomMedic.isEmpty())
+            throw new MedicamentException("Le nom du medicament est incorrect");
         this.nomMedic = nomMedic;
     }
 
-    public void setIdentifiantMed(Integer identifiantMed) {
+    public void setIdentifiantMed(Integer identifiantMed) throws MedicamentException {
+        if (identifiantMed == null)
+            throw new MedicamentException("L'identifiant du medicament est incorrect");
         this.identifiantMed = identifiantMed;
+
     }
 
     public String toString (){

@@ -13,10 +13,10 @@ public class FenetreMedicament extends JFrame {
     private Container frameContainer ;
     private JPanel panneauMedicament;
 
-    public FenetreMedicament(){
+    public FenetreMedicament(Controller controller, PanneauFicheDeSoin panneauFicheDeSoin){
         super("Ajout d'un médicament");
         setBounds(500, 100, 330, 372);
-        panneauMedicament = new PanneauMedicament(controller).getPanneauContainerPrincipal();
+        panneauMedicament = new PanneauMedicament(controller, FenetreMedicament.this, panneauFicheDeSoin).getPanneauContainerPrincipal();
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
         frameContainer.add(panneauMedicament, BorderLayout.CENTER);

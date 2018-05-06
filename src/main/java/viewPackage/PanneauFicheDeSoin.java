@@ -115,6 +115,10 @@ public class PanneauFicheDeSoin extends JPanel {
         return validationChamp;
     }
 
+    public void ajouterMedicamentAListeMedicamentsDispos(Medicament medicament) {
+        medicamentsDisposModele.addElement(medicament);
+    }
+
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == ajouterButton) {
@@ -157,7 +161,7 @@ public class PanneauFicheDeSoin extends JPanel {
                 fenetre.retourAccueil();
             }
             if (event.getSource() == ajouterUnMédicamentButton) {
-                fenetreMedicament = new FenetreMedicament();
+                fenetreMedicament = new FenetreMedicament(controller, PanneauFicheDeSoin.this);
             }
         }
     }
