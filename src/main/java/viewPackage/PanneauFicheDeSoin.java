@@ -105,6 +105,7 @@ public class PanneauFicheDeSoin extends JPanel {
 
     public Boolean validerChamps(){
         Boolean validationChamp = true;
+        textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().equals("")){
             Border border = BorderFactory.createLineBorder(Color.red);
             textAreaIntituleSoin.setBorder(BorderFactory.createCompoundBorder(border,

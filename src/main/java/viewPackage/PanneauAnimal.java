@@ -24,9 +24,7 @@ public class PanneauAnimal extends JPanel {
     private JSpinner spinnerDateEuthanasie;
     private JSpinner spinnerDateNaissance;
     private JSpinner spinnerDatePuce;
-    private JSpinner spinnerDateTatouage;
     private JTextField nomTextField;
-    private JTextField numCelluleTextField;
     private JTextField especeTextField;
     private JTextField raceTextField;
     private JTextField raisonTextField;
@@ -60,7 +58,6 @@ public class PanneauAnimal extends JPanel {
         instanciationSpinnerDate(spinnerDateEuthanasie);
         instanciationSpinnerDate(spinnerDateNaissance);
         instanciationSpinnerDate(spinnerDatePuce);
-        instanciationSpinnerDate(spinnerDateTatouage);
         instancieListeProprietaires();
     }
 
@@ -128,14 +125,12 @@ public class PanneauAnimal extends JPanel {
                 instanciationSpinnerDate(spinnerDateEuthanasie);
                 instanciationSpinnerDate(spinnerDateNaissance);
                 instanciationSpinnerDate(spinnerDatePuce);
-                instanciationSpinnerDate(spinnerDateTatouage);
                 instancieListeProprietaires();
                 aEuthanasierCheckBox.setSelected(false);
                 raisonTextField.setText("");
                 raisonTextField.setEnabled(false);
                 raisonTextField.setBackground(Color.GRAY);
                 nomTextField.setText("");
-                numCelluleTextField.setText("");
                 especeTextField.setText("");
                 raceTextField.setText("");
                 numTatouageTextField.setText("");
@@ -145,7 +140,7 @@ public class PanneauAnimal extends JPanel {
                 localisationPuceTextField.setText("");
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
-                fenetreProprio = new FenetreProprio();
+                fenetreProprio = new FenetreProprio(controller,PanneauAnimal.this);
             }
         }
     }
@@ -250,7 +245,6 @@ public class PanneauAnimal extends JPanel {
 
     public void reinitialisation(){
         nomTextField.setText("");
-        numCelluleTextField.setText("");
         especeTextField.setText("");
         raceTextField.setText("");
         raisonTextField.setText("");

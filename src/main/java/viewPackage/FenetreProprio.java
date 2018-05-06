@@ -9,14 +9,12 @@ import java.awt.event.*;
 
 public class FenetreProprio extends JFrame {
     private Container frameContainer ;
-    private Controller controller;
     private JPanel panneauProprio;
-    private Proprietaire proprietaire;
 
-    public FenetreProprio(){
+    public FenetreProprio(Controller controller, PanneauAnimal panneauAnimal){
         super("Ajout d'un propriétaire");
         setBounds(500, 100, 330, 272);
-        panneauProprio = new PanneauProprio(controller).getPanneauContainerPrincipal();
+        panneauProprio = new PanneauProprio(controller, FenetreProprio.this, panneauAnimal).getPanneauContainerPrincipal();
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
         frameContainer.add(panneauProprio, BorderLayout.CENTER);
