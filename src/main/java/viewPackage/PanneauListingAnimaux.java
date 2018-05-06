@@ -62,6 +62,10 @@ public class PanneauListingAnimaux extends JPanel {
                             "Numéro de puce", "Localisation de la puce", "Date d'attribution de la puce",
                             "Numéro de tatouage", "Localisation du tatouage"};
                     resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
+                    resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+                    listingScrollPane.createHorizontalScrollBar();
+                    listingScrollPane.createVerticalScrollBar();
                     resultatRecherche.setFillsViewportHeight(true);
                     listingScrollPane.setViewportView(resultatRecherche);
                 }

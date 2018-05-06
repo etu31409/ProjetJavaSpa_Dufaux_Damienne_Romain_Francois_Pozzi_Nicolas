@@ -402,15 +402,28 @@ public class DBDAOAnimal implements IAnimal {
                 else
                     tousLesAnimauxTries[i][8] = null;
                 tousLesAnimauxTries[i][9] = Double.toString(data.getDouble("poids"));
-                tousLesAnimauxTries[i][10] = Integer.toString(data.getInt("identifiantProprio"));
-                tousLesAnimauxTries[i][11] = Integer.toString(data.getInt("numPuce"));
+                Integer identifiantProprio = data.getInt("identifiantProprio");
+                if(!data.wasNull())
+                    tousLesAnimauxTries[i][10] = Integer.toString(data.getInt("identifiantProprio"));
+                else
+                    tousLesAnimauxTries[i][10] = null;
+                Integer numPuce = data.getInt("numPuce");
+                if(!data.wasNull())
+                    tousLesAnimauxTries[i][11] = Integer.toString(data.getInt("numPuce"));
+                else
+                    tousLesAnimauxTries[i][11] = null;
                 tousLesAnimauxTries[i][12] = data.getString("localisationPuce");
                 Date dateAttributionPuce = data.getDate("dateAttributionPuce");
                 if(!data.wasNull())
                     tousLesAnimauxTries[i][13] = data.getDate("dateAttributionPuce").toString();
                 else
                     tousLesAnimauxTries[i][13] = null;
-                tousLesAnimauxTries[i][14] = Integer.toString(data.getInt("numTatouage"));
+                Integer numTatouage = data.getInt("numTatouage");
+                if(!data.wasNull())
+                    tousLesAnimauxTries[i][14] = Integer.toString(data.getInt("numTatouage"));
+                else
+                    tousLesAnimauxTries[i][14] = null;
+
                 tousLesAnimauxTries[i][15] = data.getString("localisationTatouage");
                 i++;
             }
