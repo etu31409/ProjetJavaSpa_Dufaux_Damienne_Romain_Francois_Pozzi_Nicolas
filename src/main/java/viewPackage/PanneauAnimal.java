@@ -94,15 +94,15 @@ public class PanneauAnimal extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == aEuthanasierCheckBox){
-                aEuthanasierCheckBox.isSelected();
-            }
-            if(aEuthanasierCheckBox.isSelected()){
-                raisonTextField.setEnabled(true);
-                raisonTextField.setBackground(Color.white);
-            }
-            else{
-                raisonTextField.setEnabled(false);
-                raisonTextField.setBackground(Color.GRAY);
+                if(aEuthanasierCheckBox.isSelected()){
+                    raisonTextField.setEnabled(true);
+                    raisonTextField.setBackground(Color.white);
+                }
+                else{
+                    raisonTextField.setEnabled(false);
+                    raisonTextField.setBackground(Color.GRAY);
+                    raisonTextField.setText("");
+                }
             }
         }
     }
@@ -110,7 +110,14 @@ public class PanneauAnimal extends JPanel {
     private class EcouteurDeBoutons implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
-                validationFormulaire();
+                if (validationFormulaire()) {
+                    //controller.ajouterFicheDeSoin(); //TODO
+                    JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                }
             }
             if(e.getSource() == retourButton){
                 fenetre.retourAccueil();
@@ -142,9 +149,15 @@ public class PanneauAnimal extends JPanel {
         }
     }
 
-    public void validationFormulaire(){
-       //validation numero de cellule
-        Integer numeroCellule = 0;
+    public Boolean validationFormulaire(){
+        Boolean estValideFormulaire = true;
+
+
+
+        return estValideFormulaire;
+
+
+        /*Integer numeroCellule = 0;
         try{
             numeroCellule = Integer.valueOf(numCelluleTextField.getText());
         }
@@ -231,7 +244,7 @@ public class PanneauAnimal extends JPanel {
             controller.ajouterAnimal(animal);
         }
         catch(SingletonConnectionException e){System.out.println(e.getMessage());}
-        catch(AnimalException e){System.out.println(e.getMessage());}
+        catch(AnimalException e){System.out.println(e.getMessage());}*/
     }
 
     public void reinitialisation(){
