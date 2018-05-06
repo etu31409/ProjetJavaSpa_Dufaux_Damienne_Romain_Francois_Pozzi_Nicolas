@@ -134,7 +134,7 @@ public class PanneauFicheDeSoin extends JPanel {
             }
             if (event.getSource() == validerButton) {
                 if (validerChamps()) {
-                    //controller.ajouterFicheDeSoin(); //TODO
+                    //controller.ajouterFicheDeSoin();
                     JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
                 }
                 else

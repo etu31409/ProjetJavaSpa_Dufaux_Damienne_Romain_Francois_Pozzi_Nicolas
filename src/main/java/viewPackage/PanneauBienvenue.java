@@ -9,10 +9,9 @@ public class PanneauBienvenue{
     private ImageIcon image;
     private JPanel panneauContainerPrincipal;
 
-    public PanneauBienvenue(){
-    }
+    public PanneauBienvenue(){}
 
-    public JPanel getPanneauContainerPrincipal(){
+        public JPanel getPanneauContainerPrincipal(){
         return panneauContainerPrincipal;
     }
 }

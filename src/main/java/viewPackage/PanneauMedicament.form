@@ -3,18 +3,18 @@
   <grid id="27dc6" binding="panneauContainerPrincipal" layout-manager="FormLayout">
     <rowspec value="center:32dlu:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:32dlu:noGrow"/>
+    <rowspec value="center:32px:noGrow"/>
+    <rowspec value="top:5dlu:noGrow"/>
+    <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:32dlu:noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:32dlu:noGrow"/>
+    <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="top:28dlu:noGrow"/>
     <rowspec value="top:max(m;4px):noGrow"/>
     <rowspec value="center:32dlu:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <colspec value="left:71px:grow"/>
+    <colspec value="left:98px:grow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
@@ -24,7 +24,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="330" height="372"/>
+      <xy x="20" y="20" width="339" height="291"/>
     </constraints>
     <properties>
       <background color="-4793107"/>

@@ -9,9 +9,9 @@ public class  FenetrePrincipale extends JFrame{
     private Controller controller;
     private Container frameContainer;
     private JMenuBar barMenu;
-    private JMenu  spa, recherches, ajout, listing;
+    private JMenu  spa, recherches, ajout, listing, statistique;
     private JMenuItem accueil, quitter, nouvelAnimal, nouvelleFicheDeSoin, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires,
-            rechercheProprietaires, rechercheAnimaux;
+            rechercheProprietaires, rechercheAnimaux, statMedicaments;
     private JPanel panneauBienvenue;
 
     public  FenetrePrincipale(){
@@ -26,8 +26,6 @@ public class  FenetrePrincipale extends JFrame{
         barMenu = new JMenuBar();
         setJMenuBar(barMenu);
 
- //accueil
-
         spa = new JMenu("S.P.A.");
         spa.setMnemonic('S');
         barMenu.add(spa);
@@ -41,8 +39,6 @@ public class  FenetrePrincipale extends JFrame{
         quitter.addActionListener(new ExitListener());
         quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,InputEvent.CTRL_MASK));
         spa.add(quitter);
-
-//ajouts animaux et fiches de soin
 
         ajout = new JMenu("Ajouts");
         ajout.setMnemonic('A');
@@ -83,6 +79,14 @@ public class  FenetrePrincipale extends JFrame{
         listingFicheDeSoin = new JMenuItem("Listing fiches de soin");
         listing.add(listingFicheDeSoin);
         listingFicheDeSoin.addActionListener(new EcouteurBarMenu());
+
+        statistique = new JMenu("Statistiques");
+        statistique.setMnemonic('S');
+        barMenu.add(statistique);
+
+        statMedicaments = new JMenuItem("Médicaments");
+        statistique.add(statMedicaments);
+        statMedicaments.addActionListener(new EcouteurBarMenu());
 
         controller = new Controller();
         setVisible(true);
@@ -152,6 +156,13 @@ public class  FenetrePrincipale extends JFrame{
             else if(event.getSource() == rechercheAnimaux) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheAnimaux(controller).getPanneauContainerPrincipal());
+                frameContainer.setVisible(true);
+                frameContainer.repaint();
+                frameContainer.validate();
+            }
+            else if(event.getSource() == statMedicaments) {
+                frameContainer.removeAll();
+                //frameContainer.add(new PanneauStatistiquesMedic(controller).getPanneauContainerPrincipal());
                 frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();

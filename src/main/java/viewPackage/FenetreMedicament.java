@@ -15,7 +15,7 @@ public class FenetreMedicament extends JFrame {
 
     public FenetreMedicament(Controller controller, PanneauFicheDeSoin panneauFicheDeSoin){
         super("Ajout d'un médicament");
-        setBounds(500, 100, 330, 372);
+        setBounds(500, 100, 360, 322);
         panneauMedicament = new PanneauMedicament(controller, FenetreMedicament.this, panneauFicheDeSoin).getPanneauContainerPrincipal();
         frameContainer = getContentPane();
         frameContainer.setLayout(new BorderLayout());
@@ -31,9 +31,4 @@ public class FenetreMedicament extends JFrame {
             dispose();
         }
     }
-
-    public void fermerFenetre(){
-
-    }
-
 }
