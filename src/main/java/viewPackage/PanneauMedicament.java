@@ -43,21 +43,10 @@ public class PanneauMedicament{
         }
     }
 
-    public void validationFormulaire(){
-        //try{
+    private void validationFormulaire() {
 
         String nomMedic = textFieldNom.getText();
         String stockageMedic = textFieldStockage.getText();
         String dosageMedic = textFieldDosage.getText();
-        Medicament medicament = new Medicament(nomMedic, stockageMedic, dosageMedic);
-
-        /*}
-        catch(MedicamentException exception){
-            JOptionPane.showMessageDialog(null, exception.getMessage());
-        }*/
-    }
-
-    public Medicament getMedicament(){
-        return medicament;
     }
 }

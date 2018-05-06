@@ -103,7 +103,7 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    public Boolean validerChamps(){
+    private Boolean validerChamps(){
         Boolean validationChamp = true;
         textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().equals("")){

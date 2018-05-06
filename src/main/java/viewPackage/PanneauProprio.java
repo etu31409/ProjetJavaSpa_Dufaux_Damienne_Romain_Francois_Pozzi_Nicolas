@@ -32,7 +32,7 @@ public class PanneauProprio {
     }
 
 
-    public Boolean validationFormulaire() {
+    private Boolean validationFormulaire() {
         Boolean estValide = true;
         if (textFieldNom.getText().equals("")) {
             estValide = false;
