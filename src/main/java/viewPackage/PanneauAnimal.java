@@ -40,6 +40,7 @@ public class PanneauAnimal extends JPanel {
     private JButton ajouterUnPropriétaireButton, validerButton, reinitialiserButton, retourButton;
     private JCheckBox aEuthanasierCheckBox;
     private JComboBox comboBoxListeProprietaires;
+    private JCheckBox proprioCheckBox;
 
     private FenetrePrincipale fenetre;
 

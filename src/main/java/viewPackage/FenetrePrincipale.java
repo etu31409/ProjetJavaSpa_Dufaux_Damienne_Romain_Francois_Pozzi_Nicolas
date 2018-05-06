@@ -80,7 +80,7 @@ public class  FenetrePrincipale extends JFrame{
         listing.add(listingAnimaux);
         listingAnimaux.addActionListener(new EcouteurBarMenu());
 
-        listingFicheDeSoin = new JMenuItem("Listing fiches de ajout");
+        listingFicheDeSoin = new JMenuItem("Listing fiches de soin");
         listing.add(listingFicheDeSoin);
         listingFicheDeSoin.addActionListener(new EcouteurBarMenu());
 

@@ -18,7 +18,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private JButton trierButton;
     private JScrollPane listingScrollPane;
     private JTable resultatRecherche;
-    private static HashMap<String, String> listeCriteres = new HashMap<String, String>();;
+    private static HashMap<String, String> listeCriteres = new HashMap<String, String>();
 
 
     public PanneauListingFichesDeSoin(Controller controller) {
@@ -26,7 +26,6 @@ public class PanneauListingFichesDeSoin extends JPanel {
         initialisationListeCriteres();
         instanciationComboBox();
         trierButton.addActionListener(new EcouteurBouton());
-
     }
 
     public JPanel getPanneauContainerPrincipal() {

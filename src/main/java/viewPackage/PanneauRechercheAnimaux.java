@@ -71,7 +71,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("Recherche pour le médicament " + veterinaireChoisi.getNom());
+                        titreFacteurRecherche.setText("Recherche pour le vétérinaire " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
@@ -80,7 +80,7 @@ public class PanneauRechercheAnimaux {
                         tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
                         tableResultat.setFillsViewportHeight(true);
                         scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("Recherche pour le vétérinaire " + medicamentChoisi.getNomMedic());
+                        titreFacteurRecherche.setText("Recherche pour le médicament " + medicamentChoisi.getNomMedic());
                     }
                     else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
