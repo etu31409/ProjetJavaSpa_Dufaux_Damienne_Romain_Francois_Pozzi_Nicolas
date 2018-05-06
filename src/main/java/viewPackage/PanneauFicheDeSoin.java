@@ -10,6 +10,8 @@ import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -101,6 +103,17 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
+    public Boolean validerChamps(){
+        Boolean validationChamp = true;
+        if (textAreaIntituleSoin.getText().equals("")){
+            Border border = BorderFactory.createLineBorder(Color.red);
+            textAreaIntituleSoin.setBorder(BorderFactory.createCompoundBorder(border,
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            validationChamp = false;
+        }
+        return validationChamp;
+    }
+
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == ajouterButton) {
@@ -115,12 +128,20 @@ public class PanneauFicheDeSoin extends JPanel {
                 medicamentsDisposModele.addElement(elementSelectionne);
             }
             if (event.getSource() == validerButton) {
-                //TODO
+                if (validerChamps()) {
+                    //controller.ajouterFicheDeSoin(); //TODO
+                    JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                }
             }
             if (event.getSource() == réinitialiserButton) {
                 urgenceCheckBox.setSelected(false);
                 instancieListeVeterinaire();
                 instancieListeAnimaux();
+                textAreaIntituleSoin.setBorder(null);
                 textAreaIntituleSoin.setText("");
                 textAreaPartieDuCorps.setText("");
                 instancieListeMedicamentsDispos();
