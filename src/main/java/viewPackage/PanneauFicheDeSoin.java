@@ -153,7 +153,7 @@ public class PanneauFicheDeSoin extends JPanel {
                 }
             }
             if (event.getSource() == retourButton) {
-                fenetre.accueil();
+                fenetre.retourAccueil();
             }
             if (event.getSource() == ajouterUnMédicamentButton) {
                 fenetreMedicament = new FenetreMedicament();
