@@ -1,7 +1,6 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import dataAcessPackage.SingletonConnection;
 import exceptionPackage.AnimalException;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
@@ -15,7 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class PanneauAccueil extends JPanel {
+public class PanneauAnimal extends JPanel {
     private Controller controller;
 
     private FenetreProprio fenetreProprio;
@@ -44,7 +43,7 @@ public class PanneauAccueil extends JPanel {
 
     private FenetrePrincipale fenetre;
 
-    public PanneauAccueil(Controller controller, FenetrePrincipale fenetre) {
+    public PanneauAnimal(Controller controller, FenetrePrincipale fenetre) {
         this.fenetre = fenetre;
         this.controller = controller;
 
@@ -114,7 +113,7 @@ public class PanneauAccueil extends JPanel {
                 validationFormulaire();
             }
             if(e.getSource() == retourButton){
-                fenetre.accueil();
+                fenetre.retourAccueil();
             }
             if(e.getSource() == reinitialiserButton){
                 instanciationSpinnerPoids();
