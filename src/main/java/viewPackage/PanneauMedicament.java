@@ -38,32 +38,38 @@ public class PanneauMedicament{
         return panneauContainerPrincipal;
     }
 
-    private Boolean validationFormulaire() {
-        Boolean estValide = true;
-        if (textFieldNom.getText().equals("")) {
-            estValide = false;
+    private Boolean validationFormulaire()throws MedicamentException {
+        if (textFieldNom.getText().equals("") || isDigit(textFieldNom.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldNom.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+            throw new MedicamentException("Nom invalide - Le nom doit être une chaine de caractères non vide !");
         }
-        if (textFieldStockage.getText().equals("")) {
-            estValide = false;
+        if (textFieldStockage.getText().equals("") || isDigit(textFieldStockage.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldStockage.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+            throw new MedicamentException("Stockage invalide - Le stockage doit être une chaine de caractères non vide !");
         }
-        if (textFieldDosage.getText().equals("")) {
-            estValide = false;
+        if (textFieldDosage.getText().equals("") || isDigit(textFieldDosage.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldDosage.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+            throw new MedicamentException("Dosage invalide - Le dosage doit être une chaine de caractères non vide !");
         }
-        return estValide;
+        return true;
+    }
+
+    private boolean isDigit(String chaine) {
+        try {
+            Integer.parseInt(chaine);
+        } catch (NumberFormatException e){
+            return false;
+        }return true;
     }
 
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            fenetreMedicament.dispose();
             if (event.getSource() == buttonValider){
                 try {
                     textFieldNom.setBorder(null);
@@ -76,8 +82,6 @@ public class PanneauMedicament{
                         panneauFicheDeSoin.ajouterMedicamentAListeMedicamentsDispos(medicament);
                         fenetreMedicament.dispose();
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
                     }
                 }catch (MedicamentException e){
                     JOptionPane.showMessageDialog(null, e.getMessage());

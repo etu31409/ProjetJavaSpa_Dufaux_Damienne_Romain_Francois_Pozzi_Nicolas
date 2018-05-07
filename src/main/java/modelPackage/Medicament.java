@@ -57,7 +57,7 @@ public class Medicament {
     }
 
     public String toString (){
-       return this.getNomMedic() + " " + this.getStockage() + " " +
+       return this.getNomMedic() + " - " + this.getStockage() + " - " +
          this.getDosage();
     }
 }
