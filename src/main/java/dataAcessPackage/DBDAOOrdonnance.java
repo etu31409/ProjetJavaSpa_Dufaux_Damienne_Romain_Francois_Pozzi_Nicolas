@@ -30,8 +30,8 @@ public class DBDAOOrdonnance implements IOrdonnance{
             while (data.next()) {
                 Ordonnance ordonnance = new Ordonnance();
                 ISoinAvance soinAvance = new DBDAOSoinAvance();
-                IAnimal animal = new DBDAOAnimal();
                 ordonnance.setSoinAvance(soinAvance.getUnSoinAvance(data.getInt("numSoin")));
+                IAnimal animal = new DBDAOAnimal();
                 ordonnance.setAnimal(animal.getUnAnimal(data.getInt("numRegistre")));
                 IMedicament medicament = new DBDAOMedicament();
                 ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")));
