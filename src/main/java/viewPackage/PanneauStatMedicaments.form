@@ -6,14 +6,15 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:20dlu:noGrow"/>
     <rowspec value="top:5dlu:noGrow"/>
     <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:max(m;4px):noGrow"/>
-    <rowspec value="center:32px:noGrow"/>
+    <rowspec value="top:26px:noGrow"/>
+    <rowspec value="center:23px:noGrow"/>
     <rowspec value="top:max(m;4px):noGrow"/>
-    <rowspec value="center:32px:noGrow"/>
-    <rowspec value="top:max(m;4px):noGrow"/>
-    <rowspec value="center:32px:noGrow"/>
+    <rowspec value="center:26px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:32px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -25,11 +26,19 @@
     <colspec value="fill:86dlu:noGrow"/>
     <colspec value="fill:max(m;4px):noGrow"/>
     <colspec value="left:max(m;4px):noGrow"/>
-    <colspec value="fill:626px:noGrow"/>
-    <colspec value="fill:5dlu:noGrow"/>
+    <colspec value="fill:802px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:31px:noGrow"/>
+    <colspec value="left:15dlu:noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
+    <colspec value="left:16dlu:noGrow"/>
+    <colspec value="fill:22px:noGrow"/>
+    <colspec value="left:20dlu:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="816" height="400"/>
+      <xy x="20" y="20" width="1154" height="400"/>
     </constraints>
     <properties>
       <background color="-5911588"/>
@@ -38,7 +47,7 @@
     <children>
       <component id="b8cb6" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="2" row-span="1" col-span="12" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
@@ -48,27 +57,27 @@
       </component>
       <hspacer id="6613a">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="5" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="4" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
       <vspacer id="217de">
         <constraints>
-          <grid row="6" column="4" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="4" row-span="10" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
       <component id="608f6" class="javax.swing.JSpinner" binding="spinnerDateDebut">
         <constraints>
-          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="624d6" class="javax.swing.JCheckBox" binding="checkBoxDateFin">
         <constraints>
-          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
           <background color="-5911588"/>
@@ -77,14 +86,14 @@
       </component>
       <component id="a7979" class="javax.swing.JSpinner" binding="spinnerDateFin">
         <constraints>
-          <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
+          <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
       <scrollpane id="26e7" binding="scrollPane">
         <constraints>
-          <grid row="6" column="5" row-span="11" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="5" row-span="10" col-span="9" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -93,7 +102,7 @@
       </scrollpane>
       <component id="f47cd" class="javax.swing.JButton" binding="rechercherButton">
         <constraints>
-          <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="15" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -103,14 +112,26 @@
       </component>
       <component id="ae7a5" class="javax.swing.JCheckBox" binding="checkBoxDateDebut" default-binding="true">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
           <background color="-5911588"/>
           <text value="Date de début"/>
         </properties>
       </component>
+      <vspacer id="695d0">
+        <constraints>
+          <grid row="8" column="14" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+      </vspacer>
+      <hspacer id="3f706">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="4" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>
