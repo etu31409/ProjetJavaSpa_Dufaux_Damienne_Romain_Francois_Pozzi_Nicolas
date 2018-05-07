@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import exceptionPackage.MedicamentException;
+import exceptionPackage.SingletonConnectionException;
 import modelPackage.Medicament;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -70,8 +71,8 @@ public class PanneauMedicament{
                     textFieldDosage.setBorder(null);
                     if (validationFormulaire()) {
                         Medicament medicament = new Medicament(textFieldStockage.getText(), textFieldDosage.getText(), textFieldNom.getText());
-                        //controller.ajouterNouveauMedicament(medicament); //TODO
-                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
+                        controller.ajouterMedicament(medicament);
+                        JOptionPane.showMessageDialog(null, "Le médicament a correctement été ajouté à la base de données !");
                         panneauFicheDeSoin.ajouterMedicamentAListeMedicamentsDispos(medicament);
                         fenetreMedicament.dispose();
 
@@ -79,6 +80,8 @@ public class PanneauMedicament{
                         JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
                     }
                 }catch (MedicamentException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }catch (SingletonConnectionException e){
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
 

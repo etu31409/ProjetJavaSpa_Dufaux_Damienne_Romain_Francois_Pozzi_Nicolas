@@ -12,4 +12,5 @@ public interface IMedicament {
     Medicament getUnMedicament(int identifiantMed)throws SingletonConnectionException, MedicamentException;
     String [][] getOrdonnancesEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, OrdonnanceException, MedicamentException;
+    void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException;
 }

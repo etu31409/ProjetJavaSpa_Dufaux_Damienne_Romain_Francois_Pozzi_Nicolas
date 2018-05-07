@@ -81,11 +81,11 @@ public class Business {
 
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
-    }
+    }*/
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
-    }*/
+    }
 
 
     //tache metier

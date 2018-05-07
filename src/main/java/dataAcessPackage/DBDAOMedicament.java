@@ -76,8 +76,12 @@ public class DBDAOMedicament implements IMedicament {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into animal values (?, ?, ?);";
+            sqlInstruction = "insert into spabd.medicament(nomMedic, stockage, dosage) values (?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1,medicament.getNomMedic());
+            preparedStatement.setString(2,medicament.getDosage());
+            preparedStatement.setString(3,medicament.getStockage());
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             throw new MedicamentException("Erreur lors de l'insertion du médicament !");
@@ -135,5 +139,6 @@ public class DBDAOMedicament implements IMedicament {
                     " préscrits entre deux dates");
         }
     }
+
 }
 

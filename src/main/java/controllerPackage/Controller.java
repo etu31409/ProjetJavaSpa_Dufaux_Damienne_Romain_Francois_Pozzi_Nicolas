@@ -74,11 +74,13 @@ public class Controller {
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }
 
-    /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+    /*
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         business.ajouterOrdonnance(ordonnance);
     }
 
+    */
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);
-    }*/
+    }
 }
