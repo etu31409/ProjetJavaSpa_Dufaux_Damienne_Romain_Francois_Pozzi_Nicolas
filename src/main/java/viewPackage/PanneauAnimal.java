@@ -234,30 +234,69 @@ public class PanneauAnimal extends JPanel {
 
     private Animal creationAnimal(){
         Animal animal = new Animal();
+        if(nomTextField.getText().isEmpty()){
+            nomTextField = null;
+        }
         animal.setNom(nomTextField.getText());
+
         animal.setPoids((Double)spinnerPoids.getValue());
         if (femelleRadioButton.isSelected())
             animal.setSexe("F");
         else
             animal.setSexe("M");
+        if(especeTextField.getText().isEmpty()){
+            especeTextField = null;
+        }
         animal.setEspece(especeTextField.getText());
+
+        if(raceTextField.getText().isEmpty()){
+            raceTextField = null;
+        }
         animal.setRace(raceTextField.getText());
         if(dateDeNaissanceCheckBox.isSelected()){
             GregorianCalendar date = new GregorianCalendar();
             date.setTime((Date)spinnerDateNaissance.getValue());
             animal.setDateNaissance(date);
         }
+        if(couleurTextField.getText().isEmpty()){
+            couleurTextField = null;
+        }
+
         animal.setCouleurDePeau(couleurTextField.getText());
-        animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
-        animal.setLocalisationPuce(localisationPuceTextField.getText());
+
+        try{
+            animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
+        }
+        catch (Exception error){
+            numPuceTextField = null;
+        }
+
+        if(!localisationPuceTextField.getText().isEmpty()){
+            animal.setLocalisationPuce(localisationPuceTextField.getText());
+            //localisationPuceTextField = null;
+        }
+
         if(dateDAttributionPuceCheckBox.isSelected()){
             GregorianCalendar date = new GregorianCalendar();
             date.setTime((Date)spinnerDatePuce.getValue());
             animal.setDateNaissance(date);
         }
-        animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
-        animal.setLocalisationPuce(localisationPuceTextField.getText());
-        animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
+
+        try{
+            animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
+        }
+        catch (Exception erreur){
+            numTatouageTextField= null;
+        }
+        if(localisationTatouageTextField.getText().isEmpty()){
+            localisationTatouageTextField= null;
+        }
+       // animal.setLocalisationTatouage(localisationTatouageTextField.getText());
+        try{
+            animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
+        }
+        catch(Exception erreur){comboBoxListeProprietaires = null;}
+        System.out.println(animal);
         return animal;
     }
 
@@ -319,8 +358,16 @@ public class PanneauAnimal extends JPanel {
                 erreurMessage = "Certains champs sont invalides !\n";
                 reinitialiserBorder();
                 if (validationFormulaire()) {
-                    //TODO controller.ajouterFicheDeSoin(creationAnimal());
-                    JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !");
+                    try{
+                        controller.ajouterAnimal(creationAnimal());
+                        JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !");
+                    }
+                    catch(SingletonConnectionException exception){
+                        JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
+                    }
+                    catch(Exception exception) {
+                        System.out.println("Exception :" + exception.getMessage());
+                    }
                 }
                 else
                 {

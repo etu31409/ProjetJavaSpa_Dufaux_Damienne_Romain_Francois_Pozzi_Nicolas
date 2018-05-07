@@ -341,8 +341,8 @@ public class DBDAOAnimal implements IAnimal {
                     " race," +
                     " sexe," +
                     "estSterilise," +
-                    " couleurDePeau," +
-                    " poids)" +
+                    "couleurDePeau," +
+                    "poids)" +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setNull(1, 0);
@@ -355,7 +355,7 @@ public class DBDAOAnimal implements IAnimal {
             preparedStatement.setString(7, animal.getCouleurDePeau());
             preparedStatement.setDouble(8, animal.getPoids());
             //facultatifs
-
+            System.out.println("test");
             preparedStatement.executeUpdate();
             //colonnes facultatives (j'arrive pas à faire comme dans les slides (il faudrait récupérer l'identifiant courant pour cela...))
            /* if(animal.getNom() != null){
@@ -364,8 +364,9 @@ public class DBDAOAnimal implements IAnimal {
             */
         } catch (SQLException e) {
             //throw new AnimalException("Erreur lors de l'insertion de l'animal !");
-            System.out.println(e.getMessage());
+            System.out.println("SQL exception" + e.getMessage());
         }
+       // catch(Exception exception){System.out.prin}
        // catch (AnimalException exception){exception.getMessage();}
     }
 
