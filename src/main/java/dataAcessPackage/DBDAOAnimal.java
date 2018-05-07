@@ -344,10 +344,10 @@ public class DBDAOAnimal implements IAnimal {
                     "couleurDePeau," +
                     "poids)" +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
+            java.sql.Date sqlDate = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setNull(1, 0);
-            java.sql.Date sqlDateAttivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
-            preparedStatement.setDate(2, sqlDateAttivee);
+            preparedStatement.setNull(1, Types.INTEGER);
+            preparedStatement.setDate(2, sqlDate);
             preparedStatement.setString(3, animal.getEspece());
             preparedStatement.setString(4, animal.getRace());
             preparedStatement.setString(5, animal.getSexe());
@@ -366,7 +366,7 @@ public class DBDAOAnimal implements IAnimal {
             //throw new AnimalException("Erreur lors de l'insertion de l'animal !");
             System.out.println("SQL exception" + e.getMessage());
         }
-       // catch(Exception exception){System.out.prin}
+        catch(Exception exception){System.out.println(exception.getMessage());}
        // catch (AnimalException exception){exception.getMessage();}
     }
 
