@@ -6,6 +6,7 @@ import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 public class Business {
     IAnimal daoAnimal;
@@ -91,12 +92,53 @@ public class Business {
     //tache metier
 
     public String[][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
-            throws SingletonConnectionException, MedicamentException, OrdonnanceException{
-        String[][]listeResultatRechercheOrdonnances = daoMedicament.getOrdonnancesEntreDeuxDates(dateDebutZoneRecherche,
+            throws SingletonConnectionException, MedicamentException {
+
+        ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
                 dateFinZoneRecherche);
 
+        HashMap<String, Double> statistiques = new HashMap<>();
+        Double compteurParMedicament = 1.;
+        Double pourcentageParMedicament;
+        Integer compteurGlobal = 0;
 
+        for (StatMedicament sm : listeResultatRechercheOrdonnances) {
+            compteurGlobal++;
+            if (!statistiques.containsKey(sm.getNomMedic())) {
+                statistiques.put(sm.getNomMedic(), 1.);
+            }
+            else {
+                Double test;
+                test = statistiques.get(sm.getNomMedic());
+                compteurParMedicament = statistiques.get(sm.getNomMedic())+1;
+                statistiques.replace(sm.getNomMedic(), compteurParMedicament);
+            }
+        }
 
-        return null;
+        for (String nomMedic : statistiques.keySet()) {
+            for (StatMedicament statMedicament : listeResultatRechercheOrdonnances) {
+                if (statMedicament.getNomMedic().equals(nomMedic)) {
+                    pourcentageParMedicament = statistiques.get(nomMedic) / compteurGlobal;
+                    statistiques.replace(nomMedic, pourcentageParMedicament);
+                }
+            }
+        }
+
+        String[][] resultatStatistiques = new String[statistiques.size()][2];
+
+        int i = 0;
+        for(String nomMedic : statistiques.keySet()){
+            resultatStatistiques[i][0] = nomMedic;
+            i++;
+        }
+        String resultat;
+        i = 0;
+        for(Double pourcentage : statistiques.values()){
+            resultat = Double.toString(pourcentage*100);
+            resultatStatistiques[i][1] = resultat + " %";
+            i++;
+        }
+        //TODO
+        return resultatStatistiques;
     }
 }
