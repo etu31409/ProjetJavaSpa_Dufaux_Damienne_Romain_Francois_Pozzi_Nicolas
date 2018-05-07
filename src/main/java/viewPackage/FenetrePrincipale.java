@@ -102,6 +102,14 @@ public class  FenetrePrincipale extends JFrame{
         FenetrePrincipale.this.setVisible(true);
     }
 
+    public void afficherStatistique(){
+        frameContainer.removeAll();
+        frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
+        frameContainer.setVisible(true);
+        frameContainer.repaint();
+        frameContainer.validate();
+    }
+
     private class ExitListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             System.exit(0);
@@ -162,10 +170,13 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
+                PanneauChargement panneauChargement = new PanneauChargement(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal(), FenetrePrincipale.this);
+                frameContainer.add(panneauChargement);
                 frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
+                panneauChargement.getG().start();
+
             }
         }
     }

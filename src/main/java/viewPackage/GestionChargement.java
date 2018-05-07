@@ -2,15 +2,16 @@ package viewPackage;
 
 import javax.swing.*;
 
-public class GestionChargement {
+public class GestionChargement extends Thread{
     private JProgressBar barre;
-    private JPanel panneauCharge, fen;
+    private JPanel panneauCharge;
+    private FenetrePrincipale fenetrePrincipale;
 
-    public GestionChargement(JProgressBar barre, JPanel panneauCharge, JPanel fen)
+    public GestionChargement(JProgressBar barre, JPanel panneauCharge, FenetrePrincipale fenetrePrincipale)
     {
         this.barre = barre;
         this.panneauCharge = panneauCharge;
-        this.fen = fen;
+        this.fenetrePrincipale = fenetrePrincipale;
     }
 
     public void run()
@@ -34,7 +35,7 @@ public class GestionChargement {
                 e.printStackTrace();
             }
         }
-        panneauCharge.setVisible(true);
+        fenetrePrincipale.afficherStatistique();
     }
 }
 
