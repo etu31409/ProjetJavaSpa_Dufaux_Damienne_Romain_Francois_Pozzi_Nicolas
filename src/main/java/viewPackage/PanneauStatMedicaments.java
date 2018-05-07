@@ -4,12 +4,15 @@ import controllerPackage.Controller;
 import exceptionPackage.MedicamentException;
 import exceptionPackage.OrdonnanceException;
 import exceptionPackage.SingletonConnectionException;
+import modelPackage.StatMedicament;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -56,6 +59,7 @@ public class PanneauStatMedicaments {
         return panneauContainerPrincipal;
     }
 
+
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == rechercherButton){
@@ -79,10 +83,10 @@ public class PanneauStatMedicaments {
                         return;
                     }
 
-                    String[][] selectionStatistiques = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
+                    String [][] selectionStatistiques = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
-                    String[] nomDesColonnes = {"Nom du médicament", "Pourcentage d'utilisation dans l'interval", "Date de l'ordonnance"};
-                    resultatStatistiques = new JTable(selectionStatistiques, nomDesColonnes);
+                    String[] nomDesColonnes = {"Nom du médicament", "Pourcentage d'utilisation dans l'interval de temps"};
+                    resultatStatistiques= new JTable(selectionStatistiques, nomDesColonnes);
                     resultatStatistiques.setFillsViewportHeight(true);
                     scrollPane.setViewportView(resultatStatistiques);
                 }
@@ -90,9 +94,6 @@ public class PanneauStatMedicaments {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (MedicamentException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-                catch (OrdonnanceException e){
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
