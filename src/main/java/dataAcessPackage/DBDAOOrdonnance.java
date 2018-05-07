@@ -46,4 +46,20 @@ public class DBDAOOrdonnance implements IOrdonnance{
             throw new OrdonnanceException();
         }
     }
+
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException {
+        try{/*
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "insert into spabd.ordonnance(nomMedic, stockage, dosage) values (?, ?, ?);";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1,ordonnance.getNomMedic());
+            preparedStatement.setString(2,ordonnance.getDosage());
+            preparedStatement.setString(3,ordonnance.getStockage());
+            preparedStatement.executeUpdate();*/
+        }catch (Exception e) {
+            throw new OrdonnanceException("Problème lors de l'insertion de l'ordonnance");
+        }
+    }
 }

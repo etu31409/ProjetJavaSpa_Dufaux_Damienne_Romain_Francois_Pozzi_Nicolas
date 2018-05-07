@@ -9,9 +9,9 @@ public class Ordonnance {
     private GregorianCalendar dateOrdonnance;
 
     public Ordonnance(SoinAvance soinAvance, Animal animal, Medicament medicament, GregorianCalendar dateOrdonnance) {
-        this.soinAvance = soinAvance;
-        this.animal = animal;
-        this.medicament = medicament;
+        setSoinAvance(soinAvance);
+        setAnimal(animal);
+        setMedicament(medicament);
         this.dateOrdonnance = dateOrdonnance;
     }
 

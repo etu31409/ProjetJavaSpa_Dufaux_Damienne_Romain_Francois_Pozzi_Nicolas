@@ -54,7 +54,6 @@ public class Controller {
     }
 
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
-        System.out.println("test");
         business.ajouterAnimal(animal);
     }
 
@@ -75,12 +74,13 @@ public class Controller {
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }
 
-    /*
+
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         business.ajouterOrdonnance(ordonnance);
     }
 
-    */
+    public void ajouterFicheDeSoins(){}
+
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);
     }

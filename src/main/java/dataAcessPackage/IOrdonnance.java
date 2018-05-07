@@ -9,6 +9,6 @@ import java.util.GregorianCalendar;
 public interface IOrdonnance {
     ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
             MedicamentException, AnimalException, ProprietaireException, VeterinaireException, SoinException;
-
+    void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException;
 
 }

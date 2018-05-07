@@ -1,13 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.AnimalException;
-import exceptionPackage.MedicamentException;
-import exceptionPackage.SingletonConnectionException;
-import exceptionPackage.VeterinaireException;
-import modelPackage.Animal;
-import modelPackage.Medicament;
-import modelPackage.Veterinaire;
+import exceptionPackage.*;
+import modelPackage.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -58,8 +53,8 @@ public class PanneauFicheDeSoin extends JPanel {
     public void instancieListeVeterinaire() {
         comboBoxVeterinaires.removeAllItems();
         try {
-            for (Veterinaire v : controller.getVeterinaires()) {
-                comboBoxVeterinaires.addItem(v);
+            for (Veterinaire veto : controller.getVeterinaires()) {
+                comboBoxVeterinaires.addItem(veto);
             }
         } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -121,6 +116,7 @@ public class PanneauFicheDeSoin extends JPanel {
 
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            Ordonnance ordonnance;
             if (event.getSource() == ajouterButton) {
                 Medicament elementSelectionne = (Medicament) listMedicamentsDispos.getSelectedValue();
                 medicamentsDisposModele.removeElement(elementSelectionne);
@@ -134,7 +130,13 @@ public class PanneauFicheDeSoin extends JPanel {
             }
             if (event.getSource() == validerButton) {
                 if (validerChamps()) {
-                    //controller.ajouterFicheDeSoin();
+                    for (int i = 0 ; i < medicamentsChoisisModele.getSize(); i++) {
+                        //Créer une fiche de soins (SoinAvance)
+                        controller.ajouterFicheDeSoins();
+                        ordonnance = new Ordonnance();
+                        //controller.ajouterOrdonnance(); //TODO
+                        //controller.ajouterFicheDeSoins();
+                    }
                     JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
                 }
                 else

@@ -79,9 +79,9 @@ public class Business {
         daoProprietaire.ajouterNouveauProprio(proprietaire);
     }
 
-    /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
-    }*/
+    }
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
