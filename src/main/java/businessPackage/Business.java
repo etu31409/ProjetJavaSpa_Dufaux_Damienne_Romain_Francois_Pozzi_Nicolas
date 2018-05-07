@@ -86,5 +86,17 @@ public class Business {
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }*/
+
+
     //tache metier
+
+    public String[][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+            throws SingletonConnectionException, MedicamentException, OrdonnanceException{
+        String[][]listeResultatRechercheOrdonnances = daoMedicament.getOrdonnancesEntreDeuxDates(dateDebutZoneRecherche,
+                dateFinZoneRecherche);
+
+
+
+        return null;
+    }
 }

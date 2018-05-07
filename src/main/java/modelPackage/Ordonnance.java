@@ -48,6 +48,4 @@ public class Ordonnance {
     public void setDateOrdonnance(GregorianCalendar dateOrdonnance) {
         this.dateOrdonnance = dateOrdonnance;
     }
-
-
 }

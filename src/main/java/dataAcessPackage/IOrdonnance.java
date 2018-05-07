@@ -4,7 +4,11 @@ import exceptionPackage.*;
 import modelPackage.Ordonnance;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public interface IOrdonnance {
-    public ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException, MedicamentException, AnimalException, ProprietaireException, VeterinaireException, SoinException;
+    ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
+            MedicamentException, AnimalException, ProprietaireException, VeterinaireException, SoinException;
+
+
 }

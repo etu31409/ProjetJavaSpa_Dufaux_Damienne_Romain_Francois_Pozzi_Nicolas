@@ -35,7 +35,7 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
-    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="left:32dlu:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="fill:m:noGrow"/>
@@ -50,7 +50,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:m:grow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:max(d;4px):noGrow"/>
+    <colspec value="fill:32dlu:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
@@ -185,36 +185,6 @@
           <text value="Ajouter un médicament"/>
         </properties>
       </component>
-      <component id="3240d" class="javax.swing.JButton" binding="validerButton" default-binding="true">
-        <constraints>
-          <grid row="29" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <background color="-2565928"/>
-          <text value="Valider"/>
-        </properties>
-      </component>
-      <component id="67bc9" class="javax.swing.JButton" binding="réinitialiserButton" default-binding="true">
-        <constraints>
-          <grid row="29" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <background color="-2565928"/>
-          <text value="Réinitialiser"/>
-        </properties>
-      </component>
-      <component id="1ea6b" class="javax.swing.JButton" binding="retourButton" default-binding="true">
-        <constraints>
-          <grid row="29" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <background color="-2565928"/>
-          <text value="Retour"/>
-        </properties>
-      </component>
       <hspacer id="f45fe">
         <constraints>
           <grid row="25" column="1" row-span="1" col-span="17" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -325,6 +295,36 @@
           </scrollpane>
         </children>
       </grid>
+      <component id="3240d" class="javax.swing.JButton" binding="validerButton" default-binding="true">
+        <constraints>
+          <grid row="29" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-2565928"/>
+          <text value="Valider"/>
+        </properties>
+      </component>
+      <component id="67bc9" class="javax.swing.JButton" binding="réinitialiserButton" default-binding="true">
+        <constraints>
+          <grid row="29" column="10" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-2565928"/>
+          <text value="Réinitialiser"/>
+        </properties>
+      </component>
+      <component id="1ea6b" class="javax.swing.JButton" binding="retourButton" default-binding="true">
+        <constraints>
+          <grid row="29" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-2565928"/>
+          <text value="Retour"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

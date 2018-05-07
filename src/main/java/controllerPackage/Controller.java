@@ -69,6 +69,11 @@ public class Controller {
         business.ajouterNouveauProprio(proprietaire);
     }
 
+    public String[][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    throws SingletonConnectionException, MedicamentException, OrdonnanceException{
+        return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
+    }
+
     /*public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
         business.ajouterOrdonnance(ordonnance);
     }

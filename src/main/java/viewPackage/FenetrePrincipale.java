@@ -162,7 +162,7 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
-                //frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
                 frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();

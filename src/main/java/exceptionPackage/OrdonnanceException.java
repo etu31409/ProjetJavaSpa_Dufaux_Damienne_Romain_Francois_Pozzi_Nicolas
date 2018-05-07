@@ -8,6 +8,10 @@ public class OrdonnanceException extends Exception  {
         message = "Erreur lors de la récuperation de l'ordonnance.";
     }
 
+    public OrdonnanceException(String message){
+        this.message = message;
+    }
+
     public String getMessage()
     {
         return message;
