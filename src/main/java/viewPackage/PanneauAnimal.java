@@ -261,6 +261,7 @@ public class PanneauAnimal extends JPanel {
         if(couleurTextField.getText().isEmpty()){
             couleurTextField = null;
         }
+
         animal.setCouleurDePeau(couleurTextField.getText());
 
         try{
@@ -270,10 +271,11 @@ public class PanneauAnimal extends JPanel {
             numPuceTextField = null;
         }
 
-        if(localisationPuceTextField.getText().isEmpty()){
-            localisationPuceTextField = null;
+        if(!localisationPuceTextField.getText().isEmpty()){
+            animal.setLocalisationPuce(localisationPuceTextField.getText());
+            //localisationPuceTextField = null;
         }
-        animal.setLocalisationPuce(localisationPuceTextField.getText());
+
         if(dateDAttributionPuceCheckBox.isSelected()){
             GregorianCalendar date = new GregorianCalendar();
             date.setTime((Date)spinnerDatePuce.getValue());
@@ -281,18 +283,19 @@ public class PanneauAnimal extends JPanel {
         }
 
         try{
-            animal.setNumPuce(Integer.parseInt(numTatouageTextField.getText()));
+            animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
         }
-        catch (Exception error){
+        catch (Exception erreur){
             numTatouageTextField= null;
         }
-        animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
-        System.out.println("Num tatouage :" + numTatouageTextField.getText());
         if(localisationTatouageTextField.getText().isEmpty()){
             localisationTatouageTextField= null;
         }
-        animal.setLocalisationPuce(localisationTatouageTextField.getText());
-        animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
+       // animal.setLocalisationTatouage(localisationTatouageTextField.getText());
+        try{
+            animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
+        }
+        catch(Exception erreur){comboBoxListeProprietaires = null;}
         System.out.println(animal);
         return animal;
     }
@@ -363,7 +366,7 @@ public class PanneauAnimal extends JPanel {
                         JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
                     }
                     catch(Exception exception) {
-                        System.out.println(exception.getMessage());
+                        System.out.println("Exception :" + exception.getMessage());
                     }
                 }
                 else

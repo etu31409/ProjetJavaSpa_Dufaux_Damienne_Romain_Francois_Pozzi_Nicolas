@@ -54,6 +54,7 @@ public class Controller {
     }
 
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        System.out.println("test");
         business.ajouterAnimal(animal);
     }
 
