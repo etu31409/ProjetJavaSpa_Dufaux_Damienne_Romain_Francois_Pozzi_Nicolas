@@ -2,7 +2,7 @@ package modelPackage;
 
 public class StatMedicament {
     private String nomMedic;
-    private Double pourcentage;
+    private Integer pourcentage;
 
     public StatMedicament(){}
 
@@ -14,11 +14,11 @@ public class StatMedicament {
         this.nomMedic = nomMedic;
     }
 
-    public Double getPourcentage() {
+    public Integer getPourcentage() {
         return pourcentage;
     }
 
-    public void setPourcentage(Double pourcentage) {
+    public void setPourcentage(Integer pourcentage) {
         this.pourcentage = pourcentage;
     }
 }

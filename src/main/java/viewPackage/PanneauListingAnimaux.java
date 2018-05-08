@@ -33,7 +33,6 @@ public class PanneauListingAnimaux extends JPanel {
         buttonTri.addActionListener(new EcouteurBouton());
     }
 
-
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
     }
