@@ -80,7 +80,8 @@ public class DBDAOProprietaire implements IProprietaire{
 
             ArrayList<ProprietaireAnimal> listeResultatRecherche = new ArrayList<ProprietaireAnimal>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, \n" +
+                    "spabd.proprietaire.nom\n" +
                     "from spabd.animal\n" +
                     "inner join spabd.proprietaire\n" +
                     "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
@@ -94,8 +95,14 @@ public class DBDAOProprietaire implements IProprietaire{
             data = statement.executeQuery();
 
             while (data.next()) {
-
+                ProprietaireAnimal proprietaireAnimal = new ProprietaireAnimal();
+                proprietaireAnimal.setNumRegistreAnimal(data.getInt(1));
+                proprietaireAnimal.setNomAnimal(data.getString(2));
+                proprietaireAnimal.setIdentifiantProprio(data.getInt(3));
+                proprietaireAnimal.setNomProprio(data.getString(4));
+                listeResultatRecherche.add(proprietaireAnimal);
             }
+
             return listeResultatRecherche;
         } catch (SQLException e) {
             throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");

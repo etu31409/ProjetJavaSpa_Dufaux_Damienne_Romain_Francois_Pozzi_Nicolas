@@ -56,7 +56,6 @@ public class DBDAOMedicament implements IMedicament {
             data = statement.executeQuery();
 
             Medicament medicament = new Medicament();
-            GregorianCalendar datePreparation = new GregorianCalendar();
 
             while (data.next()) {
                 medicament.setIdentifiantMed(data.getInt("identifiantMed"));

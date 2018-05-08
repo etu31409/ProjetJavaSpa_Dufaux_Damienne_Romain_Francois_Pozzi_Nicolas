@@ -7,6 +7,7 @@ public class ProprietaireAnimal {
     private Integer identifiantProprio;
     private String nomProprio;
 
+    public ProprietaireAnimal(){}
     public ProprietaireAnimal(Integer numRegistreAnimal, String nomAnimal, Integer identifiantProprio, String nomProprio) {
         setNumRegistreAnimal(numRegistreAnimal);
         setNomAnimal(nomAnimal);
