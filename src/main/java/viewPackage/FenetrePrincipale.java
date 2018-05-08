@@ -23,7 +23,6 @@ public class  FenetrePrincipale extends JFrame{
 
         PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
         frameContainer.add(panneauChargement);
-        //frameContainer.add(panneauBienvenue, BorderLayout.CENTER);
         panneauChargement.getG().start();
         barMenu = new JMenuBar();
         setJMenuBar(barMenu);
@@ -122,13 +121,6 @@ public class  FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if (event.getSource() == accueil){
                 afficherAccueil();
-                //frameContainer.removeAll();
-                //panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
-                //PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
-                //frameContainer.add(panneauChargement);
-                //frameContainer.repaint();
-                //frameContainer.validate();
-                //panneauChargement.getG().start();
             }
             else if(event.getSource() == nouvelAnimal){
                 frameContainer.removeAll();
@@ -174,12 +166,9 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
-                //PanneauChargement panneauChargement = new PanneauChargement(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal(), FenetrePrincipale.this);
-                //frameContainer.add(panneauChargement);
                 frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-                //panneauChargement.getG().start();
             }
         }
     }
