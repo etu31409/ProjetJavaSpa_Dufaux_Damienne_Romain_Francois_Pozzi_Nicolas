@@ -10,9 +10,9 @@ import java.util.*;
 public class DBDAOVeterinaire implements IVeterinaire{
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public  ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         try {
 
@@ -69,53 +69,40 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
-    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-               GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
+    //recherche
+    public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+            throws SingletonConnectionException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-
-            sqlInstruction = "select count(*)" +
-                    "from spabd.veterinaire\n" +
-                    "inner join spabd.soinAvance\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "inner join spabd.ordonnance\n" +
-                    "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
-                    "where spabd.ordonnance.dateOrdonnance between ? and ?";
-
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
-            statement.setDate(2, new Date(dateFin.getTimeInMillis()));
-            data = statement.executeQuery();
-            data.next();
-            Integer nombreDeLignes = data.getInt(1);
-
-            String[][] listeResultatRechercheParDate = new String[nombreDeLignes][];
+            ArrayList<VeterinaireOrdonnance>listeResultatRecherche = new ArrayList<>();
+            GregorianCalendar dateSoin = new GregorianCalendar();
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
                     "spabd.ordonnance.dateOrdonnance\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "inner join spabd.ordonnance\n" +
-                    "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
-                    "where spabd.ordonnance.dateOrdonnance between ? and ?";
+                    "where spabd.soinAvance.dateSoin between ? and ?" +
+                    "and spabd.ordonnance";
+            //TODO
 
-            statement = connectionUnique.prepareStatement(sqlInstruction);
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
             statement.setDate(2, new Date(dateFin.getTimeInMillis()));
             data = statement.executeQuery();
-            int i = 0;
 
             while (data.next()) {
-                listeResultatRechercheParDate[i] = new String[3];
-                listeResultatRechercheParDate[i][0] = Integer.toString(data.getInt(1));
-                listeResultatRechercheParDate[i][1] = data.getString(2);
-                listeResultatRechercheParDate[i][2] = data.getDate(3).toString();
-                i++;
+                VeterinaireOrdonnance veto = new VeterinaireOrdonnance();
+                veto.setIdentifiantVeto(data.getInt(1));
+                veto.setNomVeto(data.getString(2));
+                dateSoin.setTime(data.getDate(3));
+                veto.setDateOrdonnance(dateSoin);
+
+                listeResultatRecherche.add(veto);
             }
-            return listeResultatRechercheParDate;
+            return listeResultatRecherche;
 
         } catch (SQLException e) {
             throw new VeterinaireException("Erreur lors de la récupération du résultat de la recherche des vétérinaires" +

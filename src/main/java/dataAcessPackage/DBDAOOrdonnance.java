@@ -10,9 +10,9 @@ import java.util.GregorianCalendar;
 public class DBDAOOrdonnance implements IOrdonnance{
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
             MedicamentException, AnimalException, VeterinaireException, SoinException {
         try {
@@ -47,6 +47,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
         }
     }
 
+    //ajout
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException {
         try{/*
             if (connectionUnique == null) {

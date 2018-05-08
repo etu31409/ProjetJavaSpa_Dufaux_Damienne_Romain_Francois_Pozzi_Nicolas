@@ -6,6 +6,7 @@ import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 public class Controller {
     private Business business;
@@ -14,76 +15,83 @@ public class Controller {
         business = new Business();
     }
 
+
+    //animaux
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
         return business.getAnimaux();
     }
 
-    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
-        return business.getMedicaments();
-    }
-
-    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
-        return business.getVeterinaires();
-    }
-
-    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
-        return business.getProprietaires();
-    }
-
-    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
-        return business.getResultatRechercheProprietaire(selectionVeterinaire);
-    }
-
-    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
-            throws SingletonConnectionException, VeterinaireException {
-        return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
-    }
-    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
-            SingletonConnectionException{
-        return business.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
-    }
-
-    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
-            throws AnimalException, SingletonConnectionException{
-        return business.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
-    }
-
-    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
-            SingletonConnectionException{
-        return business.getResultatRecherchAnimauxMedicament(selectionMedicament);
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        return business.getAnimauxTries(critere);
     }
 
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         business.ajouterAnimal(animal);
     }
 
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+    //medicaments
+    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
+        return business.getMedicaments();
+    }
+
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
+        business.ajouterMedicament(medicament);
+    }
+
+    //ordonnances
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+        business.ajouterOrdonnance(ordonnance);
+    }
+
+    //soins
+    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
+        business.ajouterFicheDeSoins(soinAvance);
+    }
+
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }
 
-    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
-        return business.getAnimauxTries(critere);
+    //veterinaires
+    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+        return business.getVeterinaires();
+    }
+
+    //proprietaires
+    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
+        return business.getProprietaires();
     }
 
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
         business.ajouterNouveauProprio(proprietaire);
     }
 
-
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
-        business.ajouterOrdonnance(ordonnance);
+    //recherches
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
+        return business.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
-    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
-        business.ajouterFicheDeSoins(soinAvance);
+    public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+            throws SingletonConnectionException, VeterinaireException {
+        return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
+    }
+    public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+            SingletonConnectionException{
+        return business.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
     }
 
-    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
-        business.ajouterMedicament(medicament);
-
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+            throws AnimalException, SingletonConnectionException{
+        return business.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
     }
 
-    public String [][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+            SingletonConnectionException{
+        return business.getResultatRecherchAnimauxMedicament(selectionMedicament);
+    }
+
+    //tâche metier
+    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException{
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }

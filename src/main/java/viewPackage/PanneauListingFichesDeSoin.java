@@ -52,7 +52,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == trierButton){
-                try {
+                /*try {
                     String critere = (String)comboBoxListingFiches.getSelectedItem();
                     String[][] resultatRequeteRecherche = controller.getSoinsTries(listeCriteres.get(critere));
                     String[] nomDesColonnes = {"Numéro du soin", "Identifiant de l'animal", "Intitulé",
@@ -70,7 +70,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
                 catch (SingletonConnectionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage());
-                }
+                }*/
             }
 
         }

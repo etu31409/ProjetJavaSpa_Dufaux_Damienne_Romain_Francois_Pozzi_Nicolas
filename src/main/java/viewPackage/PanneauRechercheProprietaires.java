@@ -47,7 +47,7 @@ public class PanneauRechercheProprietaires{
     private class rechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == rechercheButton) {
-                try {
+                /*try {
                     Veterinaire selectionVeterinaire = (Veterinaire) veterinaireComboBox.getSelectedItem();
                     String[][] resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
 
@@ -63,7 +63,7 @@ public class PanneauRechercheProprietaires{
                 }
                 catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
+                }*/
             }
         }
     }

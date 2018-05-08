@@ -281,7 +281,7 @@ public class PanneauAnimal extends JPanel {
             if (dateDAttributionPuceCheckBox.isSelected()) {
                 GregorianCalendar date = new GregorianCalendar();
                 date.setTime((Date) spinnerDatePuce.getValue());
-                animal.setDateAttributionPuce(date);
+                animal.setDateNaissance(date);
             }
 
             try {
@@ -294,13 +294,10 @@ public class PanneauAnimal extends JPanel {
                 localisationTatouageTextField = null;
             }
             animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-            if(proprioCheckBox.isSelected())
-            {
-                try {
-                    animal.setProprietaire((Proprietaire) comboBoxListeProprietaires.getSelectedItem());
-                } catch (Exception erreur) {
-                    comboBoxListeProprietaires = null;
-                }
+            try {
+                animal.setProprietaire((Proprietaire) comboBoxListeProprietaires.getSelectedItem());
+            } catch (Exception erreur) {
+                comboBoxListeProprietaires = null;
             }
             System.out.println(animal);
         }

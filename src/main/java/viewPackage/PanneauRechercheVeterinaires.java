@@ -3,12 +3,14 @@ package viewPackage;
 import controllerPackage.Controller;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
+import modelPackage.Veterinaire;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -56,7 +58,7 @@ public class PanneauRechercheVeterinaires{
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == rechercherButton){
-                try {
+                //try {
                     dateDebutZoneRecherche = new GregorianCalendar();
                     dateFinZoneRecherche = new GregorianCalendar();
                     if(!dateDeDebutCheckBox.isSelected()){
@@ -76,19 +78,19 @@ public class PanneauRechercheVeterinaires{
                         return;
                     }
 
-                    String[][] selectionRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
+                    /*ArrayList<Veterinaire> selectionRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
                     String[] nomDesColonnes = {"Identifiant du vétérinaire", "Nom du vétérinaire", "Date de l'ordonnance"};
                     resultatRecherche = new JTable(selectionRecherche, nomDesColonnes);
                     resultatRecherche.setFillsViewportHeight(true);
-                    scrollPane.setViewportView(resultatRecherche);
-                }
+                    scrollPane.setViewportView(resultatRecherche);*/
+                /*}
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (VeterinaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
+                }*/
             }
         }
     }

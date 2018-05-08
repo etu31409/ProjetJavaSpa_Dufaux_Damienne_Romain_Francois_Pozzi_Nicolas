@@ -17,9 +17,9 @@ import java.util.GregorianCalendar;
 public class DBDAOSoinAvance implements ISoinAvance {
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException {
         try {
 
@@ -42,8 +42,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                IVeterinaire veterinaire = new DBDAOVeterinaire();
-                soin.setVeterinaire(veterinaire.getUnVeterinaire(data.getInt("identifiantVeto")));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
 
                 String remarque = data.getString("remarque");
@@ -83,8 +82,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                IVeterinaire veterinaire = new DBDAOVeterinaire();
-                soin.setVeterinaire(veterinaire.getUnVeterinaire(data.getInt("identifiantVeto")));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
 
                 String remarque = data.getString("remarque");
@@ -98,38 +96,33 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException {
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "select count(*) from spabd.soinAvance";
+            ArrayList<SoinAvance> tousLesSoinsTries = new ArrayList<>();
 
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            data = statement.executeQuery();
-            data.next();
-            Integer nombreDeLignes = data.getInt(1);
-            String[][] tousLesSoinsTries = new String[nombreDeLignes][];
             if (critere.equals("")){
                 critere = "\"\"";
             }
             sqlInstruction = "select * from spabd.soinAvance order by "+ critere + " asc;";
-            statement = connectionUnique.prepareStatement(sqlInstruction);
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
+            GregorianCalendar dateSoin = new GregorianCalendar();
 
-            int i = 0;
             while (data.next()) {
-                tousLesSoinsTries[i] = new String[8];
-                tousLesSoinsTries[i][0] = Integer.toString(data.getInt("numSoin"));
-                tousLesSoinsTries[i][1] = Integer.toString(data.getInt("numRegistre"));
-                tousLesSoinsTries[i][2] = data.getString("intitule");
-                tousLesSoinsTries[i][3] = data.getString("partieDuCorps");
-                tousLesSoinsTries[i][4] = data.getDate("dateSoin").toString();
-                tousLesSoinsTries[i][5] = Integer.toString(data.getInt("identifiantVeto"));
-                tousLesSoinsTries[i][6] = Boolean.toString(data.getBoolean("estUrgent"));
-                tousLesSoinsTries[i][7] = data.getString("remarque");
-                i++;
+                SoinAvance soin = new SoinAvance();
+                soin.setNumRegistre(data.getInt("numRegistre"));
+                soin.setRemarque(data.getString("remarque"));
+                soin.setEstUrgent(data.getBoolean("estUrgent"));
+                soin.setPartieDuCorps(data.getString("parttieDuCorps"));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
+                dateSoin.setTime(data.getDate("dateSoin"));
+                soin.setDateSoin(dateSoin);
+                soin.setIntitule(data.getString("intitule"));
+                tousLesSoinsTries.add(soin);
             }
             return tousLesSoinsTries;
         } catch (SQLException e) {
@@ -137,6 +130,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
+    //ajout
     public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
         try {
             if (connectionUnique == null) {
@@ -148,17 +142,16 @@ public class DBDAOSoinAvance implements ISoinAvance {
             data = preparedStatement.executeQuery();
 
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, heure, identifiantVeto, estUrgent, remarque) " +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1,data.getInt(0));
             preparedStatement.setInt(2,soinAvance.getNumRegistre());
             preparedStatement.setString(3,soinAvance.getIntitule());
             preparedStatement.setString(4,soinAvance.getPartieDuCorps());
             preparedStatement.setDate(5,new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
-            preparedStatement.setDate(6,new java.sql.Date(soinAvance.getHeure().getTimeInMillis()));
-            preparedStatement.setInt(7,soinAvance.getVeterinaire().getIdentifiantVeto());
-            preparedStatement.setBoolean(8,soinAvance.getEstUrgent());
-            preparedStatement.setString(9,soinAvance.getRemarque());
+            preparedStatement.setInt(6,soinAvance.getVeterinaire());
+            preparedStatement.setBoolean(7,soinAvance.getEstUrgent());
+            preparedStatement.setString(8,soinAvance.getRemarque());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

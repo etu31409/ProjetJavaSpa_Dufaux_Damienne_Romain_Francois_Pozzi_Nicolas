@@ -62,7 +62,7 @@ public class PanneauStatMedicaments {
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == rechercherButton){
 
-                try {
+                //try {
                     dateDebutZoneRecherche = new GregorianCalendar();
                     dateFinZoneRecherche = new GregorianCalendar();
                     if(!checkBoxDateDebut.isSelected()){
@@ -82,19 +82,19 @@ public class PanneauStatMedicaments {
                         return;
                     }
 
-                    String [][] selectionStatistiques = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
+                    /*String [][] selectionStatistiques = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
                     String[] nomDesColonnes = {"Nom du médicament", "Pourcentage d'utilisation dans l'interval de temps"};
                     resultatStatistiques= new JTable(selectionStatistiques, nomDesColonnes);
                     resultatStatistiques.setFillsViewportHeight(true);
-                    scrollPane.setViewportView(resultatStatistiques);
-                }
+                    scrollPane.setViewportView(resultatStatistiques);*/
+                /*}
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (MedicamentException e){
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
+                }*/
             }
         }
     }

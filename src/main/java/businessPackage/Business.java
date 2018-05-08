@@ -24,78 +24,85 @@ public class Business {
         daoSoinAvance = new DBDAOSoinAvance();
     }
 
+    //animaux
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
         return daoAnimal.getAnimaux();
     }
 
-    public ArrayList<Veterinaire>getVeterinaires() throws VeterinaireException, SingletonConnectionException {
-        return daoVeterinaire.getVeterinaires();
-    }
-
-    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
-        return daoMedicament.getMedicaments();
-    }
-
-    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
-        return daoProprietaire.getProprietaires();
-    }
-
-    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
-        return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
-    }
-
-    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-                    GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
-        return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
-    }
-
-    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
-            SingletonConnectionException{
-        return daoAnimal.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
-    }
-
-    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
-            throws AnimalException, SingletonConnectionException{
-        return daoAnimal.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
-    }
-
-    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
-            SingletonConnectionException{
-        return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
-    }
-
-    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
-        daoAnimal.ajouterAnimal(animal);
-    }
-
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
-        return daoSoinAvance.getSoinsTries(critere);
-    }
-
-    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
         return daoAnimal.getAnimauxTries(critere);
     }
 
-    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
-        daoProprietaire.ajouterNouveauProprio(proprietaire);
+    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        daoAnimal.ajouterAnimal(animal);
     }
 
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
-        daoOrdonnance.ajouterOrdonnance(ordonnance);
-    }
-
-    public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
-        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
+    //medicaments
+    public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
+        return daoMedicament.getMedicaments();
     }
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }
 
+    //ordonnances
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+        daoOrdonnance.ajouterOrdonnance(ordonnance);
+    }
+
+    //soins
+    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
+        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
+    }
+
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+        return daoSoinAvance.getSoinsTries(critere);
+    }
+
+    //veterinaires
+    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+        return daoVeterinaire.getVeterinaires();
+    }
+
+    //proprietaires
+    public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
+        return daoProprietaire.getProprietaires();
+    }
+
+    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
+        daoProprietaire.ajouterNouveauProprio(proprietaire);
+    }
+
+    //recherches
+
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
+        return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
+    }
+
+    public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+                    GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
+        return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
+    }
+
+    public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+            SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
+    }
+
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+            throws AnimalException, SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
+    }
+
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+            SingletonConnectionException{
+        return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
+    }
+
 
     //tache metier
-
-    public String[][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
         ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
@@ -122,7 +129,6 @@ public class Business {
             statistiques.replace(nomMedic, pourcentageParMedicament);
         }
 
-        //return statistiques;
-        return null;
+        return statistiques;
     }
 }
