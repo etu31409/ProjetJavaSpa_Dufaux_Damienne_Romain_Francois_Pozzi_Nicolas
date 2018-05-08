@@ -116,13 +116,18 @@ public class Business {
         }
 
         for (String nomMedic : statistiques.keySet()) {
+            pourcentageParMedicament = statistiques.get(nomMedic) / compteurGlobal;
+            statistiques.replace(nomMedic, pourcentageParMedicament);
+        }
+
+        /*for (String nomMedic : statistiques.keySet()) {
             for (StatMedicament statMedicament : listeResultatRechercheOrdonnances) {
                 if (statMedicament.getNomMedic().equals(nomMedic)) {
                     pourcentageParMedicament = statistiques.get(nomMedic) / compteurGlobal;
                     statistiques.replace(nomMedic, pourcentageParMedicament);
                 }
             }
-        }
+        }*/
 
         String[][] resultatStatistiques = new String[statistiques.size()][2];
 
@@ -138,7 +143,6 @@ public class Business {
             resultatStatistiques[i][1] = resultat + " %";
             i++;
         }
-        //TODO
         return resultatStatistiques;
     }
 }
