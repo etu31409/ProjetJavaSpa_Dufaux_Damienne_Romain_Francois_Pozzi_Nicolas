@@ -104,10 +104,19 @@ public class DBDAOSoinAvance implements ISoinAvance {
 
             ArrayList<SoinAvance> tousLesSoinsTries = new ArrayList<>();
 
-            if (critere.equals("")){
-                critere = "\"\"";
-            }
-            sqlInstruction = "select * from spabd.soinAvance order by "+ critere + " asc;";
+            String critereColonne;
+            if(critere.equals("Aucun tri"))
+                critereColonne = "\"\"";
+            else if (critere.equals("Date du soin"))
+                critereColonne = "dateSoin";
+            else if (critere.equals("Identifiant du vétérinaire"))
+                critereColonne = "identifiantVeto";
+            else if (critere.equals("Identifiant de l'animal"))
+                critereColonne = "numRegistre";
+            else
+                critereColonne = "numSoin";
+
+            sqlInstruction = "select * from spabd.soinAvance order by "+ critereColonne + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
             GregorianCalendar dateSoin = new GregorianCalendar();
@@ -117,7 +126,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setNumRegistre(data.getInt("numRegistre"));
                 soin.setRemarque(data.getString("remarque"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
-                soin.setPartieDuCorps(data.getString("parttieDuCorps"));
+                soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 soin.setVeterinaire(data.getInt("identifiantVeto"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);

@@ -4,10 +4,13 @@ import controllerPackage.Controller;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
+import modelPackage.SoinAvance;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanneauListingFichesDeSoin extends JPanel {
@@ -20,12 +23,9 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private JButton modifierButton;
     private JScrollPane listingScrollPane;
     private JTable resultatRecherche;
-    private static HashMap<String, String> listeCriteres = new HashMap<String, String>();
-
 
     public PanneauListingFichesDeSoin(Controller controller) {
         this.controller = controller;
-        initialisationListeCriteres();
         instanciationComboBox();
         trierButton.addActionListener(new EcouteurBouton());
     }
@@ -34,33 +34,39 @@ public class PanneauListingFichesDeSoin extends JPanel {
         return panneauContainerPrincipal;
     }
 
-    private static void initialisationListeCriteres(){
-        listeCriteres.put("Aucun tri", "");
-        listeCriteres.put("Date du soin","dateSoin");
-        listeCriteres.put("Identifiant du vétérinaire", "identifiantVeto");
-        listeCriteres.put("Identifiant de l'animal", "numRegistre");
-        listeCriteres.put("Numéro de soin", "numSoin");
-    }
-
     private void instanciationComboBox() {
-        for (String key: listeCriteres.keySet()) {
-            comboBoxListingFiches.addItem(key);
-        }
+        comboBoxListingFiches.addItem("Aucun tri");
+        comboBoxListingFiches.addItem("Date du soin");
+        comboBoxListingFiches.addItem("Identifiant du vétérinaire");
+        comboBoxListingFiches.addItem("Identifiant de l'animal");
+        comboBoxListingFiches.addItem("Numéro de soin");
         comboBoxListingFiches.setSelectedItem("Aucun tri");
     }
 
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
+            TableColumn colonne;
+            ListSelectionModel listeSelectionnee;
+            TableModeleListeSoins modele;
+            ArrayList<SoinAvance> soinsTries = new ArrayList<>();
+
             if(e.getSource() == trierButton){
-                /*try {
+                try {
                     String critere = (String)comboBoxListingFiches.getSelectedItem();
-                    String[][] resultatRequeteRecherche = controller.getSoinsTries(listeCriteres.get(critere));
-                    String[] nomDesColonnes = {"Numéro du soin", "Identifiant de l'animal", "Intitulé",
-                            "Partie du corps", "Date du soin", "Identifiant du vétérinaire", "Urgent",
-                            "Remarque"};
-                    resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                    resultatRecherche.setFillsViewportHeight(true);
+
+                    soinsTries = controller.getSoinsTries(critere);
+                    modele = new TableModeleListeSoins(soinsTries);
+                    resultatRecherche = new JTable(modele);
                     listingScrollPane.setViewportView(resultatRecherche);
+
+                    colonne = resultatRecherche.getColumnModel().getColumn(1);
+                    colonne.setPreferredWidth(250);
+                    resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                    listingScrollPane.createHorizontalScrollBar();
+                    listingScrollPane.createVerticalScrollBar();
+                    resultatRecherche.setFillsViewportHeight(true);
                 }
                 catch (VeterinaireException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage());
@@ -70,7 +76,15 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
                 catch (SingletonConnectionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage());
-                }*/
+                }
+            }
+            if(e.getSource() == supprimerButton){
+                listeSelectionnee = resultatRecherche.getSelectionModel();
+                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+            }
+            if(e.getSource() == modifierButton){
+                listeSelectionnee = resultatRecherche.getSelectionModel();
+                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
             }
 
         }

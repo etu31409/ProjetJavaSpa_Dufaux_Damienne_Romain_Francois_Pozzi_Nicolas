@@ -81,8 +81,6 @@ public class PanneauStatMedicaments {
                         return;
                     }
 
-                    ////////////////////////////////////////////////////////////////////////////////
-
                     TableColumn colonne;
                     TableModeleStatistiquesMed modele;
                     ArrayList<StatMedicament> stats = new ArrayList<>();

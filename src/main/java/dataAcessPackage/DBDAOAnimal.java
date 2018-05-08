@@ -194,10 +194,10 @@ public class DBDAOAnimal implements IAnimal {
             sqlInstruction = "select * from spabd.animal order by "+ critereColonne + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
+            GregorianCalendar dateArrivee = new GregorianCalendar();
 
             while (data.next()) {
                 Animal animal = new Animal();
-                GregorianCalendar dateArrivee = new GregorianCalendar();
 
                 animal.setNumRegistre(data.getInt("numRegistre"));
                 dateArrivee.setTime(data.getDate("dateArrivee"));
