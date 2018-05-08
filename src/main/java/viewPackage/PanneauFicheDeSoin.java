@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class PanneauFicheDeSoin extends JPanel {
     private final Controller controller;
@@ -132,12 +133,12 @@ public class PanneauFicheDeSoin extends JPanel {
                 if (validerChamps()) {
                     for (int i = 0 ; i < medicamentsChoisisModele.getSize(); i++) {
                         //Créer une fiche de soins (SoinAvance)
-                        controller.ajouterFicheDeSoins();
+
                         ordonnance = new Ordonnance();
                         //controller.ajouterOrdonnance(); //TODO
                         //controller.ajouterFicheDeSoins();
                     }
-                    JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
+
                 }
                 else
                 {

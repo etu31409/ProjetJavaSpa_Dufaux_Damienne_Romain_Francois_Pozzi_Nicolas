@@ -1,6 +1,7 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.AnimalException;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
@@ -234,69 +235,75 @@ public class PanneauAnimal extends JPanel {
 
     private Animal creationAnimal(){
         Animal animal = new Animal();
-        if(nomTextField.getText().isEmpty()){
-            nomTextField = null;
-        }
-        animal.setNom(nomTextField.getText());
+        try {
+            if (nomTextField.getText().isEmpty()) {
+                nomTextField = null;
+            }
+            animal.setNom(nomTextField.getText());
 
-        animal.setPoids((Double)spinnerPoids.getValue());
-        if (femelleRadioButton.isSelected())
-            animal.setSexe("F");
-        else
-            animal.setSexe("M");
-        if(especeTextField.getText().isEmpty()){
-            especeTextField = null;
-        }
-        animal.setEspece(especeTextField.getText());
+            animal.setPoids((Double) spinnerPoids.getValue());
+            if (femelleRadioButton.isSelected())
+                animal.setSexe("F");
+            else
+                animal.setSexe("M");
+            if (especeTextField.getText().isEmpty()) {
+                especeTextField = null;
+            }
+            animal.setEspece(especeTextField.getText());
 
-        if(raceTextField.getText().isEmpty()){
-            raceTextField = null;
-        }
-        animal.setRace(raceTextField.getText());
-        if(dateDeNaissanceCheckBox.isSelected()){
-            GregorianCalendar date = new GregorianCalendar();
-            date.setTime((Date)spinnerDateNaissance.getValue());
-            animal.setDateNaissance(date);
-        }
-        if(couleurTextField.getText().isEmpty()){
-            couleurTextField = null;
-        }
+            if (raceTextField.getText().isEmpty()) {
+                raceTextField = null;
+            }
+            animal.setRace(raceTextField.getText());
+            if (dateDeNaissanceCheckBox.isSelected()) {
+                GregorianCalendar date = new GregorianCalendar();
+                date.setTime((Date) spinnerDateNaissance.getValue());
+                animal.setDateNaissance(date);
+            }
+            if (couleurTextField.getText().isEmpty()) {
+                couleurTextField = null;
+            }
 
-        animal.setCouleurDePeau(couleurTextField.getText());
+            animal.setCouleurDePeau(couleurTextField.getText());
 
-        try{
-            animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
-        }
-        catch (Exception error){
-            numPuceTextField = null;
-        }
+            try {
+                animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
+            }
+            catch (Exception error) {
+                numPuceTextField = null;
+            }
 
-        if(!localisationPuceTextField.getText().isEmpty()){
+            if (localisationPuceTextField.getText() == "") {
+                localisationPuceTextField = null;
+            }
             animal.setLocalisationPuce(localisationPuceTextField.getText());
-            //localisationPuceTextField = null;
-        }
 
-        if(dateDAttributionPuceCheckBox.isSelected()){
-            GregorianCalendar date = new GregorianCalendar();
-            date.setTime((Date)spinnerDatePuce.getValue());
-            animal.setDateNaissance(date);
-        }
+            if (dateDAttributionPuceCheckBox.isSelected()) {
+                GregorianCalendar date = new GregorianCalendar();
+                date.setTime((Date) spinnerDatePuce.getValue());
+                animal.setDateNaissance(date);
+            }
 
-        try{
-            animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
+            try {
+                animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
+            }
+            catch (Exception erreur) {
+                numTatouageTextField = null;
+            }
+            if (localisationTatouageTextField.getText() == "") {
+                localisationTatouageTextField = null;
+            }
+            animal.setLocalisationTatouage(localisationTatouageTextField.getText());
+            try {
+                animal.setProprietaire((Proprietaire) comboBoxListeProprietaires.getSelectedItem());
+            } catch (Exception erreur) {
+                comboBoxListeProprietaires = null;
+            }
+            System.out.println(animal);
         }
-        catch (Exception erreur){
-            numTatouageTextField= null;
+        catch(AnimalException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage());
         }
-        if(localisationTatouageTextField.getText().isEmpty()){
-            localisationTatouageTextField= null;
-        }
-       // animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-        try{
-            animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
-        }
-        catch(Exception erreur){comboBoxListeProprietaires = null;}
-        System.out.println(animal);
         return animal;
     }
 
@@ -362,11 +369,14 @@ public class PanneauAnimal extends JPanel {
                         controller.ajouterAnimal(creationAnimal());
                         JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !");
                     }
+                    catch(AnimalException exception){
+                        JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
+                    }
                     catch(SingletonConnectionException exception){
                         JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
                     }
                     catch(Exception exception) {
-                        System.out.println("Exception :" + exception.getMessage());
+                        System.out.println("Exception : " + exception.getMessage());
                     }
                 }
                 else

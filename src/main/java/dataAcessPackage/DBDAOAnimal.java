@@ -330,21 +330,22 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
+    public void ajouterAnimal(Animal animal) throws SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into spabd.animal(numRegistre," +
+            sqlInstruction = "insert into animal(numRegistre," +
                     " dateArrivee," +
                     " espece," +
                     " race," +
                     " sexe," +
                     "estSterilise," +
                     "couleurDePeau," +
-                    "poids)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
-            java.sql.Date sqlDate = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
+                    "poids," +
+                    "nom, dateNaissance, numPuce, localisationPuce, dateAttributionPuce, numTatouage, localisationTatouage, identifiantProprio)"+
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            java.sql.Date sqlDate = new java.sql.Date(GregorianCalendar.getInstance().getTimeInMillis());
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setNull(1, Types.INTEGER);
             preparedStatement.setDate(2, sqlDate);
@@ -355,19 +356,61 @@ public class DBDAOAnimal implements IAnimal {
             preparedStatement.setString(7, animal.getCouleurDePeau());
             preparedStatement.setDouble(8, animal.getPoids());
             //facultatifs
-            System.out.println("test");
-            preparedStatement.executeUpdate();
-            //colonnes facultatives (j'arrive pas à faire comme dans les slides (il faudrait récupérer l'identifiant courant pour cela...))
-           /* if(animal.getNom() != null){
-                sqlInstruction = "update animal set nom = ? where numRegistre =  'animal'";
+            if(animal.getNom() != null){
+                preparedStatement.setString(9, animal.getNom());
             }
-            */
-        } catch (SQLException e) {
-            //throw new AnimalException("Erreur lors de l'insertion de l'animal !");
+            else{
+                preparedStatement.setNull(9, Types.VARCHAR);
+            }
+            if(animal.getDateNaissance() != null){
+                preparedStatement.setDate(10, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
+            }
+            else{
+                preparedStatement.setNull(10, Types.DATE);
+            }
+            if(animal.getNumPuce() != null){
+                preparedStatement.setInt(11, animal.getNumPuce());
+            }
+            else{
+                preparedStatement.setNull(11, Types.INTEGER);
+            }
+            if(animal.getLocalisationPuce() != null){
+                preparedStatement.setString(12, animal.getLocalisationPuce());
+            }
+            else{
+                preparedStatement.setNull(12, Types.VARCHAR);
+            }
+            if(animal.getDateAttributionPuce() != null){
+                preparedStatement.setDate(13,new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
+            }
+            else{
+                preparedStatement.setNull(13, Types.DATE);
+            }
+            if(animal.getNumTatouage() != null){
+                preparedStatement.setInt(14,animal.getNumPuce());
+            }
+            else{
+                preparedStatement.setNull(14, Types.INTEGER);
+            }
+            if(animal.getLocalisationTatouage() != null){
+                preparedStatement.setString(15,animal.getLocalisationTatouage());
+            }
+            else{
+                preparedStatement.setNull(15, Types.VARCHAR);
+            }
+            if(animal.getProprietaire() != null){
+                preparedStatement.setInt(16,animal.getProprietaire().getIdentifiantProprio());
+            }
+            else{
+                preparedStatement.setNull(16, Types.INTEGER);
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch(SingletonConnectionException exception){throw new SingletonConnectionException();}
+        catch (SQLException e) {
             System.out.println("SQL exception" + e.getMessage());
         }
         catch(Exception exception){System.out.println(exception.getMessage());}
-       // catch (AnimalException exception){exception.getMessage();}
     }
 
     public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
