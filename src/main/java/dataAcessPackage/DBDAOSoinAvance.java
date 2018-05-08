@@ -42,8 +42,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                IVeterinaire veterinaire = new DBDAOVeterinaire();
-                soin.setVeterinaire(veterinaire.getUnVeterinaire(data.getInt("identifiantVeto")));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
 
                 String remarque = data.getString("remarque");
@@ -83,8 +82,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                IVeterinaire veterinaire = new DBDAOVeterinaire();
-                soin.setVeterinaire(veterinaire.getUnVeterinaire(data.getInt("identifiantVeto")));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
 
                 String remarque = data.getString("remarque");
@@ -112,6 +110,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "select * from spabd.soinAvance order by "+ critere + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
+            GregorianCalendar dateSoin = new GregorianCalendar();
 
             while (data.next()) {
                 SoinAvance soin = new SoinAvance();
@@ -120,8 +119,10 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
                 soin.setPartieDuCorps(data.getString("parttieDuCorps"));
                 soin.setVeterinaire(data.getInt("identifiantVeto"));
-                //soin.setDateSoin(data.getDate("dateSoin"));
+                dateSoin.setTime(data.getDate("dateSoin"));
+                soin.setDateSoin(dateSoin);
                 soin.setIntitule(data.getString("intitule"));
+                tousLesSoinsTries.add(soin);
             }
             return tousLesSoinsTries;
         } catch (SQLException e) {
