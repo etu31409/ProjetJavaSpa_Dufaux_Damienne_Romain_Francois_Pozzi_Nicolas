@@ -121,12 +121,13 @@ public class  FenetrePrincipale extends JFrame{
     {
         public void actionPerformed(ActionEvent event){
             if (event.getSource() == accueil){
-                frameContainer.removeAll();
-                panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
+                afficherAccueil();
+                //frameContainer.removeAll();
+                //panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
                 //PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
                 //frameContainer.add(panneauChargement);
-                frameContainer.repaint();
-                frameContainer.validate();
+                //frameContainer.repaint();
+                //frameContainer.validate();
                 //panneauChargement.getG().start();
             }
             else if(event.getSource() == nouvelAnimal){
