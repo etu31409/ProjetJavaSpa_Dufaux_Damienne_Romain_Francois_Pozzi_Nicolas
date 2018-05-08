@@ -24,27 +24,63 @@ public class Business {
         daoSoinAvance = new DBDAOSoinAvance();
     }
 
+    //animaux
     public ArrayList<Animal>getAnimaux() throws AnimalException, SingletonConnectionException {
         return daoAnimal.getAnimaux();
     }
 
-    public ArrayList<Veterinaire>getVeterinaires() throws VeterinaireException, SingletonConnectionException {
-        return daoVeterinaire.getVeterinaires();
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        return daoAnimal.getAnimauxTries(critere);
     }
 
+    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        daoAnimal.ajouterAnimal(animal);
+    }
+
+    //medicaments
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
         return daoMedicament.getMedicaments();
     }
 
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
+        daoMedicament.ajouterMedicament(medicament);
+    }
+
+    //ordonnances
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+        daoOrdonnance.ajouterOrdonnance(ordonnance);
+    }
+
+    //soins
+    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
+        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
+    }
+
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+        return daoSoinAvance.getSoinsTries(critere);
+    }
+
+    //veterinaires
+    public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+        return daoVeterinaire.getVeterinaires();
+    }
+
+    //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
         return daoProprietaire.getProprietaires();
     }
+
+    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
+        daoProprietaire.ajouterNouveauProprio(proprietaire);
+    }
+
+    //recherches
 
     public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
         return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
-    public String[][] getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+    public ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
                     GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
         return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
@@ -64,36 +100,8 @@ public class Business {
         return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
 
-    public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException {
-        daoAnimal.ajouterAnimal(animal);
-    }
-
-    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
-        return daoSoinAvance.getSoinsTries(critere);
-    }
-
-    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
-        return daoAnimal.getAnimauxTries(critere);
-    }
-
-    public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
-        daoProprietaire.ajouterNouveauProprio(proprietaire);
-    }
-
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
-        daoOrdonnance.ajouterOrdonnance(ordonnance);
-    }
-
-    public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
-        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
-    }
-
-    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
-        daoMedicament.ajouterMedicament(medicament);
-    }
 
     //tache metier
-
     public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
