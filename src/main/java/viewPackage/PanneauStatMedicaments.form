@@ -52,7 +52,7 @@
         </constraints>
         <properties>
           <font size="17"/>
-          <text value="Statistiques sur les médicaments préscrits entre deux dates"/>
+          <text value="Statistiques sur les médicaments prescrits entre deux dates"/>
         </properties>
       </component>
       <hspacer id="6613a">

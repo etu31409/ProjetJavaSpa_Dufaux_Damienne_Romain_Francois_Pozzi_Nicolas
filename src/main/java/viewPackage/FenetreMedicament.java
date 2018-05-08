@@ -9,7 +9,6 @@ import java.awt.event.WindowEvent;
 
 
 public class FenetreMedicament extends JFrame {
-    private Controller controller;
     private Container frameContainer ;
     private JPanel panneauMedicament;
 
