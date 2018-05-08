@@ -3,6 +3,7 @@ package dataAcessPackage;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;
+import modelPackage.VeterinaireOrdonnance;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -14,6 +15,6 @@ public interface IVeterinaire {
     Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException;
 
     //recherche
-    ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+    ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
             throws SingletonConnectionException, VeterinaireException;
 }

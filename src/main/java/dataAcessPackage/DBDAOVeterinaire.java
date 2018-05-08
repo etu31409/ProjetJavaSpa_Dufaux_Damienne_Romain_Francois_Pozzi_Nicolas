@@ -70,22 +70,23 @@ public class DBDAOVeterinaire implements IVeterinaire{
     }
 
     //recherche
-    public ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+    public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
             throws SingletonConnectionException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            ArrayList<Veterinaire>listeResultatRecherche = new ArrayList<>();
+            ArrayList<VeterinaireOrdonnance>listeResultatRecherche = new ArrayList<>();
+            GregorianCalendar dateSoin = new GregorianCalendar();
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
                     "spabd.ordonnance.dateOrdonnance\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "inner join spabd.ordonnance\n" +
-                    "on (spabd.soinAvance.numRegistre = spabd.ordonnance.numRegistre)" +
-                    "where spabd.ordonnance.dateOrdonnance between ? and ?";
+                    "where spabd.soinAvance.dateSoin between ? and ?" +
+                    "and spabd.ordonnance";
+            //TODO
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setDate(1, new Date(dateDebut.getTimeInMillis()));
@@ -93,9 +94,11 @@ public class DBDAOVeterinaire implements IVeterinaire{
             data = statement.executeQuery();
 
             while (data.next()) {
-                Veterinaire veto = new Veterinaire();
-                veto.setIdentifiantVeto(data.getInt("identifiantVeto"));
-                veto.setNom(data.getString("nom"));
+                VeterinaireOrdonnance veto = new VeterinaireOrdonnance();
+                veto.setIdentifiantVeto(data.getInt(1));
+                veto.setNomVeto(data.getString(2));
+                dateSoin.setTime(data.getDate(3));
+                veto.setDateOrdonnance(dateSoin);
 
                 listeResultatRecherche.add(veto);
             }

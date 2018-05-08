@@ -150,8 +150,7 @@ public class PanneauFicheDeSoin extends JPanel {
         }
          */
         soinAvance.setDateSoin(new GregorianCalendar());
-        soinAvance.setHeure(new GregorianCalendar());
-        soinAvance.setVeterinaire((Veterinaire)comboBoxVeterinaires.getSelectedItem());
+        //soinAvance.setVeterinaire((Veterinaire)comboBoxVeterinaires.getSelectedItem());
         soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
         soinAvance.setRemarque(textAreaRemarque.getText());
         return soinAvance;

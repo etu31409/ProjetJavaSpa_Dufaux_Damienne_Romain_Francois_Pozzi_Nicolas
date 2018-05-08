@@ -80,7 +80,7 @@ public class Business {
         return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
-    public ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
+    public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
                     GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException {
         return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
