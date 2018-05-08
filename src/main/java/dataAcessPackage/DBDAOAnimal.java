@@ -344,7 +344,7 @@ public class DBDAOAnimal implements IAnimal {
                 preparedStatement.setNull(15, Types.VARCHAR);
             }
             if(animal.getProprietaire() != null){
-                preparedStatement.setInt(16,animal.getProprietaire().getIdentifiantProprio());
+                preparedStatement.setInt(16,animal.getProprietaire());
             }
             else{
                 preparedStatement.setNull(16, Types.INTEGER);

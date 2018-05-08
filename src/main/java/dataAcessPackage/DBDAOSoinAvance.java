@@ -114,7 +114,14 @@ public class DBDAOSoinAvance implements ISoinAvance {
             data = statement.executeQuery();
 
             while (data.next()) {
-
+                SoinAvance soin = new SoinAvance();
+                soin.setNumRegistre(data.getInt("numRegistre"));
+                soin.setRemarque(data.getString("remarque"));
+                soin.setEstUrgent(data.getBoolean("estUrgent"));
+                soin.setPartieDuCorps(data.getString("parttieDuCorps"));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
+                //soin.setDateSoin(data.getDate("dateSoin"));
+                soin.setIntitule(data.getString("intitule"));
             }
             return tousLesSoinsTries;
         } catch (SQLException e) {
@@ -133,17 +140,16 @@ public class DBDAOSoinAvance implements ISoinAvance {
             data = preparedStatement.executeQuery();
 
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, heure, identifiantVeto, estUrgent, remarque) " +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1,data.getInt(0));
             preparedStatement.setInt(2,soinAvance.getNumRegistre());
             preparedStatement.setString(3,soinAvance.getIntitule());
             preparedStatement.setString(4,soinAvance.getPartieDuCorps());
             preparedStatement.setDate(5,new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
-            preparedStatement.setDate(6,new java.sql.Date(soinAvance.getHeure().getTimeInMillis()));
-            preparedStatement.setInt(7,soinAvance.getVeterinaire().getIdentifiantVeto());
-            preparedStatement.setBoolean(8,soinAvance.getEstUrgent());
-            preparedStatement.setString(9,soinAvance.getRemarque());
+            preparedStatement.setInt(6,soinAvance.getVeterinaire());
+            preparedStatement.setBoolean(7,soinAvance.getEstUrgent());
+            preparedStatement.setString(8,soinAvance.getRemarque());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

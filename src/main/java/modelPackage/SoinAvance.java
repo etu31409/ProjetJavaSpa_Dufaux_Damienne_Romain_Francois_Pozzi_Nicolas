@@ -7,22 +7,20 @@ public class SoinAvance {
     private String intitule;
     private String partieDuCorps;
     private GregorianCalendar dateSoin;
-    private GregorianCalendar heure;
-    private Veterinaire veterinaire;
+    private Integer veterinaire;
     private Boolean estUrgent;
     private String remarque;
 
     public SoinAvance(){}
     public SoinAvance(Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
-                      GregorianCalendar heure, Veterinaire veterinaire, Boolean estUrgent, String remarque) {
-        this.numRegistre = numRegistre;
-        this.intitule = intitule;
-        this.partieDuCorps = partieDuCorps;
-        this.dateSoin = dateSoin;
-        this.heure = heure;
-        this.veterinaire = veterinaire;
-        this.estUrgent = estUrgent;
-        this.remarque = remarque;
+                      Integer veterinaire, Boolean estUrgent, String remarque) {
+        setNumRegistre(numRegistre);
+        setIntitule(intitule);
+        setPartieDuCorps(partieDuCorps);
+        setDateSoin(dateSoin);
+        setVeterinaire(veterinaire);
+        setEstUrgent(estUrgent);
+        setRemarque(remarque);
     }
 
     public Integer getNumRegistre() {
@@ -41,11 +39,7 @@ public class SoinAvance {
         return dateSoin;
     }
 
-    public GregorianCalendar getHeure() {
-        return heure;
-    }
-
-    public Veterinaire getVeterinaire() {
+    public Integer getVeterinaire() {
         return veterinaire;
     }
 
@@ -73,11 +67,7 @@ public class SoinAvance {
         this.dateSoin = dateSoin;
     }
 
-    public void setHeure(GregorianCalendar heure) {
-        this.heure = heure;
-    }
-
-    public void setVeterinaire(Veterinaire veterinaire) {
+    public void setVeterinaire(Integer veterinaire) {
         this.veterinaire = veterinaire;
     }
 
