@@ -38,6 +38,7 @@ public class PanneauListingAnimaux extends JPanel {
     }
 
     private static void initialisationListeCriteres(){
+        //pabon
         listeCriteres.put("Aucun tri", "");
         listeCriteres.put("Date d'arrivée","dateArrivee");
         listeCriteres.put("Date de naissance", "dateNaissance");
@@ -45,10 +46,13 @@ public class PanneauListingAnimaux extends JPanel {
         listeCriteres.put("Identifiant de l'animal", "numRegistre");
         listeCriteres.put("Poids", "poids");
         listeCriteres.put("Espèce", "espece");
+
+
     }
 
     private void instanciationComboBox() {
         for (String key: listeCriteres.keySet()) {
+            System.out.println(key);
             comboBoxTriAnimaux.addItem(key);
         }
         comboBoxTriAnimaux.setSelectedItem("Aucun tri");
@@ -57,7 +61,7 @@ public class PanneauListingAnimaux extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == buttonTri){
-                try {
+                /*try {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
                     String[][] resultatRequeteRecherche = controller.getAnimauxTries(listeCriteres.get(critere));
                     String[] nomDesColonnes = {"Identifiant de l'animal", "Date d'arrivée","Nom", "Espèce", "Race",
@@ -77,7 +81,7 @@ public class PanneauListingAnimaux extends JPanel {
                 }
                 catch (SingletonConnectionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage());
-                }
+                }*/
             }
         }
     }

@@ -98,38 +98,23 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException {
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "select count(*) from spabd.soinAvance";
+            ArrayList<SoinAvance> tousLesSoinsTries = new ArrayList<>();
 
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            data = statement.executeQuery();
-            data.next();
-            Integer nombreDeLignes = data.getInt(1);
-            String[][] tousLesSoinsTries = new String[nombreDeLignes][];
             if (critere.equals("")){
                 critere = "\"\"";
             }
             sqlInstruction = "select * from spabd.soinAvance order by "+ critere + " asc;";
-            statement = connectionUnique.prepareStatement(sqlInstruction);
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 
-            int i = 0;
             while (data.next()) {
-                tousLesSoinsTries[i] = new String[8];
-                tousLesSoinsTries[i][0] = Integer.toString(data.getInt("numSoin"));
-                tousLesSoinsTries[i][1] = Integer.toString(data.getInt("numRegistre"));
-                tousLesSoinsTries[i][2] = data.getString("intitule");
-                tousLesSoinsTries[i][3] = data.getString("partieDuCorps");
-                tousLesSoinsTries[i][4] = data.getDate("dateSoin").toString();
-                tousLesSoinsTries[i][5] = Integer.toString(data.getInt("identifiantVeto"));
-                tousLesSoinsTries[i][6] = Boolean.toString(data.getBoolean("estUrgent"));
-                tousLesSoinsTries[i][7] = data.getString("remarque");
-                i++;
+
             }
             return tousLesSoinsTries;
         } catch (SQLException e) {

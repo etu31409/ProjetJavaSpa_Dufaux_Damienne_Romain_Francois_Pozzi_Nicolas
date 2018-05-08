@@ -63,7 +63,7 @@ public class PanneauRechercheAnimaux {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == rechercherButton) {
                 String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
-                try {
+                /*try {
                     if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
                     {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
@@ -103,7 +103,7 @@ public class PanneauRechercheAnimaux {
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }
+                }*/
             }
         }
     }

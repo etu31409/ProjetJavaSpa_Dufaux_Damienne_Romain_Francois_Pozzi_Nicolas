@@ -72,12 +72,15 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
-    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "select count(*)" +
+
+            ArrayList<ProprietaireAnimal> listeResultatRecherche = new ArrayList<ProprietaireAnimal>();
+
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
                     "from spabd.animal\n" +
                     "inner join spabd.proprietaire\n" +
                     "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
@@ -89,31 +92,9 @@ public class DBDAOProprietaire implements IProprietaire{
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
-            data.next();
-            Integer nombreDeLignes = data.getInt(1);
 
-            String[][] listeResultatRecherche = new String[nombreDeLignes][];
-
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, spabd.proprietaire.nom\n" +
-                    "from spabd.animal\n" +
-                    "inner join spabd.proprietaire\n" +
-                    "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
-                    "inner join spabd.soinAvance\n" +
-                    "on (spabd.soinAvance.numRegistre = spabd.animal.numRegistre)\n" +
-                    "inner join spabd.veterinaire\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "where spabd.veterinaire.identifiantVeto = ?;";
-            statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
-            data = statement.executeQuery();
-            int i = 0;
             while (data.next()) {
-                listeResultatRecherche[i] = new String[4];
-                listeResultatRecherche[i][0] = Integer.toString(data.getInt(1));
-                listeResultatRecherche[i][1] = data.getString(2);
-                listeResultatRecherche[i][2] = Integer.toString(data.getInt(3));
-                listeResultatRecherche[i][3] = data.getString(4);
-                i++;
+
             }
             return listeResultatRecherche;
         } catch (SQLException e) {

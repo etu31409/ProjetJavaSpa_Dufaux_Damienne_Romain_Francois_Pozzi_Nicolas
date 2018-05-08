@@ -6,6 +6,7 @@ import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 public class Controller {
     private Business business;
@@ -30,7 +31,7 @@ public class Controller {
         return business.getProprietaires();
     }
 
-    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
         return business.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
@@ -38,17 +39,17 @@ public class Controller {
             throws SingletonConnectionException, VeterinaireException {
         return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
-    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+    public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
             SingletonConnectionException{
         return business.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
     }
 
-    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
             throws AnimalException, SingletonConnectionException{
         return business.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
     }
 
-    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
             SingletonConnectionException{
         return business.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
@@ -57,11 +58,11 @@ public class Controller {
         business.ajouterAnimal(animal);
     }
 
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }
 
-    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
         return business.getAnimauxTries(critere);
     }
 
@@ -83,7 +84,7 @@ public class Controller {
 
     }
 
-    public String [][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException{
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }

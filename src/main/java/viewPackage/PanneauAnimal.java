@@ -292,11 +292,11 @@ public class PanneauAnimal extends JPanel {
             localisationTatouageTextField= null;
         }
        // animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-        try{
+        /*try{
             animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
-        }
-        catch(Exception erreur){comboBoxListeProprietaires = null;}
-        System.out.println(animal);
+        }*/
+        /*catch(Exception erreur){comboBoxListeProprietaires = null;}
+        System.out.println(animal);*/
         return animal;
     }
 

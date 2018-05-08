@@ -40,7 +40,7 @@ public class Business {
         return daoProprietaire.getProprietaires();
     }
 
-    public String[][] getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {
         return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
 
@@ -49,17 +49,17 @@ public class Business {
         return daoVeterinaire.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
 
-    public String[][] getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
+    public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
             SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
     }
 
-    public String[][] getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament, Veterinaire selectionVeterinaire)
             throws AnimalException, SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxMedicamentVeto(selectionMedicament, selectionVeterinaire);
     }
 
-    public String[][] getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
+    public ArrayList<Animal> getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
             SingletonConnectionException{
         return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
@@ -68,11 +68,11 @@ public class Business {
         daoAnimal.ajouterAnimal(animal);
     }
 
-    public String[][] getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return daoSoinAvance.getSoinsTries(critere);
     }
 
-    public String[][] getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
         return daoAnimal.getAnimauxTries(critere);
     }
 
@@ -92,10 +92,9 @@ public class Business {
         daoMedicament.ajouterMedicament(medicament);
     }
 
-
     //tache metier
 
-    public String[][] getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
         ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
@@ -122,7 +121,6 @@ public class Business {
             statistiques.replace(nomMedic, pourcentageParMedicament);
         }
 
-        //return statistiques;
-        return null;
+        return statistiques;
     }
 }

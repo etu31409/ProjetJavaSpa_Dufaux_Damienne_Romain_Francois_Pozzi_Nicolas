@@ -21,7 +21,8 @@ public class Animal {
     private Integer numTatouage;
     private String localisationTatouage;
     private Double poids;
-    private Proprietaire proprietaire;
+    //private Proprietaire proprietaire;
+    private Integer proprietaire;
 
     public Animal(){}
 
@@ -29,7 +30,7 @@ public class Animal {
                   String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Integer numTatouage, String localisationTatouage, Double poids,
-                  Proprietaire proprietaire)  {
+                  Integer proprietaire)  {
         setNom(nom);
         setDateArrivee(dateArrivee);
         setEspece(espece);
@@ -103,7 +104,11 @@ public class Animal {
         this.poids = poids;
     }
 
-    public void setProprietaire(Proprietaire proprietaire) {
+    /*public void setProprietaire(Proprietaire proprietaire) {
+        this.proprietaire = proprietaire;
+    }*/
+
+    public void setProprietaire(Integer proprietaire){
         this.proprietaire = proprietaire;
     }
 
@@ -174,7 +179,11 @@ public class Animal {
         return poids;
     }
 
-    public Proprietaire getProprietaire() {
+    /*public Proprietaire getProprietaire() {
+        return proprietaire;
+    }*/
+
+    public Integer getProprietaire(){
         return proprietaire;
     }
 

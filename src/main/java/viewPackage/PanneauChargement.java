@@ -1,6 +1,6 @@
 package viewPackage;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.*;
 
 public class PanneauChargement extends JPanel {
@@ -10,10 +10,8 @@ public class PanneauChargement extends JPanel {
 
     public PanneauChargement(JPanel panneauACharger, FenetrePrincipale fenetrePrincipale){
 
-        barreDeChargement = new JProgressBar();
-        barreDeChargement.setValue(0);
-        barreDeChargement.setStringPainted(true);
-        barreDeChargement.setVisible(true);
+        //barreDeChargement.setForeground(Color.BLACK);
+        //barreDeChargement.setBackground(Color.red);
 
         setLayout(new BorderLayout());
         add(barreDeChargement, BorderLayout.CENTER);

@@ -69,7 +69,6 @@ public class DBDAOMedicament implements IMedicament {
         catch (SQLException e) {
             throw new MedicamentException();
         }
-
     }
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException {
