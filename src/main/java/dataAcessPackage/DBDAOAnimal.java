@@ -449,7 +449,7 @@ public class DBDAOAnimal implements IAnimal {
         }
         catch(SingletonConnectionException exception){throw new SingletonConnectionException();}
         catch (SQLException e) {
-            System.out.println("SQL exception" + e.getMessage());
+            System.out.println("SQL exception :" + e.getMessage());
         }
         catch(Exception exception){System.out.println(exception.getMessage());}
     }

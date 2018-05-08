@@ -281,7 +281,7 @@ public class PanneauAnimal extends JPanel {
             if (dateDAttributionPuceCheckBox.isSelected()) {
                 GregorianCalendar date = new GregorianCalendar();
                 date.setTime((Date) spinnerDatePuce.getValue());
-                animal.setDateNaissance(date);
+                animal.setDateAttributionPuce(date);
             }
 
             try {
@@ -294,21 +294,16 @@ public class PanneauAnimal extends JPanel {
                 localisationTatouageTextField = null;
             }
             animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-            try {
-                animal.setProprietaire((Integer) comboBoxListeProprietaires.getSelectedItem());
-            } catch (Exception erreur) {
-                comboBoxListeProprietaires = null;
+            if(proprioCheckBox.isSelected()){
+                try {
+                    animal.setProprietaire((Integer)comboBoxListeProprietaires.getSelectedItem());
+                } catch (Exception erreur) {
+                    comboBoxListeProprietaires = null;
+                }
             }
+
             System.out.println(animal);
         }
-
-       // animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-        /*try{
-            animal.setProprietaire((Proprietaire)comboBoxListeProprietaires.getSelectedItem());
-        }*/
-        /*catch(Exception erreur){comboBoxListeProprietaires = null;}
-        System.out.println(animal);*/
-
         catch(AnimalException exception){
             JOptionPane.showMessageDialog(null, exception.getMessage());
         }
