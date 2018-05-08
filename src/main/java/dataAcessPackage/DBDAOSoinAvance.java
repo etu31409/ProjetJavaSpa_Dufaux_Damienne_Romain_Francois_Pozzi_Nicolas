@@ -136,4 +136,33 @@ public class DBDAOSoinAvance implements ISoinAvance {
             throw new SoinException();
         }
     }
+
+    public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "select max(?) from spabd.soinavance;";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1,"numSoin");
+            data = preparedStatement.executeQuery();
+
+            sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, heure, identifiantVeto, estUrgent, remarque) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1,data.getInt(0));
+            preparedStatement.setInt(2,soinAvance.getNumRegistre());
+            preparedStatement.setString(3,soinAvance.getIntitule());
+            preparedStatement.setString(4,soinAvance.getPartieDuCorps());
+            preparedStatement.setDate(5,new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
+            preparedStatement.setDate(6,new java.sql.Date(soinAvance.getHeure().getTimeInMillis()));
+            preparedStatement.setInt(7,soinAvance.getVeterinaire().getIdentifiantVeto());
+            preparedStatement.setBoolean(8,soinAvance.getEstUrgent());
+            preparedStatement.setString(9,soinAvance.getRemarque());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new SoinException("Erreur lors de l'insertion d'un soin avancé !");
+        }
+    }
 }

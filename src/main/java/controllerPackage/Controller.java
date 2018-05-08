@@ -74,7 +74,9 @@ public class Controller {
         business.ajouterOrdonnance(ordonnance);
     }
 
-    public void ajouterFicheDeSoins(){}
+    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
+        business.ajouterFicheDeSoins(soinAvance);
+    }
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);

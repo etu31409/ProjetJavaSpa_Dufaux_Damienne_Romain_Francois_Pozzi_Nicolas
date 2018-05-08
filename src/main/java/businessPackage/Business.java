@@ -84,6 +84,10 @@ public class Business {
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }
 
+    public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
+        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
+    }
+
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }
