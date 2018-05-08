@@ -102,12 +102,13 @@ public class Business {
 
 
     //tache metier
-    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
         ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
                 dateFinZoneRecherche);
 
+        ArrayList<StatMedicament> resultatStatistiques = new ArrayList<>();
         HashMap<String, Double> statistiques = new HashMap<>();
         Double compteurParMedicament;
         Double pourcentageParMedicament;
@@ -125,10 +126,13 @@ public class Business {
         }
 
         for (String nomMedic : statistiques.keySet()) {
+            StatMedicament stat = new StatMedicament();
             pourcentageParMedicament = (statistiques.get(nomMedic)) / compteurGlobal;
-            statistiques.replace(nomMedic, pourcentageParMedicament);
+            stat.setNomMedic(nomMedic);
+            stat.setPourcentage(pourcentageParMedicament);
+            resultatStatistiques.add(stat);
         }
 
-        return statistiques;
+        return resultatStatistiques;
     }
 }

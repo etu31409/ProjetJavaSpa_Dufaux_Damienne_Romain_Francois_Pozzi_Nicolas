@@ -1,29 +1,53 @@
 package viewPackage;
 
+import modelPackage.StatMedicament;
+
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class TableModeleStatistiquesMed  extends AbstractTableModel {
-    public int getRowCount() {
-        return 0;
+    private ArrayList<String> nomDesColonnes;
+    private ArrayList<StatMedicament> stats;
+
+    public TableModeleStatistiquesMed(ArrayList<StatMedicament> stats){
+        nomDesColonnes = new ArrayList<>();
+        this.stats = stats;
+
+        nomDesColonnes.add("Nom du médicament");
+        nomDesColonnes.add("Pourcentage d'utilisation dans l'interval de temps");
     }
 
     public int getColumnCount() {
-        return 0;
+        return nomDesColonnes.size();
     }
 
-    public String getColumnName(int columnIndex) {
-        return null;
+    public int getRowCount() {
+        return stats.size();
     }
 
-    public Class<?> getColumnClass(int columnIndex) {
-        return null;
+    public String getColumnName(int colonne) {
+        return nomDesColonnes.get(colonne);
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return null;
+    public Object getValueAt(int ligne, int colonne) {
+        StatMedicament stat = stats.get(ligne);
+        switch(colonne){
+            case 0 : return stat.getNomMedic();
+            case 1 : return Math.round(stat.getPourcentage()*100) + " %";
+            default : return null;
+        }
     }
 
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-
+    //afficher correctement les colonnes en fonction de leur type
+    public Class getColumnClass(int colonne) {
+        Class c;
+        switch(colonne){
+            case 0 : c = String.class;
+                break;
+            case 1 : c = Integer.class;
+                break;
+            default : c = String.class;
+        }
+        return c;
     }
 }

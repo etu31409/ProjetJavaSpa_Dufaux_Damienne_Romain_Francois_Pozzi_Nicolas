@@ -8,10 +8,12 @@ import modelPackage.StatMedicament;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -61,40 +63,50 @@ public class PanneauStatMedicaments {
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == rechercherButton){
-
-                //try {
+                try {
                     dateDebutZoneRecherche = new GregorianCalendar();
                     dateFinZoneRecherche = new GregorianCalendar();
-                    if(!checkBoxDateDebut.isSelected()){
+                    if (!checkBoxDateDebut.isSelected()) {
                         dateDebutZoneRecherche = new GregorianCalendar(1950, 01, 01);
+                    } else {
+                        dateDebutZoneRecherche.setTime((Date) spinnerDateDebut.getValue());
                     }
-                    else{
-                        dateDebutZoneRecherche.setTime((Date)spinnerDateDebut.getValue());
-                    }
-                    if(!checkBoxDateFin.isSelected()){
+                    if (!checkBoxDateFin.isSelected()) {
                         dateFinZoneRecherche.setTime(GregorianCalendar.getInstance().getTime());
-                    }
-                    else{
-                        dateFinZoneRecherche.setTime((Date)spinnerDateFin.getValue());
+                    } else {
+                        dateFinZoneRecherche.setTime((Date) spinnerDateFin.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
                         JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
                         return;
                     }
 
-                    /*String [][] selectionStatistiques = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
+                    ////////////////////////////////////////////////////////////////////////////////
+
+                    TableColumn colonne;
+                    TableModeleStatistiquesMed modele;
+                    ArrayList<StatMedicament> stats = new ArrayList<>();
+
+                    stats = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
-                    String[] nomDesColonnes = {"Nom du médicament", "Pourcentage d'utilisation dans l'interval de temps"};
-                    resultatStatistiques= new JTable(selectionStatistiques, nomDesColonnes);
-                    resultatStatistiques.setFillsViewportHeight(true);
-                    scrollPane.setViewportView(resultatStatistiques);*/
-                /*}
+                    modele = new TableModeleStatistiquesMed(stats);
+                    resultatStatistiques = new JTable(modele);
+                    scrollPane.setViewportView(resultatStatistiques);
+
+                    colonne = resultatStatistiques.getColumnModel().getColumn(1);
+                    colonne.setPreferredWidth(150);
+                    resultatStatistiques.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                    scrollPane.createHorizontalScrollBar();
+                    scrollPane.createVerticalScrollBar();
+
+                }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (MedicamentException e){
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }*/
+                }
             }
         }
     }

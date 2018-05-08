@@ -91,7 +91,7 @@ public class Controller {
     }
 
     //tâche metier
-    public HashMap<String, Double> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException{
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }

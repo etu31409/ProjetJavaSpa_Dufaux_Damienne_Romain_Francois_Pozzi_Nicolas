@@ -24,11 +24,10 @@ public class PanneauListingAnimaux extends JPanel {
     private JScrollPane listingScrollPane;
 
     private JTable resultatRecherche;
-    private static HashMap<String, String> listeCriteres = new HashMap<>();;
 
     public PanneauListingAnimaux(Controller controller){
+
         this.controller = controller;
-        initialisationListeCriteres();
         instanciationComboBox();
         buttonTri.addActionListener(new EcouteurBouton());
     }
@@ -37,51 +36,58 @@ public class PanneauListingAnimaux extends JPanel {
         return panneauContainerPrincipal;
     }
 
-    private static void initialisationListeCriteres(){
-        //pabon
-        listeCriteres.put("Aucun tri", "");
-        listeCriteres.put("Date d'arrivée","dateArrivee");
-        listeCriteres.put("Date de naissance", "dateNaissance");
-        listeCriteres.put("Nom", "nom");
-        listeCriteres.put("Identifiant de l'animal", "numRegistre");
-        listeCriteres.put("Poids", "poids");
-        listeCriteres.put("Espèce", "espece");
-
-
-    }
-
     private void instanciationComboBox() {
-        for (String key: listeCriteres.keySet()) {
-            System.out.println(key);
-            comboBoxTriAnimaux.addItem(key);
-        }
+        comboBoxTriAnimaux.addItem("Aucun tri");
+        comboBoxTriAnimaux.addItem("Date d'arrivée");
+        comboBoxTriAnimaux.addItem("Date de naissance");
+        comboBoxTriAnimaux.addItem("Nom");
+        comboBoxTriAnimaux.addItem("Identifiant de l'animal");
+        comboBoxTriAnimaux.addItem("Poids");
+        comboBoxTriAnimaux.addItem("Espèce");
         comboBoxTriAnimaux.setSelectedItem("Aucun tri");
     }
 
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
+            TableColumn colonne;
+            ListSelectionModel listeSelectionnee;
+            TableModeleListeAnimaux modele;
+            ArrayList<Animal> animauxTries = new ArrayList<>();
+
             if(e.getSource() == buttonTri){
-                /*try {
+                try {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
-                    String[][] resultatRequeteRecherche = controller.getAnimauxTries(listeCriteres.get(critere));
-                    String[] nomDesColonnes = {"Identifiant de l'animal", "Date d'arrivée","Nom", "Espèce", "Race",
-                            "Sexe", "Stérilisé.e", "Couleur", "Date de naissance","Poids", "Identifiant du propriétaire",
-                            "Numéro de puce", "Localisation de la puce", "Date d'attribution de la puce",
-                            "Numéro de tatouage", "Localisation du tatouage"};
-                    resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                    resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+                    animauxTries = controller.getAnimauxTries(critere);
+                    modele = new TableModeleListeAnimaux(animauxTries);
+                    resultatRecherche = new JTable(modele);
+                    listingScrollPane.setViewportView(resultatRecherche);
+
+                    colonne = resultatRecherche.getColumnModel().getColumn(1);
+                    colonne.setPreferredWidth(250);
+                    //resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
                     listingScrollPane.createHorizontalScrollBar();
                     listingScrollPane.createVerticalScrollBar();
                     resultatRecherche.setFillsViewportHeight(true);
-                    listingScrollPane.setViewportView(resultatRecherche);
+
                 }
                 catch (AnimalException s) {
                     JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux");
                 }
                 catch (SingletonConnectionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage());
-                }*/
+                }
+            }
+            if(e.getSource() == supprimerButton){
+                listeSelectionnee = resultatRecherche.getSelectionModel();
+                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+            }
+            if(e.getSource() == modifierButton){
+                listeSelectionnee = resultatRecherche.getSelectionModel();
+                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
             }
         }
     }

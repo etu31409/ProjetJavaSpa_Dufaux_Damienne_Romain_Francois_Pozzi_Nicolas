@@ -175,10 +175,23 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> tousLesAnimauxTries = new ArrayList<>();
 
-            if (critere.equals("")){
-                critere = "\"\"";
-            }
-            sqlInstruction = "select * from spabd.animal order by "+ critere + " asc;";
+            String critereColonne;
+            if(critere.equals("Aucun tri"))
+                critereColonne = "\"\"";
+            else if (critere.equals("Date d'arrivée"))
+                critereColonne = "dateArrivee";
+            else if (critere.equals("Date d'arrivée"))
+                critereColonne = "dateNaissance";
+            else if (critere.equals("Nom"))
+                critereColonne = "nom";
+            else if (critere.equals("Identifiant de l'animal"))
+                critereColonne = "numRegistre";
+            else if (critere.equals("Poids"))
+                critereColonne = "poids";
+            else
+                critereColonne = "espece";
+
+            sqlInstruction = "select * from spabd.animal order by "+ critereColonne + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 
