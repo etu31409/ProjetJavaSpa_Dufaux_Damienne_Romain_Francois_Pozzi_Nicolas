@@ -3,6 +3,7 @@ package modelPackage;
 import java.util.GregorianCalendar;
 
 public class SoinAvance {
+    private Integer numSoin;
     private Integer numRegistre;
     private String intitule;
     private String partieDuCorps;
@@ -12,8 +13,9 @@ public class SoinAvance {
     private String remarque;
 
     public SoinAvance(){}
-    public SoinAvance(Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
+    public SoinAvance(Integer numSoin, Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
                       Integer veterinaire, Boolean estUrgent, String remarque) {
+        setNumSoin(numSoin);
         setNumRegistre(numRegistre);
         setIntitule(intitule);
         setPartieDuCorps(partieDuCorps);
@@ -21,6 +23,14 @@ public class SoinAvance {
         setVeterinaire(veterinaire);
         setEstUrgent(estUrgent);
         setRemarque(remarque);
+    }
+
+    public Integer getNumSoin() {
+        return numSoin;
+    }
+
+    public void setNumSoin(Integer numSoin) {
+        this.numSoin = numSoin;
     }
 
     public Integer getNumRegistre() {

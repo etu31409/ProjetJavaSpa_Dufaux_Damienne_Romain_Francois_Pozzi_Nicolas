@@ -17,11 +17,11 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         nomDesColonnes.add("Identifiant du soin");
         nomDesColonnes.add("Identifiant de l'animal");
         nomDesColonnes.add("Intitulé du soin");
-        nomDesColonnes.add("Partie du corps concerné");//
+        nomDesColonnes.add("Partie du corps concerné");
         nomDesColonnes.add("Date du soin");
         nomDesColonnes.add("Identifiant du vétérinaire");
         nomDesColonnes.add("En urgence");
-        nomDesColonnes.add("Remarque");//
+        nomDesColonnes.add("Remarque");
     }
 
     public int getColumnCount() {
@@ -39,7 +39,7 @@ public class TableModeleListeSoins  extends AbstractTableModel {
     public Object getValueAt(int ligne, int colonne) {
         SoinAvance soin = soins.get(ligne);
         switch(colonne){
-            //case 0 : return soin.get();
+            case 0 : return soin.getNumSoin();
             case 1 : return soin.getNumRegistre();
             case 2 : return soin.getIntitule();
             case 3 : return soin.getPartieDuCorps();

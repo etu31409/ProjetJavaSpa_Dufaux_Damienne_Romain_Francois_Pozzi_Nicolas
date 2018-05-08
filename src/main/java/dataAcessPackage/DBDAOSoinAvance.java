@@ -123,6 +123,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
 
             while (data.next()) {
                 SoinAvance soin = new SoinAvance();
+                soin.setNumSoin(data.getInt("numSoin"));
                 soin.setNumRegistre(data.getInt("numRegistre"));
                 soin.setRemarque(data.getString("remarque"));
                 soin.setEstUrgent(data.getBoolean("estUrgent"));
