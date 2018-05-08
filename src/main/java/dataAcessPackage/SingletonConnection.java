@@ -11,7 +11,7 @@ public class SingletonConnection {
         if(connectionUnique == null){
             try{
                 connectionUnique = DriverManager.getConnection("jdbc:mysql://localhost:3306/spabd?useSSL=false",
-                        "root", "root");
+                        "root", "Pn783iOm");
 
             }catch (SQLException exception)
             {

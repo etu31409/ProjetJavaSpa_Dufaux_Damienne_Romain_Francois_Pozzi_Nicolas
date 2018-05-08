@@ -1,7 +1,7 @@
 package modelPackage;
 
 public class ProprietaireAnimal {
-    //numRegistre, animal.nom, proprietaire.identifiantProprio, proprietaire.nom
+
     private Integer numRegistreAnimal;
     private String nomAnimal;
     private Integer identifiantProprio;
