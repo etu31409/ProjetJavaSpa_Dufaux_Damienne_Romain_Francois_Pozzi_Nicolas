@@ -98,7 +98,7 @@ public class Business {
                 dateFinZoneRecherche);
 
         HashMap<String, Double> statistiques = new HashMap<>();
-        Double compteurParMedicament = 1.;
+        Double compteurParMedicament;
         Double pourcentageParMedicament;
         Integer compteurGlobal = 0;
 
@@ -108,41 +108,17 @@ public class Business {
                 statistiques.put(sm.getNomMedic(), 1.);
             }
             else {
-                Double test;
-                test = statistiques.get(sm.getNomMedic());
-                compteurParMedicament = statistiques.get(sm.getNomMedic())+1;
+                compteurParMedicament = (statistiques.get(sm.getNomMedic()))+1;
                 statistiques.replace(sm.getNomMedic(), compteurParMedicament);
             }
         }
 
         for (String nomMedic : statistiques.keySet()) {
-            pourcentageParMedicament = statistiques.get(nomMedic) / compteurGlobal;
+            pourcentageParMedicament = (statistiques.get(nomMedic)) / compteurGlobal;
             statistiques.replace(nomMedic, pourcentageParMedicament);
         }
 
-        /*for (String nomMedic : statistiques.keySet()) {
-            for (StatMedicament statMedicament : listeResultatRechercheOrdonnances) {
-                if (statMedicament.getNomMedic().equals(nomMedic)) {
-                    pourcentageParMedicament = statistiques.get(nomMedic) / compteurGlobal;
-                    statistiques.replace(nomMedic, pourcentageParMedicament);
-                }
-            }
-        }*/
-
-        String[][] resultatStatistiques = new String[statistiques.size()][2];
-
-        int i = 0;
-        for(String nomMedic : statistiques.keySet()){
-            resultatStatistiques[i][0] = nomMedic;
-            i++;
-        }
-        String resultat;
-        i = 0;
-        for(Double pourcentage : statistiques.values()){
-            resultat = Double.toString(pourcentage*100);
-            resultatStatistiques[i][1] = resultat + " %";
-            i++;
-        }
-        return resultatStatistiques;
+        //return statistiques;
+        return null;
     }
 }

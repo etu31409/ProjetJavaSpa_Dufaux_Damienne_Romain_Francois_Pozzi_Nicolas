@@ -21,13 +21,14 @@ public class  FenetrePrincipale extends JFrame{
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
 
-        panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
-        frameContainer.add(panneauBienvenue, BorderLayout.CENTER);
+        PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
+        frameContainer.add(panneauChargement);
+        //frameContainer.add(panneauBienvenue, BorderLayout.CENTER);
+        panneauChargement.getG().start();
         barMenu = new JMenuBar();
         setJMenuBar(barMenu);
 
         spa = new JMenu("S.P.A.");
-        spa.setMnemonic('S');
         barMenu.add(spa);
         spa.addActionListener(new EcouteurBarMenu());
 
@@ -102,9 +103,9 @@ public class  FenetrePrincipale extends JFrame{
         FenetrePrincipale.this.setVisible(true);
     }
 
-    public void afficherStatistique(){
+    public void afficherAccueil(){
         frameContainer.removeAll();
-        frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
+        frameContainer.add(new PanneauBienvenue().getPanneauContainerPrincipal());
         frameContainer.setVisible(true);
         frameContainer.repaint();
         frameContainer.validate();
@@ -121,9 +122,12 @@ public class  FenetrePrincipale extends JFrame{
         public void actionPerformed(ActionEvent event){
             if (event.getSource() == accueil){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauBienvenue().getPanneauContainerPrincipal());
+                panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
+                //PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
+                //frameContainer.add(panneauChargement);
                 frameContainer.repaint();
                 frameContainer.validate();
+                //panneauChargement.getG().start();
             }
             else if(event.getSource() == nouvelAnimal){
                 frameContainer.removeAll();
@@ -164,19 +168,17 @@ public class  FenetrePrincipale extends JFrame{
             else if(event.getSource() == rechercheAnimaux) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheAnimaux(controller).getPanneauContainerPrincipal());
-                frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
             }
             else if(event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
-                PanneauChargement panneauChargement = new PanneauChargement(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal(), FenetrePrincipale.this);
-                frameContainer.add(panneauChargement);
-                frameContainer.setVisible(true);
+                //PanneauChargement panneauChargement = new PanneauChargement(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal(), FenetrePrincipale.this);
+                //frameContainer.add(panneauChargement);
+                frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-                panneauChargement.getG().start();
-
+                //panneauChargement.getG().start();
             }
         }
     }

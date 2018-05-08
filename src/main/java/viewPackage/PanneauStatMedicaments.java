@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -59,10 +58,10 @@ public class PanneauStatMedicaments {
         return panneauContainerPrincipal;
     }
 
-
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
             if(event.getSource() == rechercherButton){
+
                 try {
                     dateDebutZoneRecherche = new GregorianCalendar();
                     dateFinZoneRecherche = new GregorianCalendar();
