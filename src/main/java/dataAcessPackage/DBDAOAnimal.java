@@ -14,6 +14,7 @@ public class DBDAOAnimal implements IAnimal {
     private String sqlInstruction;
     private ResultSet data;
 
+    //get
     public ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
@@ -166,6 +167,87 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+
+            ArrayList<Animal> tousLesAnimauxTries = new ArrayList<>();
+
+            if (critere.equals("")){
+                critere = "\"\"";
+            }
+            sqlInstruction = "select * from spabd.animal order by "+ critere + " asc;";
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            data = statement.executeQuery();
+
+            while (data.next()) {
+                Animal animal = new Animal();
+                GregorianCalendar dateArrivee = new GregorianCalendar();
+
+                animal.setNumRegistre(data.getInt("numRegistre"));
+                dateArrivee.setTime(data.getDate("dateArrivee"));
+                animal.setDateArrivee(dateArrivee);
+                animal.setEspece(data.getString("espece"));
+                animal.setRace(data.getString("race"));
+                animal.setSexe(data.getString("sexe"));
+                animal.setEstSterilise(data.getBoolean("estSterilise"));
+                animal.setCouleurDePeau(data.getString("couleurDePeau"));
+                animal.setPoids(data.getDouble("poids"));
+
+                String nom = data.getString("nom");
+                if (!data.wasNull()) {
+                    animal.setNom(nom);
+                }
+
+                Date sqlDateNaissance = data.getDate("dateNaissance");
+                if (!data.wasNull()) {
+                    GregorianCalendar calendar = new GregorianCalendar();
+                    calendar.setTime(sqlDateNaissance);
+                    animal.setDateNaissance(calendar);
+                }
+
+                Integer numPuce = data.getInt("numPuce");
+                if (!data.wasNull()) {
+                    animal.setNumPuce(numPuce);
+                }
+
+                String localisationPuce = data.getString("localisationPuce");
+                if (!data.wasNull()) {
+                    animal.setLocalisationPuce(localisationPuce);
+                }
+
+                java.sql.Date sqlDateAttributionPuce = data.getDate("dateAttributionPuce");
+                if (!data.wasNull()) {
+                    GregorianCalendar calendar = new GregorianCalendar();
+                    calendar.setTime(sqlDateAttributionPuce);
+                    animal.setDateAttributionPuce(calendar);
+                }
+
+                Integer numTatouage = data.getInt("numTatouage");
+                if (!data.wasNull()) {
+                    animal.setNumTatouage(numTatouage);
+                }
+
+                String localisationTatouage = data.getString("localisationPuce");
+                if (!data.wasNull()) {
+                    animal.setLocalisationTatouage(localisationTatouage);
+                }
+
+                Integer identifiantProprio = data.getInt("identifiantProprio");
+                if (!data.wasNull()) {
+                    animal.setProprietaire(identifiantProprio);
+                }
+                tousLesAnimauxTries.add(animal);
+            }
+            return tousLesAnimauxTries;
+        } catch (SQLException e) {
+            throw new AnimalException();
+        }
+    }
+
+    //recherches
     public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
             SingletonConnectionException {
         try {
@@ -275,6 +357,7 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
+    //ajout
     public void ajouterAnimal(Animal animal) throws SingletonConnectionException {
         try {
             if (connectionUnique == null) {
@@ -356,86 +439,6 @@ public class DBDAOAnimal implements IAnimal {
             System.out.println("SQL exception" + e.getMessage());
         }
         catch(Exception exception){System.out.println(exception.getMessage());}
-    }
-
-    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
-        try {
-            if (connectionUnique == null) {
-                connectionUnique = SingletonConnection.getUniqueInstance();
-            }
-
-            ArrayList<Animal> tousLesAnimauxTries = new ArrayList<>();
-
-            if (critere.equals("")){
-                critere = "\"\"";
-            }
-            sqlInstruction = "select * from spabd.animal order by "+ critere + " asc;";
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            data = statement.executeQuery();
-
-            while (data.next()) {
-                Animal animal = new Animal();
-                GregorianCalendar dateArrivee = new GregorianCalendar();
-
-                animal.setNumRegistre(data.getInt("numRegistre"));
-                dateArrivee.setTime(data.getDate("dateArrivee"));
-                animal.setDateArrivee(dateArrivee);
-                animal.setEspece(data.getString("espece"));
-                animal.setRace(data.getString("race"));
-                animal.setSexe(data.getString("sexe"));
-                animal.setEstSterilise(data.getBoolean("estSterilise"));
-                animal.setCouleurDePeau(data.getString("couleurDePeau"));
-                animal.setPoids(data.getDouble("poids"));
-
-                String nom = data.getString("nom");
-                if (!data.wasNull()) {
-                    animal.setNom(nom);
-                }
-
-                Date sqlDateNaissance = data.getDate("dateNaissance");
-                if (!data.wasNull()) {
-                    GregorianCalendar calendar = new GregorianCalendar();
-                    calendar.setTime(sqlDateNaissance);
-                    animal.setDateNaissance(calendar);
-                }
-
-                Integer numPuce = data.getInt("numPuce");
-                if (!data.wasNull()) {
-                    animal.setNumPuce(numPuce);
-                }
-
-                String localisationPuce = data.getString("localisationPuce");
-                if (!data.wasNull()) {
-                    animal.setLocalisationPuce(localisationPuce);
-                }
-
-                java.sql.Date sqlDateAttributionPuce = data.getDate("dateAttributionPuce");
-                if (!data.wasNull()) {
-                    GregorianCalendar calendar = new GregorianCalendar();
-                    calendar.setTime(sqlDateAttributionPuce);
-                    animal.setDateAttributionPuce(calendar);
-                }
-
-                Integer numTatouage = data.getInt("numTatouage");
-                if (!data.wasNull()) {
-                    animal.setNumTatouage(numTatouage);
-                }
-
-                String localisationTatouage = data.getString("localisationPuce");
-                if (!data.wasNull()) {
-                    animal.setLocalisationTatouage(localisationTatouage);
-                }
-
-                Integer identifiantProprio = data.getInt("identifiantProprio");
-                if (!data.wasNull()) {
-                    animal.setProprietaire(identifiantProprio);
-                }
-                tousLesAnimauxTries.add(animal);
-            }
-            return tousLesAnimauxTries;
-        } catch (SQLException e) {
-            throw new AnimalException();
-        }
     }
 }
 

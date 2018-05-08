@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IMedicament {
+
+    //get
     ArrayList<Medicament> getMedicaments() throws MedicamentException, SingletonConnectionException;
     Medicament getUnMedicament(int identifiantMed)throws SingletonConnectionException, MedicamentException;
+
+    //ajout
     void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException;
 
     //tâche métier
-
     ArrayList<StatMedicament> getMedicamentsEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException;
 

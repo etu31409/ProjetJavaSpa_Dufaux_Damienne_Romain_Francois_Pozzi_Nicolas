@@ -12,9 +12,9 @@ import java.util.*;
 public class DBDAOProprietaire implements IProprietaire{
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public  ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
@@ -72,6 +72,7 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
+    //recherche
     public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
@@ -109,6 +110,7 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
+    //ajout
     public void ajouterNouveauProprio(Proprietaire proprietaire) throws SingletonConnectionException, ProprietaireException{
         try {
             if (proprietaire != null && !proprietaire.getPrenom().isEmpty() && !proprietaire.getNom().isEmpty()) {

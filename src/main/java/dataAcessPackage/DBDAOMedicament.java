@@ -12,9 +12,9 @@ import java.util.GregorianCalendar;
 public class DBDAOMedicament implements IMedicament {
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public ArrayList<Medicament> getMedicaments() throws MedicamentException, SingletonConnectionException {
         try {
 
@@ -70,6 +70,7 @@ public class DBDAOMedicament implements IMedicament {
         }
     }
 
+    //ajout
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
@@ -87,6 +88,7 @@ public class DBDAOMedicament implements IMedicament {
         }
     }
 
+    //tâche metier
     public ArrayList<StatMedicament> getMedicamentsEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException{
         try {

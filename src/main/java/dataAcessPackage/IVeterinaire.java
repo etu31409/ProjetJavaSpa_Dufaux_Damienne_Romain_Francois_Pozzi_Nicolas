@@ -8,8 +8,12 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IVeterinaire {
+
+    //get
     ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException;
     Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException;
-    ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut,
-                                                               GregorianCalendar dateFin) throws SingletonConnectionException, VeterinaireException;
+
+    //recherche
+    ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
+            throws SingletonConnectionException, VeterinaireException;
 }

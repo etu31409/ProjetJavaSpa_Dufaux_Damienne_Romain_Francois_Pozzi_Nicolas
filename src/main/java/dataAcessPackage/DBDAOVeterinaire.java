@@ -10,9 +10,9 @@ import java.util.*;
 public class DBDAOVeterinaire implements IVeterinaire{
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public  ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         try {
 
@@ -69,6 +69,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
+    //recherche
     public ArrayList<Veterinaire> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
             throws SingletonConnectionException, VeterinaireException {
         try {

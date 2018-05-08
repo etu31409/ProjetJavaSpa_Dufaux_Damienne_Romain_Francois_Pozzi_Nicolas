@@ -17,9 +17,9 @@ import java.util.GregorianCalendar;
 public class DBDAOSoinAvance implements ISoinAvance {
     private Connection connectionUnique;
     private String sqlInstruction;
-
     private ResultSet data;
 
+    //get
     public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException {
         try {
 
@@ -130,6 +130,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
+    //ajout
     public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
         try {
             if (connectionUnique == null) {
