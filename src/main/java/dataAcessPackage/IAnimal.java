@@ -26,4 +26,5 @@ public interface IAnimal {
 
     //ajouts
     void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException;
+    void supprimerAnimal(Animal animal) throws  AnimalException, SingletonConnectionException;
 }

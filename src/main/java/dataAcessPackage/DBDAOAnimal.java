@@ -453,5 +453,21 @@ public class DBDAOAnimal implements IAnimal {
         }
         catch(Exception exception){System.out.println(exception.getMessage());}
     }
+    public void supprimerAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "delete from animal where numRegistre = ?";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1, animal.getNumRegistre());
+            preparedStatement.executeUpdate();
+        }
+        catch(SingletonConnectionException exception){throw new SingletonConnectionException();}
+        catch (SQLException e) {
+            System.out.println("SQL exception :" + e.getMessage());
+        }
+        catch(Exception exception){System.out.println(exception.getMessage());}
+    }
 }
 

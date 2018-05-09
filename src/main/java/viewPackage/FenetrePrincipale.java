@@ -142,7 +142,7 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == listingAnimaux){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauListingAnimaux(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauListingAnimaux(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

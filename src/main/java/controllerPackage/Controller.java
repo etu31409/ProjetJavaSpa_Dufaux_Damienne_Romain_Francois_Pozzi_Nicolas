@@ -28,6 +28,9 @@ public class Controller {
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         business.ajouterAnimal(animal);
     }
+    public void supprimerAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+        business.supprimerAnimal(animal);
+    }
 
     //medicaments
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
