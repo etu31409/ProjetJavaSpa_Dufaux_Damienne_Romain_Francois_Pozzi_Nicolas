@@ -177,8 +177,23 @@ public class DBDAOSoinAvance implements ISoinAvance {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "delete from soinavance where numSoin = ?";
+            //Recuperer toutes les ordonnaces qui sont liés à la fiche de soins
+            sqlInstruction = "select * from ordonnance where numSoin = ?";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1,soin.getNumSoin());
+            data = preparedStatement.executeQuery();
+            // Supprimer les ordonnances liées à la fiche de soin
+            sqlInstruction = "delete from ordonnance where numSoin = ? and numRegistre = ? and identifiantMed = ?";
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            while (data.next()) {
+                preparedStatement.setInt(1,soin.getNumSoin());
+                preparedStatement.setInt(2,soin.getNumRegistre());
+                preparedStatement.setInt(3,data.getInt("identifiantMed"));
+                preparedStatement.executeUpdate();
+            }
+            //Supprimer la fiche de soins
+            sqlInstruction = "delete from soinavance where numSoin = ?";
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, soin.getNumSoin());
             preparedStatement.executeUpdate();
         }

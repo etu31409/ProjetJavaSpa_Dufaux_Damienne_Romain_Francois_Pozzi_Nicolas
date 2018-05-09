@@ -46,6 +46,10 @@ public class Business {
         return daoMedicament.getMedicaments();
     }
 
+    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
+        return daoMedicament.getUnMedicament(identifiantMed);
+    }
+
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }

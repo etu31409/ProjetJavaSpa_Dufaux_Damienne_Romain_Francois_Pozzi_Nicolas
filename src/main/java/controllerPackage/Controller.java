@@ -37,6 +37,10 @@ public class Controller {
         return business.getMedicaments();
     }
 
+    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
+        return business.getUnMedicament(identifiantMed);
+    }
+
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);
     }

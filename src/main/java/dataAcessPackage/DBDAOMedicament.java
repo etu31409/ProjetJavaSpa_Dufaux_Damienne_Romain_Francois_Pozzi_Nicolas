@@ -44,7 +44,7 @@ public class DBDAOMedicament implements IMedicament {
         }
     }
 
-    public Medicament getUnMedicament(int identifiantMed)throws SingletonConnectionException, MedicamentException{
+    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -65,8 +65,8 @@ public class DBDAOMedicament implements IMedicament {
             }
             return medicament;
         }
-        catch (SQLException e) {
-            throw new MedicamentException();
+        catch (Exception e) {
+            throw new MedicamentException("Impossible de récuperer un, médicament dans la base de données");
         }
     }
 
