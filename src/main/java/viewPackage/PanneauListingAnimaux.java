@@ -22,14 +22,17 @@ public class PanneauListingAnimaux extends JPanel {
     private JButton supprimerButton;
     private JButton modifierButton;
     private JScrollPane listingScrollPane;
-
+    private FenetrePrincipale fenetrePrincipale;
     private JTable resultatRecherche;
 
-    public PanneauListingAnimaux(Controller controller){
+    public PanneauListingAnimaux(Controller controller, FenetrePrincipale fenetrePrincipale){
 
         this.controller = controller;
         instanciationComboBox();
         buttonTri.addActionListener(new EcouteurBouton());
+        supprimerButton.addActionListener(new EcouteurBouton());
+        modifierButton.addActionListener(new EcouteurBouton());
+        this.fenetrePrincipale = fenetrePrincipale;
     }
 
     public JPanel getPanneauContainerPrincipal() {
@@ -84,11 +87,24 @@ public class PanneauListingAnimaux extends JPanel {
             if(e.getSource() == supprimerButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                try{
+                    String critere = (String)comboBoxTriAnimaux.getSelectedItem();
+                    animauxTries = controller.getAnimauxTries(critere);
+                    Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
+                    controller.supprimerAnimal(animalASup);
+                    JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !");
+                }
+                catch (AnimalException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux");}
+                catch(SingletonConnectionException s){JOptionPane.showMessageDialog(null,s.getMessage());}
             }
             if(e.getSource() == modifierButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                modifierAnimal();
             }
         }
+    }
+    public void modifierAnimal(){
+
     }
 }
