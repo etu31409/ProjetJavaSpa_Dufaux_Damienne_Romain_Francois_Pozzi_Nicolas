@@ -74,7 +74,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setNumTatouage(numTatouage);
                 }
 
-                String localisationTatouage = data.getString("localisationPuce");
+                String localisationTatouage = data.getString("localisationTatouage");
                 if (!data.wasNull()) {
                     animal.setLocalisationTatouage(localisationTatouage);
                 }
@@ -243,7 +243,7 @@ public class DBDAOAnimal implements IAnimal {
                     animal.setNumTatouage(numTatouage);
                 }
 
-                String localisationTatouage = data.getString("localisationPuce");
+                String localisationTatouage = data.getString("localisationTatouage");
                 if (!data.wasNull()) {
                     animal.setLocalisationTatouage(localisationTatouage);
                 }

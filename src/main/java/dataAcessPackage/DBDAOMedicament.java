@@ -89,7 +89,8 @@ public class DBDAOMedicament implements IMedicament {
     }
 
     //tâche metier
-    public ArrayList<StatMedicament> getMedicamentsEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public ArrayList<StatMedicament> getMedicamentsEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche,
+                                                                  GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException{
         try {
             if (connectionUnique == null) {
