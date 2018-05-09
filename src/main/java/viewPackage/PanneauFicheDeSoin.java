@@ -10,7 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class PanneauFicheDeSoin extends JPanel {
     private final Controller controller;
@@ -116,12 +118,12 @@ public class PanneauFicheDeSoin extends JPanel {
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
             valide = false;
         }
-        if (listMedicamentsChoisis.isSelectionEmpty()) {
+        /*if (listMedicamentsChoisis.isEmpty() == 0) {
             Border border = BorderFactory.createLineBorder(Color.red);
             listMedicamentsChoisis.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
             valide = false;
-        }
+        }*///TODO
         return valide;
     }
 
@@ -142,23 +144,16 @@ public class PanneauFicheDeSoin extends JPanel {
         soinAvance.setNumRegistre(((Animal)comboBoxAnimaux.getSelectedItem()).getNumRegistre());
         soinAvance.setIntitule(textAreaIntituleSoin.getText());
         soinAvance.setPartieDuCorps(textAreaPartieDuCorps.getText());
-        /*
-         * if(dateDAttributionPuceCheckBox.isSelected()){
-            GregorianCalendar date = new GregorianCalendar();
-            date.setTime((Date)spinnerDatePuce.getValue());
-            animal.setDateNaissance(date);
-        }
-         */
-        soinAvance.setDateSoin(new GregorianCalendar());
-        //soinAvance.setVeterinaire((Veterinaire)comboBoxVeterinaires.getSelectedItem());
+        soinAvance.setDateSoin(new GregorianCalendar(TimeZone.getTimeZone("Europe/Brussels")));
+        soinAvance.setVeterinaire(((Veterinaire)comboBoxVeterinaires.getSelectedItem()).getIdentifiantVeto());
         soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
+        if(textAreaRemarque.getText().isEmpty()) textAreaRemarque = null;
         soinAvance.setRemarque(textAreaRemarque.getText());
         return soinAvance;
     }
 
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            Ordonnance ordonnance;
             int nbMed;
             if (event.getSource() == ajouterButton) {
                 Medicament elementSelectionne = (Medicament) listMedicamentsDispos.getSelectedValue();
@@ -173,17 +168,16 @@ public class PanneauFicheDeSoin extends JPanel {
             if (event.getSource() == validerButton) {
                 if(validerChamps()) {
                     nbMed = medicamentsChoisisModele.getSize();
-                    for (int i = 0; i < nbMed; i++) {
-                        try {
-                            //Créer une fiche de soins (SoinAvance)
+                    System.out.println(nbMed);
+                    try {
+                        for (int i = 0; i < nbMed; i++) {
                             controller.ajouterFicheDeSoins(nouveauSoinAvance());
-                            ordonnance = new Ordonnance();
-                            //controller.ajouterOrdonnance(); //TODO
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
+                            //controller.ajouterOrdonnance(nouvelleOrdonance()); //TODO
                         }
+                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                    JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
                 }
                 JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
             }

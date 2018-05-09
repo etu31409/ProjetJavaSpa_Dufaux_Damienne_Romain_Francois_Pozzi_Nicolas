@@ -6,13 +6,11 @@ public class Ordonnance {
     private SoinAvance soinAvance;
     private Animal animal;
     private Medicament medicament;
-    private GregorianCalendar dateOrdonnance;
 
-    public Ordonnance(SoinAvance soinAvance, Animal animal, Medicament medicament, GregorianCalendar dateOrdonnance) {
+    public Ordonnance(SoinAvance soinAvance, Animal animal, Medicament medicament) {
         setSoinAvance(soinAvance);
         setAnimal(animal);
         setMedicament(medicament);
-        this.dateOrdonnance = dateOrdonnance;
     }
 
     public Ordonnance(){}
@@ -29,10 +27,6 @@ public class Ordonnance {
         return medicament;
     }
 
-    public GregorianCalendar getDateOrdonnance() {
-        return dateOrdonnance;
-    }
-
     public void setSoinAvance(SoinAvance soinAvance) {
         this.soinAvance = soinAvance;
     }
@@ -43,9 +37,5 @@ public class Ordonnance {
 
     public void setMedicament(Medicament medicament) {
         this.medicament = medicament;
-    }
-
-    public void setDateOrdonnance(GregorianCalendar dateOrdonnance) {
-        this.dateOrdonnance = dateOrdonnance;
     }
 }
