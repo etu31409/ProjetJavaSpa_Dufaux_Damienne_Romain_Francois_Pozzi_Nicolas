@@ -3,6 +3,7 @@ package viewPackage;
 import modelPackage.Animal;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -51,7 +52,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
             case 0 : return animal.getNumRegistre();
             case 1 : {
                 if (animal.getDateArrivee()!= null)
-                    return animal.getDateArrivee().getTime();
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateArrivee().getTime());
                 else
                     return null;
             }
@@ -63,7 +64,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
             case 7 : return animal.getCouleurDePeau();
             case 8 : {
                 if (animal.getDateNaissance()!= null)
-                    return animal.getDateNaissance().getTime();
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateNaissance().getTime());
                 else
                     return null;
             }
@@ -73,7 +74,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
             case 12 : return animal.getLocalisationPuce();
             case 13 : {
                 if (animal.getDateAttributionPuce()!= null)
-                    return animal.getDateAttributionPuce().getTime();
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateAttributionPuce().getTime());
                 else
                     return null;
             }

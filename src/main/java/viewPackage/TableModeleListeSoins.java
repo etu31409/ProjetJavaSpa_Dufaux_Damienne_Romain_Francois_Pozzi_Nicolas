@@ -3,6 +3,7 @@ package viewPackage;
 import modelPackage.SoinAvance;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -43,7 +44,12 @@ public class TableModeleListeSoins  extends AbstractTableModel {
             case 1 : return soin.getNumRegistre();
             case 2 : return soin.getIntitule();
             case 3 : return soin.getPartieDuCorps();
-            case 4 : return soin.getDateSoin().getTimeInMillis();
+            case 4 : {
+                if (soin.getDateSoin()!= null)
+                    return new SimpleDateFormat("dd/MM/YYYY").format(soin.getDateSoin().getTime());
+                else
+                    return null;
+            }
             case 5 : return soin.getVeterinaire();
             case 6 : return soin.getEstUrgent();
             case 7 : return soin.getRemarque();

@@ -33,7 +33,7 @@ public class TableModeleStatistiquesMed  extends AbstractTableModel {
         StatMedicament stat = stats.get(ligne);
         switch(colonne){
             case 0 : return stat.getNomMedic();
-            case 1 : return Math.round(stat.getPourcentage()*100) + " %";
+            case 1 : return  String.format("%.1f", stat.getPourcentage()*100) + " %";
             default : return null;
         }
     }

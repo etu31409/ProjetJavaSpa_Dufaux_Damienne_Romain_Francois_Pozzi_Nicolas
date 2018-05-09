@@ -89,6 +89,8 @@ public class PanneauStatMedicaments {
                             dateFinZoneRecherche);
                     modele = new TableModeleStatistiquesMed(stats);
                     resultatStatistiques = new JTable(modele);
+                    //resultatStatistiques.setAutoCreateRowSorter(true);
+
                     scrollPane.setViewportView(resultatStatistiques);
 
                     colonne = resultatStatistiques.getColumnModel().getColumn(1);
