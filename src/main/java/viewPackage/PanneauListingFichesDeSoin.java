@@ -28,6 +28,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
         this.controller = controller;
         instanciationComboBox();
         trierButton.addActionListener(new EcouteurBouton());
+        supprimerButton.addActionListener(new EcouteurBouton());
     }
 
     public JPanel getPanneauContainerPrincipal() {
@@ -81,6 +82,14 @@ public class PanneauListingFichesDeSoin extends JPanel {
             if(e.getSource() == supprimerButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                try{
+                    String critere = (String)comboBoxListingFiches.getSelectedItem();
+                    soinsTries = controller.getSoinsTries(critere);
+                    SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
+                    controller.supprimerSoin(soinASup);
+                    JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !");
+                }
+                catch (Exception exception){JOptionPane.showMessageDialog(null, exception.getMessage());}
             }
             if(e.getSource() == modifierButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();

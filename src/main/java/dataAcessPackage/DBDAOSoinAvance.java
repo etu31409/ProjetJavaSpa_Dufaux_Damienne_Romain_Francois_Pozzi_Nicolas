@@ -171,4 +171,19 @@ public class DBDAOSoinAvance implements ISoinAvance {
             throw new SoinException("Erreur lors de l'insertion d'un soin avancé");
         }
     }
+
+    public void supprimerSoin(SoinAvance soin) throws SoinException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "delete from soinavance where numSoin = ?";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1, soin.getNumSoin());
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException exception){throw new SoinException(exception.getMessage());}
+        catch(Exception exception){throw new SoinException("Erreur lors de la suppression de la fiche de soins");}
+    }
+
 }

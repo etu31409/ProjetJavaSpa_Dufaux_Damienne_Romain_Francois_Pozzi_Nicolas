@@ -16,4 +16,7 @@ public interface ISoinAvance {
 
     //ajout
     void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException;
+
+    //Suppression
+    void supprimerSoin(SoinAvance soin) throws SoinException;
 }

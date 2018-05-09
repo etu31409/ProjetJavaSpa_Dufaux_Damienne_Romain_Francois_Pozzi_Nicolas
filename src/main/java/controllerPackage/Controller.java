@@ -54,6 +54,9 @@ public class Controller {
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }
+    public void supprimerSoin(SoinAvance soin) throws SoinException{
+        business.supprimerSoin(soin);
+    }
 
     //veterinaires
     public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
