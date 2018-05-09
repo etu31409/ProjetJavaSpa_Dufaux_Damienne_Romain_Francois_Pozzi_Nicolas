@@ -4,12 +4,12 @@ import java.util.GregorianCalendar;
 
 public class Ordonnance {
     private SoinAvance soinAvance;
-    private Animal animal;
+    private Integer numRegistre;
     private Medicament medicament;
 
-    public Ordonnance(SoinAvance soinAvance, Animal animal, Medicament medicament) {
+    public Ordonnance(SoinAvance soinAvance, Integer numRegistre, Medicament medicament) {
         setSoinAvance(soinAvance);
-        setAnimal(animal);
+        setNumRegistre(numRegistre);
         setMedicament(medicament);
     }
 
@@ -19,8 +19,8 @@ public class Ordonnance {
         return soinAvance;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public Integer getNumRegistre() {
+        return numRegistre;
     }
 
     public Medicament getMedicament() {
@@ -31,9 +31,7 @@ public class Ordonnance {
         this.soinAvance = soinAvance;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
+    public void setNumRegistre(Integer numRegistre) { this.numRegistre = numRegistre; }
 
     public void setMedicament(Medicament medicament) {
         this.medicament = medicament;

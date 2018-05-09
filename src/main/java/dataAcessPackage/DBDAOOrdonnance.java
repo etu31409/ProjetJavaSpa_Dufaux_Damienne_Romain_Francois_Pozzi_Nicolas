@@ -26,7 +26,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
             data = statement.executeQuery();
 
             ArrayList<Ordonnance> toutesLesOrdonnances = new ArrayList<Ordonnance>();
-
+/*
             while (data.next()) {
                 Ordonnance ordonnance = new Ordonnance();
                 ISoinAvance soinAvance = new DBDAOSoinAvance();
@@ -38,7 +38,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
 
                 toutesLesOrdonnances.add(ordonnance);
             }
-
+*/
             connectionUnique.close();
             return toutesLesOrdonnances;
         }

@@ -151,9 +151,12 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            int numSoin; //TODO
-            //numSoin = 20;
-            numSoin = data.getInt(0);
+            int numSoin = 24;
+            /*data.next();
+            String chaine = data.getString("numSoin");
+            System.out.println(chaine);
+            numSoin = Integer.parseInt(chaine);*/
+
             preparedStatement.setInt(1, numSoin);
             preparedStatement.setInt(2,soinAvance.getNumRegistre());
             preparedStatement.setString(3,soinAvance.getIntitule());
@@ -165,6 +168,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            //throw new SoinException("test");
             throw new SoinException(e.getMessage());
         }
     }
