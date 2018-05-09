@@ -124,6 +124,5 @@ public class DBDAOMedicament implements IMedicament {
                     " préscrits entre deux dates");
         }
     }
-
 }
 

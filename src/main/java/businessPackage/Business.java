@@ -110,10 +110,10 @@ public class Business {
 
         ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
                 dateFinZoneRecherche);
+        ArrayList<Medicament> listeMedicaments = daoMedicament.getMedicaments();
 
         ArrayList<StatMedicament> resultatStatistiques = new ArrayList<>();
         HashMap<String, Double> statistiques = new HashMap<>();
-        Double compteurParMedicament;
         Double pourcentageParMedicament;
         Integer compteurGlobal = 0;
 
@@ -123,8 +123,13 @@ public class Business {
                 statistiques.put(sm.getNomMedic(), 1.);
             }
             else {
-                compteurParMedicament = (statistiques.get(sm.getNomMedic()))+1;
-                statistiques.replace(sm.getNomMedic(), compteurParMedicament);
+                statistiques.replace(sm.getNomMedic(), ((statistiques.get(sm.getNomMedic()))+1));
+            }
+        }
+
+        for(Medicament med : listeMedicaments){
+            if(!statistiques.containsKey(med.getNomMedic())){
+                statistiques.put(med.getNomMedic(), 0.);
             }
         }
 
