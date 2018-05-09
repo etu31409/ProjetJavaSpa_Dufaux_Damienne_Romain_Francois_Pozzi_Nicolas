@@ -118,12 +118,6 @@ public class PanneauFicheDeSoin extends JPanel {
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
             valide = false;
         }
-        /*if (listMedicamentsChoisis.isEmpty() == 0) {
-            Border border = BorderFactory.createLineBorder(Color.red);
-            listMedicamentsChoisis.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            valide = false;
-        }*///TODO
         return valide;
     }
 
@@ -140,16 +134,20 @@ public class PanneauFicheDeSoin extends JPanel {
     }
 
     private SoinAvance nouveauSoinAvance() throws SoinException{
-        SoinAvance soinAvance = new SoinAvance();
-        soinAvance.setNumRegistre(((Animal)comboBoxAnimaux.getSelectedItem()).getNumRegistre());
-        soinAvance.setIntitule(textAreaIntituleSoin.getText());
-        soinAvance.setPartieDuCorps(textAreaPartieDuCorps.getText());
-        soinAvance.setDateSoin(new GregorianCalendar(TimeZone.getTimeZone("Europe/Brussels")));
-        soinAvance.setVeterinaire(((Veterinaire)comboBoxVeterinaires.getSelectedItem()).getIdentifiantVeto());
-        soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
-        if(textAreaRemarque.getText().isEmpty()) textAreaRemarque = null;
-        soinAvance.setRemarque(textAreaRemarque.getText());
-        return soinAvance;
+        try {
+            SoinAvance soinAvance = new SoinAvance();
+            soinAvance.setNumRegistre(((Animal) comboBoxAnimaux.getSelectedItem()).getNumRegistre());
+            soinAvance.setIntitule(textAreaIntituleSoin.getText());
+            soinAvance.setPartieDuCorps(textAreaPartieDuCorps.getText());
+            soinAvance.setDateSoin(new GregorianCalendar());
+            soinAvance.setVeterinaire(((Veterinaire) comboBoxVeterinaires.getSelectedItem()).getIdentifiantVeto());
+            soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
+            if (textAreaRemarque.getText().isEmpty()) soinAvance.setRemarque(null);
+            else soinAvance.setRemarque(textAreaRemarque.getText());
+            return soinAvance;
+        }catch (Exception e){
+            throw new SoinException("Erreur création soinAvance");
+        }
     }
 
     private class EcouteurBouton implements ActionListener {
@@ -170,8 +168,8 @@ public class PanneauFicheDeSoin extends JPanel {
                     nbMed = medicamentsChoisisModele.getSize();
                     System.out.println(nbMed);
                     try {
+                        controller.ajouterFicheDeSoins(nouveauSoinAvance());
                         for (int i = 0; i < nbMed; i++) {
-                            controller.ajouterFicheDeSoins(nouveauSoinAvance());
                             //controller.ajouterOrdonnance(nouvelleOrdonance()); //TODO
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
