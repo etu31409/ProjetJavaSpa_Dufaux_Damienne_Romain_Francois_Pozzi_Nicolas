@@ -60,6 +60,10 @@ public class Business {
         daoSoinAvance.ajouterFicheDeSoins(soinAvance);
     }
 
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException{
+        return daoSoinAvance.getUnSoinAvance(numSoin);
+    }
+
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return daoSoinAvance.getSoinsTries(critere);
     }

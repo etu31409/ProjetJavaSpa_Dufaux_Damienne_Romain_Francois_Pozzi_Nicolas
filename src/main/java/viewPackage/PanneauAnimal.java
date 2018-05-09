@@ -1,9 +1,7 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.AnimalException;
-import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.*;
 import modelPackage.Animal;
 import modelPackage.Proprietaire;
 

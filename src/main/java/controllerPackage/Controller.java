@@ -51,6 +51,10 @@ public class Controller {
         business.ajouterFicheDeSoins(soinAvance);
     }
 
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException{
+        return business.getUnSoinAvance(numSoin);
+    }
+
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }

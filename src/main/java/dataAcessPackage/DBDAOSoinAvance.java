@@ -57,7 +57,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public SoinAvance getUnSoinAvance(Integer numSoin) throws SingletonConnectionException, SoinException, VeterinaireException {
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException {
 
         try {
             if (connectionUnique == null) {
@@ -88,8 +88,8 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 }
             }
             return soin;
-        } catch (SQLException e) {
-            throw new SoinException();
+        } catch (Exception e) {
+            throw new SoinException("Erreur lors de la récupération d'un soin");
         }
     }
 
