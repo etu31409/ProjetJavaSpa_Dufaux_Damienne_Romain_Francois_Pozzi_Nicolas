@@ -47,7 +47,7 @@ public class Business {
     }
 
     //ordonnances
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }
 

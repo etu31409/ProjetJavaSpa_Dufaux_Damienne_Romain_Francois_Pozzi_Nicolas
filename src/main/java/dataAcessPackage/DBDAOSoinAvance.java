@@ -151,7 +151,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            int numSoin = 24;
+            int numSoin = 29;
             /*data.next();
             String chaine = data.getString("numSoin");
             System.out.println(chaine);
@@ -168,8 +168,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            //throw new SoinException("test");
-            throw new SoinException(e.getMessage());
+            throw new SoinException("Erreur lors de l'insertion d'un soin avancé");
         }
     }
 }

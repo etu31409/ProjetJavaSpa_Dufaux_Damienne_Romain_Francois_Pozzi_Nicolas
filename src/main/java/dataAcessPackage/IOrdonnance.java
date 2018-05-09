@@ -13,6 +13,6 @@ public interface IOrdonnance {
             MedicamentException, AnimalException, ProprietaireException, VeterinaireException, SoinException;
 
     //ajout
-    void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException;
+    void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException;
 
 }

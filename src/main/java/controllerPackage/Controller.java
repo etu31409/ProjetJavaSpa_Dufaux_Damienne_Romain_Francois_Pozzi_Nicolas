@@ -39,7 +39,7 @@ public class Controller {
     }
 
     //ordonnances
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException{
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException{
         business.ajouterOrdonnance(ordonnance);
     }
 

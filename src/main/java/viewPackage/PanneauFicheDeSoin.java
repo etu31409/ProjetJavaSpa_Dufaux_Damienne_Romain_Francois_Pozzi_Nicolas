@@ -180,14 +180,15 @@ public class PanneauFicheDeSoin extends JPanel {
                         SoinAvance soinAvance = nouveauSoinAvance();
                         controller.ajouterFicheDeSoins(soinAvance);
                         for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                            //controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i)); //TODO
+                            controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
+                }else {
+                    JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
                 }
-                JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
             }
             if (event.getSource() == réinitialiserButton) {
                 urgenceCheckBox.setSelected(false);

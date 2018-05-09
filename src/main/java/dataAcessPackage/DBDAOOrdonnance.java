@@ -26,19 +26,19 @@ public class DBDAOOrdonnance implements IOrdonnance{
             data = statement.executeQuery();
 
             ArrayList<Ordonnance> toutesLesOrdonnances = new ArrayList<Ordonnance>();
-/*
+
             while (data.next()) {
                 Ordonnance ordonnance = new Ordonnance();
                 ISoinAvance soinAvance = new DBDAOSoinAvance();
                 ordonnance.setSoinAvance(soinAvance.getUnSoinAvance(data.getInt("numSoin")));
                 IAnimal animal = new DBDAOAnimal();
-                ordonnance.setAnimal(animal.getUnAnimal(data.getInt("numRegistre")));
+                ordonnance.setNumRegistre(animal.getUnAnimal(data.getInt("numRegistre")).getNumRegistre());
                 IMedicament medicament = new DBDAOMedicament();
                 ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")));
 
                 toutesLesOrdonnances.add(ordonnance);
             }
-*/
+
             connectionUnique.close();
             return toutesLesOrdonnances;
         }
@@ -48,17 +48,17 @@ public class DBDAOOrdonnance implements IOrdonnance{
     }
 
     //ajout
-    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, SingletonConnectionException {
-        try{/*
+    public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException {
+        try{
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into spabd.ordonnance(nomMedic, stockage, dosage) values (?, ?, ?);";
+            sqlInstruction = "insert into spabd.ordonnance(numRegistre, numSoin, identifiantMed) values (?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setString(1,ordonnance.getNomMedic());
-            preparedStatement.setString(2,ordonnance.getDosage());
-            preparedStatement.setString(3,ordonnance.getStockage());
-            preparedStatement.executeUpdate();*/
+            preparedStatement.setInt(1,ordonnance.getNumRegistre());
+            preparedStatement.setInt(2,ordonnance.getSoinAvance().getNumSoin());
+            preparedStatement.setInt(3,ordonnance.getMedicament().getIdentifiantMed());
+            preparedStatement.executeUpdate();
         }catch (Exception e) {
             throw new OrdonnanceException("Problème lors de l'insertion de l'ordonnance");
         }
