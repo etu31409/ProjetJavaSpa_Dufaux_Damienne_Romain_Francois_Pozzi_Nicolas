@@ -6,10 +6,7 @@ import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
 import modelPackage.Veterinaire;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -154,7 +151,13 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setInt(1,data.getInt(0));
+            int numSoin = 24;
+            /*data.next();
+            String chaine = data.getString("numSoin");
+            System.out.println(chaine);
+            numSoin = Integer.parseInt(chaine);*/
+
+            preparedStatement.setInt(1, numSoin);
             preparedStatement.setInt(2,soinAvance.getNumRegistre());
             preparedStatement.setString(3,soinAvance.getIntitule());
             preparedStatement.setString(4,soinAvance.getPartieDuCorps());
@@ -165,7 +168,8 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new SoinException("Erreur lors de l'insertion d'un soin avancé !");
+            //throw new SoinException("test");
+            throw new SoinException(e.getMessage());
         }
     }
 }
