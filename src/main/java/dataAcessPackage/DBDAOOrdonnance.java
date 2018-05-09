@@ -56,7 +56,9 @@ public class DBDAOOrdonnance implements IOrdonnance{
             sqlInstruction = "insert into spabd.ordonnance(numRegistre, numSoin, identifiantMed) values (?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1,ordonnance.getNumRegistre());
-            preparedStatement.setInt(2,ordonnance.getSoinAvance().getNumSoin());
+            preparedStatement.setInt(2,34);
+            //preparedStatement.setInt(2,ordonnance.getSoinAvance().getNumSoin()); // null -> car autoincrement via sql
+            // Moyen de récupérer la dernière requete effectué -> recup numSoin ?
             preparedStatement.setInt(3,ordonnance.getMedicament().getIdentifiantMed());
             preparedStatement.executeUpdate();
         }catch (Exception e) {

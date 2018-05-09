@@ -151,7 +151,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            int numSoin = 29;
+            int numSoin = 34; //TODO
             /*data.next();
             String chaine = data.getString("numSoin");
             System.out.println(chaine);

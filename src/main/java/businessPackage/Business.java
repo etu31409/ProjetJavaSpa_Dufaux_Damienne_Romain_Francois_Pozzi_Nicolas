@@ -22,6 +22,7 @@ public class Business {
         daoProprietaire = new DBDAOProprietaire();
         daoVeterinaire = new DBDAOVeterinaire();
         daoSoinAvance = new DBDAOSoinAvance();
+        daoOrdonnance = new DBDAOOrdonnance();
     }
 
     //animaux

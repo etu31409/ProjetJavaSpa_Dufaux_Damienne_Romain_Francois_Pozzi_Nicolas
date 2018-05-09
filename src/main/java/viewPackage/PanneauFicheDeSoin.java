@@ -82,7 +82,6 @@ public class PanneauFicheDeSoin extends JPanel {
 
     public void instancieListeMedicamentsDispos() {
         try {
-
             medicamentsArrayList = controller.getMedicaments();
             medicamentsDisposModele = new DefaultListModel();
             for (Medicament medicament: medicamentsArrayList) {
@@ -95,30 +94,21 @@ public class PanneauFicheDeSoin extends JPanel {
             listMedicamentsChoisis = new JList(medicamentsChoisisModele);
             listeMedicamentsChoisisJScrollPane.setViewportView(listMedicamentsChoisis);
 
-        } catch (MedicamentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } catch (SingletonConnectionException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
-    private boolean validerChamps() {
-        boolean valide = true;
+    private boolean validerChamps() throws TextAreaException {
         textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().isEmpty() || isDigit(textAreaIntituleSoin.getText())) {
-            Border border = BorderFactory.createLineBorder(Color.red);
-            textAreaIntituleSoin.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            valide = false;
+            throw new TextAreaException(textAreaIntituleSoin,"L'intitulé du soin doit être une chaîne de caractères non vide !");
         }
         textAreaPartieDuCorps.setBorder(null);
         if (textAreaPartieDuCorps.getText().isEmpty() || isDigit(textAreaPartieDuCorps.getText())) {
-            Border border = BorderFactory.createLineBorder(Color.red);
-            textAreaPartieDuCorps.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            valide = false;
+            throw new TextAreaException(textAreaPartieDuCorps,"La partie du corps doit être une chaîne de caractères non vide !");
         }
-        return valide;
+        return true;
     }
 
     private boolean isDigit(String chaine) {
@@ -175,19 +165,20 @@ public class PanneauFicheDeSoin extends JPanel {
                 medicamentsDisposModele.addElement(elementSelectionne);
             }
             if (event.getSource() == validerButton) {
-                if(validerChamps()) {
-                    try {
+                try {
+                    if (validerChamps()) {
                         SoinAvance soinAvance = nouveauSoinAvance();
                         controller.ajouterFicheDeSoins(soinAvance);
                         for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
                             controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                }else {
-                    JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                    else {
+                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
             if (event.getSource() == réinitialiserButton) {
