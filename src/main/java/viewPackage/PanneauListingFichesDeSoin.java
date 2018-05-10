@@ -77,23 +77,28 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
             }
             else if(event.getSource() == supprimerButton){
-                listeSelectionnee = resultatRecherche.getSelectionModel();
-                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
-                try{
-                    String critere = (String)comboBoxListingFiches.getSelectedItem();
-                    soinsTries = controller.getSoinsTries(critere);
-                    SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
-                    controller.supprimerSoin(soinASup);
-                    JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !","Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                } catch (VeterinaireException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (SoinException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (SingletonConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-                catch (Exception exception){
-                    System.out.println("Exception : " + exception.getMessage());
+                int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                        "Veuillez confirmer votre choix",
+                        JOptionPane.YES_NO_OPTION);
+                if(confirmation == 0) {
+                    listeSelectionnee = resultatRecherche.getSelectionModel();
+                    int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                    try {
+                        String critere = (String) comboBoxListingFiches.getSelectedItem();
+                        soinsTries = controller.getSoinsTries(critere);
+                        SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
+                        controller.supprimerSoin(soinASup);
+                        trierButton.doClick();
+                        JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (VeterinaireException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (SoinException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (SingletonConnectionException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (Exception exception) {
+                        System.out.println("Exception : " + exception.getMessage());
+                    }
                 }
             }
             else if(event.getSource() == modifierButton){
@@ -118,6 +123,4 @@ public class PanneauListingFichesDeSoin extends JPanel {
             }
         }
     }
-
-
 }

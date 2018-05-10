@@ -64,8 +64,8 @@ public class Business {
         daoSoinAvance.ajouterFicheDeSoins(soinAvance);
     }
 
-    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, SingletonConnectionException{
-        return daoSoinAvance.getUnSoinAvance(numSoin);
+    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException{
+        return daoSoinAvance.getUnSoinAvance(numRegistre);
     }
 
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{

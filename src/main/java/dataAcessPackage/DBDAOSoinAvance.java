@@ -57,7 +57,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, SingletonConnectionException {
+    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException {
 
         try {
             if (connectionUnique == null) {
@@ -67,7 +67,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             SoinAvance soin = new SoinAvance();
             sqlInstruction = "select * from spabd.soinAvance where numRegistre = ?";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, numSoin);
+            statement.setInt(1, numRegistre);
             data = statement.executeQuery();
             while (data.next()) {
                 soin.setNumSoin(data.getInt("numSoin"));
