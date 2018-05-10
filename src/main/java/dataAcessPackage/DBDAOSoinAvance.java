@@ -195,8 +195,28 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.setInt(1, soin.getNumSoin());
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){throw new SoinException(exception.getMessage());}
         catch(Exception exception){throw new SoinException("Erreur lors de la suppression de la fiche de soins");}
+    }
+
+    public void modifierSoin(SoinAvance soin) throws SoinException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "update soinavance set numRegistre = ?, intitule = ?, partieDuCorps = ?," +
+                    "dateSoin = ?, identifiantVeto = ?, estUrgent = ?, remarque = ? where numSoin = ?";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1,soin.getNumRegistre());
+            preparedStatement.setString(2,soin.getIntitule());
+            preparedStatement.setString(3,soin.getPartieDuCorps());
+            preparedStatement.setDate(4,new java.sql.Date(soin.getDateSoin().getTimeInMillis()));
+            preparedStatement.setInt(5,soin.getVeterinaire());
+            preparedStatement.setBoolean(6,soin.getEstUrgent());
+            preparedStatement.setString(7,soin.getRemarque());
+            preparedStatement.setInt(8, soin.getNumSoin());
+            preparedStatement.executeUpdate();
+        }
+        catch(Exception exception){throw new SoinException("Erreur lors de la modification de la fiche de soins");}
     }
 
 }

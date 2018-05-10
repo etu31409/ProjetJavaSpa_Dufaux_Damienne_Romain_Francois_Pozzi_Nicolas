@@ -29,6 +29,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
         instanciationComboBox();
         trierButton.addActionListener(new EcouteurBouton());
         supprimerButton.addActionListener(new EcouteurBouton());
+        modifierButton.addActionListener(new EcouteurBouton());
     }
 
     public JPanel getPanneauContainerPrincipal() {
@@ -79,7 +80,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     JOptionPane.showMessageDialog(null, s.getMessage());
                 }
             }
-            if(e.getSource() == supprimerButton){
+            else if(e.getSource() == supprimerButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                 try{
@@ -91,11 +92,22 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
                 catch (Exception exception){JOptionPane.showMessageDialog(null, exception.getMessage());}
             }
-            if(e.getSource() == modifierButton){
-                listeSelectionnee = resultatRecherche.getSelectionModel();
-                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+            else if(e.getSource() == modifierButton){
+                try{
+                    listeSelectionnee = resultatRecherche.getSelectionModel();
+                    int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                    String critere = (String)comboBoxListingFiches.getSelectedItem();
+                    soinsTries = controller.getSoinsTries(critere);
+                    SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
+                    System.out.println(resultatRecherche.isCellEditable(1,1));
+                    controller.modifierSoin(soinAModif);
+                    JOptionPane.showMessageDialog(null, "Le soin a été correctemen modifié dans la base de données !");
+                }catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
             }
-
         }
     }
+
+
 }

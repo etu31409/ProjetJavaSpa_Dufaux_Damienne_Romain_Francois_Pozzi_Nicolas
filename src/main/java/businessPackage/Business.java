@@ -75,6 +75,10 @@ public class Business {
         daoSoinAvance.supprimerSoin(soin);
     }
 
+    public void modifierSoin(SoinAvance soin) throws SoinException{
+        daoSoinAvance.modifierSoin(soin);
+    }
+
     //veterinaires
     public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         return daoVeterinaire.getVeterinaires();

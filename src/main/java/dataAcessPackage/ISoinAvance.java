@@ -19,4 +19,7 @@ public interface ISoinAvance {
 
     //Suppression
     void supprimerSoin(SoinAvance soin) throws SoinException;
+
+    //Modification
+    void modifierSoin(SoinAvance soin) throws SoinException;
 }
