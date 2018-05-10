@@ -61,11 +61,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     modele = new TableModeleListeSoins(soinsTries);
                     resultatRecherche = new JTable(modele);
                     listingScrollPane.setViewportView(resultatRecherche);
-
-                    colonne = resultatRecherche.getColumnModel().getColumn(1);
-                    colonne.setPreferredWidth(250);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
                     listingScrollPane.createHorizontalScrollBar();
                     listingScrollPane.createVerticalScrollBar();
                     resultatRecherche.setFillsViewportHeight(true);

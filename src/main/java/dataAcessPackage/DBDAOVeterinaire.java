@@ -80,13 +80,13 @@ public class DBDAOVeterinaire implements IVeterinaire{
             GregorianCalendar dateSoin = new GregorianCalendar();
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
-                    "spabd.ordonnance.dateOrdonnance\n" +
+                    "spabd.soinAvance.dateSoin\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "where spabd.soinAvance.dateSoin between ? and ?" +
-                    "and spabd.ordonnance";
-            //TODO
+                    "inner join spabd.ordonnance\n" +
+                    "on spabd.ordonnance.numSoin = spabd.soinAvance.numSoin\n" +
+                    "where spabd.soinAvance.dateSoin between ? and ?";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setDate(1, new Date(dateDebut.getTimeInMillis()));

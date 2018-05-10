@@ -65,7 +65,6 @@ public class PanneauRechercheAnimaux {
         public void actionPerformed(ActionEvent event) {
 
             ArrayList<Animal> resultatRequeteRecherche = new ArrayList<>();
-            TableColumn colonne;
             TableModeleRechercheAnimaux modele;
 
             if (event.getSource() == rechercherButton) {
