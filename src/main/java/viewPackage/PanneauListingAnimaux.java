@@ -84,43 +84,64 @@ public class PanneauListingAnimaux extends JPanel {
                 }
             }
             if(event.getSource() == supprimerButton) {
-                int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
-                        "Veuillez confirmer votre choix",
-                        JOptionPane.YES_NO_OPTION);
-                if (confirmation == 0) {
-                    listeSelectionnee = resultatRecherche.getSelectionModel();
+                if (resultatRecherche != null) {
+                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                            "Veuillez confirmer votre choix",
+                            JOptionPane.YES_NO_OPTION);
+                    if (confirmation == 0) {
+                        listeSelectionnee = resultatRecherche.getSelectionModel();
+                        int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                        try {
+                            String critere = (String) comboBoxTriAnimaux.getSelectedItem();
+                            animauxTries = controller.getAnimauxTries(critere);
+                            Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
+                            SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                            //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
+                            while (soinASup.getNumRegistre() != null) {
+                                controller.supprimerSoin(soinASup);
+                                soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                            }
+                            controller.supprimerAnimal(animalASup);
+                            buttonTri.doClick();
+                            JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
+                                    "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (AnimalException e) {
+                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        } catch (SoinException e) {
+                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        } catch (SingletonConnectionException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        } catch (Exception e) {
+                            System.out.println("Exception: " + e.getMessage());
+                        }
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Vous devez selectionner un élément dans la liste !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            if(event.getSource() == modifierButton){
+                if(resultatRecherche != null){
+                listeSelectionnee = resultatRecherche.getSelectionModel();
                     int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                     try {
                         String critere = (String) comboBoxTriAnimaux.getSelectedItem();
                         animauxTries = controller.getAnimauxTries(critere);
-                        Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
-                        SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                        //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
-                        while (soinASup.getNumRegistre() != null) {
-                            controller.supprimerSoin(soinASup);
-                            soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                        }
-                        controller.supprimerAnimal(animalASup);
-                        buttonTri.doClick();
-                        JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
-                                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                        Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
+
                     } catch (AnimalException e) {
                         JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
-                    } catch (SoinException e) {
-                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SingletonConnectionException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
+                    catch(Exception e){
+                        System.out.println("Exception: "+e.getMessage());
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            if(event.getSource() == modifierButton){
-                listeSelectionnee = resultatRecherche.getSelectionModel();
-                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
-                modifierAnimal();
-            }
         }
-    }
-    public void modifierAnimal(){
-
     }
 }
