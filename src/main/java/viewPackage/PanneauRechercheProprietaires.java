@@ -4,12 +4,14 @@ import controllerPackage.Controller;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
+import modelPackage.ProprietaireAnimal;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PanneauRechercheProprietaires{
 
@@ -46,24 +48,27 @@ public class PanneauRechercheProprietaires{
 
     private class rechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            if (event.getSource() == rechercheButton) {
-                /*try {
-                    Veterinaire selectionVeterinaire = (Veterinaire) veterinaireComboBox.getSelectedItem();
-                    String[][] resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
 
-                    String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal", "Identifiant du propriétaire",
-                            "Nom du propriétaire"};
-                    resultatRecherche = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                    resultatRecherche.setRowSelectionAllowed(false);
-                    resultatRecherche.setFillsViewportHeight(true);
+            TableModeleRechercheProprietaires modele;
+            ArrayList<ProprietaireAnimal> resultatRequeteRecherche = new ArrayList<>();
+
+            if (event.getSource() == rechercheButton) {
+                try {
+                    Veterinaire selectionVeterinaire = (Veterinaire) veterinaireComboBox.getSelectedItem();
+                    resultatRequeteRecherche = controller.getResultatRechercheProprietaire(selectionVeterinaire);
+
+                    modele = new TableModeleRechercheProprietaires(resultatRequeteRecherche);
+                    resultatRecherche = new JTable(modele);
                     scrollPane.setViewportView(resultatRecherche);
+                    resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    resultatRecherche.setFillsViewportHeight(true);
                 }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }*/
+                }
             }
         }
     }
