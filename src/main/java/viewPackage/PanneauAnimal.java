@@ -74,8 +74,6 @@ public class PanneauAnimal extends JPanel {
         instanciationSpinnerDate(spinnerDatePuce);
         instanciationListeProprietaires();
 
-        erreurMessage = "Certains champs sont invalides !\n";
-
         baseBorder = nomTextField.getBorder();
     }
 
@@ -363,7 +361,7 @@ public class PanneauAnimal extends JPanel {
     private class EcouteurDeBoutons implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
-                erreurMessage = "Certains champs sont invalides !\n";
+                erreurMessage = "Certains champs sont invalides !\nDe plus : \n";
                 reinitialiserBorder();
                 if (validationFormulaire()) {
                     try{

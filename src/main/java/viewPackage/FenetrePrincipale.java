@@ -90,6 +90,7 @@ public class  FenetrePrincipale extends JFrame{
 
         controller = new Controller();
         setVisible(true);
+        barMenu.setVisible(false);
     }
 
     public void retourAccueil(){
@@ -171,5 +172,9 @@ public class  FenetrePrincipale extends JFrame{
                 frameContainer.validate();
             }
         }
+    }
+
+    public JMenuBar getBarMenu() {
+        return barMenu;
     }
 }

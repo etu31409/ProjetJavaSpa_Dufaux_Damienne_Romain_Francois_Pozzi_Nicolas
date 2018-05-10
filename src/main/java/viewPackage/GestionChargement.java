@@ -32,6 +32,7 @@ public class GestionChargement extends Thread{
             }
         }
         fenetrePrincipale.afficherAccueil();
+        fenetrePrincipale.getBarMenu().setVisible(true);
     }
 }
 
