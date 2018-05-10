@@ -61,9 +61,9 @@ public class PanneauFicheDeSoin extends JPanel {
                 comboBoxVeterinaires.addItem(veto);
             }
         } catch (VeterinaireException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -74,9 +74,9 @@ public class PanneauFicheDeSoin extends JPanel {
                 comboBoxAnimaux.addItem(a);
             }
         } catch (AnimalException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -95,7 +95,7 @@ public class PanneauFicheDeSoin extends JPanel {
             listeMedicamentsChoisisJScrollPane.setViewportView(listMedicamentsChoisis);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -172,13 +172,15 @@ public class PanneauFicheDeSoin extends JPanel {
                         for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
                             controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
                         }
-                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !");
+                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
+                                "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !",
+                                "Attention!", JOptionPane.WARNING_MESSAGE);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
             if (event.getSource() == réinitialiserButton) {

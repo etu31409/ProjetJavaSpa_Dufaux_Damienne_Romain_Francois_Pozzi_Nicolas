@@ -63,17 +63,18 @@ public class PanneauProprio {
                     if (validationFormulaire()) {
                         proprietaire = new Proprietaire(textFieldNom.getText(), textFieldPrenom.getText());
                         controller.ajouterNouveauProprio(proprietaire);
-                        JOptionPane.showMessageDialog(null, "Le propriétaire a été correctement ajouté à la base de données !");
+                        JOptionPane.showMessageDialog(null, "Le propriétaire a été correctement ajouté à la base de données !",
+                                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                         panneauAnimal.instanciationListeProprietaires();
                         fenetreProprio.dispose();
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !");
+                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !", "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (ProprietaireException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 } catch (SingletonConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             } else if (event.getSource() == annulerButton) {
                 fenetreProprio.dispose();

@@ -78,15 +78,16 @@ public class PanneauMedicament{
                     if (validationFormulaire()) {
                         Medicament medicament = new Medicament(textFieldStockage.getText(), textFieldDosage.getText(), textFieldNom.getText());
                         controller.ajouterMedicament(medicament);
-                        JOptionPane.showMessageDialog(null, "Le médicament a correctement été ajouté à la base de données !");
+                        JOptionPane.showMessageDialog(null, "Le médicament a correctement été ajouté à la base de données !",
+                                "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                         panneauFicheDeSoin.ajouterMedicamentAListeMedicamentsDispos(medicament);
                         fenetreMedicament.dispose();
 
                     }
                 }catch (MedicamentException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }catch (SingletonConnectionException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
 
             }

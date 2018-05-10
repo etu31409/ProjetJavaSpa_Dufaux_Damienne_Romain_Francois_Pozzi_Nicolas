@@ -303,7 +303,7 @@ public class PanneauAnimal extends JPanel {
             System.out.println(animal);
         }
         catch(AnimalException exception){
-            JOptionPane.showMessageDialog(null, exception.getMessage());
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
         return animal;
     }
@@ -315,9 +315,9 @@ public class PanneauAnimal extends JPanel {
                 comboBoxListeProprietaires.addItem(p);
             }
         } catch (ProprietaireException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -368,7 +368,8 @@ public class PanneauAnimal extends JPanel {
                 if (validationFormulaire()) {
                     try{
                         controller.ajouterAnimal(creationAnimal());
-                        JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !");
+                        JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !",
+                                "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                     }
                     catch(AnimalException exception){
                         JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
@@ -382,7 +383,7 @@ public class PanneauAnimal extends JPanel {
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,erreurMessage);
+                    JOptionPane.showMessageDialog(null,erreurMessage, "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
             if(e.getSource() == retourButton){

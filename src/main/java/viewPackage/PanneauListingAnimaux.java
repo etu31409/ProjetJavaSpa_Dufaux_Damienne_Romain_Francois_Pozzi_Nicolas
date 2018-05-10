@@ -53,14 +53,14 @@ public class PanneauListingAnimaux extends JPanel {
     }
 
     private class EcouteurBouton implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
 
             TableColumn colonne;
             ListSelectionModel listeSelectionnee;
             TableModeleListeAnimaux modele;
             ArrayList<Animal> animauxTries = new ArrayList<>();
 
-            if(e.getSource() == buttonTri){
+            if(event.getSource() == buttonTri){
                 try {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
 
@@ -80,13 +80,13 @@ public class PanneauListingAnimaux extends JPanel {
 
                 }
                 catch (AnimalException s) {
-                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux");
+                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux", "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SingletonConnectionException s) {
-                    JOptionPane.showMessageDialog(null, s.getMessage());
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            if(e.getSource() == supprimerButton){
+            if(event.getSource() == supprimerButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                 try{
@@ -100,13 +100,20 @@ public class PanneauListingAnimaux extends JPanel {
                         soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
                     }
                     controller.supprimerAnimal(animalASup);
-                    JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !");
+                    JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
+                            "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                 }
-                catch (AnimalException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !");}
-                catch(SoinException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !");}
-                catch(SingletonConnectionException s){JOptionPane.showMessageDialog(null,s.getMessage());}
+                catch (AnimalException e){
+                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+                catch(SoinException e){
+                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+                catch(SingletonConnectionException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            if(e.getSource() == modifierButton){
+            if(event.getSource() == modifierButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                 modifierAnimal();

@@ -34,9 +34,9 @@ public class PanneauRechercheProprietaires{
                 veterinaireComboBox.addItem(v);
             }
         } catch (VeterinaireException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -77,7 +77,8 @@ public class PanneauStatMedicaments {
                         dateFinZoneRecherche.setTime((Date) spinnerDateFin.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
-                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
+                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin",
+                        "Attention!", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
@@ -102,10 +103,10 @@ public class PanneauStatMedicaments {
 
                 }
                 catch (SingletonConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (MedicamentException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

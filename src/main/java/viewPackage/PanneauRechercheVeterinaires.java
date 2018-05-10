@@ -74,7 +74,7 @@ public class PanneauRechercheVeterinaires{
                         dateFinZoneRecherche.setTime((Date)dateDeFinSpinner.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
-                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin");
+                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin", "Erreur !", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 

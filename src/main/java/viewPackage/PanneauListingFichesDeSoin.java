@@ -71,13 +71,13 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     resultatRecherche.setFillsViewportHeight(true);
                 }
                 catch (VeterinaireException s) {
-                    JOptionPane.showMessageDialog(null, s.getMessage());
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SoinException s) {
-                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins");
+                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins", "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SingletonConnectionException s) {
-                    JOptionPane.showMessageDialog(null, s.getMessage());
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
             else if(e.getSource() == supprimerButton){
@@ -88,9 +88,11 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     soinsTries = controller.getSoinsTries(critere);
                     SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
                     controller.supprimerSoin(soinASup);
-                    JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !");
+                    JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !","Confirmation", JOptionPane.INFORMATION_MESSAGE);
                 }
-                catch (Exception exception){JOptionPane.showMessageDialog(null, exception.getMessage());}
+                catch (Exception exception){
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
             }
             else if(e.getSource() == modifierButton){
                 try{
@@ -103,7 +105,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     controller.modifierSoin(soinAModif);
                     JOptionPane.showMessageDialog(null, "Le soin a été correctemen modifié dans la base de données !");
                 }catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                    JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
