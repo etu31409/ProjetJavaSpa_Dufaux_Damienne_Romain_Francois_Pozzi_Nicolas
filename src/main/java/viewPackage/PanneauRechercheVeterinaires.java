@@ -4,8 +4,10 @@ import controllerPackage.Controller;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Veterinaire;
+import modelPackage.VeterinaireOrdonnance;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -57,8 +59,12 @@ public class PanneauRechercheVeterinaires{
 
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
+
+            TableModeleRechercheVeterinaires modele;
+            ArrayList<VeterinaireOrdonnance> resultatRequeteRecherche = new ArrayList<>();
+
             if(event.getSource() == rechercherButton){
-                //try {
+                try {
                     dateDebutZoneRecherche = new GregorianCalendar();
                     dateFinZoneRecherche = new GregorianCalendar();
                     if(!dateDeDebutCheckBox.isSelected()){
@@ -78,19 +84,21 @@ public class PanneauRechercheVeterinaires{
                         return;
                     }
 
-                    /*ArrayList<Veterinaire> selectionRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
+                    resultatRequeteRecherche = controller.getResultatRechercheVeterinaireDate(dateDebutZoneRecherche,
                             dateFinZoneRecherche);
-                    String[] nomDesColonnes = {"Identifiant du vétérinaire", "Nom du vétérinaire", "Date de l'ordonnance"};
-                    resultatRecherche = new JTable(selectionRecherche, nomDesColonnes);
+
+                    modele = new TableModeleRechercheVeterinaires(resultatRequeteRecherche);
+                    resultatRecherche = new JTable(modele);
+                    scrollPane.setViewportView(resultatRecherche);
+                    resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     resultatRecherche.setFillsViewportHeight(true);
-                    scrollPane.setViewportView(resultatRecherche);*/
-                /*}
+                }
                 catch (SingletonConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (VeterinaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
-                }*/
+                }
             }
         }
     }

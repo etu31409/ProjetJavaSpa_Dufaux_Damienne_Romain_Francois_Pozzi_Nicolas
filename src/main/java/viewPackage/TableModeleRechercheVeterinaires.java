@@ -1,30 +1,63 @@
 package viewPackage;
 
+import modelPackage.VeterinaireOrdonnance;
+
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class TableModeleRechercheVeterinaires extends AbstractTableModel {
+    private ArrayList<String> nomDesColonnes;
+    private ArrayList<VeterinaireOrdonnance> veterinairesOrdonnances;
 
-    public int getRowCount() {
-        return 0;
+    public TableModeleRechercheVeterinaires(ArrayList<VeterinaireOrdonnance> veterinairesOrdonnances){
+        nomDesColonnes = new ArrayList<>();
+        this.veterinairesOrdonnances = veterinairesOrdonnances;
+
+        nomDesColonnes.add("Identifiant du vétérinaire");
+        nomDesColonnes.add("Nom du vétérinaire");
+        nomDesColonnes.add("Date de l'ordonnance");
     }
 
     public int getColumnCount() {
-        return 0;
+        return nomDesColonnes.size();
     }
 
-    public String getColumnName(int columnIndex) {
-        return null;
+    public int getRowCount() {
+        return veterinairesOrdonnances.size();
     }
 
-    public Class<?> getColumnClass(int columnIndex) {
-        return null;
+    public String getColumnName(int colonne) {
+        return nomDesColonnes.get(colonne);
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return null;
+    public Object getValueAt(int ligne, int colonne) {
+        VeterinaireOrdonnance veterinaireOrdonnance = veterinairesOrdonnances.get(ligne);
+        switch(colonne){
+            case 0 : return veterinaireOrdonnance.getIdentifiantVeto();
+            case 1 : return veterinaireOrdonnance.getNomVeto();
+            case 2 :{
+                if(veterinaireOrdonnance.getDateOrdonnance()!= null)
+                    return new SimpleDateFormat("dd/MM/YYYY").format(veterinaireOrdonnance.getDateOrdonnance().getTime());
+                else
+                    return null;
+            }
+            default : return null;
+        }
     }
 
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-
+    //afficher correctement les colonnes en fonction de leur type
+    public Class getColumnClass(int colonne) {
+        Class c;
+        switch(colonne){
+            case 0 : c = Integer.class;
+                break;
+            case 1 : c = String.class;
+                break;
+            case 2 : c = GregorianCalendar.class;
+            default : c = String.class;
+        }
+        return c;
     }
 }
