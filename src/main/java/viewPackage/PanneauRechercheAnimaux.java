@@ -5,12 +5,15 @@ import exceptionPackage.AnimalException;
 import exceptionPackage.MedicamentException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
+import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PanneauRechercheAnimaux {
 
@@ -39,7 +42,6 @@ public class PanneauRechercheAnimaux {
         return panneauContainerPrincipal;
     }
 
-
     private void instanciationComboBox() {
         veterinairesComboBox.removeAllItems();
         medicamentsComboBox.removeAllItems();
@@ -61,49 +63,54 @@ public class PanneauRechercheAnimaux {
 
     private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+
+            ArrayList<Animal> resultatRequeteRecherche = new ArrayList<>();
+            TableColumn colonne;
+            TableModeleRechercheAnimaux modele;
+
             if (event.getSource() == rechercherButton) {
-                String[] nomDesColonnes = {"Identifiant de l'animal", "Nom de l'animal"};
-                /*try {
+                try {
                     if (veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
                     {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
-                        String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxVeterinaire(veterinaireChoisi);
-                        tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        tableResultat.setFillsViewportHeight(true);
-                        scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("Recherche pour le vétérinaire " + veterinaireChoisi.getNom());
+                        resultatRequeteRecherche = controller.getResultatRecherchAnimauxVeterinaire(veterinaireChoisi);
+                        titreFacteurRecherche.setText("Résultat.s de la recherche pour le vétérinaire " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
-                        String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicament(medicamentChoisi);
-                        tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        tableResultat.setFillsViewportHeight(true);
-                        scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("Recherche pour le médicament " + medicamentChoisi.getNomMedic());
+                        resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicament(medicamentChoisi);
+                        titreFacteurRecherche.setText("Résultat.s de la recherche pour le médicament " + medicamentChoisi.getNomMedic());
                     }
                     else if (veterinairesCheckBox.isSelected() && medicamentsCheckBox.isSelected())
                     {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
-                        String[][] resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicamentVeto(medicamentChoisi, veterinaireChoisi);
-                        tableResultat = new JTable(resultatRequeteRecherche, nomDesColonnes);
-                        tableResultat.setFillsViewportHeight(true);
-                        scrollPane.setViewportView(tableResultat);
-                        titreFacteurRecherche.setText("Recherche pour pour le médicament " + medicamentChoisi.getNomMedic()
+                        titreFacteurRecherche.setText("Résultat.s de la recherche pour pour le médicament " + medicamentChoisi.getNomMedic()
                                 + " et le vétérinaire " + veterinaireChoisi.getPrenom()+  " " + veterinaireChoisi.getNom());
                     }
                     else if (!veterinairesCheckBox.isSelected() && !medicamentsCheckBox.isSelected())
                     {
-                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères !");
+                        JOptionPane.showMessageDialog(null, "Veuillez selectionner au moins un des deux critères !",
+                                "Attention !", JOptionPane.INFORMATION_MESSAGE);
                     }
+
+                    modele = new TableModeleRechercheAnimaux(resultatRequeteRecherche);
+                    tableResultat = new JTable(modele);
+                    scrollPane.setViewportView(tableResultat);
+
+                    tableResultat.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    tableResultat.setFillsViewportHeight(true);
+
+                    scrollPane.createHorizontalScrollBar();
+                    scrollPane.createVerticalScrollBar();
                 }
                 catch (AnimalException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SingletonConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }*/
+                    JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }

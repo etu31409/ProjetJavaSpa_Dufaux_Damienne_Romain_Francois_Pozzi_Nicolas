@@ -63,14 +63,12 @@ public class PanneauListingAnimaux extends JPanel {
             if(e.getSource() == buttonTri){
                 try {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
-
                     animauxTries = controller.getAnimauxTries(critere);
+
                     modele = new TableModeleListeAnimaux(animauxTries);
                     resultatRecherche = new JTable(modele);
                     listingScrollPane.setViewportView(resultatRecherche);
 
-                    colonne = resultatRecherche.getColumnModel().getColumn(1);
-                    colonne.setPreferredWidth(250);
                     resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
