@@ -57,13 +57,12 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException {
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, SingletonConnectionException {
 
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-
             GregorianCalendar dateSoin = new GregorianCalendar();
             SoinAvance soin = new SoinAvance();
             sqlInstruction = "select * from spabd.soinAvance where numRegistre = ?";
@@ -73,16 +72,21 @@ public class DBDAOSoinAvance implements ISoinAvance {
             while (data.next()) {
                 soin.setNumSoin(data.getInt("numSoin"));
                 soin.setNumRegistre(data.getInt("numRegistre"));
-                soin.setRemarque(data.getString("remarque"));
-                soin.setEstUrgent(data.getBoolean("estUrgent"));
+                soin.setIntitule(data.getString("intitule"));
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
                 soin.setVeterinaire(data.getInt("identifiantVeto"));
+                soin.setEstUrgent(data.getBoolean("estUrgent"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                soin.setIntitule(data.getString("intitule"));
+                String remarque = data.getString("remarque");
+                if(!data.wasNull()){
+                    soin.setRemarque(remarque);
+                }
             }
             return soin;
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             throw new SoinException("Erreur lors de la récupération d'un soin");
         }
     }

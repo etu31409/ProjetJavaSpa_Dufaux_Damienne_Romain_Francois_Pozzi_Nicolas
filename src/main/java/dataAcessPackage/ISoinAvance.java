@@ -11,7 +11,7 @@ public interface ISoinAvance {
 
     //get
     ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException;
-    SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException;
+    SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, SingletonConnectionException;
     ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException;
 
     //ajout

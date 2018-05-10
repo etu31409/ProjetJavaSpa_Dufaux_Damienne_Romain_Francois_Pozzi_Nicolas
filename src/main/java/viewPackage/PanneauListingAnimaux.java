@@ -94,8 +94,11 @@ public class PanneauListingAnimaux extends JPanel {
                     animauxTries = controller.getAnimauxTries(critere);
                     Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
                     SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                    System.out.println(soinASup);
-                    controller.supprimerSoin(soinASup);
+                    //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
+                    while(soinASup.getNumRegistre() != null){
+                        controller.supprimerSoin(soinASup);
+                        soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                    }
                     controller.supprimerAnimal(animalASup);
                     JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !");
                 }

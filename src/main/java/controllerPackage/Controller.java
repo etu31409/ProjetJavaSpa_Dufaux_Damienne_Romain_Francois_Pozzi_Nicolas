@@ -55,7 +55,7 @@ public class Controller {
         business.ajouterFicheDeSoins(soinAvance);
     }
 
-    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException{
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, SingletonConnectionException{
         return business.getUnSoinAvance(numSoin);
     }
 
