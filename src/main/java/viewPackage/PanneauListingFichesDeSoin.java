@@ -46,14 +46,14 @@ public class PanneauListingFichesDeSoin extends JPanel {
     }
 
     private class EcouteurBouton implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
 
             TableColumn colonne;
             ListSelectionModel listeSelectionnee;
             TableModeleListeSoins modele;
             ArrayList<SoinAvance> soinsTries = new ArrayList<>();
 
-            if(e.getSource() == trierButton){
+            if(event.getSource() == trierButton){
                 try {
                     String critere = (String)comboBoxListingFiches.getSelectedItem();
 
@@ -76,7 +76,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            else if(e.getSource() == supprimerButton){
+            else if(event.getSource() == supprimerButton){
                 listeSelectionnee = resultatRecherche.getSelectionModel();
                 int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                 try{
@@ -85,12 +85,18 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
                     controller.supprimerSoin(soinASup);
                     JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !","Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                } catch (VeterinaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (SoinException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (Exception exception){
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                    System.out.println("Exception : " + exception.getMessage());
                 }
             }
-            else if(e.getSource() == modifierButton){
+            else if(event.getSource() == modifierButton){
                 try{
                     listeSelectionnee = resultatRecherche.getSelectionModel();
                     int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
@@ -100,8 +106,14 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     System.out.println(resultatRecherche.isCellEditable(1,1));
                     controller.modifierSoin(soinAModif);
                     JOptionPane.showMessageDialog(null, "Le soin a été correctemen modifié dans la base de données !");
-                }catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (VeterinaireException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (SoinException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (SingletonConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }catch (Exception e) {
+                    System.out.println("Exception : " + e.getMessage());
                 }
             }
         }

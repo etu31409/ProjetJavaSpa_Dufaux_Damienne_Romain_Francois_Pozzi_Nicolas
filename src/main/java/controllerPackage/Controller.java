@@ -62,11 +62,11 @@ public class Controller {
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }
-    public void supprimerSoin(SoinAvance soin) throws SoinException{
+    public void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         business.supprimerSoin(soin);
     }
 
-    public void modifierSoin(SoinAvance soin) throws SoinException{
+    public void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         business.modifierSoin(soin);
     }
 

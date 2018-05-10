@@ -170,7 +170,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public void supprimerSoin(SoinAvance soin) throws SoinException{
+    public void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -194,11 +194,12 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, soin.getNumSoin());
             preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            throw new SoinException("Erreur lors de la suppression du soin !");
         }
-        catch(Exception exception){throw new SoinException("Erreur lors de la suppression de la fiche de soins");}
     }
 
-    public void modifierSoin(SoinAvance soin) throws SoinException{
+    public void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -215,8 +216,10 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.setString(7,soin.getRemarque());
             preparedStatement.setInt(8, soin.getNumSoin());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+                throw new SoinException("Erreur lors de la modification de la fiche de soins");
+
         }
-        catch(Exception exception){throw new SoinException("Erreur lors de la modification de la fiche de soins");}
     }
 
 }
