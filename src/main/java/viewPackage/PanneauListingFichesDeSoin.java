@@ -11,6 +11,7 @@ import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class PanneauListingFichesDeSoin extends JPanel {
@@ -48,7 +49,6 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-            TableColumn colonne;
             ListSelectionModel listeSelectionnee;
             TableModeleListeSoins modele;
             ArrayList<SoinAvance> soinsTries = new ArrayList<>();
@@ -62,6 +62,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     resultatRecherche = new JTable(modele);
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
+                    resultatRecherche.setDefaultRenderer(GregorianCalendar.class, modele.getCenterRenderer());
                     listingScrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     listingScrollPane.createHorizontalScrollBar();

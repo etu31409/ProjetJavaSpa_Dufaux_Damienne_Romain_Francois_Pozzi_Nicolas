@@ -68,6 +68,7 @@ public class PanneauListingAnimaux extends JPanel {
                     resultatRecherche = new JTable(modele);
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
+                    resultatRecherche.setDefaultRenderer(GregorianCalendar.class, modele.getCenterRenderer());
                     listingScrollPane.setViewportView(resultatRecherche);
 
                     resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
