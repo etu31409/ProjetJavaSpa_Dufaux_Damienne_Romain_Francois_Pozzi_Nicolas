@@ -77,11 +77,10 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
             }
             else if(event.getSource() == supprimerButton){
-                JOptionPane confirmation = new JOptionPane();
-                int i = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
                         "Veuillez confirmer votre choix",
                         JOptionPane.YES_NO_OPTION);
-                if(i == 0) {
+                if(confirmation == 0) {
                     listeSelectionnee = resultatRecherche.getSelectionModel();
                     int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                     try {
