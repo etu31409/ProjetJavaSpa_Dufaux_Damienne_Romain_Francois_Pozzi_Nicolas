@@ -2,7 +2,9 @@ package viewPackage;
 
 import modelPackage.VeterinaireOrdonnance;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -10,6 +12,7 @@ import java.util.GregorianCalendar;
 public class TableModeleRechercheVeterinaires extends AbstractTableModel {
     private ArrayList<String> nomDesColonnes;
     private ArrayList<VeterinaireOrdonnance> veterinairesOrdonnances;
+    private DefaultTableCellRenderer centerRenderer;
 
     public TableModeleRechercheVeterinaires(ArrayList<VeterinaireOrdonnance> veterinairesOrdonnances){
         nomDesColonnes = new ArrayList<>();
@@ -18,6 +21,9 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
         nomDesColonnes.add("Identifiant du vétérinaire");
         nomDesColonnes.add("Nom du vétérinaire");
         nomDesColonnes.add("Date de l'ordonnance");
+
+        centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
     }
 
     public int getColumnCount() {
@@ -59,5 +65,9 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
             default : c = String.class;
         }
         return c;
+    }
+
+    public DefaultTableCellRenderer getCenterRenderer() {
+        return centerRenderer;
     }
 }

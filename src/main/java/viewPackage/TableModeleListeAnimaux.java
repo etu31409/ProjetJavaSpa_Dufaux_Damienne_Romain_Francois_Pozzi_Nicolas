@@ -2,7 +2,9 @@ package viewPackage;
 
 import modelPackage.Animal;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -11,6 +13,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
 
     private ArrayList<String> nomDesColonnes;
     private ArrayList<Animal> animaux;
+    private DefaultTableCellRenderer centerRenderer;
 
     public TableModeleListeAnimaux(ArrayList<Animal> animaux){
         nomDesColonnes = new ArrayList<>();
@@ -32,6 +35,9 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
         nomDesColonnes.add("Date d'attribution de la puce");
         nomDesColonnes.add("Numéro de tatouage");
         nomDesColonnes.add("Localisation du tatouage");
+
+        centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
     }
 
     public int getColumnCount() {
@@ -123,5 +129,9 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
             default : c = String.class;
         }
         return c;
+    }
+
+    public DefaultTableCellRenderer getCenterRenderer() {
+        return centerRenderer;
     }
 }

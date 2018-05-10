@@ -55,7 +55,6 @@ public class PanneauListingAnimaux extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-            TableColumn colonne;
             ListSelectionModel listeSelectionnee;
             TableModeleListeAnimaux modele;
             ArrayList<Animal> animauxTries = new ArrayList<>();
@@ -67,6 +66,8 @@ public class PanneauListingAnimaux extends JPanel {
 
                     modele = new TableModeleListeAnimaux(animauxTries);
                     resultatRecherche = new JTable(modele);
+                    resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
+                    resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
                     listingScrollPane.setViewportView(resultatRecherche);
 
                     resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

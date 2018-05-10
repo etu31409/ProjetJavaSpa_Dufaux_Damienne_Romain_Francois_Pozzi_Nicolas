@@ -89,6 +89,8 @@ public class PanneauRechercheVeterinaires{
 
                     modele = new TableModeleRechercheVeterinaires(resultatRequeteRecherche);
                     resultatRecherche = new JTable(modele);
+                    resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
+                    resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
                     scrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     resultatRecherche.setFillsViewportHeight(true);

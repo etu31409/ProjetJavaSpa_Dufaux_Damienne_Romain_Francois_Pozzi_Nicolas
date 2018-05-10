@@ -269,13 +269,15 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
+            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race, \n" +
+                    "spabd.soinAvance.dateSoin\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
                     "inner join spabd.animal\n" +
                     "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
+
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
             data = statement.executeQuery();
@@ -303,8 +305,8 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
-                    "from spabd.veterinaire\n" +
+            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom, spabd.animal.espece, spabd.animal.race \n" +
+                    "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +
@@ -346,8 +348,8 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
-                    "from spabd.veterinaire\n" +
+            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
+                    "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +

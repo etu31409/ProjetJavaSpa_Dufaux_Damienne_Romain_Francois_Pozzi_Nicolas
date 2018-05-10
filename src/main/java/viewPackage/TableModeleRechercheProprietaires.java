@@ -2,12 +2,15 @@ package viewPackage;
 
 import modelPackage.ProprietaireAnimal;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.util.ArrayList;
 
 public class TableModeleRechercheProprietaires  extends AbstractTableModel {
     private ArrayList<String> nomDesColonnes;
     private ArrayList<ProprietaireAnimal> proprietairesAnimaux;
+    private DefaultTableCellRenderer centerRenderer;
 
     public TableModeleRechercheProprietaires(ArrayList<ProprietaireAnimal> proprietairesAnimaux){
         nomDesColonnes = new ArrayList<>();
@@ -17,6 +20,9 @@ public class TableModeleRechercheProprietaires  extends AbstractTableModel {
         nomDesColonnes.add("Nom de l'animal");
         nomDesColonnes.add("Identifiant du propriétaire");
         nomDesColonnes.add("Nom du propriétaire");
+
+        centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
     }
 
     public int getColumnCount() {
@@ -57,5 +63,9 @@ public class TableModeleRechercheProprietaires  extends AbstractTableModel {
             default : c = String.class;
         }
         return c;
+    }
+
+    public DefaultTableCellRenderer getCenterRenderer() {
+        return centerRenderer;
     }
 }

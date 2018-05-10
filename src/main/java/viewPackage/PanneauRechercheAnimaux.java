@@ -85,6 +85,7 @@ public class PanneauRechercheAnimaux {
                     {
                         Veterinaire veterinaireChoisi = (Veterinaire) veterinairesComboBox.getSelectedItem();
                         Medicament medicamentChoisi = (Medicament) medicamentsComboBox.getSelectedItem();
+                        resultatRequeteRecherche = controller.getResultatRecherchAnimauxMedicamentVeto(medicamentChoisi, veterinaireChoisi);
                         titreFacteurRecherche.setText("Résultat.s de la recherche pour pour le médicament " + medicamentChoisi.getNomMedic()
                                 + " et le vétérinaire " + veterinaireChoisi.getPrenom()+  " " + veterinaireChoisi.getNom());
                     }
@@ -96,6 +97,8 @@ public class PanneauRechercheAnimaux {
 
                     modele = new TableModeleRechercheAnimaux(resultatRequeteRecherche);
                     tableResultat = new JTable(modele);
+                    tableResultat.setDefaultRenderer(String.class, modele.getCenterRenderer());
+                    tableResultat.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
                     scrollPane.setViewportView(tableResultat);
 
                     tableResultat.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

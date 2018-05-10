@@ -2,12 +2,15 @@ package viewPackage;
 
 import modelPackage.StatMedicament;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.util.ArrayList;
 
 public class TableModeleStatistiquesMed  extends AbstractTableModel {
     private ArrayList<String> nomDesColonnes;
     private ArrayList<StatMedicament> stats;
+    private DefaultTableCellRenderer centerRenderer;
 
     public TableModeleStatistiquesMed(ArrayList<StatMedicament> stats){
         nomDesColonnes = new ArrayList<>();
@@ -15,6 +18,9 @@ public class TableModeleStatistiquesMed  extends AbstractTableModel {
 
         nomDesColonnes.add("Nom du médicament");
         nomDesColonnes.add("Pourcentage d'utilisation dans l'interval de temps");
+
+        centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
     }
 
     public int getColumnCount() {
@@ -49,5 +55,9 @@ public class TableModeleStatistiquesMed  extends AbstractTableModel {
             default : c = String.class;
         }
         return c;
+    }
+
+    public DefaultTableCellRenderer getCenterRenderer() {
+        return centerRenderer;
     }
 }

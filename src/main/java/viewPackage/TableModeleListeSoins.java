@@ -2,7 +2,9 @@ package viewPackage;
 
 import modelPackage.SoinAvance;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -10,6 +12,7 @@ import java.util.GregorianCalendar;
 public class TableModeleListeSoins  extends AbstractTableModel {
     private ArrayList<String> nomDesColonnes;
     private ArrayList<SoinAvance> soins;
+    private DefaultTableCellRenderer centerRenderer;
 
     public TableModeleListeSoins(ArrayList<SoinAvance> soins){
         nomDesColonnes = new ArrayList<>();
@@ -23,6 +26,9 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         nomDesColonnes.add("Identifiant du vétérinaire");
         nomDesColonnes.add("En urgence");
         nomDesColonnes.add("Remarque");
+
+        centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
     }
 
     public int getColumnCount() {
@@ -87,5 +93,9 @@ public class TableModeleListeSoins  extends AbstractTableModel {
     public boolean isCellEditable(int row, int col){
         if (col == 0) return false;
         return true;
+    }
+
+    public DefaultTableCellRenderer getCenterRenderer() {
+        return centerRenderer;
     }
 }

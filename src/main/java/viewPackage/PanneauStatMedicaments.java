@@ -90,7 +90,8 @@ public class PanneauStatMedicaments {
                             dateFinZoneRecherche);
                     modele = new TableModeleStatistiquesMed(stats);
                     resultatStatistiques = new JTable(modele);
-                    //resultatStatistiques.setAutoCreateRowSorter(true);
+                    resultatStatistiques.setDefaultRenderer(String.class, modele.getCenterRenderer());
+                    resultatStatistiques.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
 
                     scrollPane.setViewportView(resultatStatistiques);
 
