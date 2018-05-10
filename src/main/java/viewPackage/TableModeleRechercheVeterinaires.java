@@ -20,6 +20,7 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
 
         nomDesColonnes.add("Identifiant du vétérinaire");
         nomDesColonnes.add("Nom du vétérinaire");
+        nomDesColonnes.add("Prénom du vétérinaire");
         nomDesColonnes.add("Date de l'ordonnance");
 
         centerRenderer = new DefaultTableCellRenderer();
@@ -42,8 +43,9 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
         VeterinaireOrdonnance veterinaireOrdonnance = veterinairesOrdonnances.get(ligne);
         switch(colonne){
             case 0 : return veterinaireOrdonnance.getIdentifiantVeto();
-            case 1 : return veterinaireOrdonnance.getNomVeto();
-            case 2 :{
+            case 1 : return veterinaireOrdonnance.getPrenomVeto();
+            case 2 : return veterinaireOrdonnance.getNomVeto();
+            case 3 :{
                 if(veterinaireOrdonnance.getDateOrdonnance()!= null)
                     return new SimpleDateFormat("dd/MM/YYYY").format(veterinaireOrdonnance.getDateOrdonnance().getTime());
                 else
@@ -61,7 +63,10 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
                 break;
             case 1 : c = String.class;
                 break;
-            case 2 : c = GregorianCalendar.class;
+            case 2 : c = String.class;
+                break;
+            case 3 : c = GregorianCalendar.class;
+                break;
             default : c = String.class;
         }
         return c;

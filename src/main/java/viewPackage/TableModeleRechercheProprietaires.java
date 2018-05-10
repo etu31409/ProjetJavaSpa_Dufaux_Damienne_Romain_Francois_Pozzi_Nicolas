@@ -19,6 +19,7 @@ public class TableModeleRechercheProprietaires  extends AbstractTableModel {
         nomDesColonnes.add("Identifiant de l'animal");
         nomDesColonnes.add("Nom de l'animal");
         nomDesColonnes.add("Identifiant du propriétaire");
+        nomDesColonnes.add("Prénom du propriétaire");
         nomDesColonnes.add("Nom du propriétaire");
 
         centerRenderer = new DefaultTableCellRenderer();
@@ -38,12 +39,13 @@ public class TableModeleRechercheProprietaires  extends AbstractTableModel {
     }
 
     public Object getValueAt(int ligne, int colonne) {
-        ProprietaireAnimal veterinaireOrdonnance = proprietairesAnimaux.get(ligne);
+        ProprietaireAnimal proprietaireAnimal = proprietairesAnimaux.get(ligne);
         switch(colonne){
-            case 0 : return veterinaireOrdonnance.getNumRegistreAnimal();
-            case 1 : return veterinaireOrdonnance.getNomAnimal();
-            case 2 : return veterinaireOrdonnance.getIdentifiantProprio();
-            case 3 : return veterinaireOrdonnance.getNomProprio();
+            case 0 : return proprietaireAnimal.getNumRegistreAnimal();
+            case 1 : return proprietaireAnimal.getNomAnimal();
+            case 2 : return proprietaireAnimal.getIdentifiantProprio();
+            case 3 : return proprietaireAnimal.getPrenomProprio();
+            case 4 : return proprietaireAnimal.getNomProprio();
             default : return null;
         }
     }
@@ -59,6 +61,8 @@ public class TableModeleRechercheProprietaires  extends AbstractTableModel {
             case 2 : c = Integer.class;
                 break;
             case 3 : c = String.class;
+                break;
+            case 4 : c = String.class;
                 break;
             default : c = String.class;
         }

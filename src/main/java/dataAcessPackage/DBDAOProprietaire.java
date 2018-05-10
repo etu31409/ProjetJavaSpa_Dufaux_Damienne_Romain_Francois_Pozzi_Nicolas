@@ -82,7 +82,7 @@ public class DBDAOProprietaire implements IProprietaire{
             ArrayList<ProprietaireAnimal> listeResultatRecherche = new ArrayList<ProprietaireAnimal>();
 
             sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.proprietaire.identifiantProprio, \n" +
-                    "spabd.proprietaire.nom\n" +
+                    "spabd.proprietaire.prenom, spabd.proprietaire.nom\n" +
                     "from spabd.animal\n" +
                     "inner join spabd.proprietaire\n" +
                     "on (spabd.animal.identifiantProprio = spabd.proprietaire.identifiantProprio)\n" +
@@ -100,7 +100,8 @@ public class DBDAOProprietaire implements IProprietaire{
                 proprietaireAnimal.setNumRegistreAnimal(data.getInt(1));
                 proprietaireAnimal.setNomAnimal(data.getString(2));
                 proprietaireAnimal.setIdentifiantProprio(data.getInt(3));
-                proprietaireAnimal.setNomProprio(data.getString(4));
+                proprietaireAnimal.setPrenomProprio(data.getString(4));
+                proprietaireAnimal.setNomProprio(data.getString(5));
                 listeResultatRecherche.add(proprietaireAnimal);
             }
 

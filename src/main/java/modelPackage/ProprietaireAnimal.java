@@ -6,12 +6,15 @@ public class ProprietaireAnimal {
     private String nomAnimal;
     private Integer identifiantProprio;
     private String nomProprio;
+    private String prenomProprio;
 
     public ProprietaireAnimal(){}
-    public ProprietaireAnimal(Integer numRegistreAnimal, String nomAnimal, Integer identifiantProprio, String nomProprio) {
+    public ProprietaireAnimal(Integer numRegistreAnimal, String nomAnimal, Integer identifiantProprio, String prenomProprio,
+                              String nomProprio) {
         setNumRegistreAnimal(numRegistreAnimal);
         setNomAnimal(nomAnimal);
         setIdentifiantProprio(identifiantProprio);
+        setPrenomProprio(prenomProprio);
         setNomProprio(nomProprio);
     }
 
@@ -45,5 +48,13 @@ public class ProprietaireAnimal {
 
     public void setNomProprio(String nomProprio) {
         this.nomProprio = nomProprio;
+    }
+
+    public String getPrenomProprio() {
+        return prenomProprio;
+    }
+
+    public void setPrenomProprio(String prenomProprio) {
+        this.prenomProprio = prenomProprio;
     }
 }

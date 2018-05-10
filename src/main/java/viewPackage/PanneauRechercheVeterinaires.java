@@ -91,6 +91,7 @@ public class PanneauRechercheVeterinaires{
                     resultatRecherche = new JTable(modele);
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
+                    resultatRecherche.setDefaultRenderer(GregorianCalendar.class, modele.getCenterRenderer());
                     scrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     resultatRecherche.setFillsViewportHeight(true);

@@ -3,17 +3,17 @@ package modelPackage;
 import java.util.GregorianCalendar;
 
 public class VeterinaireOrdonnance {
-    //pabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
-    //                    "spabd.ordonnance.dateOrdonnance
 
     private Integer identifiantVeto;
     private String nomVeto;
+    private String prenomVeto;
     private GregorianCalendar dateOrdonnance;
 
     public VeterinaireOrdonnance(){}
-    public VeterinaireOrdonnance(Integer identifiantVeto, String nomVeto, GregorianCalendar dateOrdonnance) {
+    public VeterinaireOrdonnance(Integer identifiantVeto, String prenomVeto, String nomVeto, GregorianCalendar dateOrdonnance) {
         setIdentifiantVeto(identifiantVeto);
         setNomVeto(nomVeto);
+        setPrenomVeto(prenomVeto);
         setDateOrdonnance(dateOrdonnance);
     }
 
@@ -39,5 +39,13 @@ public class VeterinaireOrdonnance {
 
     public void setDateOrdonnance(GregorianCalendar dateOrdonnance) {
         this.dateOrdonnance = dateOrdonnance;
+    }
+
+    public String getPrenomVeto() {
+        return prenomVeto;
+    }
+
+    public void setPrenomVeto(String prenomVeto) {
+        this.prenomVeto = prenomVeto;
     }
 }

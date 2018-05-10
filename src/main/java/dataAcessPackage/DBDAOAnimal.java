@@ -305,7 +305,7 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom, spabd.animal.espece, spabd.animal.race \n" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom, spabd.animal.espece, spabd.animal.race \n" +
                     "from spabd.medicament\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
@@ -320,8 +320,8 @@ public class DBDAOAnimal implements IAnimal {
                     "AND spabd.medicament.identifiantMed = ?;";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, selectionMedicament.getIdentifiantMed());
-            statement.setInt(2, selectionVeterinaire.getIdentifiantVeto());
+            statement.setInt(1, selectionVeterinaire.getIdentifiantVeto());
+            statement.setInt(2, selectionMedicament.getIdentifiantMed());
             data = statement.executeQuery();
 
             while (data.next()) {

@@ -75,7 +75,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
             }
             ArrayList<VeterinaireOrdonnance>listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
+            sqlInstruction = "select distinct spabd.veterinaire.identifiantVeto, spabd.veterinaire.prenom, spabd.veterinaire.nom, " +
                     "spabd.soinAvance.dateSoin\n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
@@ -93,8 +93,9 @@ public class DBDAOVeterinaire implements IVeterinaire{
                 GregorianCalendar dateSoin = new GregorianCalendar();
                 VeterinaireOrdonnance veto = new VeterinaireOrdonnance();
                 veto.setIdentifiantVeto(data.getInt(1));
-                veto.setNomVeto(data.getString(2));
-                dateSoin.setTime(data.getDate(3));
+                veto.setPrenomVeto(data.getString(2));
+                veto.setNomVeto(data.getString(3));
+                dateSoin.setTime(data.getDate(4));
                 veto.setDateOrdonnance(dateSoin);
 
                 listeResultatRecherche.add(veto);
