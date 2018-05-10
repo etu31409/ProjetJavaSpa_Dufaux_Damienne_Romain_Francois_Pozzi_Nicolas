@@ -12,7 +12,7 @@ public class Animal {
     private String espece;
     private String race;
     private String sexe;
-    private boolean estSterilise;
+    private Boolean estSterilise;
     private String couleurDePeau;
     private GregorianCalendar dateNaissance;
     private Integer numPuce;
@@ -26,7 +26,7 @@ public class Animal {
     public Animal(){}
 
     public Animal(String nom, GregorianCalendar dateArrivee,
-                  String espece, String race, String sexe, boolean estSterilise, String couleurDePeau,
+                  String espece, String race, String sexe, Boolean estSterilise, String couleurDePeau,
                   GregorianCalendar dateNaissance, Integer numPuce, String localisationPuce,
                   GregorianCalendar dateAttributionPuce, Integer numTatouage, String localisationTatouage, Double poids,
                   Integer proprietaire) throws AnimalException {
@@ -102,7 +102,7 @@ public class Animal {
     public void setPoids(Double poids) throws AnimalException{
         this.poids = poids;
         if(poids <= 0)
-            throw new AnimalException("Le poids ne peut pas être inférieur ou égale à 0 !");
+            throw new AnimalException("Le poids ne peut pas être inférieur ou égal à 0 !");
     }
 
     public void setProprietaire(Integer proprietaire){
@@ -140,7 +140,7 @@ public class Animal {
         return sexe;
     }
 
-    public boolean isEstSterilise() {
+    public Boolean isEstSterilise() {
         return estSterilise;
     }
 
