@@ -478,5 +478,89 @@ public class DBDAOAnimal implements IAnimal {
             throw new AnimalException("Impossible de supprimer l'animal");
         }
     }
+
+    public void modifierAnimal(Animal animal) throws  AnimalException, SingletonConnectionException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "update animal set numRegistre," +
+                    " dateArrivee," +
+                    " espece," +
+                    " race," +
+                    " sexe," +
+                    "estSterilise," +
+                    "couleurDePeau," +
+                    "poids," +
+                    "nom, dateNaissance, numPuce, localisationPuce, dateAttributionPuce, numTatouage, localisationTatouage, identifiantProprio)"+
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            java.sql.Date sqlDate = new java.sql.Date(GregorianCalendar.getInstance().getTimeInMillis());
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setNull(1, Types.INTEGER);
+            preparedStatement.setDate(2, sqlDate);
+            preparedStatement.setString(3, animal.getEspece());
+            preparedStatement.setString(4, animal.getRace());
+            preparedStatement.setString(5, animal.getSexe());
+            preparedStatement.setBoolean(6, animal.isEstSterilise());
+            preparedStatement.setString(7, animal.getCouleurDePeau());
+            preparedStatement.setDouble(8, animal.getPoids());
+            //facultatifs
+            if(animal.getNom() != null){
+                preparedStatement.setString(9, animal.getNom());
+            }
+            else{
+                preparedStatement.setNull(9, Types.VARCHAR);
+            }
+            if(animal.getDateNaissance() != null){
+                preparedStatement.setDate(10, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
+            }
+            else{
+                preparedStatement.setNull(10, Types.DATE);
+            }
+            if(animal.getNumPuce() != null){
+                preparedStatement.setInt(11, animal.getNumPuce());
+            }
+            else{
+                preparedStatement.setNull(11, Types.INTEGER);
+            }
+            if(animal.getLocalisationPuce() != null){
+                preparedStatement.setString(12, animal.getLocalisationPuce());
+            }
+            else{
+                preparedStatement.setNull(12, Types.VARCHAR);
+            }
+            if(animal.getDateAttributionPuce() != null){
+                preparedStatement.setDate(13,new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
+            }
+            else{
+                preparedStatement.setNull(13, Types.DATE);
+            }
+            if(animal.getNumTatouage() != null){
+                preparedStatement.setInt(14,animal.getNumPuce());
+            }
+            else{
+                preparedStatement.setNull(14, Types.INTEGER);
+            }
+            if(animal.getLocalisationTatouage() != null){
+                preparedStatement.setString(15,animal.getLocalisationTatouage());
+            }
+            else{
+                preparedStatement.setNull(15, Types.VARCHAR);
+            }
+            if(animal.getProprietaire() != null){
+                preparedStatement.setInt(16,animal.getProprietaire());
+            }
+            else{
+                preparedStatement.setNull(16, Types.INTEGER);
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch(SingletonConnectionException exception){
+            throw new SingletonConnectionException();
+        }
+        catch (SQLException e) {
+            throw new AnimalException("Impossible d'ajouter l'animal");
+        }
+    }
 }
 
