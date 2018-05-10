@@ -4,7 +4,9 @@ import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.SoinException;
 import modelPackage.Animal;
+import modelPackage.SoinAvance;
 
 import javax.swing.table.*;
 import javax.swing.*;
@@ -91,10 +93,14 @@ public class PanneauListingAnimaux extends JPanel {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
                     animauxTries = controller.getAnimauxTries(critere);
                     Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
+                    SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                    System.out.println(soinASup);
+                    controller.supprimerSoin(soinASup);
                     controller.supprimerAnimal(animalASup);
                     JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !");
                 }
-                catch (AnimalException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux");}
+                catch (AnimalException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !");}
+                catch(SoinException s){JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !");}
                 catch(SingletonConnectionException s){JOptionPane.showMessageDialog(null,s.getMessage());}
             }
             if(e.getSource() == modifierButton){

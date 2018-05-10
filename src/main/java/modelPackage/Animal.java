@@ -55,22 +55,15 @@ public class Animal {
         this.dateArrivee = dateArrivee;
     }
 
-    public void setEspece(String espece) throws AnimalException{
-        if(espece.isEmpty())
-            throw new AnimalException("Champ espece vide !");
+    public void setEspece(String espece) {
         this.espece = espece;
     }
 
-    public void setRace(String race) throws AnimalException {
-        if(race.isEmpty()){
-            throw new AnimalException("Champ race vide");
-        }
+    public void setRace(String race){
         this.race = race;
     }
 
-    public void setSexe(String sexe) throws AnimalException {
-        if(sexe.isEmpty())
-            throw new AnimalException("Champ sexe vide");
+    public void setSexe(String sexe) {
         this.sexe = sexe;
     }
 
@@ -78,9 +71,7 @@ public class Animal {
         this.estSterilise = estSterilise;
     }
 
-    public void setCouleurDePeau(String couleurDePeau)throws AnimalException {
-        if(couleurDePeau.isEmpty())
-            throw new AnimalException("Champ couleur de peau vide");
+    public void setCouleurDePeau(String couleurDePeau) {
         this.couleurDePeau = couleurDePeau;
     }
 
@@ -108,8 +99,10 @@ public class Animal {
         this.localisationTatouage = localisationTatouage;
     }
 
-    public void setPoids(Double poids) {
+    public void setPoids(Double poids) throws AnimalException{
         this.poids = poids;
+        if(poids <= 0)
+            throw new AnimalException("Le poids ne peut pas être inférieur ou égale à 0 !");
     }
 
     public void setProprietaire(Integer proprietaire){

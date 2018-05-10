@@ -64,28 +64,22 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            SoinAvance soin = new SoinAvance();
             GregorianCalendar dateSoin = new GregorianCalendar();
-
-            sqlInstruction = "select * from spabd.soinAvance where numSoin = ?";
+            SoinAvance soin = new SoinAvance();
+            sqlInstruction = "select * from spabd.soinAvance where numRegistre = ?";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, numSoin);
             data = statement.executeQuery();
-
             while (data.next()) {
-                soin.setNumRegistre(data.getInt("numSoin"));
+                soin.setNumSoin(data.getInt("numSoin"));
                 soin.setNumRegistre(data.getInt("numRegistre"));
-                soin.setIntitule(data.getString("intitule"));
+                soin.setRemarque(data.getString("remarque"));
+                soin.setEstUrgent(data.getBoolean("estUrgent"));
                 soin.setPartieDuCorps(data.getString("partieDuCorps"));
+                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
-                soin.setVeterinaire(data.getInt("identifiantVeto"));
-                soin.setEstUrgent(data.getBoolean("estUrgent"));
-
-                String remarque = data.getString("remarque");
-                if (!data.wasNull()) {
-                    soin.setRemarque(remarque);
-                }
+                soin.setIntitule(data.getString("intitule"));
             }
             return soin;
         } catch (Exception e) {
