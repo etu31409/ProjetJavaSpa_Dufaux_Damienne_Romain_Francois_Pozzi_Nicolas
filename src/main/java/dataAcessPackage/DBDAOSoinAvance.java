@@ -99,11 +99,14 @@ public class DBDAOSoinAvance implements ISoinAvance {
 
             ArrayList<SoinAvance> tousLesSoinsTries = new ArrayList<>();
 
+            String ordre = "asc";
             String critereColonne;
             if(critere.equals("Aucun tri"))
                 critereColonne = "\"\"";
-            else if (critere.equals("Date du soin"))
+            else if (critere.equals("Date du soin")){
                 critereColonne = "dateSoin";
+            ordre = "desc";
+        }
             else if (critere.equals("Identifiant du vétérinaire"))
                 critereColonne = "identifiantVeto";
             else if (critere.equals("Identifiant de l'animal"))
@@ -111,7 +114,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             else
                 critereColonne = "numSoin";
 
-            sqlInstruction = "select * from spabd.soinAvance order by "+ critereColonne + " asc;";
+            sqlInstruction = "select * from spabd.soinAvance order by "+ critereColonne + " " + ordre + ";";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 

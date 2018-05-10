@@ -175,13 +175,18 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> tousLesAnimauxTries = new ArrayList<>();
 
+            String ordre = "asc";
             String critereColonne;
             if(critere.equals("Aucun tri"))
                 critereColonne = "\"\"";
-            else if (critere.equals("Date d'arrivée"))
+            else if (critere.equals("Date d'arrivée")){
                 critereColonne = "dateArrivee";
-            else if (critere.equals("Date d'arrivée"))
+                ordre = "desc";
+            }
+            else if (critere.equals("Date de naissance")) {
                 critereColonne = "dateNaissance";
+                ordre = "desc";
+            }
             else if (critere.equals("Nom"))
                 critereColonne = "nom";
             else if (critere.equals("Identifiant de l'animal"))
@@ -191,7 +196,7 @@ public class DBDAOAnimal implements IAnimal {
             else
                 critereColonne = "espece";
 
-            sqlInstruction = "select * from spabd.animal order by "+ critereColonne + " asc;";
+            sqlInstruction = "select * from spabd.animal order by "+ critereColonne + " " + ordre + ";";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 
