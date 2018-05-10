@@ -41,6 +41,9 @@ public class Business {
         daoAnimal.supprimerAnimal(animal);
     }
 
+    public void modifierAnimal(Animal animal) throws  AnimalException, SingletonConnectionException{
+        daoAnimal.modifierAnimal(animal);
+    }
     //medicaments
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
         return daoMedicament.getMedicaments();

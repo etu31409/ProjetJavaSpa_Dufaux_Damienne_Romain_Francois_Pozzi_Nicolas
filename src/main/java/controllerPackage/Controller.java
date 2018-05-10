@@ -32,6 +32,10 @@ public class Controller {
         business.supprimerAnimal(animal);
     }
 
+    public void modifierAnimal(Animal animal) throws  AnimalException, SingletonConnectionException{
+        business.modifierAnimal(animal);
+    }
+
     //medicaments
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, SingletonConnectionException {
         return business.getMedicaments();
