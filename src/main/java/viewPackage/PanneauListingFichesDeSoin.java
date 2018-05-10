@@ -111,14 +111,13 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     try {
                         listeSelectionnee = resultatRecherche.getSelectionModel();
                         int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
-
                         String critere = (String) comboBoxListingFiches.getSelectedItem();
                         soinsTries = controller.getSoinsTries(critere);
                         SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
                         System.out.println(resultatRecherche.isCellEditable(1, 1));
                         controller.modifierSoin(soinAModif);
                         trierButton.doClick();
-                        JOptionPane.showMessageDialog(null, "Le soin a été correctemen modifié dans la base de données !");
+                        JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
                     } catch (VeterinaireException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SoinException e) {

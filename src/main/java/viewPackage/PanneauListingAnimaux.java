@@ -122,13 +122,15 @@ public class PanneauListingAnimaux extends JPanel {
             }
             if(event.getSource() == modifierButton){
                 if(resultatRecherche != null){
-                listeSelectionnee = resultatRecherche.getSelectionModel();
+                    listeSelectionnee = resultatRecherche.getSelectionModel();
                     int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                     try {
                         String critere = (String) comboBoxTriAnimaux.getSelectedItem();
                         animauxTries = controller.getAnimauxTries(critere);
                         Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
-
+                        controller.modifierAnimal(animalModif);
+                        buttonTri.doClick();
+                        JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié dans la base de données !");
                     } catch (AnimalException e) {
                         JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SingletonConnectionException e) {
