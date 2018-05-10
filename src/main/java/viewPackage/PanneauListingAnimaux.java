@@ -75,7 +75,6 @@ public class PanneauListingAnimaux extends JPanel {
                     listingScrollPane.createHorizontalScrollBar();
                     listingScrollPane.createVerticalScrollBar();
                     resultatRecherche.setFillsViewportHeight(true);
-
                 }
                 catch (AnimalException s) {
                     JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux", "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -84,31 +83,34 @@ public class PanneauListingAnimaux extends JPanel {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            if(event.getSource() == supprimerButton){
-                listeSelectionnee = resultatRecherche.getSelectionModel();
-                int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
-                try{
-                    String critere = (String)comboBoxTriAnimaux.getSelectedItem();
-                    animauxTries = controller.getAnimauxTries(critere);
-                    Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
-                    SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                    //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
-                    while(soinASup.getNumRegistre() != null){
-                        controller.supprimerSoin(soinASup);
-                        soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+            if(event.getSource() == supprimerButton) {
+                int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                        "Veuillez confirmer votre choix",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirmation == 0) {
+                    listeSelectionnee = resultatRecherche.getSelectionModel();
+                    int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
+                    try {
+                        String critere = (String) comboBoxTriAnimaux.getSelectedItem();
+                        animauxTries = controller.getAnimauxTries(critere);
+                        Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
+                        SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                        //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
+                        while (soinASup.getNumRegistre() != null) {
+                            controller.supprimerSoin(soinASup);
+                            soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
+                        }
+                        controller.supprimerAnimal(animalASup);
+                        buttonTri.doClick();
+                        JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
+                                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (AnimalException e) {
+                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    } catch (SoinException e) {
+                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    } catch (SingletonConnectionException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
-                    controller.supprimerAnimal(animalASup);
-                    JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
-                            "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                }
-                catch (AnimalException e){
-                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }
-                catch(SoinException e){
-                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }
-                catch(SingletonConnectionException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
             if(event.getSource() == modifierButton){
