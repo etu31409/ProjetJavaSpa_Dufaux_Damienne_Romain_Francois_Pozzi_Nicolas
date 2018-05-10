@@ -29,9 +29,9 @@ public class DBDAOSoinAvance implements ISoinAvance {
             data = statement.executeQuery();
 
             ArrayList<SoinAvance> tousLesSoins = new ArrayList<SoinAvance>();
-            GregorianCalendar dateSoin = new GregorianCalendar();
 
             while (data.next()) {
+                GregorianCalendar dateSoin = new GregorianCalendar();
                 SoinAvance soin = new SoinAvance();
                 soin.setNumRegistre(data.getInt("numSoin"));
                 soin.setNumRegistre(data.getInt("numRegistre"));
@@ -114,9 +114,9 @@ public class DBDAOSoinAvance implements ISoinAvance {
             sqlInstruction = "select * from spabd.soinAvance order by "+ critereColonne + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
-            GregorianCalendar dateSoin = new GregorianCalendar();
 
             while (data.next()) {
+                GregorianCalendar dateSoin = new GregorianCalendar();
                 SoinAvance soin = new SoinAvance();
                 soin.setNumSoin(data.getInt("numSoin"));
                 soin.setNumRegistre(data.getInt("numRegistre"));

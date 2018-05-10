@@ -15,6 +15,8 @@ public class TableModeleRechercheAnimaux  extends AbstractTableModel {
 
         nomDesColonnes.add("Identifiant de l'animal");
         nomDesColonnes.add("Nom");
+        nomDesColonnes.add("Espèce");
+        nomDesColonnes.add("Race");
     }
 
     public int getColumnCount() {
@@ -34,6 +36,8 @@ public class TableModeleRechercheAnimaux  extends AbstractTableModel {
         switch(colonne){
             case 0 : return animal.getNumRegistre();
             case 1 : return animal.getNom();
+            case 2 : return animal.getEspece();
+            case 3 : return animal.getRace();
             default : return null;
         }
     }
@@ -45,6 +49,10 @@ public class TableModeleRechercheAnimaux  extends AbstractTableModel {
             case 0 : c = Integer.class;
                 break;
             case 1 : c = String.class;
+                break;
+            case 2 : c = String.class;
+                break;
+            case 3 : c = String.class;
                 break;
             default : c = String.class;
         }

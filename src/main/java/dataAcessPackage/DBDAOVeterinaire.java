@@ -48,8 +48,6 @@ public class DBDAOVeterinaire implements IVeterinaire{
             }
 
             Veterinaire veterinaire = new Veterinaire();
-            GregorianCalendar dateSoin = new GregorianCalendar();
-            GregorianCalendar heure = new GregorianCalendar();
 
             sqlInstruction = "select * from spabd.veterinaire where identifiantVeto = ?";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
@@ -61,7 +59,6 @@ public class DBDAOVeterinaire implements IVeterinaire{
                 veterinaire.setNom(data.getString("nom"));
                 veterinaire.setPrenom(data.getString("prenom"));
             }
-
             return veterinaire;
         }
         catch (SQLException e) {
@@ -77,7 +74,6 @@ public class DBDAOVeterinaire implements IVeterinaire{
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
             ArrayList<VeterinaireOrdonnance>listeResultatRecherche = new ArrayList<>();
-            GregorianCalendar dateSoin = new GregorianCalendar();
 
             sqlInstruction = "select spabd.veterinaire.identifiantVeto, spabd.veterinaire.nom, " +
                     "spabd.soinAvance.dateSoin\n" +
@@ -94,6 +90,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
             data = statement.executeQuery();
 
             while (data.next()) {
+                GregorianCalendar dateSoin = new GregorianCalendar();
                 VeterinaireOrdonnance veto = new VeterinaireOrdonnance();
                 veto.setIdentifiantVeto(data.getInt(1));
                 veto.setNomVeto(data.getString(2));

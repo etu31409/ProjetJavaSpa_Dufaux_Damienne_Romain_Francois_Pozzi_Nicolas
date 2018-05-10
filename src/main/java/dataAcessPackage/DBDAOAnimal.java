@@ -194,11 +194,10 @@ public class DBDAOAnimal implements IAnimal {
             sqlInstruction = "select * from spabd.animal order by "+ critereColonne + " asc;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
-            GregorianCalendar dateArrivee = new GregorianCalendar();
 
             while (data.next()) {
                 Animal animal = new Animal();
-
+                GregorianCalendar dateArrivee = new GregorianCalendar();
                 animal.setNumRegistre(data.getInt("numRegistre"));
                 dateArrivee.setTime(data.getDate("dateArrivee"));
                 animal.setDateArrivee(dateArrivee);
@@ -270,7 +269,7 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
                     "from spabd.veterinaire\n" +
                     "inner join spabd.soinAvance\n" +
                     "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
@@ -285,6 +284,8 @@ public class DBDAOAnimal implements IAnimal {
                 Animal a = new Animal();
                 a.setNumRegistre(data.getInt(1));
                 a.setNom(data.getString(2));
+                a.setEspece(data.getString(3));
+                a.setRace(data.getString(4));
                 listeResultatRecherche.add(a);
             }
             return listeResultatRecherche;
@@ -302,8 +303,8 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
-                    "from spabd.medicament\n" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
+                    "from spabd.veterinaire\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +
@@ -325,6 +326,8 @@ public class DBDAOAnimal implements IAnimal {
                 Animal a = new Animal();
                 a.setNumRegistre(data.getInt(1));
                 a.setNom(data.getString(2));
+                a.setEspece(data.getString(3));
+                a.setRace(data.getString(4));
                 listeResultatRecherche.add(a);
             }
             return listeResultatRecherche;
@@ -343,8 +346,8 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n" +
-                    "from spabd.medicament\n" +
+            sqlInstruction = "select spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race \n" +
+                    "from spabd.veterinaire\n" +
                     "inner join spabd.ordonnance\n" +
                     "on (spabd.medicament.identifiantMed = spabd.ordonnance.identifiantMed)\n" +
                     "inner join spabd.soinAvance\n" +
@@ -362,6 +365,8 @@ public class DBDAOAnimal implements IAnimal {
                 Animal a = new Animal();
                 a.setNumRegistre(data.getInt(1));
                 a.setNom(data.getString(2));
+                a.setEspece(data.getString(3));
+                a.setRace(data.getString(4));
                 listeResultatRecherche.add(a);
             }
             return listeResultatRecherche;
