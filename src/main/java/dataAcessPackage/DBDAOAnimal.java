@@ -371,7 +371,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     //ajout
-    public void ajouterAnimal(Animal animal) throws SingletonConnectionException {
+    public void ajouterAnimal(Animal animal) throws SingletonConnectionException, AnimalException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -447,11 +447,12 @@ public class DBDAOAnimal implements IAnimal {
             }
             preparedStatement.executeUpdate();
         }
-        catch(SingletonConnectionException exception){throw new SingletonConnectionException();}
-        catch (SQLException e) {
-            System.out.println("SQL exception :" + e.getMessage());
+        catch(SingletonConnectionException exception){
+            throw new SingletonConnectionException();
         }
-        catch(Exception exception){System.out.println(exception.getMessage());}
+        catch (SQLException e) {
+            throw new AnimalException("Impossible d'ajouter l'animal");
+        }
     }
     public void supprimerAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         try {
@@ -463,11 +464,12 @@ public class DBDAOAnimal implements IAnimal {
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
         }
-        catch(SingletonConnectionException exception){throw new SingletonConnectionException();}
-        catch (SQLException e) {
-            System.out.println("SQL exception :" + e.getMessage());
+        catch(SingletonConnectionException exception){
+            throw new SingletonConnectionException();
         }
-        catch(Exception exception){System.out.println(exception.getMessage());}
+        catch (SQLException e) {
+            throw new AnimalException("Impossible de supprimer l'animal");
+        }
     }
 }
 

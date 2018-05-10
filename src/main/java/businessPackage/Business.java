@@ -71,11 +71,11 @@ public class Business {
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException{
         return daoSoinAvance.getSoinsTries(critere);
     }
-    public void supprimerSoin(SoinAvance soin) throws SoinException{
+    public void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         daoSoinAvance.supprimerSoin(soin);
     }
 
-    public void modifierSoin(SoinAvance soin) throws SoinException{
+    public void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
         daoSoinAvance.modifierSoin(soin);
     }
 

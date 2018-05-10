@@ -84,7 +84,7 @@ public class PanneauFicheDeSoin extends JPanel {
         try {
             medicamentsArrayList = controller.getMedicaments();
             medicamentsDisposModele = new DefaultListModel();
-            for (Medicament medicament: medicamentsArrayList) {
+            for (Medicament medicament : medicamentsArrayList) {
                 medicamentsDisposModele.addElement(medicament);
             }
             listMedicamentsDispos = new JList(medicamentsDisposModele);
@@ -94,7 +94,9 @@ public class PanneauFicheDeSoin extends JPanel {
             listMedicamentsChoisis = new JList(medicamentsChoisisModele);
             listeMedicamentsChoisisJScrollPane.setViewportView(listMedicamentsChoisis);
 
-        } catch (Exception e) {
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -102,11 +104,11 @@ public class PanneauFicheDeSoin extends JPanel {
     private boolean validerChamps() throws TextAreaException {
         textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().isEmpty() || isDigit(textAreaIntituleSoin.getText())) {
-            throw new TextAreaException(textAreaIntituleSoin,"L'intitulé du soin doit être une chaîne de caractères non vide !");
+            throw new TextAreaException(textAreaIntituleSoin, "L'intitulé du soin doit être une chaîne de caractères non vide !");
         }
         textAreaPartieDuCorps.setBorder(null);
         if (textAreaPartieDuCorps.getText().isEmpty() || isDigit(textAreaPartieDuCorps.getText())) {
-            throw new TextAreaException(textAreaPartieDuCorps,"La partie du corps doit être une chaîne de caractères non vide !");
+            throw new TextAreaException(textAreaPartieDuCorps, "La partie du corps doit être une chaîne de caractères non vide !");
         }
         return true;
     }
@@ -114,43 +116,40 @@ public class PanneauFicheDeSoin extends JPanel {
     private boolean isDigit(String chaine) {
         try {
             Integer.parseInt(chaine);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
-        }return true;
+        }
+        return true;
     }
 
     public void ajouterMedicamentAListeMedicamentsDispos(Medicament medicament) {
         medicamentsDisposModele.addElement(medicament);
     }
 
-    private SoinAvance nouveauSoinAvance() throws SoinException{
-        try {
-            SoinAvance soinAvance = new SoinAvance();
-            soinAvance.setNumRegistre(((Animal) comboBoxAnimaux.getSelectedItem()).getNumRegistre());
-            soinAvance.setIntitule(textAreaIntituleSoin.getText());
-            soinAvance.setPartieDuCorps(textAreaPartieDuCorps.getText());
-            soinAvance.setDateSoin(new GregorianCalendar());
-            soinAvance.setVeterinaire(((Veterinaire) comboBoxVeterinaires.getSelectedItem()).getIdentifiantVeto());
-            soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
-            if (textAreaRemarque.getText().isEmpty()) soinAvance.setRemarque(null);
-            else soinAvance.setRemarque(textAreaRemarque.getText());
-            return soinAvance;
-        }catch (Exception e){
-            throw new SoinException("Erreur création soinAvance");
-        }
+    private SoinAvance nouveauSoinAvance() {
+        SoinAvance soinAvance = new SoinAvance();
+        soinAvance.setNumRegistre(((Animal) comboBoxAnimaux.getSelectedItem()).getNumRegistre());
+        soinAvance.setIntitule(textAreaIntituleSoin.getText());
+        soinAvance.setPartieDuCorps(textAreaPartieDuCorps.getText());
+        soinAvance.setDateSoin(new GregorianCalendar());
+        soinAvance.setVeterinaire(((Veterinaire) comboBoxVeterinaires.getSelectedItem()).getIdentifiantVeto());
+        soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
+        if (textAreaRemarque.getText().isEmpty()) soinAvance.setRemarque(null);
+        else soinAvance.setRemarque(textAreaRemarque.getText());
+        return soinAvance;
     }
 
-    private Ordonnance nouvelleOrdonance(SoinAvance soinAvance, int i) throws SoinException{
-        try{
+    private Ordonnance nouvelleOrdonance(SoinAvance soinAvance, int i) throws SoinException {
+        try {
             Ordonnance ord = new Ordonnance();
             ord.setMedicament((Medicament) medicamentsChoisisModele.getElementAt(i));
             ord.setNumRegistre(soinAvance.getNumRegistre());
             ord.setSoinAvance(soinAvance);
             return ord;
-        } catch (Exception e){
-            throw new SoinException("Erreur création ordonnancz");
-        }
+        } catch (Exception e) {
+        throw new SoinException("Erreur création ordonnance");
     }
+}
 
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
@@ -166,6 +165,7 @@ public class PanneauFicheDeSoin extends JPanel {
             }
             if (event.getSource() == validerButton) {
                 try {
+
                     if (validerChamps()) {
                         SoinAvance soinAvance = nouveauSoinAvance();
                         controller.ajouterFicheDeSoins(soinAvance);
@@ -174,13 +174,18 @@ public class PanneauFicheDeSoin extends JPanel {
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
                                 "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !",
                                 "Attention!", JOptionPane.WARNING_MESSAGE);
                     }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (SoinException e) {
+                    e.printStackTrace();
+                } catch (SingletonConnectionException e) {
+                    e.printStackTrace();
+                } catch (TextAreaException e) {
+                    e.printStackTrace();
+                } catch (OrdonnanceException e) {
+                    e.printStackTrace();
                 }
             }
             if (event.getSource() == réinitialiserButton) {
@@ -194,7 +199,7 @@ public class PanneauFicheDeSoin extends JPanel {
                 instancieListeMedicamentsDispos();
                 listMedicamentsChoisis.removeAll();
                 textAreaRemarque.setText("");
-                if (fenetreMedicament != null){
+                if (fenetreMedicament != null) {
                     fenetreMedicament.dispose();
                     fenetreMedicament = null;
                 }

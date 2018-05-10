@@ -18,8 +18,8 @@ public interface ISoinAvance {
     void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException;
 
     //Suppression
-    void supprimerSoin(SoinAvance soin) throws SoinException;
+    void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException;
 
     //Modification
-    void modifierSoin(SoinAvance soin) throws SoinException;
+    void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException;
 }
