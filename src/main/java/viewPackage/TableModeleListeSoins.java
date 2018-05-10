@@ -81,4 +81,11 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         }
         return c;
     }
+
+
+    //Permet de modifier les cellules
+    public boolean isCellEditable(int row, int col){
+        if (col == 0) return false;
+        return true;
+    }
 }

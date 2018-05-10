@@ -66,6 +66,10 @@ public class Controller {
         business.supprimerSoin(soin);
     }
 
+    public void modifierSoin(SoinAvance soin) throws SoinException{
+        business.modifierSoin(soin);
+    }
+
     //veterinaires
     public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         return business.getVeterinaires();
