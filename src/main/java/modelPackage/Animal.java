@@ -65,6 +65,9 @@ public class Animal {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
+        /*if(sexe != "F" && sexe != "M"){
+            throw new AnimalException("Le sexe n'est pas valide !");
+        }*/
     }
 
     public void setEstSterilise(boolean estSterilise) {

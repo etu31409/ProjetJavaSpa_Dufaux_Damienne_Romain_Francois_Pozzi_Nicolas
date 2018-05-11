@@ -86,9 +86,12 @@ public class PanneauAnimal extends JPanel {
         //modifier titre...
         ajouterUnPropriétaireButton.setEnabled(false);
         comboBoxListeProprietaires.setEnabled(false);
+        dateDeNaissanceCheckBox.addActionListener(new EcouteurDeCheckBox());
+        dateDAttributionPuceCheckBox.addActionListener(new EcouteurDeCheckBox());
         if(animalModif.getProprietaire()!=null){
             instancieUnProprietaire(animalModif.getProprietaire());
             try{
+                proprioCheckBox.doClick();
                 Proprietaire proprietaire = controller.getUnProprietaire(animalModif.getProprietaire());
                 comboBoxListeProprietaires.addItem(proprietaire);
             }
@@ -99,7 +102,59 @@ public class PanneauAnimal extends JPanel {
             }
         }
         proprioCheckBox.addActionListener(new EcouteurDeCheckBox());
-
+        if(animalModif.getNom() != null){
+            nomTextField.setText(animalModif.getNom());
+        }
+        raceTextField.setText(animalModif.getRace());
+        System.out.println(animalModif.getSexe());
+        if(animalModif.getSexe() == "M"){
+            maleRadioButton.doClick();
+        }else{
+            femelleRadioButton.doClick();
+        }
+        especeTextField.setText(animalModif.getEspece());
+        couleurTextField.setText(animalModif.getCouleurDePeau());
+        spinnerPoids.setValue(animalModif.getPoids());
+        if(animalModif.isEstSterilise()){
+            steriliseRadioButton.doClick();
+        }else{
+            nonSteriliseRadioButton.doClick();
+        }
+        if(animalModif.getDateNaissance() == null){
+            instanciationSpinnerDate(spinnerDateNaissance);
+        }
+        else{
+            spinnerDateNaissance.setModel(new SpinnerDateModel());
+            spinnerDateNaissance.setEditor(new JSpinner.DateEditor(spinnerDateNaissance, "dd/MM/yyyy"));
+            spinnerDateNaissance.setValue(animalModif.getDateNaissance().getTime());
+            spinnerDateNaissance.setEnabled(false);
+        }
+        if(animalModif.getNumPuce() != null){
+            numPuceTextField.setText(String.valueOf(animalModif.getNumPuce()));
+        }
+        if(animalModif.getLocalisationPuce() != null){
+            localisationPuceTextField.setText(animalModif.getLocalisationPuce());
+        }
+        if(animalModif.getDateAttributionPuce() == null){
+            instanciationSpinnerDate(spinnerDatePuce);
+        }
+        else{
+            spinnerDatePuce.setModel(new SpinnerDateModel());
+            spinnerDatePuce.setEditor(new JSpinner.DateEditor(spinnerDatePuce, "dd/MM/yyyy"));
+            spinnerDatePuce.setValue(animalModif.getDateAttributionPuce().getTime());
+            spinnerDatePuce.setEnabled(false);
+        }
+        if(animalModif.getNumTatouage() != null){
+            numTatouageTextField.setText(String.valueOf(animalModif.getNumTatouage()));
+        }
+        if(animalModif.getLocalisationTatouage() != null){
+            localisationTatouageTextField.setText(animalModif.getLocalisationTatouage());
+        }
+        baseBorder = nomTextField.getBorder();
+        validerButton.addActionListener(new EcouteurDeBoutonModifierValidation());
+        reinitialiserButton.addActionListener(new EcouteurDeBoutons());
+        retourButton.addActionListener(new EcouteurDeBoutons());
+        ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
     }
 
 
@@ -259,7 +314,7 @@ public class PanneauAnimal extends JPanel {
         Animal animal = new Animal();
         try {
             if (nomTextField.getText().isEmpty()) {
-                nomTextField = null;
+                nomTextField.setText("");
             }
             animal.setNom(nomTextField.getText());
 
@@ -268,24 +323,22 @@ public class PanneauAnimal extends JPanel {
                 animal.setSexe("F");
             else
                 animal.setSexe("M");
-            if (especeTextField.getText().isEmpty()) {
-                especeTextField = null;
-            }
+            /*if (especeTextField.getText().isEmpty()) {
+                especeTextField.setText("");
+            }*/
             animal.setEspece(especeTextField.getText());
-
-            if (raceTextField.getText().isEmpty()) {
-                raceTextField = null;
-            }
+            /*if (raceTextField.getText().isEmpty()) {
+                raceTextField.setText("");
+            }*/
             animal.setRace(raceTextField.getText());
             if (dateDeNaissanceCheckBox.isSelected()) {
                 GregorianCalendar date = new GregorianCalendar();
                 date.setTime((Date) spinnerDateNaissance.getValue());
                 animal.setDateNaissance(date);
             }
-            if (couleurTextField.getText().isEmpty()) {
+            /*if (couleurTextField.getText().isEmpty()) {
                 couleurTextField = null;
-            }
-
+            }*/
             animal.setCouleurDePeau(couleurTextField.getText());
 
             try {
@@ -298,6 +351,9 @@ public class PanneauAnimal extends JPanel {
             if (localisationPuceTextField.getText() == "") {
                 localisationPuceTextField = null;
             }
+            /*if(localisationPuceTextField.getText().isEmpty()){
+                localisationPuceTextField.setText("");
+            }*/
             animal.setLocalisationPuce(localisationPuceTextField.getText());
 
             if (dateDAttributionPuceCheckBox.isSelected()) {
@@ -315,19 +371,30 @@ public class PanneauAnimal extends JPanel {
             if (localisationTatouageTextField.getText() == "") {
                 localisationTatouageTextField = null;
             }
+            if(steriliseRadioButton.isSelected()){
+                animal.setEstSterilise(true);
+            }else{
+                animal.setEstSterilise(false);
+            }
+            /*if(localisationTatouageTextField.getText().isEmpty()){
+                localisationTatouageTextField.setText("");
+            }*/
             animal.setLocalisationTatouage(localisationTatouageTextField.getText());
             if(proprioCheckBox.isSelected()){
                 try {
-                    animal.setProprietaire((Integer)comboBoxListeProprietaires.getSelectedItem());
+                    Proprietaire proprietaire = (Proprietaire) comboBoxListeProprietaires.getSelectedItem();
+                    animal.setProprietaire(proprietaire.getIdentifiantProprio());
                 } catch (Exception erreur) {
                     comboBoxListeProprietaires = null;
                 }
             }
-
             System.out.println(animal);
         }
         catch(AnimalException exception){
             JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+        if(modification){
+            animal.setNumRegistre(animalModif.getNumRegistre());
         }
         return animal;
     }
@@ -368,7 +435,6 @@ public class PanneauAnimal extends JPanel {
     }
 
     private class EcouteurDeCheckBox implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == proprioCheckBox){
                 if(proprioCheckBox.isSelected()){
@@ -424,8 +490,7 @@ public class PanneauAnimal extends JPanel {
                         System.out.println("Exception : " + exception.getMessage());
                     }
                 }
-                else
-                {
+                else {
                     JOptionPane.showMessageDialog(null,erreurMessage, "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -437,6 +502,33 @@ public class PanneauAnimal extends JPanel {
             }
             if(e.getSource() == ajouterUnPropriétaireButton){
                 new FenetreProprio(controller,PanneauAnimal.this);
+            }
+        }
+    }
+    private class EcouteurDeBoutonModifierValidation implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(e.getSource() == validerButton){
+                erreurMessage = "Certains champs sont invalides !\nDe plus : \n";
+                reinitialiserBorder();
+                if (validationFormulaire()) {
+                    try{
+                        controller.modifierAnimal(creationAnimal());
+                        JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié de la base de donnée !",
+                                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    catch(AnimalException exception){
+                        JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
+                    }
+                    catch(SingletonConnectionException exception){
+                        JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
+                    }
+                    catch(Exception exception) {
+                        System.out.println("Exception : " + exception.getMessage());
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,erreurMessage, "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
