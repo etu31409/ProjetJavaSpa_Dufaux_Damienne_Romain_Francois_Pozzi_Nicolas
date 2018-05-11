@@ -7,12 +7,6 @@ public class Ordonnance {
     private Integer numRegistre;
     private Medicament medicament;
 
-    public Ordonnance(SoinAvance soinAvance, Integer numRegistre, Medicament medicament) {
-        setSoinAvance(soinAvance);
-        setNumRegistre(numRegistre);
-        setMedicament(medicament);
-    }
-
     public Ordonnance(){}
 
     public SoinAvance getSoinAvance() {

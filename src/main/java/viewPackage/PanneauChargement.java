@@ -10,11 +10,9 @@ public class PanneauChargement extends JPanel {
 
     public PanneauChargement(JPanel panneauACharger, FenetrePrincipale fenetrePrincipale){
 
-        //barreDeChargement.setForeground(Color.BLACK);
-        //barreDeChargement.setBackground(Color.red);
-
         setLayout(new BorderLayout());
         add(barreDeChargement, BorderLayout.CENTER);
+
         repaint();
 
         g = new GestionChargement(barreDeChargement, this, fenetrePrincipale);

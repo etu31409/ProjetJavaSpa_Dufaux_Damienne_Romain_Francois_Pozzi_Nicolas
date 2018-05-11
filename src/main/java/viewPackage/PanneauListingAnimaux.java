@@ -66,12 +66,13 @@ public class PanneauListingAnimaux extends JPanel {
 
                     modele = new TableModeleListeAnimaux(animauxTries);
                     resultatRecherche = new JTable(modele);
+
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(GregorianCalendar.class, modele.getCenterRenderer());
-                    listingScrollPane.setViewportView(resultatRecherche);
+                    resultatRecherche.setDefaultRenderer(Double.class, modele.getCenterRenderer());
 
-                    resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    listingScrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
                     listingScrollPane.createHorizontalScrollBar();
@@ -87,7 +88,8 @@ public class PanneauListingAnimaux extends JPanel {
             }
             if(event.getSource() == supprimerButton) {
                 if (resultatRecherche != null) {
-                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible." +
+                                    " Êtes-vous sûr.e de vouloir continuer ?",
                             "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {

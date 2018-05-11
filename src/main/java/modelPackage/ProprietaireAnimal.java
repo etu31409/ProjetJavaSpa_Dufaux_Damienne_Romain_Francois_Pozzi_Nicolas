@@ -9,14 +9,6 @@ public class ProprietaireAnimal {
     private String prenomProprio;
 
     public ProprietaireAnimal(){}
-    public ProprietaireAnimal(Integer numRegistreAnimal, String nomAnimal, Integer identifiantProprio, String prenomProprio,
-                              String nomProprio) {
-        setNumRegistreAnimal(numRegistreAnimal);
-        setNomAnimal(nomAnimal);
-        setIdentifiantProprio(identifiantProprio);
-        setPrenomProprio(prenomProprio);
-        setNomProprio(nomProprio);
-    }
 
     public Integer getNumRegistreAnimal() {
         return numRegistreAnimal;

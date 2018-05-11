@@ -191,17 +191,19 @@ public class PanneauAnimal extends JPanel {
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
             maleRadioButton.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            erreurMessage += "Il faut que le sexe soit défini\n";
+            erreurMessage += "Le sexe doit être défini\n";
         }
         if (especeTextField.getText().isEmpty()){
             estValide = false;
             especeTextField.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            erreurMessage += "L'espèce doit être définie\n";
         }
         if (raceTextField.getText().isEmpty()){
             estValide = false;
             raceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            erreurMessage += "La race doit être définie\n";
         }
         if (!steriliseRadioButton.isSelected() && !nonSteriliseRadioButton.isSelected())
         {
@@ -216,19 +218,20 @@ public class PanneauAnimal extends JPanel {
             estValide = false;
             couleurTextField.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            erreurMessage += "La couleur doit être définie\n";
         }
         if (dateDAttributionPuceCheckBox.isSelected()){
             if (numPuceTextField.getText().isEmpty()){
                 estValide = false;
                 numPuceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                erreurMessage += "Le champ de numero de puce ne peut être vide\n";
+                erreurMessage += "Le champ de numéro de puce ne peut être vide\n";
             }
             if (localisationPuceTextField.getText().isEmpty()){
                 estValide = false;
                 localisationPuceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                erreurMessage += "Le champ localisation puce ne peut être vide\n";
+                erreurMessage += "Le champ de localisation de la puce ne peut être vide\n";
             }
         }
         if (!numPuceTextField.getText().isEmpty()){
@@ -238,7 +241,7 @@ public class PanneauAnimal extends JPanel {
                 estValide = false;
                 numPuceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                erreurMessage += "Le champ de numero de puce doit contenir un nombre entier plus petit que 2 147 483 647 \n";
+                erreurMessage += "Le champ de numéro de puce doit contenir un nombre entier plus petit que 2 147 483 647 \n";
             }
         }
         if (!numTatouageTextField.getText().isEmpty()){
@@ -248,7 +251,7 @@ public class PanneauAnimal extends JPanel {
                 estValide = false;
                 numPuceTextField.setBorder(BorderFactory.createCompoundBorder(border,
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                erreurMessage += "Le champ de numero de tatouage doit contenir un nombre entier plus petit que 2 147 483 647 \n";
+                erreurMessage += "Le champ de numéro de tatouage doit contenir un nombre entier plus petit que 2 147 483 647 \n";
             }
         }
         return estValide;
