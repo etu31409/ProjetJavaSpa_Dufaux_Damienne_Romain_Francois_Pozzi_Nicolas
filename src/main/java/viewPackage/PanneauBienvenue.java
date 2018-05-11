@@ -4,14 +4,17 @@ import controllerPackage.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class PanneauBienvenue{
-    private ImageIcon image;
+    private ImageIcon imageIcon;
     private JPanel panneauContainerPrincipal;
 
-    public PanneauBienvenue(){}
+    public PanneauBienvenue(){
+    }
 
-        public JPanel getPanneauContainerPrincipal(){
+    public JPanel getPanneauContainerPrincipal(){
         return panneauContainerPrincipal;
     }
+
 }

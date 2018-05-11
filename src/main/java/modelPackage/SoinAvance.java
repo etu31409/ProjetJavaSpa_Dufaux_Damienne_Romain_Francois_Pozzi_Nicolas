@@ -13,17 +13,6 @@ public class SoinAvance {
     private String remarque;
 
     public SoinAvance(){}
-    public SoinAvance(Integer numSoin, Integer numRegistre, String intitule, String partieDuCorps, GregorianCalendar dateSoin,
-                      Integer veterinaire, Boolean estUrgent, String remarque) {
-        setNumSoin(numSoin);
-        setNumRegistre(numRegistre);
-        setIntitule(intitule);
-        setPartieDuCorps(partieDuCorps);
-        setDateSoin(dateSoin);
-        setVeterinaire(veterinaire);
-        setEstUrgent(estUrgent);
-        setRemarque(remarque);
-    }
 
     public Integer getNumSoin() {
         return numSoin;

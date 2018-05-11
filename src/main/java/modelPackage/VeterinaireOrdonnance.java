@@ -10,12 +10,6 @@ public class VeterinaireOrdonnance {
     private GregorianCalendar dateOrdonnance;
 
     public VeterinaireOrdonnance(){}
-    public VeterinaireOrdonnance(Integer identifiantVeto, String prenomVeto, String nomVeto, GregorianCalendar dateOrdonnance) {
-        setIdentifiantVeto(identifiantVeto);
-        setNomVeto(nomVeto);
-        setPrenomVeto(prenomVeto);
-        setDateOrdonnance(dateOrdonnance);
-    }
 
     public Integer getIdentifiantVeto() {
         return identifiantVeto;

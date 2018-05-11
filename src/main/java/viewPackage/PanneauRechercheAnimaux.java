@@ -97,8 +97,10 @@ public class PanneauRechercheAnimaux {
 
                     modele = new TableModeleRechercheAnimaux(resultatRequeteRecherche);
                     tableResultat = new JTable(modele);
+                    tableResultat.setAutoCreateRowSorter(true);
                     tableResultat.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     tableResultat.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
+
                     scrollPane.setViewportView(tableResultat);
 
                     tableResultat.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -21,7 +21,7 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         nomDesColonnes.add("Identifiant du soin");
         nomDesColonnes.add("Identifiant de l'animal");
         nomDesColonnes.add("Intitulé du soin");
-        nomDesColonnes.add("Partie du corps concerné");
+        nomDesColonnes.add("Partie du corps concernée");
         nomDesColonnes.add("Date du soin");
         nomDesColonnes.add("Identifiant du vétérinaire");
         nomDesColonnes.add("En urgence");

@@ -42,7 +42,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
         comboBoxListingFiches.addItem("Date du soin");
         comboBoxListingFiches.addItem("Identifiant du vétérinaire");
         comboBoxListingFiches.addItem("Identifiant de l'animal");
-        comboBoxListingFiches.addItem("Numéro de soin");
+        comboBoxListingFiches.addItem("Identifiant du soin");
         comboBoxListingFiches.setSelectedItem("Aucun tri");
     }
 
@@ -60,9 +60,11 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     soinsTries = controller.getSoinsTries(critere);
                     modele = new TableModeleListeSoins(soinsTries);
                     resultatRecherche = new JTable(modele);
+
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(GregorianCalendar.class, modele.getCenterRenderer());
+
                     listingScrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     listingScrollPane.createHorizontalScrollBar();
@@ -73,7 +75,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SoinException s) {
-                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins", "Erreur !",
+                            JOptionPane.ERROR_MESSAGE);
                 }
                 catch (SingletonConnectionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -81,7 +84,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
             }
             else if(event.getSource() == supprimerButton){
                 if (resultatRecherche != null) {
-                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. Êtes-vous sûr de vouloir continuer?",
+                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. " +
+                                    "Êtes-vous sûr.e de vouloir continuer ?",
                             "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {
@@ -93,7 +97,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
                             SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
                             controller.supprimerSoin(soinASup);
                             trierButton.doClick();
-                            JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de" +
+                                    " données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                         } catch (VeterinaireException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         } catch (SoinException e) {
@@ -106,7 +111,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Vous devez sélectionner un élément dans la liste !",  "Erreur !",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
             else if(event.getSource() == modifierButton){
@@ -132,7 +138,8 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
