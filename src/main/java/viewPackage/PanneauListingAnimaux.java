@@ -73,8 +73,6 @@ public class PanneauListingAnimaux extends JPanel {
                     resultatRecherche.setDefaultRenderer(Double.class, modele.getCenterRenderer());
 
                     listingScrollPane.setViewportView(resultatRecherche);
-
-                    resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
                     listingScrollPane.createHorizontalScrollBar();

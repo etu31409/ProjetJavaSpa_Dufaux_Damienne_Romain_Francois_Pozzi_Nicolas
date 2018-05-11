@@ -128,11 +128,12 @@ public class Business {
 
 
     //tache metier
-    public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche, GregorianCalendar dateFinZoneRecherche)
+    public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche,
+                                                                GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
-        ArrayList<StatMedicament> listeResultatRechercheOrdonnances = daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche,
-                dateFinZoneRecherche);
+        ArrayList<StatMedicament> listeResultatRechercheOrdonnances =
+                daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche, dateFinZoneRecherche);
         ArrayList<Medicament> listeMedicaments = daoMedicament.getMedicaments();
 
         ArrayList<StatMedicament> resultatStatistiques = new ArrayList<>();
