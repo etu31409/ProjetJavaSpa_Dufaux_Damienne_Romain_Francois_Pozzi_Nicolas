@@ -13,8 +13,7 @@ public interface IProprietaire {
 
     //get
     ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException;
-    Proprietaire getUnProprietaire(Integer identifiantProprietaire)
-            throws SingletonConnectionException, ProprietaireException;
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException;
 
     //recherche
     ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException,

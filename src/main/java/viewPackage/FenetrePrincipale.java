@@ -1,6 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import modelPackage.Animal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -106,6 +108,14 @@ public class  FenetrePrincipale extends JFrame{
     public void afficherAccueil(){
         frameContainer.removeAll();
         frameContainer.add(new PanneauBienvenue().getPanneauContainerPrincipal());
+        frameContainer.setVisible(true);
+        frameContainer.repaint();
+        frameContainer.validate();
+    }
+
+    public void afficherPanneauAnimal(Animal animalModif){
+        frameContainer.removeAll();
+        frameContainer.add(new PanneauAnimal(controller, this, animalModif).getPanneauContainerPrincipal());
         frameContainer.setVisible(true);
         frameContainer.repaint();
         frameContainer.validate();

@@ -96,6 +96,10 @@ public class Business {
         daoProprietaire.ajouterNouveauProprio(proprietaire);
     }
 
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
+        return daoProprietaire.getUnProprietaire(identifiantProprietaire);
+    }
+
     //recherches
 
     public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws SingletonConnectionException, ProprietaireException {

@@ -48,7 +48,8 @@ public class PanneauAnimal extends JPanel {
     private ButtonGroup buttonGroupeSterilise;
 
     private FenetrePrincipale fenetre;
-
+    private boolean modification = false;
+    private Animal animalModif;
     public PanneauAnimal(Controller controller, FenetrePrincipale fenetre) {
         this.fenetre = fenetre;
         this.controller = controller;
@@ -76,6 +77,31 @@ public class PanneauAnimal extends JPanel {
 
         baseBorder = nomTextField.getBorder();
     }
+
+    public PanneauAnimal(Controller controller, FenetrePrincipale fenetre, Animal animalModif){
+        modification = true;
+        this.fenetre = fenetre;
+        this.controller = controller;
+        this.animalModif = animalModif;
+        //modifier titre...
+        ajouterUnPropriétaireButton.setEnabled(false);
+        comboBoxListeProprietaires.setEnabled(false);
+        if(animalModif.getProprietaire()!=null){
+            instancieUnProprietaire(animalModif.getProprietaire());
+            try{
+                Proprietaire proprietaire = controller.getUnProprietaire(animalModif.getProprietaire());
+                comboBoxListeProprietaires.addItem(proprietaire);
+            }
+            catch (ProprietaireException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+            } catch (SingletonConnectionException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        proprioCheckBox.addActionListener(new EcouteurDeCheckBox());
+
+    }
+
 
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
@@ -319,6 +345,18 @@ public class PanneauAnimal extends JPanel {
         }
     }
 
+    public void instancieUnProprietaire(Integer identifiantProprio){
+        try{
+            Proprietaire proprietaire = controller.getUnProprietaire(identifiantProprio);
+            comboBoxListeProprietaires.addItem(proprietaire);
+        }
+        catch (ProprietaireException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void instanciationSpinnerDate(JSpinner spinnerDate) {
         spinnerDate.setModel(new SpinnerDateModel());
         spinnerDate.setEditor(new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy"));
@@ -336,10 +374,17 @@ public class PanneauAnimal extends JPanel {
                 if(proprioCheckBox.isSelected()){
                     ajouterUnPropriétaireButton.setEnabled(true);
                     comboBoxListeProprietaires.setEnabled(true);
+                    if(modification){
+                        instanciationListeProprietaires();
+                    }
                 }
                 else{
                     ajouterUnPropriétaireButton.setEnabled(false);
                     comboBoxListeProprietaires.setEnabled(false);
+                    if(modification){
+                        comboBoxListeProprietaires.removeAllItems();
+                        instancieUnProprietaire(animalModif.getProprietaire());
+                    }
                 }
             }
             if(e.getSource() == dateDeNaissanceCheckBox){

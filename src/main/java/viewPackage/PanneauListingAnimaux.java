@@ -130,6 +130,7 @@ public class PanneauListingAnimaux extends JPanel {
                         String critere = (String) comboBoxTriAnimaux.getSelectedItem();
                         animauxTries = controller.getAnimauxTries(critere);
                         Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
+                        animalModif = modifieAnimal(animalModif);
                         controller.modifierAnimal(animalModif);
                         buttonTri.doClick();
                         JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié dans la base de données !");
@@ -147,5 +148,12 @@ public class PanneauListingAnimaux extends JPanel {
                 }
             }
         }
+    }
+    public Animal modifieAnimal(Animal animalModif){
+        //creer la nouvelle fenetre et appeler la methode pour récupérer l'animal de cette classe
+        Animal animal = new Animal();
+        fenetrePrincipale.afficherPanneauAnimal(animalModif);
+
+        return animal;
     }
 }

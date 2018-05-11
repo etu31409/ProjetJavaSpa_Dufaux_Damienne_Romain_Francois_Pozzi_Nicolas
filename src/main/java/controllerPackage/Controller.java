@@ -84,6 +84,10 @@ public class Controller {
         return business.getProprietaires();
     }
 
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
+        return business.getUnProprietaire(identifiantProprietaire);
+    }
+
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
         business.ajouterNouveauProprio(proprietaire);
     }
