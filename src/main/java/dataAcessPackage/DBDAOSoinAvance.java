@@ -165,7 +165,12 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.setDate(5,new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
             preparedStatement.setInt(6,soinAvance.getVeterinaire());
             preparedStatement.setBoolean(7,soinAvance.getEstUrgent());
-            preparedStatement.setString(8,soinAvance.getRemarque());
+            if(soinAvance.getRemarque() != null){
+                preparedStatement.setString(8,soinAvance.getRemarque());
+            }
+            else{
+                preparedStatement.setNull(8, Types.VARCHAR);
+            }
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -216,7 +221,12 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.setDate(4,new java.sql.Date(soin.getDateSoin().getTimeInMillis()));
             preparedStatement.setInt(5,soin.getVeterinaire());
             preparedStatement.setBoolean(6,soin.getEstUrgent());
-            preparedStatement.setString(7,soin.getRemarque());
+            if(soin.getRemarque() != null){
+                preparedStatement.setString(7,soin.getRemarque());
+            }
+            else{
+                preparedStatement.setNull(7, Types.VARCHAR);
+            }
             preparedStatement.setInt(8, soin.getNumSoin());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

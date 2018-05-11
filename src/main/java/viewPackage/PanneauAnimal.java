@@ -153,7 +153,7 @@ public class PanneauAnimal extends JPanel {
             localisationTatouageTextField.setText(animalModif.getLocalisationTatouage());
         }
         baseBorder = nomTextField.getBorder();
-        validerButton.addActionListener(new EcouteurDeBoutonModifierValidation());
+        validerButton.addActionListener(new EcouteurDeBoutonModifier());
         reinitialiserButton.addActionListener(new EcouteurDeBoutons());
         retourButton.addActionListener(new EcouteurDeBoutons());
         ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
@@ -501,7 +501,7 @@ public class PanneauAnimal extends JPanel {
             }
         }
     }
-    private class EcouteurDeBoutonModifierValidation implements ActionListener{
+    private class EcouteurDeBoutonModifier implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
                 erreurMessage = "Certains champs sont invalides !\nDe plus : \n";
