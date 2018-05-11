@@ -128,43 +128,67 @@ public class Business {
 
 
     //tache metier
+
     public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche,
                                                                 GregorianCalendar dateFinZoneRecherche)
             throws SingletonConnectionException, MedicamentException {
 
+        HashMap<String, Double> statistiques = new HashMap<>();
         ArrayList<StatMedicament> listeResultatRechercheOrdonnances =
                 daoMedicament.getMedicamentsEntreDeuxDates(dateDebutZoneRecherche, dateFinZoneRecherche);
-        ArrayList<Medicament> listeMedicaments = daoMedicament.getMedicaments();
 
+        ArrayList<Medicament> listeMedicaments = daoMedicament.getMedicaments();
         ArrayList<StatMedicament> resultatStatistiques = new ArrayList<>();
-        HashMap<String, Double> statistiques = new HashMap<>();
-        Double pourcentageParMedicament;
+
         Integer compteurGlobal = 0;
 
         for (StatMedicament sm : listeResultatRechercheOrdonnances) {
             compteurGlobal++;
-            if (!statistiques.containsKey(sm.getNomMedic())) {
-                statistiques.put(sm.getNomMedic(), 1.);
-            }
-            else {
-                statistiques.replace(sm.getNomMedic(), ((statistiques.get(sm.getNomMedic()))+1));
-            }
+            instanciationHashMap(statistiques, sm);
         }
 
         for(Medicament med : listeMedicaments){
-            if(!statistiques.containsKey(med.getNomMedic())){
-                statistiques.put(med.getNomMedic(), 0.);
-            }
+            instanciationListeMedicaments(statistiques, med);
         }
 
         for (String nomMedic : statistiques.keySet()) {
-            StatMedicament stat = new StatMedicament();
-            pourcentageParMedicament = (statistiques.get(nomMedic)) / compteurGlobal;
-            stat.setNomMedic(nomMedic);
-            stat.setPourcentage(pourcentageParMedicament);
-            resultatStatistiques.add(stat);
+            instanciationResultatStatistiques(statistiques, compteurGlobal, nomMedic, resultatStatistiques);
         }
-
         return resultatStatistiques;
+    }
+
+    public void instanciationHashMap(HashMap<String, Double> statistiques, StatMedicament sm){
+        if (!statistiques.containsKey(sm.getNomMedic())) {
+            statistiques.put(sm.getNomMedic(), 1.);
+        }
+        else {
+            statistiques.replace(sm.getNomMedic(), ((statistiques.get(sm.getNomMedic()))+1));
+        }
+    }
+
+    public void instanciationListeMedicaments(HashMap<String, Double> statistiques, Medicament med){
+        if(!statistiques.containsKey(med.getNomMedic())){
+            statistiques.put(med.getNomMedic(), 0.);
+        }
+    }
+
+    public void instanciationResultatStatistiques(HashMap<String, Double> statistiques, Integer compteurGlobal,
+                                                  String nomMedic, ArrayList<StatMedicament> resultatStatistiques){
+        StatMedicament stat = new StatMedicament();
+        Double pourcentageParMedicament;
+        if(compteurGlobal != 0) {
+            Double base = statistiques.get(nomMedic);
+            pourcentageParMedicament = calculPourcentageParMedicament(base, compteurGlobal, nomMedic);
+        }
+        else {
+            pourcentageParMedicament = 0.;
+        }
+        stat.setNomMedic(nomMedic);
+        stat.setPourcentage(pourcentageParMedicament);
+        resultatStatistiques.add(stat);
+    }
+
+    public Double calculPourcentageParMedicament(Double base, Integer compteurGlobal, String nomMedic){
+        return  base / compteurGlobal;
     }
 }
