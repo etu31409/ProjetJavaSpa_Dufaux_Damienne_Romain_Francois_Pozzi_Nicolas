@@ -43,6 +43,7 @@ public class PanneauAnimal extends JPanel {
     private JCheckBox dateDeNaissanceCheckBox;
     private JCheckBox dateDAttributionPuceCheckBox;
     private JCheckBox proprioCheckBox;
+    private JLabel titreDeLaPage;
 
     private ButtonGroup buttonGroupeSexe;
     private ButtonGroup buttonGroupeSterilise;
