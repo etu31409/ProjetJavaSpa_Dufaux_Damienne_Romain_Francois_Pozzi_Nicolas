@@ -80,6 +80,7 @@ public class PanneauAnimal extends JPanel {
     }
 
     public PanneauAnimal(Controller controller, FenetrePrincipale fenetre, Animal animalModif){
+        titreDeLaPage.setText("Modification d'un animal");
         modification = true;
         this.fenetre = fenetre;
         this.controller = controller;
@@ -327,22 +328,13 @@ public class PanneauAnimal extends JPanel {
                 animal.setSexe("F");
             else
                 animal.setSexe("M");
-            /*if (especeTextField.getText().isEmpty()) {
-                especeTextField.setText("");
-            }*/
             animal.setEspece(especeTextField.getText());
-            /*if (raceTextField.getText().isEmpty()) {
-                raceTextField.setText("");
-            }*/
             animal.setRace(raceTextField.getText());
             if (dateDeNaissanceCheckBox.isSelected()) {
                 GregorianCalendar date = new GregorianCalendar();
                 date.setTime((Date) spinnerDateNaissance.getValue());
                 animal.setDateNaissance(date);
             }
-            /*if (couleurTextField.getText().isEmpty()) {
-                couleurTextField = null;
-            }*/
             animal.setCouleurDePeau(couleurTextField.getText());
 
             try {
@@ -352,12 +344,12 @@ public class PanneauAnimal extends JPanel {
                 numPuceTextField = null;
             }
 
-            if (localisationPuceTextField.getText() == "") {
+           /* if (localisationPuceTextField.getText() == "") {
                 localisationPuceTextField = null;
-            }
-            /*if(localisationPuceTextField.getText().isEmpty()){
-                localisationPuceTextField.setText("");
             }*/
+            if(localisationPuceTextField.getText().isEmpty()){
+                localisationPuceTextField.setText("");
+            }
             animal.setLocalisationPuce(localisationPuceTextField.getText());
 
             if (dateDAttributionPuceCheckBox.isSelected()) {
@@ -380,9 +372,9 @@ public class PanneauAnimal extends JPanel {
             }else{
                 animal.setEstSterilise(false);
             }
-            /*if(localisationTatouageTextField.getText().isEmpty()){
+            if(localisationTatouageTextField.getText().isEmpty()){
                 localisationTatouageTextField.setText("");
-            }*/
+            }
             animal.setLocalisationTatouage(localisationTatouageTextField.getText());
             if(proprioCheckBox.isSelected()){
                 try {
