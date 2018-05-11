@@ -12,6 +12,7 @@ public class PanneauChargement extends JPanel {
 
         setLayout(new BorderLayout());
         add(barreDeChargement, BorderLayout.CENTER);
+
         repaint();
 
         g = new GestionChargement(barreDeChargement, this, fenetrePrincipale);
