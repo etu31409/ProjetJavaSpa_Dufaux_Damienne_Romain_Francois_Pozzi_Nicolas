@@ -30,6 +30,7 @@ public class PanneauFicheDeSoin extends JPanel {
     private JPanel listeMedicamentsDisposJPanel;
     private JPanel listeMedicamentsChoisisJPanel;
     private JScrollPane listeMedicamentsChoisisJScrollPane, listeMedicamentsDisposJScrollPane;
+    private JLabel titreDeLaPage;
     private JLabel label;
 
 
@@ -51,6 +52,7 @@ public class PanneauFicheDeSoin extends JPanel {
     }
 
     public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceModif) {
+        titreDeLaPage.setText("Modifier une fiche de soin");
         this.fenetre = fenetre;
         this.controller = controller;
 
