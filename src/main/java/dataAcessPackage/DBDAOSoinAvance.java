@@ -231,7 +231,6 @@ public class DBDAOSoinAvance implements ISoinAvance {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
                 throw new SoinException("Erreur lors de la modification de la fiche de soins");
-
         }
     }
 

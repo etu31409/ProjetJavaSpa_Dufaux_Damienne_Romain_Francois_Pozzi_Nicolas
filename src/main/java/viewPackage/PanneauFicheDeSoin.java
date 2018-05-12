@@ -63,7 +63,7 @@ public class PanneauFicheDeSoin extends JPanel {
         this.controller = controller;
         this.soinAvanceModif = soinAvanceModif;
         instancieUnAnimal();
-        comboBoxAnimaux.addItemListener(new comboBoxListener());
+        comboBoxAnimaux.addActionListener(new comboBoxListener());
         instancieUnVeterinaire();
         instancieListeMedicamentsDispos();
         //instancieListeMedicamentsSelectionne();
@@ -80,7 +80,7 @@ public class PanneauFicheDeSoin extends JPanel {
         ajouterButton.addActionListener(new EcouteurBouton());
         retirerButton.addActionListener(new EcouteurBouton());
         ajouterUnMédicamentButton.addActionListener(new EcouteurBouton());
-        //validerButton.addActionListener(new EcouteurBouton());
+        validerButton.addActionListener(new EcouteurBoutonModification());
         réinitialiserButton.addActionListener(new EcouteurBouton());
         retourButton.addActionListener(new EcouteurBouton());
     }
@@ -203,6 +203,9 @@ public class PanneauFicheDeSoin extends JPanel {
         soinAvance.setEstUrgent(urgenceCheckBox.isSelected());
         if (textAreaRemarque.getText().isEmpty()) soinAvance.setRemarque(null);
         else soinAvance.setRemarque(textAreaRemarque.getText());
+        if(modification){
+            soinAvance.setNumSoin(soinAvanceModif.getNumSoin());
+        }
         return soinAvance;
     }
 
@@ -280,13 +283,42 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    private class comboBoxListener implements ItemListener{
-        public void itemStateChanged(ItemEvent event){
-            if(event.getStateChange() ==  ItemEvent.SELECTED){
+    private class EcouteurBoutonModification implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == validerButton) {
+                try {
+                    if (validerChamps()) {
+                        SoinAvance soinAvance = nouveauSoinAvance();
+                        controller.modifierSoin(soinAvance);
+                        for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
+                            controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
+                        }
+                        JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
+                                "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !",
+                                "Attention!", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (SoinException e) {
+                    e.printStackTrace();
+                } catch (SingletonConnectionException e) {
+                    e.printStackTrace();
+                } catch (TextAreaException e) {
+                    e.printStackTrace();
+                } catch (OrdonnanceException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private class comboBoxListener implements ActionListener{
+        public void actionPerformed(ActionEvent event) {
+            if(event.getSource() ==  comboBoxAnimaux){
                 instancieListeAnimaux();
             }
-            if(event.getSource() == comboBoxAnimaux){
-                instancieListeAnimaux();
+            if(event.getSource() == comboBoxVeterinaires){
+                instancieListeVeterinaire();
             }
         }
     }
