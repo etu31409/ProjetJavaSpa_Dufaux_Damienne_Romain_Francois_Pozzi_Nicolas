@@ -50,6 +50,22 @@ public class PanneauFicheDeSoin extends JPanel {
 
     }
 
+    public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceModif) {
+        this.fenetre = fenetre;
+        this.controller = controller;
+
+        instancieListeAnimaux();
+        instancieListeVeterinaire();
+        instancieListeMedicamentsDispos();
+
+        ajouterButton.addActionListener(new EcouteurBouton());
+        retirerButton.addActionListener(new EcouteurBouton());
+        ajouterUnMédicamentButton.addActionListener(new EcouteurBouton());
+        validerButton.addActionListener(new EcouteurBouton());
+        réinitialiserButton.addActionListener(new EcouteurBouton());
+        retourButton.addActionListener(new EcouteurBouton());
+    }
+
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
     }

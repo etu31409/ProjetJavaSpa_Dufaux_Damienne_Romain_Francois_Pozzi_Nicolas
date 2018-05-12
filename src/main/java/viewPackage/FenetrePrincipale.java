@@ -2,6 +2,7 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import modelPackage.Animal;
+import modelPackage.SoinAvance;
 
 import javax.swing.*;
 import java.awt.*;
@@ -121,6 +122,14 @@ public class  FenetrePrincipale extends JFrame{
         frameContainer.validate();
     }
 
+    public void afficherPanneauSoin(SoinAvance soinAvanceModif){
+        frameContainer.removeAll();
+        frameContainer.add(new PanneauFicheDeSoin(controller, this, soinAvanceModif).getPanneauContainerPrincipal());
+        frameContainer.setVisible(true);
+        frameContainer.repaint();
+        frameContainer.validate();
+    }
+
     private class ExitListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             System.exit(0);
@@ -147,7 +156,7 @@ public class  FenetrePrincipale extends JFrame{
             }
             else if(event.getSource() == listingFicheDeSoin){
                 frameContainer.removeAll();
-                frameContainer.add(new PanneauListingFichesDeSoin(controller).getPanneauContainerPrincipal());
+                frameContainer.add(new PanneauListingFichesDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
             }

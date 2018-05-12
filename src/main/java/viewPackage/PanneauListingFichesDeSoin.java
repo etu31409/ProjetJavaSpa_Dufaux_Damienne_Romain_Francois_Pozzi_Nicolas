@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class PanneauListingFichesDeSoin extends JPanel {
     private Controller controller;
-
+    private FenetrePrincipale fenetrePrincipale;
     private JPanel panneauContainerPrincipal;
     private JComboBox comboBoxListingFiches;
     private JButton trierButton;
@@ -25,8 +25,9 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private JScrollPane listingScrollPane;
     private JTable resultatRecherche;
 
-    public PanneauListingFichesDeSoin(Controller controller) {
+    public PanneauListingFichesDeSoin(Controller controller, FenetrePrincipale fenetrePrincipale) {
         this.controller = controller;
+        this.fenetrePrincipale = fenetrePrincipale;
         instanciationComboBox();
         trierButton.addActionListener(new EcouteurBouton());
         supprimerButton.addActionListener(new EcouteurBouton());
@@ -123,8 +124,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                         String critere = (String) comboBoxListingFiches.getSelectedItem();
                         soinsTries = controller.getSoinsTries(critere);
                         SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
-                        System.out.println(resultatRecherche.isCellEditable(1, 1));
-                        controller.modifierSoin(soinAModif);
+                        fenetrePrincipale.afficherPanneauSoin(soinAModif);
                         trierButton.doClick();
                         JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
                     } catch (VeterinaireException e) {
