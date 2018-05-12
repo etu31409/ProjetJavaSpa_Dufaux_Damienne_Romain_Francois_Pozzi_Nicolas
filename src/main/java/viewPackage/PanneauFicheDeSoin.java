@@ -9,6 +9,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -32,6 +34,8 @@ public class PanneauFicheDeSoin extends JPanel {
     private JScrollPane listeMedicamentsChoisisJScrollPane, listeMedicamentsDisposJScrollPane;
     private JLabel titreDeLaPage;
     private JLabel label;
+    private boolean modification = false;
+    private SoinAvance soinAvanceModif;
 
 
     public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre) {
@@ -39,6 +43,7 @@ public class PanneauFicheDeSoin extends JPanel {
         this.controller = controller;
 
         instancieListeAnimaux();
+
         instancieListeVeterinaire();
         instancieListeMedicamentsDispos();
 
@@ -53,17 +58,29 @@ public class PanneauFicheDeSoin extends JPanel {
 
     public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceModif) {
         titreDeLaPage.setText("Modifier une fiche de soin");
+        modification = true;
         this.fenetre = fenetre;
         this.controller = controller;
-
-        instancieListeAnimaux();
-        instancieListeVeterinaire();
+        this.soinAvanceModif = soinAvanceModif;
+        instancieUnAnimal();
+        comboBoxAnimaux.addItemListener(new comboBoxListener());
+        instancieUnVeterinaire();
         instancieListeMedicamentsDispos();
+        //instancieListeMedicamentsSelectionne();
+
+        textAreaIntituleSoin.setText(soinAvanceModif.getIntitule());
+        textAreaPartieDuCorps.setText(soinAvanceModif.getPartieDuCorps());
+        if(soinAvanceModif.getRemarque() != null){
+            textAreaRemarque.setText(soinAvanceModif.getRemarque());
+        }
+        if(soinAvanceModif.getEstUrgent()){
+            urgenceCheckBox.doClick();
+        }
 
         ajouterButton.addActionListener(new EcouteurBouton());
         retirerButton.addActionListener(new EcouteurBouton());
         ajouterUnMédicamentButton.addActionListener(new EcouteurBouton());
-        validerButton.addActionListener(new EcouteurBouton());
+        //validerButton.addActionListener(new EcouteurBouton());
         réinitialiserButton.addActionListener(new EcouteurBouton());
         retourButton.addActionListener(new EcouteurBouton());
     }
@@ -85,6 +102,17 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
+    public void instancieUnVeterinaire(){
+        comboBoxVeterinaires.removeAllItems();
+        try{
+            comboBoxVeterinaires.addItem(controller.getUnVeterinaire(soinAvanceModif.getVeterinaire()));
+        }catch (VeterinaireException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void instancieListeAnimaux() {
         comboBoxAnimaux.removeAllItems();
         try {
@@ -92,6 +120,17 @@ public class PanneauFicheDeSoin extends JPanel {
                 comboBoxAnimaux.addItem(a);
             }
         } catch (AnimalException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        } catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void instancieUnAnimal(){
+        comboBoxAnimaux.removeAllItems();
+        try{
+            comboBoxAnimaux.addItem(controller.getUnAnimal(soinAvanceModif.getNumRegistre()));
+        }catch (AnimalException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (SingletonConnectionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -119,6 +158,16 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
+   /* public void instancieListeMedicamentsSelectionne(){
+        try{
+
+        }catch (SingletonConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        } catch (MedicamentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+*/
     private boolean validerChamps() throws TextAreaException {
         textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().isEmpty() || isDigit(textAreaIntituleSoin.getText())) {
@@ -227,6 +276,17 @@ public class PanneauFicheDeSoin extends JPanel {
             }
             if (event.getSource() == ajouterUnMédicamentButton) {
                 fenetreMedicament = new FenetreMedicament(controller, PanneauFicheDeSoin.this);
+            }
+        }
+    }
+
+    private class comboBoxListener implements ItemListener{
+        public void itemStateChanged(ItemEvent event){
+            if(event.getStateChange() ==  ItemEvent.SELECTED){
+                instancieListeAnimaux();
+            }
+            if(event.getSource() == comboBoxAnimaux){
+                instancieListeAnimaux();
             }
         }
     }

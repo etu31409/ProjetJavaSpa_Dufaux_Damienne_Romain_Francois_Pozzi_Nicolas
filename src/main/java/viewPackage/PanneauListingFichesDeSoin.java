@@ -126,7 +126,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                         SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
                         fenetrePrincipale.afficherPanneauSoin(soinAModif);
                         trierButton.doClick();
-                        JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
+                        //JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
                     } catch (VeterinaireException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SoinException e) {

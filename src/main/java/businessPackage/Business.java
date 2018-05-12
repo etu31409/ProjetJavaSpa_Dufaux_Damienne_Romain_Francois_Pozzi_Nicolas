@@ -34,6 +34,10 @@ public class Business {
         return daoAnimal.getAnimauxTries(critere);
     }
 
+    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
+        return daoAnimal.getUnAnimal(numRegistre);
+    }
+
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         daoAnimal.ajouterAnimal(animal);
     }
@@ -85,6 +89,10 @@ public class Business {
     //veterinaires
     public ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
         return daoVeterinaire.getVeterinaires();
+    }
+
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+        return daoVeterinaire.getUnVeterinaire(identifiantVeto);
     }
 
     //proprietaires

@@ -25,6 +25,10 @@ public class Controller {
         return business.getAnimauxTries(critere);
     }
 
+    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
+        return business.getUnAnimal(numRegistre);
+    }
+
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         business.ajouterAnimal(animal);
     }
@@ -79,6 +83,9 @@ public class Controller {
         return business.getVeterinaires();
     }
 
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+        return business.getUnVeterinaire(identifiantVeto);
+    }
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
         return business.getProprietaires();
