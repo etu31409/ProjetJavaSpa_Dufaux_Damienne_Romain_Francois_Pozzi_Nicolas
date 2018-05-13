@@ -489,69 +489,67 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "update animal set dateArrivee = ?, espece = ?, race = ?, sexe = ?, estSterilise = ?," +
+            sqlInstruction = "update animal set espece = ?, race = ?, sexe = ?, estSterilise = ?," +
                     "couleurDePeau = ?, poids = ?, nom = ?, dateNaissance = ?, numPuce = ?, localisationPuce = ?, " +
                     "dateAttributionPuce = ?, numTatouage = ?, localisationTatouage = ?," +
                     "identifiantProprio = ? where numRegistre = ?";
-            java.sql.Date sqlDateArrivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setDate(1, sqlDateArrivee);
-            preparedStatement.setString(2, animal.getEspece());
-            preparedStatement.setString(3, animal.getRace());
-            preparedStatement.setString(4, animal.getSexe());
-            preparedStatement.setBoolean(5, animal.isEstSterilise());
-            preparedStatement.setString(6, animal.getCouleurDePeau());
-            preparedStatement.setDouble(7, animal.getPoids());
+            preparedStatement.setString(1, animal.getEspece());
+            preparedStatement.setString(2, animal.getRace());
+            preparedStatement.setString(3, animal.getSexe());
+            preparedStatement.setBoolean(4, animal.isEstSterilise());
+            preparedStatement.setString(5, animal.getCouleurDePeau());
+            preparedStatement.setDouble(6, animal.getPoids());
 
             if(animal.getNom() != null){
-                preparedStatement.setString(8, animal.getNom());
+                preparedStatement.setString(7, animal.getNom());
             }
             else{
-                preparedStatement.setNull(8, Types.VARCHAR);
+                preparedStatement.setNull(7, Types.VARCHAR);
             }
             if(animal.getDateNaissance() != null){
-                preparedStatement.setDate(9, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
+                preparedStatement.setDate(8, new java.sql.Date(animal.getDateNaissance().getTimeInMillis()));
             }
             else{
-                preparedStatement.setNull(9, Types.DATE);
+                preparedStatement.setNull(8, Types.DATE);
             }
             if(animal.getNumPuce() != null){
-                preparedStatement.setInt(10, animal.getNumPuce());
+                preparedStatement.setInt(9, animal.getNumPuce());
             }
             else{
-                preparedStatement.setNull(10, Types.INTEGER);
+                preparedStatement.setNull(9, Types.INTEGER);
             }
             if(animal.getLocalisationPuce() != null){
-                preparedStatement.setString(11, animal.getLocalisationPuce());
+                preparedStatement.setString(10, animal.getLocalisationPuce());
             }
             else{
-                preparedStatement.setNull(11, Types.VARCHAR);
+                preparedStatement.setNull(10, Types.VARCHAR);
             }
             if(animal.getDateAttributionPuce() != null){
-                preparedStatement.setDate(12,new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
+                preparedStatement.setDate(11,new java.sql.Date(animal.getDateAttributionPuce().getTimeInMillis()));
             }
             else{
-                preparedStatement.setNull(12, Types.DATE);
+                preparedStatement.setNull(11, Types.DATE);
             }
             if(animal.getNumTatouage() != null){
-                preparedStatement.setInt(13,animal.getNumPuce());
+                preparedStatement.setInt(12,animal.getNumPuce());
             }
             else{
-                preparedStatement.setNull(13, Types.INTEGER);
+                preparedStatement.setNull(12, Types.INTEGER);
             }
             if(animal.getLocalisationTatouage() != null){
-                preparedStatement.setString(14,animal.getLocalisationTatouage());
+                preparedStatement.setString(13,animal.getLocalisationTatouage());
             }
             else{
-                preparedStatement.setNull(14, Types.VARCHAR);
+                preparedStatement.setNull(13, Types.VARCHAR);
             }
             if(animal.getProprietaire() != null){
-                preparedStatement.setInt(15,animal.getProprietaire());
+                preparedStatement.setInt(14,animal.getProprietaire());
             }
             else{
-                preparedStatement.setNull(15, Types.INTEGER);
+                preparedStatement.setNull(14, Types.INTEGER);
             }
-            preparedStatement.setInt(16, animal.getNumRegistre());
+            preparedStatement.setInt(15, animal.getNumRegistre());
             preparedStatement.executeUpdate();
         }
         catch(SingletonConnectionException exception){

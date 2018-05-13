@@ -452,7 +452,7 @@ public class PanneauAnimal extends JPanel {
                     try{
                         if (modification){
                             controller.modifierAnimal(creationAnimal());
-                            JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié de la base de donnée !",
+                                JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié de la base de donnée !",
                                     "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                             fenetre.afficherListingAnimaux();
                         }
