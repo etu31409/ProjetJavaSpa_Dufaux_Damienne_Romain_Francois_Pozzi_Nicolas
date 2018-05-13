@@ -318,16 +318,11 @@ public class PanneauAnimal extends JPanel {
     private Animal creationAnimal(){
         Animal animal = new Animal();
         try {
-            if (nomTextField.getText().isEmpty()) {
-                nomTextField.setText("");
-            }
-            animal.setNom(nomTextField.getText());
-
+           if(nomTextField.getText().isEmpty())animal.setNom(null);
+           else animal.setNom(nomTextField.getText());
             animal.setPoids((Double) spinnerPoids.getValue());
-            if (femelleRadioButton.isSelected())
-                animal.setSexe("F");
-            else
-                animal.setSexe("M");
+            if (femelleRadioButton.isSelected()) animal.setSexe("F");
+            else animal.setSexe("M");
             animal.setEspece(especeTextField.getText());
             animal.setRace(raceTextField.getText());
             if (dateDeNaissanceCheckBox.isSelected()) {
@@ -336,46 +331,32 @@ public class PanneauAnimal extends JPanel {
                 animal.setDateNaissance(date);
             }
             animal.setCouleurDePeau(couleurTextField.getText());
-
             try {
                 animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
             }
             catch (Exception error) {
-                numPuceTextField = null;
+                animal.setNumPuce(null);
             }
-
-           /* if (localisationPuceTextField.getText() == "") {
-                localisationPuceTextField = null;
-            }*/
-            if(localisationPuceTextField.getText().isEmpty()){
-                localisationPuceTextField.setText("");
-            }
-            animal.setLocalisationPuce(localisationPuceTextField.getText());
-
+            if(localisationPuceTextField.getText().isEmpty())animal.setLocalisationPuce(null);
+            else animal.setLocalisationPuce(localisationPuceTextField.getText());
             if (dateDAttributionPuceCheckBox.isSelected()) {
                 GregorianCalendar date = new GregorianCalendar();
                 date.setTime((Date) spinnerDatePuce.getValue());
                 animal.setDateAttributionPuce(date);
             }
-
             try {
                 animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
             }
             catch (Exception erreur) {
-                numTatouageTextField = null;
+                animal.setNumTatouage(null);
             }
-            if (localisationTatouageTextField.getText() == "") {
-                localisationTatouageTextField = null;
-            }
+            if(localisationTatouageTextField.getText().isEmpty())animal.setLocalisationTatouage(null);
+            else animal.setLocalisationTatouage(localisationTatouageTextField.getText());
             if(steriliseRadioButton.isSelected()){
                 animal.setEstSterilise(true);
             }else{
                 animal.setEstSterilise(false);
             }
-            if(localisationTatouageTextField.getText().isEmpty()){
-                localisationTatouageTextField.setText("");
-            }
-            animal.setLocalisationTatouage(localisationTatouageTextField.getText());
             if(proprioCheckBox.isSelected()){
                 try {
                     Proprietaire proprietaire = (Proprietaire) comboBoxListeProprietaires.getSelectedItem();
@@ -475,6 +456,8 @@ public class PanneauAnimal extends JPanel {
                         controller.ajouterAnimal(creationAnimal());
                         JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !",
                                 "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
+                        //refresh la page pour ajouter d'autre animaux
+                        reinitialiserButton.doClick();
                     }
                     catch(AnimalException exception){
                         JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
