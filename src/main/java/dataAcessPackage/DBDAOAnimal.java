@@ -469,10 +469,16 @@ public class DBDAOAnimal implements IAnimal {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "delete from Ordonnance where numRegistre = ?;" +
-                    "delete from SoinAvance where numRegistre = ?;" +
-                    "delete from Animal where numRegistre = ?;";
+            sqlInstruction = "delete from Ordonnance where numRegistre = ?;";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1, animal.getNumRegistre());
+            preparedStatement.executeUpdate();
+            sqlInstruction = "delete from SoinAvance where numRegistre = ?;";
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1, animal.getNumRegistre());
+            preparedStatement.executeUpdate();
+            sqlInstruction = "delete from Animal where numRegistre = ?;";
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
         }

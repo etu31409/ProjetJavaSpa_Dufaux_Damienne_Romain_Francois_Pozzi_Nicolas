@@ -105,7 +105,7 @@ public class PanneauListingAnimaux extends JPanel {
                             }
                             controller.supprimerAnimal(animalASup);
                             buttonTri.doClick();
-                            JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de donnée !",
+                            JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de données !",
                                     "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                         } catch (AnimalException e) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
