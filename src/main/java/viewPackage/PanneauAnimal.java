@@ -109,7 +109,7 @@ public class PanneauAnimal extends JPanel {
         }
         raceTextField.setText(animalModif.getRace());
         System.out.println(animalModif.getSexe());
-        if(animalModif.getSexe() == "M"){
+        if(animalModif.getSexe().equals("M")){
             maleRadioButton.doClick();
         }else{
             femelleRadioButton.doClick();

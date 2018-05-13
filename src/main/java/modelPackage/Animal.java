@@ -63,11 +63,13 @@ public class Animal {
         this.race = race;
     }
 
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-        /*if(sexe != "F" && sexe != "M"){
+    public void setSexe(String sexe) throws AnimalException{
+        if(sexe.equals("F") || sexe.equals("M"))
+        {
+            this.sexe = sexe;
+        }
+        else
             throw new AnimalException("Le sexe n'est pas valide !");
-        }*/
     }
 
     public void setEstSterilise(boolean estSterilise) {
