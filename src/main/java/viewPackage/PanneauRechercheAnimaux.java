@@ -8,9 +8,9 @@ import exceptionPackage.VeterinaireException;
 import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
+import viewPackage.tableModele.TableModeleRechercheAnimaux;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

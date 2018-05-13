@@ -1,4 +1,4 @@
-package viewPackage;
+package viewPackage.tableModele;
 
 import modelPackage.Animal;
 
@@ -48,7 +48,6 @@ public class TableModeleRechercheAnimaux  extends AbstractTableModel {
         }
     }
 
-    //afficher correctement les colonnes en fonction de leur type
     public Class getColumnClass(int colonne) {
         Class c;
         switch(colonne){

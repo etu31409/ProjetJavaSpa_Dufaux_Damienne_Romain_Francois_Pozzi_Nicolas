@@ -3,11 +3,10 @@ package viewPackage;
 import controllerPackage.Controller;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
-import modelPackage.Veterinaire;
 import modelPackage.VeterinaireOrdonnance;
+import viewPackage.tableModele.TableModeleRechercheVeterinaires;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;

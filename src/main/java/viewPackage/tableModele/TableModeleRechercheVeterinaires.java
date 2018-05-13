@@ -1,4 +1,4 @@
-package viewPackage;
+package viewPackage.tableModele;
 
 import modelPackage.VeterinaireOrdonnance;
 
@@ -55,7 +55,6 @@ public class TableModeleRechercheVeterinaires extends AbstractTableModel {
         }
     }
 
-    //afficher correctement les colonnes en fonction de leur type
     public Class getColumnClass(int colonne) {
         Class c;
         switch(colonne){

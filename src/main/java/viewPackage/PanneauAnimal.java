@@ -14,8 +14,8 @@ import java.util.GregorianCalendar;
 
 public class PanneauAnimal extends JPanel {
 
+    //permet de mettre les bord en rouge
     private Border baseBorder;
-
     private Controller controller;
     private String erreurMessage;
 
@@ -84,8 +84,8 @@ public class PanneauAnimal extends JPanel {
         modification = true;
         this.fenetre = fenetre;
         this.controller = controller;
+        //modifier titre
         this.animalModif = animalModif;
-        //modifier titre...
         ajouterUnPropriétaireButton.setEnabled(false);
         comboBoxListeProprietaires.setEnabled(false);
         dateDeNaissanceCheckBox.addActionListener(new EcouteurDeCheckBox());
@@ -111,7 +111,8 @@ public class PanneauAnimal extends JPanel {
         System.out.println(animalModif.getSexe());
         if(animalModif.getSexe().equals("M")){
             maleRadioButton.doClick();
-        }else{
+        }
+        else{
             femelleRadioButton.doClick();
         }
         especeTextField.setText(animalModif.getEspece());
@@ -119,7 +120,8 @@ public class PanneauAnimal extends JPanel {
         spinnerPoids.setValue(animalModif.getPoids());
         if(animalModif.isEstSterilise()){
             steriliseRadioButton.doClick();
-        }else{
+        }
+        else{
             nonSteriliseRadioButton.doClick();
         }
         if(animalModif.getDateNaissance() == null){
@@ -158,7 +160,6 @@ public class PanneauAnimal extends JPanel {
         retourButton.addActionListener(new EcouteurDeBoutons());
         ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
     }
-
 
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
@@ -456,7 +457,7 @@ public class PanneauAnimal extends JPanel {
                         controller.ajouterAnimal(creationAnimal());
                         JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !",
                                 "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
-                        //refresh la page pour ajouter d'autre animaux
+                        //refresh la page pour ajouter d'autres animaux
                         reinitialiserButton.doClick();
                     }
                     catch(AnimalException exception){
@@ -487,7 +488,7 @@ public class PanneauAnimal extends JPanel {
     private class EcouteurDeBoutonModifier implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
-                erreurMessage = "Certains champs sont invalides !\nDe plus : \n";
+                erreurMessage = "Certains champs sont invalides ! \n";
                 reinitialiserBorder();
                 if (validationFormulaire()) {
                     try{

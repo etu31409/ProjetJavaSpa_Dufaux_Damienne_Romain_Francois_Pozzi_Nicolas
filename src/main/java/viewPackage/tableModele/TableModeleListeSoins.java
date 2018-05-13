@@ -1,4 +1,4 @@
-package viewPackage;
+package viewPackage.tableModele;
 
 import modelPackage.SoinAvance;
 
@@ -63,7 +63,6 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         }
     }
 
-    //afficher correctement les colonnes en fonction de leur type
     public Class getColumnClass(int colonne) {
         Class c;
         switch(colonne){

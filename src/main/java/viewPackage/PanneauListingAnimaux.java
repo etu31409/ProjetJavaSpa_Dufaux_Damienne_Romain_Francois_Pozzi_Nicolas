@@ -2,15 +2,13 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
-import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
+import viewPackage.tableModele.TableModeleListeAnimaux;
 
-import javax.swing.table.*;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;

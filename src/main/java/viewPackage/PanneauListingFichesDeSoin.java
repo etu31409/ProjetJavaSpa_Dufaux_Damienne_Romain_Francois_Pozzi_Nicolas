@@ -5,14 +5,13 @@ import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
+import viewPackage.tableModele.TableModeleListeSoins;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 public class PanneauListingFichesDeSoin extends JPanel {
     private Controller controller;

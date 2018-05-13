@@ -2,12 +2,11 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.MedicamentException;
-import exceptionPackage.OrdonnanceException;
 import exceptionPackage.SingletonConnectionException;
 import modelPackage.StatMedicament;
+import viewPackage.tableModele.TableModeleStatistiquesMed;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

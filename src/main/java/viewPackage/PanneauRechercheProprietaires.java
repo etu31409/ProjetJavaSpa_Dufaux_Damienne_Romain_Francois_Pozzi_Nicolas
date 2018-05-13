@@ -6,9 +6,9 @@ import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.ProprietaireAnimal;
 import modelPackage.Veterinaire;
+import viewPackage.tableModele.TableModeleRechercheProprietaires;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
