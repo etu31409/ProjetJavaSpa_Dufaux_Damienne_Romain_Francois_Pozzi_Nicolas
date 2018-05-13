@@ -14,7 +14,7 @@ public class PanneauBienvenue extends JPanel{
         this.setLayout(new BorderLayout());
         this.add(texteAccueil, BorderLayout.CENTER);
 
-        image = new ImageIcon("C:\\Users\\PC MSI\\Desktop\\GitHub\\kmy-animaux.png");
+        image = new ImageIcon("src\\resources\\kmy-animaux.png");
         baniere = new JLabel(image);
         this.add(baniere, BorderLayout.NORTH);
     }
@@ -24,17 +24,3 @@ public class PanneauBienvenue extends JPanel{
     }
 
 }
-
-/*
-
-    public PanneauBienvenue() {
-        texteAccueil = new JLabel("<html><h1>Bienvenue ! </h1></html>");
-        texteAccueil.setHorizontalAlignment(SwingConstants.CENTER);
-        this.setLayout(new BorderLayout());
-        this.add(texteAccueil, BorderLayout.CENTER);
-
-        image = new ImageIcon("E:/cropped-photo-couverture-facebookb.jpg");
-        baniere = new JLabel(image);
-        this.add(baniere, BorderLayout.NORTH);
-    }
-}*/
