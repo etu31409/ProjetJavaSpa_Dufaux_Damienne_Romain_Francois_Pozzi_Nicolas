@@ -469,7 +469,7 @@ public class DBDAOAnimal implements IAnimal {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "delete from Ordonnance where numRegistre = ?;";
+            sqlInstruction = "delete from spabd.Ordonnance, spabd.SoinAvance, spabd.Animal where numRegistre = ?;";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
@@ -538,7 +538,7 @@ public class DBDAOAnimal implements IAnimal {
                 preparedStatement.setNull(11, Types.DATE);
             }
             if(animal.getNumTatouage() != null){
-                preparedStatement.setInt(12,animal.getNumPuce());
+                preparedStatement.setInt(12,animal.getNumTatouage());
             }
             else{
                 preparedStatement.setNull(12, Types.INTEGER);

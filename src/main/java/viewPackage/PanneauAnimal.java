@@ -14,7 +14,6 @@ import java.util.GregorianCalendar;
 
 public class PanneauAnimal extends JPanel {
 
-    //permet de mettre les bord en rouge
     private Border baseBorder;
     private Controller controller;
     private String erreurMessage;
@@ -382,18 +381,6 @@ public class PanneauAnimal extends JPanel {
         }
     }
 
-    public void instancieUnProprietaire(Integer identifiantProprio){
-        try{
-            Proprietaire proprietaire = controller.getUnProprietaire(identifiantProprio);
-            comboBoxListeProprietaires.addItem(proprietaire);
-        }
-        catch (ProprietaireException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     private void instanciationSpinnerDate(JSpinner spinnerDate, Date date) {
         spinnerDate.setModel(new SpinnerDateModel());
         spinnerDate.setEditor(new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy"));
@@ -421,10 +408,6 @@ public class PanneauAnimal extends JPanel {
                 else{
                     ajouterUnProprietaireButton.setEnabled(false);
                     comboBoxListeProprietaires.setEnabled(false);
-                    if(modification){
-                        comboBoxListeProprietaires.removeAllItems();
-                        instancieUnProprietaire(animalModif.getProprietaire());
-                    }
                 }
             }
             if(e.getSource() == dateDeNaissanceCheckBox){
