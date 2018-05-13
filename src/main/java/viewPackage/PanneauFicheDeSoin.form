@@ -175,7 +175,7 @@
           <text value="Médicaments :"/>
         </properties>
       </component>
-      <component id="fb197" class="javax.swing.JButton" binding="ajouterUnMédicamentButton" default-binding="true">
+      <component id="fb197" class="javax.swing.JButton" binding="ajouterUnMedicamentButton" default-binding="true">
         <constraints>
           <grid row="23" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
@@ -305,7 +305,7 @@
           <text value="Valider"/>
         </properties>
       </component>
-      <component id="67bc9" class="javax.swing.JButton" binding="réinitialiserButton" default-binding="true">
+      <component id="67bc9" class="javax.swing.JButton" binding="reinitialiserButton" default-binding="true">
         <constraints>
           <grid row="29" column="10" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>

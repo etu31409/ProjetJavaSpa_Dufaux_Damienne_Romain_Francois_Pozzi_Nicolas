@@ -36,7 +36,7 @@ public class PanneauAnimal extends JPanel {
 
     private JRadioButton femelleRadioButton, maleRadioButton, steriliseRadioButton, nonSteriliseRadioButton;
 
-    private JButton ajouterUnPropriétaireButton, validerButton, reinitialiserButton, retourButton;
+    private JButton ajouterUnProprietaireButton, validerButton, reinitialiserButton, retourButton;
 
     private JComboBox comboBoxListeProprietaires;
 
@@ -64,7 +64,7 @@ public class PanneauAnimal extends JPanel {
         validerButton.addActionListener(new EcouteurDeBoutons());
         reinitialiserButton.addActionListener(new EcouteurDeBoutons());
         retourButton.addActionListener(new EcouteurDeBoutons());
-        ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
+        ajouterUnProprietaireButton.addActionListener(new EcouteurDeBoutons());
 
     }
 
@@ -85,7 +85,7 @@ public class PanneauAnimal extends JPanel {
         dateDeNaissanceCheckBox.addActionListener(new EcouteurDeCheckBox());
         dateDAttributionPuceCheckBox.addActionListener(new EcouteurDeCheckBox());
         proprioCheckBox.addActionListener(new EcouteurDeCheckBox());
-        ajouterUnPropriétaireButton.addActionListener(new EcouteurDeBoutons());
+        ajouterUnProprietaireButton.addActionListener(new EcouteurDeBoutons());
         validerButton.addActionListener(new EcouteurDeBoutons());
         reinitialiserButton.addActionListener(new EcouteurDeBoutons());
         retourButton.addActionListener(new EcouteurDeBoutons());
@@ -138,7 +138,7 @@ public class PanneauAnimal extends JPanel {
 
         if(animalModif.getProprietaire() != null){
             proprioCheckBox.setSelected(true);
-            ajouterUnPropriétaireButton.setEnabled(true);
+            ajouterUnProprietaireButton.setEnabled(true);
             comboBoxListeProprietaires.setSelectedIndex(animalModif.getProprietaire()-1);
             comboBoxListeProprietaires.setEnabled(true);
         }
@@ -346,7 +346,7 @@ public class PanneauAnimal extends JPanel {
         localisationPuceTextField.setText("");
         spinnerDatePuce.setEnabled(false);
         proprioCheckBox.setSelected(false);
-        ajouterUnPropriétaireButton.setEnabled(false);
+        ajouterUnProprietaireButton.setEnabled(false);
         comboBoxListeProprietaires.setEnabled(false);
         buttonGroupeSexe.clearSelection();
         buttonGroupeSterilise.clearSelection();
@@ -412,14 +412,14 @@ public class PanneauAnimal extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == proprioCheckBox){
                 if(proprioCheckBox.isSelected()){
-                    ajouterUnPropriétaireButton.setEnabled(true);
+                    ajouterUnProprietaireButton.setEnabled(true);
                     comboBoxListeProprietaires.setEnabled(true);
                     if(modification){
                         instanciationListeProprietaires();
                     }
                 }
                 else{
-                    ajouterUnPropriétaireButton.setEnabled(false);
+                    ajouterUnProprietaireButton.setEnabled(false);
                     comboBoxListeProprietaires.setEnabled(false);
                     if(modification){
                         comboBoxListeProprietaires.removeAllItems();
@@ -486,7 +486,7 @@ public class PanneauAnimal extends JPanel {
             if(e.getSource() == reinitialiserButton){
                 reinitialisation();
             }
-            if(e.getSource() == ajouterUnPropriétaireButton){
+            if(e.getSource() == ajouterUnProprietaireButton){
                 new FenetreProprio(controller,PanneauAnimal.this);
             }
         }

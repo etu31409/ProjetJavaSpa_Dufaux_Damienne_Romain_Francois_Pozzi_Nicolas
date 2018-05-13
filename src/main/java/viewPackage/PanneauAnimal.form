@@ -213,7 +213,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="679df" class="javax.swing.JButton" binding="ajouterUnPropriétaireButton" default-binding="true">
+      <component id="679df" class="javax.swing.JButton" binding="ajouterUnProprietaireButton" default-binding="true">
         <constraints>
           <grid row="33" column="11" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>

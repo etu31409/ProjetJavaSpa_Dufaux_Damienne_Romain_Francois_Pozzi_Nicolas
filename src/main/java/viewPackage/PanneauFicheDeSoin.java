@@ -22,13 +22,13 @@ public class PanneauFicheDeSoin extends JPanel {
     private JComboBox comboBoxAnimaux, comboBoxVeterinaires;
     private JTextArea textAreaIntituleSoin, textAreaPartieDuCorps, textAreaRemarque;
     private JList listMedicamentsDispos, listMedicamentsChoisis;
-    private JButton ajouterButton, retirerButton, ajouterUnMédicamentButton, validerButton, réinitialiserButton, retourButton;
+    private JButton ajouterButton, retirerButton, ajouterUnMedicamentButton, validerButton, reinitialiserButton, retourButton;
     private JPanel listeMedicamentsDisposJPanel;
     private JPanel listeMedicamentsChoisisJPanel;
     private JScrollPane listeMedicamentsChoisisJScrollPane, listeMedicamentsDisposJScrollPane;
     private JLabel titreDeLaPage;
     private JLabel label;
-    private boolean modification = false;
+    private boolean modification;
     private SoinAvance soinAvanceModif;
 
 
@@ -43,9 +43,9 @@ public class PanneauFicheDeSoin extends JPanel {
 
         ajouterButton.addActionListener(new EcouteurBouton());
         retirerButton.addActionListener(new EcouteurBouton());
-        ajouterUnMédicamentButton.addActionListener(new EcouteurBouton());
+        ajouterUnMedicamentButton.addActionListener(new EcouteurBouton());
         validerButton.addActionListener(new EcouteurBouton());
-        réinitialiserButton.addActionListener(new EcouteurBouton());
+        reinitialiserButton.addActionListener(new EcouteurBouton());
         retourButton.addActionListener(new EcouteurBouton());
 
     }
@@ -72,9 +72,9 @@ public class PanneauFicheDeSoin extends JPanel {
 
         ajouterButton.addActionListener(new EcouteurBouton());
         retirerButton.addActionListener(new EcouteurBouton());
-        ajouterUnMédicamentButton.addActionListener(new EcouteurBouton());
+        ajouterUnMedicamentButton.addActionListener(new EcouteurBouton());
         validerButton.addActionListener(new EcouteurBoutonModification());
-        réinitialiserButton.addActionListener(new EcouteurBouton());
+        reinitialiserButton.addActionListener(new EcouteurBouton());
         retourButton.addActionListener(new EcouteurBouton());
     }
 
@@ -242,7 +242,7 @@ public class PanneauFicheDeSoin extends JPanel {
                     e.printStackTrace();
                 }
             }
-            if (event.getSource() == réinitialiserButton) {
+            if (event.getSource() == reinitialiserButton) {
                 urgenceCheckBox.setSelected(false);
                 instancieListeVeterinaire();
                 instancieListeAnimaux();
@@ -261,7 +261,7 @@ public class PanneauFicheDeSoin extends JPanel {
             if (event.getSource() == retourButton) {
                 fenetre.retourAccueil();
             }
-            if (event.getSource() == ajouterUnMédicamentButton) {
+            if (event.getSource() == ajouterUnMedicamentButton) {
                 fenetreMedicament = new FenetreMedicament(controller, PanneauFicheDeSoin.this);
             }
         }
