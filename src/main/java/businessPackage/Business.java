@@ -67,8 +67,8 @@ public class Business {
     }
 
     //soins
-    public void ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
-        daoSoinAvance.ajouterFicheDeSoins(soinAvance);
+    public Integer ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, SingletonConnectionException{
+        return daoSoinAvance.ajouterFicheDeSoins(soinAvance);
     }
 
     public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException{

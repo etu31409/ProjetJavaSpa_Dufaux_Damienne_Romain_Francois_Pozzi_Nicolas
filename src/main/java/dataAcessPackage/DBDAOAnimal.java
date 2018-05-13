@@ -382,24 +382,20 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    //ajout
+    //ajout/suppression/modification
     public void ajouterAnimal(Animal animal) throws SingletonConnectionException, AnimalException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "insert into animal(numRegistre," +
-                    " dateArrivee," +
-                    " espece," +
-                    " race," +
-                    " sexe," +
-                    "estSterilise," +
-                    "couleurDePeau," +
-                    "poids," +
-                    "nom, dateNaissance, numPuce, localisationPuce, dateAttributionPuce, numTatouage, localisationTatouage, identifiantProprio)"+
+            sqlInstruction = "insert into animal(numRegistre, dateArrivee, espece, race, sexe,estSterilise,couleurDePeau," +
+                    "poids,nom, dateNaissance, numPuce, localisationPuce, dateAttributionPuce, numTatouage, " +
+                    "localisationTatouage, identifiantProprio)"+
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
             java.sql.Date sqlDate = new java.sql.Date(GregorianCalendar.getInstance().getTimeInMillis());
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
             preparedStatement.setNull(1, Types.INTEGER);
             preparedStatement.setDate(2, sqlDate);
             preparedStatement.setString(3, animal.getEspece());
@@ -408,7 +404,7 @@ public class DBDAOAnimal implements IAnimal {
             preparedStatement.setBoolean(6, animal.isEstSterilise());
             preparedStatement.setString(7, animal.getCouleurDePeau());
             preparedStatement.setDouble(8, animal.getPoids());
-            //facultatifs
+
             if(animal.getNom() != null){
                 preparedStatement.setString(9, animal.getNom());
             }
@@ -466,12 +462,16 @@ public class DBDAOAnimal implements IAnimal {
             throw new AnimalException("Impossible d'ajouter l'animal");
         }
     }
+
     public void supprimerAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "delete from animal where numRegistre = ?";
+
+            sqlInstruction = "delete from Ordonnance where numRegistre = ?;" +
+                    "delete from SoinAvance where numRegistre = ?;" +
+                    "delete from Animal where numRegistre = ?;";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
@@ -489,25 +489,20 @@ public class DBDAOAnimal implements IAnimal {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "update animal set dateArrivee = ?," +
-                    " espece = ?," +
-                    " race = ?," +
-                    " sexe = ?," +
-                    "estSterilise = ?," +
-                    "couleurDePeau = ?," +
-                    "poids = ?," +
-                    "nom = ?, dateNaissance = ?, numPuce = ?, localisationPuce = ?, dateAttributionPuce = ?, numTatouage = ?, localisationTatouage = ?," +
+            sqlInstruction = "update animal set dateArrivee = ?, espece = ?, race = ?, sexe = ?, estSterilise = ?," +
+                    "couleurDePeau = ?, poids = ?, nom = ?, dateNaissance = ?, numPuce = ?, localisationPuce = ?, " +
+                    "dateAttributionPuce = ?, numTatouage = ?, localisationTatouage = ?," +
                     "identifiantProprio = ? where numRegistre = ?";
-            java.sql.Date sqlDate = new java.sql.Date(GregorianCalendar.getInstance().getTimeInMillis());
+            java.sql.Date sqlDateArrivee = new java.sql.Date(animal.getDateArrivee().getTimeInMillis());
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setDate(1, sqlDate);
+            preparedStatement.setDate(1, sqlDateArrivee);
             preparedStatement.setString(2, animal.getEspece());
             preparedStatement.setString(3, animal.getRace());
             preparedStatement.setString(4, animal.getSexe());
             preparedStatement.setBoolean(5, animal.isEstSterilise());
             preparedStatement.setString(6, animal.getCouleurDePeau());
             preparedStatement.setDouble(7, animal.getPoids());
-            //facultatifs
+
             if(animal.getNom() != null){
                 preparedStatement.setString(8, animal.getNom());
             }
@@ -563,7 +558,6 @@ public class DBDAOAnimal implements IAnimal {
             throw new SingletonConnectionException();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new AnimalException("Impossible de modifier l'animal");
         }
     }

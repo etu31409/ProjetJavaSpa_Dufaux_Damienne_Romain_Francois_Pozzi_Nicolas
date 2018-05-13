@@ -14,7 +14,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
 
     //get
     public ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
-            MedicamentException, AnimalException, VeterinaireException, SoinException {
+            MedicamentException, AnimalException, SoinException {
         try {
 
             if (connectionUnique == null) {
@@ -30,16 +30,14 @@ public class DBDAOOrdonnance implements IOrdonnance{
             while (data.next()) {
                 Ordonnance ordonnance = new Ordonnance();
                 ISoinAvance soinAvance = new DBDAOSoinAvance();
-                ordonnance.setSoinAvance(soinAvance.getUnSoinAvance(data.getInt("numSoin")));
+                ordonnance.setSoinAvance(soinAvance.getUnSoinAvance(data.getInt("numSoin")).getNumSoin());
                 IAnimal animal = new DBDAOAnimal();
                 ordonnance.setNumRegistre(animal.getUnAnimal(data.getInt("numRegistre")).getNumRegistre());
                 IMedicament medicament = new DBDAOMedicament();
-                ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")));
+                ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")).getIdentifiantMed());
 
                 toutesLesOrdonnances.add(ordonnance);
             }
-
-            connectionUnique.close();
             return toutesLesOrdonnances;
         }
         catch (SQLException e) {
@@ -56,10 +54,9 @@ public class DBDAOOrdonnance implements IOrdonnance{
             sqlInstruction = "insert into spabd.ordonnance(numRegistre, numSoin, identifiantMed) values (?, ?, ?);";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1,ordonnance.getNumRegistre());
-            preparedStatement.setInt(2,34);
-            //preparedStatement.setInt(2,ordonnance.getSoinAvance().getNumSoin()); // null -> car autoincrement via sql
-            // Moyen de récupérer la dernière requete effectué -> recup numSoin ?
-            preparedStatement.setInt(3,ordonnance.getMedicament().getIdentifiantMed());
+            preparedStatement.setInt(2,ordonnance.getSoinAvance());
+            preparedStatement.setInt(3, ordonnance.getMedicament());
+
             preparedStatement.executeUpdate();
         }catch (Exception e) {
             throw new OrdonnanceException("Problème lors de l'insertion de l'ordonnance");

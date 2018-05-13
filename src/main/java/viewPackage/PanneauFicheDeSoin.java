@@ -5,16 +5,10 @@ import exceptionPackage.*;
 import modelPackage.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 public class PanneauFicheDeSoin extends JPanel {
     private final Controller controller;
@@ -63,10 +57,9 @@ public class PanneauFicheDeSoin extends JPanel {
         this.controller = controller;
         this.soinAvanceModif = soinAvanceModif;
         instancieUnAnimal();
-        comboBoxAnimaux.addActionListener(new comboBoxListener());
+        comboBoxAnimaux.addActionListener(new ComboBoxListener());
         instancieUnVeterinaire();
         instancieListeMedicamentsDispos();
-        //instancieListeMedicamentsSelectionne();
 
         textAreaIntituleSoin.setText(soinAvanceModif.getIntitule());
         textAreaPartieDuCorps.setText(soinAvanceModif.getPartieDuCorps());
@@ -158,16 +151,6 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-   /* public void instancieListeMedicamentsSelectionne(){
-        try{
-
-        }catch (SingletonConnectionException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (MedicamentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-*/
     private boolean validerChamps() throws TextAreaException {
         textAreaIntituleSoin.setBorder(null);
         if (textAreaIntituleSoin.getText().isEmpty() || isDigit(textAreaIntituleSoin.getText())) {
@@ -209,12 +192,12 @@ public class PanneauFicheDeSoin extends JPanel {
         return soinAvance;
     }
 
-    private Ordonnance nouvelleOrdonance(SoinAvance soinAvance, int i) throws SoinException {
+    private Ordonnance nouvelleOrdonance(Integer idSoinAvance, SoinAvance soinAvance, Medicament medicament) throws SoinException {
         try {
             Ordonnance ord = new Ordonnance();
-            ord.setMedicament((Medicament) medicamentsChoisisModele.getElementAt(i));
+            ord.setMedicament(medicament.getIdentifiantMed());
             ord.setNumRegistre(soinAvance.getNumRegistre());
-            ord.setSoinAvance(soinAvance);
+            ord.setSoinAvance(idSoinAvance);
             return ord;
         } catch (Exception e) {
         throw new SoinException("Erreur création ordonnance");
@@ -238,9 +221,10 @@ public class PanneauFicheDeSoin extends JPanel {
 
                     if (validerChamps()) {
                         SoinAvance soinAvance = nouveauSoinAvance();
-                        controller.ajouterFicheDeSoins(soinAvance);
+                        Integer identifiantSoinAvance = controller.ajouterFicheDeSoins(soinAvance);
                         for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                            controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
+                            controller.ajouterOrdonnance(nouvelleOrdonance(identifiantSoinAvance, soinAvance,
+                                    (Medicament) medicamentsChoisisModele.getElementAt(i)));
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
                                 "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
@@ -291,7 +275,8 @@ public class PanneauFicheDeSoin extends JPanel {
                         SoinAvance soinAvance = nouveauSoinAvance();
                         controller.modifierSoin(soinAvance);
                         for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                            controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance, i));
+                            controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance.getNumSoin(), soinAvance,
+                                    (Medicament)medicamentsChoisisModele.getElementAt(i)));
                         }
                         JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
                                 "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
@@ -312,7 +297,7 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    private class comboBoxListener implements ActionListener{
+    private class ComboBoxListener implements ActionListener{
         public void actionPerformed(ActionEvent event) {
             if(event.getSource() ==  comboBoxAnimaux){
                 instancieListeAnimaux();

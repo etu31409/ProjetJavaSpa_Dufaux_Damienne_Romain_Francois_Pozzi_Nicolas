@@ -15,7 +15,7 @@ public interface ISoinAvance {
     ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException;
 
     //ajout
-    void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException;
+    Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException;
 
     //Suppression
     void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException;

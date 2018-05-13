@@ -1,15 +1,13 @@
 package modelPackage;
 
-import java.util.GregorianCalendar;
-
 public class Ordonnance {
-    private SoinAvance soinAvance;
+    private Integer soinAvance;
     private Integer numRegistre;
-    private Medicament medicament;
+    private Integer medicament;
 
     public Ordonnance(){}
 
-    public SoinAvance getSoinAvance() {
+    public Integer getSoinAvance() {
         return soinAvance;
     }
 
@@ -17,17 +15,17 @@ public class Ordonnance {
         return numRegistre;
     }
 
-    public Medicament getMedicament() {
+    public Integer getMedicament() {
         return medicament;
     }
 
-    public void setSoinAvance(SoinAvance soinAvance) {
+    public void setSoinAvance(Integer soinAvance) {
         this.soinAvance = soinAvance;
     }
 
     public void setNumRegistre(Integer numRegistre) { this.numRegistre = numRegistre; }
 
-    public void setMedicament(Medicament medicament) {
+    public void setMedicament(Integer medicament) {
         this.medicament = medicament;
     }
 }

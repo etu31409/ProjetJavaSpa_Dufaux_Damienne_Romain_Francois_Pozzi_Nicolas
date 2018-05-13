@@ -4,11 +4,9 @@ import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
-import modelPackage.Veterinaire;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DBDAOSoinAvance implements ISoinAvance {
@@ -58,7 +56,6 @@ public class DBDAOSoinAvance implements ISoinAvance {
     }
 
     public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException {
-
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -105,8 +102,8 @@ public class DBDAOSoinAvance implements ISoinAvance {
                 critereColonne = "\"\"";
             else if (critere.equals("Date du soin")){
                 critereColonne = "dateSoin";
-            ordre = "desc";
-        }
+                ordre = "desc";
+            }
             else if (critere.equals("Identifiant du vétérinaire"))
                 critereColonne = "identifiantVeto";
             else if (critere.equals("Identifiant de l'animal"))
@@ -138,40 +135,40 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    //ajout
-    public void ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
+    //ajout/suppression/modification
+    public Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            sqlInstruction = "select max(?) from spabd.soinavance;";
+
+            sqlInstruction = "select max(numSoin) as maximum from spabd.soinavance;";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setString(1,"numSoin");
             data = preparedStatement.executeQuery();
+            data.next();
+            Integer numSoinMax = data.getInt("maximum");
 
-            sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, identifiantVeto, estUrgent, remarque) " +
+            sqlInstruction = "insert into spabd.soinavance(numSoin,numRegistre, intitule, partieDuCorps, dateSoin, " +
+                    "identifiantVeto, estUrgent, remarque) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?);";
-            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            int numSoin = 34; //TODO
-            /*data.next();
-            String chaine = data.getString("numSoin");
-            System.out.println(chaine);
-            numSoin = Integer.parseInt(chaine);*/
 
-            preparedStatement.setInt(1, numSoin);
-            preparedStatement.setInt(2,soinAvance.getNumRegistre());
-            preparedStatement.setString(3,soinAvance.getIntitule());
-            preparedStatement.setString(4,soinAvance.getPartieDuCorps());
-            preparedStatement.setDate(5,new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
-            preparedStatement.setInt(6,soinAvance.getVeterinaire());
-            preparedStatement.setBoolean(7,soinAvance.getEstUrgent());
+            preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
+            preparedStatement.setInt(1, (++numSoinMax));
+            preparedStatement.setInt(2, soinAvance.getNumRegistre());
+            preparedStatement.setString(3, soinAvance.getIntitule());
+            preparedStatement.setString(4, soinAvance.getPartieDuCorps());
+            preparedStatement.setDate(5, new java.sql.Date(soinAvance.getDateSoin().getTimeInMillis()));
+            preparedStatement.setInt(6, soinAvance.getVeterinaire());
+            preparedStatement.setBoolean(7, soinAvance.getEstUrgent());
             if(soinAvance.getRemarque() != null){
-                preparedStatement.setString(8,soinAvance.getRemarque());
+                preparedStatement.setString(8, soinAvance.getRemarque());
             }
             else{
                 preparedStatement.setNull(8, Types.VARCHAR);
             }
             preparedStatement.executeUpdate();
+            return numSoinMax;
 
         } catch (SQLException e) {
             throw new SoinException("Erreur lors de l'insertion d'un soin avancé");
@@ -183,7 +180,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
-            //Recuperer toutes les ordonnaces qui sont liés à la fiche de soins
+            //Recuperer toutes les ordonnaces qui sont liées à la fiche de soins
             sqlInstruction = "select * from ordonnance where numSoin = ?";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1,soin.getNumSoin());
