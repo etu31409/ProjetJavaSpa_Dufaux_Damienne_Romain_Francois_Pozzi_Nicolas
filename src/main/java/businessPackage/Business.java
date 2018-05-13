@@ -186,7 +186,7 @@ public class Business {
         Double pourcentageParMedicament;
         if(compteurGlobal != 0) {
             Double base = statistiques.get(nomMedic);
-            pourcentageParMedicament = calculPourcentageParMedicament(base, compteurGlobal, nomMedic);
+            pourcentageParMedicament = calculPourcentageParMedicament(base, compteurGlobal);
         }
         else {
             pourcentageParMedicament = 0.;
@@ -196,7 +196,10 @@ public class Business {
         resultatStatistiques.add(stat);
     }
 
-    public Double calculPourcentageParMedicament(Double base, Integer compteurGlobal, String nomMedic){
-        return  base / compteurGlobal;
+    public Double calculPourcentageParMedicament(Double base, Integer compteurGlobal)throws  IllegalArgumentException{
+        if( compteurGlobal != 0)
+            return  base / compteurGlobal;
+        else
+            throw  new IllegalArgumentException("La division par 0 est impossible !");
     }
 }
