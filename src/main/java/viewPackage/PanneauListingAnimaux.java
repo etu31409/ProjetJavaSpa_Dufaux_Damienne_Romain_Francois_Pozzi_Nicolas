@@ -130,7 +130,7 @@ public class PanneauListingAnimaux extends JPanel {
                         String critere = (String) comboBoxTriAnimaux.getSelectedItem();
                         animauxTries = controller.getAnimauxTries(critere);
                         Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
-                        fenetrePrincipale.afficherPanneauAnimal(animalModif);
+                        fenetrePrincipale.afficherPanneauAnimalPourModifier(animalModif);
                         buttonTri.doClick();
                         //JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié dans la base de données !");
                     } catch (AnimalException e) {
@@ -139,7 +139,7 @@ public class PanneauListingAnimaux extends JPanel {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                     catch(Exception e){
-                        System.out.println("Exception: "+e.getMessage());
+                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{

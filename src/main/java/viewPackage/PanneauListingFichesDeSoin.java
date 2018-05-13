@@ -123,7 +123,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                         String critere = (String) comboBoxListingFiches.getSelectedItem();
                         soinsTries = controller.getSoinsTries(critere);
                         SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
-                        fenetrePrincipale.afficherPanneauSoin(soinAModif);
+                        fenetrePrincipale.afficherPanneauSoinPourModifier(soinAModif);
                         trierButton.doClick();
                         //JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
                     } catch (VeterinaireException e) {

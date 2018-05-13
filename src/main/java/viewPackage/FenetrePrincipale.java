@@ -8,19 +8,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class  FenetrePrincipale extends JFrame{
+public class FenetrePrincipale extends JFrame {
     private Controller controller;
     private Container frameContainer;
     private JMenuBar barMenu;
-    private JMenu  spa, recherches, ajout, listing, statistique;
+    private JMenu spa, recherches, ajout, listing, statistique;
     private JMenuItem accueil, quitter, nouvelAnimal, nouvelleFicheDeSoin, listingFicheDeSoin, listingAnimaux, rechercheVeterinaires,
             rechercheProprietaires, rechercheAnimaux, statMedicaments;
     private JPanel panneauBienvenue;
 
-    public  FenetrePrincipale(){
+    public FenetrePrincipale() {
         super("S.P.A, Société Protectrice des Animaux");
         setBounds(100, 0, 1200, 750);
-        this.addWindowListener( new WindowAdapter() { public void windowClosing(WindowEvent e) { System.exit(0); } } );
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
 
@@ -40,7 +44,7 @@ public class  FenetrePrincipale extends JFrame{
 
         quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new ExitListener());
-        quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,InputEvent.CTRL_MASK));
+        quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         spa.add(quitter);
 
         ajout = new JMenu("Ajouts");
@@ -96,7 +100,38 @@ public class  FenetrePrincipale extends JFrame{
         barMenu.setVisible(false);
     }
 
-    public void retourAccueil(){
+    public void afficherPanneauAnimalPourModifier(Animal animalModif) {
+        try {
+            frameContainer.removeAll();
+            frameContainer.add(new PanneauAnimal(controller, this, animalModif).getPanneauContainerPrincipal());
+            frameContainer.setVisible(true);
+            frameContainer.repaint();
+            frameContainer.validate();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void afficherPanneauSoinPourModifier(SoinAvance soinAvanceModif) {
+        try {
+            frameContainer.removeAll();
+            frameContainer.add(new PanneauFicheDeSoin(controller, this, soinAvanceModif).getPanneauContainerPrincipal());
+            frameContainer.setVisible(true);
+            frameContainer.repaint();
+            frameContainer.validate();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void afficherListingAnimaux() {
+        frameContainer.removeAll();
+        frameContainer.add(new PanneauListingAnimaux(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
+        frameContainer.repaint();
+        frameContainer.validate();
+    }
+
+    public void retourAccueil() {
         frameContainer.removeAll();
         frameContainer.setLayout(new BorderLayout());
         panneauBienvenue = new PanneauBienvenue().getPanneauContainerPrincipal();
@@ -106,85 +141,50 @@ public class  FenetrePrincipale extends JFrame{
         FenetrePrincipale.this.setVisible(true);
     }
 
-    public void afficherAccueil(){
-        frameContainer.removeAll();
-        frameContainer.add(new PanneauBienvenue().getPanneauContainerPrincipal());
-        frameContainer.setVisible(true);
-        frameContainer.repaint();
-        frameContainer.validate();
-    }
-
-    public void afficherPanneauAnimal(Animal animalModif){
-        frameContainer.removeAll();
-        frameContainer.add(new PanneauAnimal(controller, this, animalModif).getPanneauContainerPrincipal());
-        frameContainer.setVisible(true);
-        frameContainer.repaint();
-        frameContainer.validate();
-    }
-
-    public void afficherPanneauSoin(SoinAvance soinAvanceModif){
-        frameContainer.removeAll();
-        frameContainer.add(new PanneauFicheDeSoin(controller, this, soinAvanceModif).getPanneauContainerPrincipal());
-        frameContainer.setVisible(true);
-        frameContainer.repaint();
-        frameContainer.validate();
-    }
-
-    private class ExitListener implements ActionListener{
-        public void actionPerformed(ActionEvent event){
+    private class ExitListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
             System.exit(0);
         }
     }
 
-    private class EcouteurBarMenu implements ActionListener
-    {
-        public void actionPerformed(ActionEvent event){
-            if (event.getSource() == accueil){
-                afficherAccueil();
-            }
-            else if(event.getSource() == nouvelAnimal){
+    private class EcouteurBarMenu implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == accueil) {
+                retourAccueil();
+            } else if (event.getSource() == nouvelAnimal) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauAnimal(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
+                frameContainer.setVisible(true);
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == nouvelleFicheDeSoin){
+            } else if (event.getSource() == nouvelleFicheDeSoin) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauFicheDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == listingFicheDeSoin){
+            } else if (event.getSource() == listingFicheDeSoin) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauListingFichesDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == listingAnimaux){
-                frameContainer.removeAll();
-                frameContainer.add(new PanneauListingAnimaux(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
-                frameContainer.repaint();
-                frameContainer.validate();
-            }
-            else if(event.getSource() == rechercheVeterinaires) {
+            } else if (event.getSource() == listingAnimaux) {
+                afficherListingAnimaux();
+            } else if (event.getSource() == rechercheVeterinaires) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheVeterinaires(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == rechercheProprietaires) {
+            } else if (event.getSource() == rechercheProprietaires) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheProprietaires(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == rechercheAnimaux) {
+            } else if (event.getSource() == rechercheAnimaux) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauRechercheAnimaux(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
                 frameContainer.validate();
-            }
-            else if(event.getSource() == statMedicaments) {
+            } else if (event.getSource() == statMedicaments) {
                 frameContainer.removeAll();
                 frameContainer.add(new PanneauStatMedicaments(controller).getPanneauContainerPrincipal());
                 frameContainer.repaint();
