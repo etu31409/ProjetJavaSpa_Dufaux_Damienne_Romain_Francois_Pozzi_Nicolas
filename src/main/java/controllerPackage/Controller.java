@@ -49,19 +49,11 @@ public class Controller {
         return business.getMedicamentsDeLaFiche(numSoin);
     }
 
-    /*public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
-        return business.getUnMedicament(identifiantMed);
-    }*/
-
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);
     }
 
     //ordonnances
-    /*public ArrayList <Ordonnance> getOrdonnances() throws SingletonConnectionException,
-            AnimalException, MedicamentException, OrdonnanceException, SoinException {
-        return business.getOrdonnances();
-    }*/
 
     public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException {
         business.supprimerOrdonnance(soin, medicament);
@@ -96,17 +88,10 @@ public class Controller {
         return business.getVeterinaires();
     }
 
-    /*public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
-        return business.getUnVeterinaire(identifiantVeto);
-    }*/
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
         return business.getProprietaires();
     }
-
-    /*public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
-        return business.getUnProprietaire(identifiantProprietaire);
-    }*/
 
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
         business.ajouterNouveauProprio(proprietaire);

@@ -15,39 +15,6 @@ public class DBDAOOrdonnance implements IOrdonnance{
     private ResultSet data;
 
     //get
-    /*public ArrayList<Ordonnance> getOrdonnances(Integer numSoin) throws OrdonnanceException, SingletonConnectionException,
-            MedicamentException, AnimalException, SoinException {
-        try {
-
-            if (connectionUnique == null) {
-                connectionUnique = SingletonConnection.getUniqueInstance();
-            }
-
-            sqlInstruction = "select * from spabd.ordonnance where numSoin = ?";
-
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, numSoin);
-            data = statement.executeQuery();
-
-            ArrayList<Ordonnance> toutesLesOrdonnances = new ArrayList<Ordonnance>();
-
-            while (data.next()) {
-                Ordonnance ordonnance = new Ordonnance();
-                ISoinAvance soinAvance = new DBDAOSoinAvance();
-                ordonnance.setSoinAvance(soinAvance.getUnSoinAvance(data.getInt("numSoin")).getNumSoin());
-                IAnimal animal = new DBDAOAnimal();
-                ordonnance.setNumRegistre(animal.getUnAnimal(data.getInt("numRegistre")).getNumRegistre());
-                IMedicament medicament = new DBDAOMedicament();
-                ordonnance.setMedicament(medicament.getUnMedicament(data.getInt("identifiantMed")).getIdentifiantMed());
-
-                toutesLesOrdonnances.add(ordonnance);
-            }
-            return toutesLesOrdonnances;
-        }
-        catch (SQLException e) {
-            throw new OrdonnanceException();
-        }
-    }*/
 
     //ajout
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException {

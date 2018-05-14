@@ -234,25 +234,29 @@ public class PanneauFicheDeSoin extends JPanel {
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                         } else {
-
-
-                            //TODO Si un medicament n'est pas affecté il faut rajouter une ordonance uniquement
-                            //TODO pour les nouvelles
-                            //TODO Il faudra également supprimer les ordonances des médicaments retirés.
-                            //TODO Utiliser medicamentsDeLaFiche pour savoir si il faut ajouter ou supprimer.
-
                             ArrayList<Medicament>listeDeMedocsAvantModif =
                                     controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
 
-                            for(Medicament med : listeDeMedocsAvantModif){
-                                if(medicamentsDisposModele.contains(med)){
-                                    controller.supprimerOrdonnance(soinAvanceModif, med);
+                            for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
+                                for(int j = 0; j < listeDeMedocsAvantModif.size(); j++){
+                                    int medocListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
+                                    int medocListeDispo = ((Medicament)medicamentsDisposModele.getElementAt(i)).getIdentifiantMed();
+                                    int medocListeChoisis = ((Medicament)medicamentsChoisisModele.getElementAt(i)).getIdentifiantMed();
+                                    if(medocListeAvantModif != medocListeChoisis)
+                                        controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceModif.getNumSoin(),
+                                                soinAvanceModif, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                                    if(medocListeAvantModif == medocListeDispo)
+                                        controller.supprimerOrdonnance(soinAvanceModif, (Medicament)medicamentsDisposModele.getElementAt(i));
                                 }
                             }
+
                             for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                                if(!listeDeMedocsAvantModif.contains(medicamentsChoisisModele.getElementAt(i)))
-                                    controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceModif.getNumSoin(),
-                                            soinAvanceModif, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                                for(int j = 0; j < listeDeMedocsAvantModif.size(); j++){
+                                    int medocListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
+                                    int medocListeDispo = ((Medicament)medicamentsDisposModele.getElementAt(i)).getIdentifiantMed();
+                                    if(medocListeAvantModif == medocListeDispo)
+                                        controller.supprimerOrdonnance(soinAvanceModif, (Medicament)medicamentsDisposModele.getElementAt(i));
+                                }
                             }
 
                             controller.modifierSoin(soinAvanceModif);

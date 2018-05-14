@@ -61,19 +61,11 @@ public class Business {
         return daoMedicament.getMedicamentsDeLaFiche(numSoin);
     }
 
-    /*public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
-        return daoMedicament.getUnMedicament(identifiantMed);
-    }*/
-
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }
 
     //ordonnances
-    /*public ArrayList <Ordonnance> getOrdonnances() throws SingletonConnectionException,
-            SoinException, MedicamentException, OrdonnanceException, AnimalException {
-        return daoOrdonnance.getOrdonnances();
-    }*/
 
     public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException {
         daoOrdonnance.supprimerOrdonnance(soin, medicament);
@@ -108,10 +100,6 @@ public class Business {
         return daoVeterinaire.getVeterinaires();
     }
 
-    /*public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
-        return daoVeterinaire.getUnVeterinaire(identifiantVeto);
-    }*/
-
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
         return daoProprietaire.getProprietaires();
@@ -120,10 +108,6 @@ public class Business {
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
         daoProprietaire.ajouterNouveauProprio(proprietaire);
     }
-
-    /*public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
-        return daoProprietaire.getUnProprietaire(identifiantProprietaire);
-    }*/
 
     //recherches
 
@@ -219,6 +203,7 @@ public class Business {
         else
             throw  new IllegalArgumentException("La division par 0 est impossible !");
     }
+
     //fermer connexion
     public void closeBaseDeDonnees() throws SingletonConnectionException, ConnexionException{
         try{
