@@ -1,7 +1,9 @@
 package dataAcessPackage;
 
 import exceptionPackage.*;
+import modelPackage.Medicament;
 import modelPackage.Ordonnance;
+import modelPackage.SoinAvance;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
     private ResultSet data;
 
     //get
-    public ArrayList<Ordonnance> getOrdonnances() throws OrdonnanceException, SingletonConnectionException,
+    /*public ArrayList<Ordonnance> getOrdonnances(Integer numSoin) throws OrdonnanceException, SingletonConnectionException,
             MedicamentException, AnimalException, SoinException {
         try {
 
@@ -21,8 +23,10 @@ public class DBDAOOrdonnance implements IOrdonnance{
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "select * from spabd.ordonnance";
+            sqlInstruction = "select * from spabd.ordonnance where numSoin = ?";
+
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, numSoin);
             data = statement.executeQuery();
 
             ArrayList<Ordonnance> toutesLesOrdonnances = new ArrayList<Ordonnance>();
@@ -43,7 +47,7 @@ public class DBDAOOrdonnance implements IOrdonnance{
         catch (SQLException e) {
             throw new OrdonnanceException();
         }
-    }
+    }*/
 
     //ajout
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException {
@@ -60,6 +64,28 @@ public class DBDAOOrdonnance implements IOrdonnance{
             preparedStatement.executeUpdate();
         }catch (Exception e) {
             throw new OrdonnanceException("Problème lors de l'insertion de l'ordonnance");
+        }
+    }
+
+    //suppression
+    public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException {
+        try{
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "delete from spabd.Ordonnance where numRegistre = ? and numSoin = ? and identifiantMed = ?;";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+
+            preparedStatement.setInt(1,soin.getNumRegistre());
+            preparedStatement.setInt(2,soin.getNumSoin());
+            preparedStatement.setInt(3, medicament.getIdentifiantMed());
+
+            preparedStatement.executeUpdate();
+
+        }catch(SingletonConnectionException exception){
+            throw new SingletonConnectionException();
+        }catch (Exception e) {
+            throw new OrdonnanceException("Problème lors de la suppression de l'ordonnance");
         }
     }
 }

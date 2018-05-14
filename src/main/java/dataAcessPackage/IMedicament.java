@@ -15,6 +15,8 @@ public interface IMedicament {
     ArrayList<Medicament> getMedicaments() throws MedicamentException, SingletonConnectionException;
     Medicament getUnMedicament(int identifiantMed)throws MedicamentException;
 
+    ArrayList<Medicament> getMedicamentsDeLaFiche(Integer numSoin) throws MedicamentException;
+
     //ajout
     void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException;
 

@@ -3,6 +3,7 @@ package dataAcessPackage;
 import exceptionPackage.*;
 import exceptionPackage.MedicamentException;
 import modelPackage.Medicament;
+import modelPackage.SoinAvance;
 import modelPackage.StatMedicament;
 
 import java.sql.*;
@@ -67,6 +68,35 @@ public class DBDAOMedicament implements IMedicament {
         }
         catch (Exception e) {
             throw new MedicamentException("Impossible de récuperer un, médicament dans la base de données");
+        }
+    }
+
+    public ArrayList <Medicament> getMedicamentsDeLaFiche(Integer ficheDeSoin)throws MedicamentException{
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "select * from spabd.medicament inner join spabd.ordonnance " +
+                    "on (medicament.identifiantMed = ordonnance.identifiantMed) " +
+                    "where ordonnance.numSoin = ?;";
+            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
+            statement.setInt(1, ficheDeSoin);
+            data = statement.executeQuery();
+
+            ArrayList<Medicament> listeMedicamensDeLaFicheDeSoin = new ArrayList<>();
+
+            while (data.next()) {
+                Medicament medicament = new Medicament();
+                medicament.setIdentifiantMed(data.getInt("identifiantMed"));
+                medicament.setStockage(data.getString("stockage"));
+                medicament.setDosage(data.getString("dosage"));
+                medicament.setNomMedic(data.getString("nomMedic"));
+                listeMedicamensDeLaFicheDeSoin.add(medicament);
+            }
+            return listeMedicamensDeLaFicheDeSoin;
+        }
+        catch (Exception e) {
+            throw new MedicamentException("Impossible de récuperer un médicament dans la base de données");
         }
     }
 

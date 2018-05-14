@@ -469,7 +469,7 @@ public class DBDAOAnimal implements IAnimal {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            sqlInstruction = "delete from spabd.Ordonnance, spabd.SoinAvance, spabd.Animal where numRegistre = ?;";
+            sqlInstruction = "delete from spabd.Ordonnance where numRegistre = ?;";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();

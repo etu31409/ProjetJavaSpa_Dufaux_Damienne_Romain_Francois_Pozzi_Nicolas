@@ -25,9 +25,9 @@ public class Controller {
         return business.getAnimauxTries(critere);
     }
 
-    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
+    /*public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
         return business.getUnAnimal(numRegistre);
-    }
+    }*/
 
     public void ajouterAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
         business.ajouterAnimal(animal);
@@ -45,15 +45,28 @@ public class Controller {
         return business.getMedicaments();
     }
 
-    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
-        return business.getUnMedicament(identifiantMed);
+    public ArrayList<Medicament> getMedicamentsDeLaFiche(Integer numSoin)throws MedicamentException{
+        return business.getMedicamentsDeLaFiche(numSoin);
     }
+
+    /*public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
+        return business.getUnMedicament(identifiantMed);
+    }*/
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         business.ajouterMedicament(medicament);
     }
 
     //ordonnances
+    /*public ArrayList <Ordonnance> getOrdonnances() throws SingletonConnectionException,
+            AnimalException, MedicamentException, OrdonnanceException, SoinException {
+        return business.getOrdonnances();
+    }*/
+
+    public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException {
+        business.supprimerOrdonnance(soin, medicament);
+    }
+
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException{
         business.ajouterOrdonnance(ordonnance);
     }
@@ -83,17 +96,17 @@ public class Controller {
         return business.getVeterinaires();
     }
 
-    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+    /*public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
         return business.getUnVeterinaire(identifiantVeto);
-    }
+    }*/
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
         return business.getProprietaires();
     }
 
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
+    /*public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
         return business.getUnProprietaire(identifiantProprietaire);
-    }
+    }*/
 
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException {
         business.ajouterNouveauProprio(proprietaire);

@@ -53,15 +53,28 @@ public class Business {
         return daoMedicament.getMedicaments();
     }
 
-    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
-        return daoMedicament.getUnMedicament(identifiantMed);
+    public ArrayList<Medicament> getMedicamentsDeLaFiche(Integer numSoin) throws  MedicamentException{
+        return daoMedicament.getMedicamentsDeLaFiche(numSoin);
     }
+
+    /*public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
+        return daoMedicament.getUnMedicament(identifiantMed);
+    }*/
 
     public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException{
         daoMedicament.ajouterMedicament(medicament);
     }
 
     //ordonnances
+    /*public ArrayList <Ordonnance> getOrdonnances() throws SingletonConnectionException,
+            SoinException, MedicamentException, OrdonnanceException, AnimalException {
+        return daoOrdonnance.getOrdonnances();
+    }*/
+
+    public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException {
+        daoOrdonnance.supprimerOrdonnance(soin, medicament);
+    }
+
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }
@@ -91,9 +104,9 @@ public class Business {
         return daoVeterinaire.getVeterinaires();
     }
 
-    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+    /*public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
         return daoVeterinaire.getUnVeterinaire(identifiantVeto);
-    }
+    }*/
 
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException{
@@ -104,9 +117,9 @@ public class Business {
         daoProprietaire.ajouterNouveauProprio(proprietaire);
     }
 
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
+    /*public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException{
         return daoProprietaire.getUnProprietaire(identifiantProprietaire);
-    }
+    }*/
 
     //recherches
 

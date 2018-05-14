@@ -75,12 +75,17 @@ public class PanneauFicheDeSoin extends JPanel {
             urgenceCheckBox.setSelected(true);
         }
 
-        //TODO
-        // medicamentsDeLaFiche = controller.getLesMedocsDeLaFicheDeSoin();
-        //for (Medicament med : medicamentsDeLaFiche) {
-        //    medicamentsDisposModele.removeElement(med);
-        //    medicamentsChoisisModele.addElement(med);
-        //}
+        try {
+            medicamentsDeLaFiche = controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
+
+            for (Medicament med : medicamentsDeLaFiche) {
+                medicamentsDisposModele.removeElement(med);
+                medicamentsChoisisModele.addElement(med);
+            }
+
+        } catch (MedicamentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public JPanel getPanneauContainerPrincipal() {
@@ -229,16 +234,28 @@ public class PanneauFicheDeSoin extends JPanel {
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                         } else {
+
+
                             //TODO Si un medicament n'est pas affecté il faut rajouter une ordonance uniquement
                             //TODO pour les nouvelles
-                            //TODO Il faudra égament supprimer les ordonances des médicaments retiré.
+                            //TODO Il faudra également supprimer les ordonances des médicaments retirés.
                             //TODO Utiliser medicamentsDeLaFiche pour savoir si il faut ajouter ou supprimer.
-                            SoinAvance soinAvance = nouveauSoinAvance();
-                            controller.modifierSoin(soinAvance);
-                            for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                                controller.ajouterOrdonnance(nouvelleOrdonance(soinAvance.getNumSoin(), soinAvance,
-                                        (Medicament) medicamentsChoisisModele.getElementAt(i)));
+
+                            ArrayList<Medicament>listeDeMedocsAvantModif =
+                                    controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
+
+                            for(Medicament med : listeDeMedocsAvantModif){
+                                if(medicamentsDisposModele.contains(med)){
+                                    controller.supprimerOrdonnance(soinAvanceModif, med);
+                                }
                             }
+                            for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
+                                if(!listeDeMedocsAvantModif.contains(medicamentsChoisisModele.getElementAt(i)))
+                                    controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceModif.getNumSoin(),
+                                            soinAvanceModif, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                            }
+
+                            controller.modifierSoin(soinAvanceModif);
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -247,13 +264,15 @@ public class PanneauFicheDeSoin extends JPanel {
                                 "Attention!", JOptionPane.WARNING_MESSAGE);
                     }
                 } catch (SoinException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 } catch (SingletonConnectionException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 } catch (TextAreaException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 } catch (OrdonnanceException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (MedicamentException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
             if (event.getSource() == reinitialiserButton) {
