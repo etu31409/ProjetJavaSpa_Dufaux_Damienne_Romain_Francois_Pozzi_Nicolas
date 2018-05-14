@@ -15,7 +15,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
     private ResultSet data;
 
     //get
-    public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException {
+    public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException {
         try {
 
             if (connectionUnique == null) {

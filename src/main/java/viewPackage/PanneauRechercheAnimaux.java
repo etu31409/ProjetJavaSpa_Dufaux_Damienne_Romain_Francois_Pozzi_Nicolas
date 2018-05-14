@@ -35,14 +35,14 @@ public class PanneauRechercheAnimaux {
         rechercherButton.addActionListener(new RechercheListener());
         titreFacteurRecherche.setText("Aucune recherche sélectionnée");
 
-        instanciationComboBox();
+        instancieComboBox();
     }
 
     public JPanel getPanneauContainerPrincipal() {
         return panneauContainerPrincipal;
     }
 
-    private void instanciationComboBox() {
+    private void instancieComboBox() {
         veterinairesComboBox.removeAllItems();
         medicamentsComboBox.removeAllItems();
         try {

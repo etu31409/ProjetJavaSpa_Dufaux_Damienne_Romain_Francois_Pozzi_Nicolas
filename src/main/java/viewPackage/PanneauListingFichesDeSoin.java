@@ -33,10 +33,6 @@ public class PanneauListingFichesDeSoin extends JPanel {
         modifierButton.addActionListener(new EcouteurBouton());
     }
 
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
-    }
-
     private void instanciationComboBox() {
         comboBoxListingFiches.addItem("Aucun tri");
         comboBoxListingFiches.addItem("Date du soin");
@@ -44,6 +40,10 @@ public class PanneauListingFichesDeSoin extends JPanel {
         comboBoxListingFiches.addItem("Identifiant de l'animal");
         comboBoxListingFiches.addItem("Identifiant du soin");
         comboBoxListingFiches.setSelectedItem("Aucun tri");
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class EcouteurBouton implements ActionListener {

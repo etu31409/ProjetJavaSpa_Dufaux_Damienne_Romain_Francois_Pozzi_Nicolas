@@ -26,7 +26,7 @@ public class PanneauRechercheProprietaires{
     public PanneauRechercheProprietaires(Controller controller) {
         this.controller = controller;
         instancieListeVeterinaire();
-        rechercheButton.addActionListener(new rechercheListener());
+        rechercheButton.addActionListener(new RechercheListener());
     }
 
     public void instancieListeVeterinaire() {
@@ -46,7 +46,7 @@ public class PanneauRechercheProprietaires{
         return panneauContainerPrincipal;
     }
 
-    private class rechercheListener implements ActionListener {
+    private class RechercheListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
             TableModeleRechercheProprietaires modele;

@@ -35,10 +35,6 @@ public class PanneauListingAnimaux extends JPanel {
         this.fenetrePrincipale = fenetrePrincipale;
     }
 
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
-    }
-
     private void instanciationComboBox() {
         comboBoxTriAnimaux.addItem("Aucun tri");
         comboBoxTriAnimaux.addItem("Date d'arrivée");
@@ -48,6 +44,10 @@ public class PanneauListingAnimaux extends JPanel {
         comboBoxTriAnimaux.addItem("Poids");
         comboBoxTriAnimaux.addItem("Espèce");
         comboBoxTriAnimaux.setSelectedItem("Aucun tri");
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class EcouteurBouton implements ActionListener {
@@ -88,7 +88,7 @@ public class PanneauListingAnimaux extends JPanel {
                 if (resultatRecherche != null) {
                     int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible." +
                                     " Êtes-vous sûr.e de vouloir continuer ?",
-                            "Veuillez confirmer votre choix",
+                                    "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {
                         listeSelectionnee = resultatRecherche.getSelectionModel();
@@ -98,7 +98,7 @@ public class PanneauListingAnimaux extends JPanel {
                             animauxTries = controller.getAnimauxTries(critere);
                             Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
                             SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                            //la méthode getUnSoinAvance peut renvoyer des soinAvance vides
+
                             while (soinASup.getNumRegistre() != null) {
                                 controller.supprimerSoin(soinASup);
                                 soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
@@ -108,9 +108,11 @@ public class PanneauListingAnimaux extends JPanel {
                             JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de données !",
                                     "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                         } catch (AnimalException e) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
                         } catch (SoinException e) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
                         } catch (SingletonConnectionException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                         } catch (Exception e) {
@@ -119,7 +121,8 @@ public class PanneauListingAnimaux extends JPanel {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Vous devez selectionner un élément dans la liste !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Vous devez selectionner un élément dans la liste !", "Erreur !",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
             if(event.getSource() == modifierButton){
@@ -132,18 +135,21 @@ public class PanneauListingAnimaux extends JPanel {
                         Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
                         fenetrePrincipale.afficherPanneauAnimalPourModifier(animalModif);
                         buttonTri.doClick();
-                        //JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié dans la base de données !");
+
                     } catch (AnimalException e) {
-                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
+                                JOptionPane.ERROR_MESSAGE);
                     } catch (SingletonConnectionException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                     catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

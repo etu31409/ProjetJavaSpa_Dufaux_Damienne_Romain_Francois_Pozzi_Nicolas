@@ -28,10 +28,9 @@ public class PanneauProprio {
         this.fenetreProprio = fenetreProprio;
         this.panneauAnimal  = panneauAnimal;
         this.controller = controller;
-        validerButton.addActionListener(new ButtonListener());
-        annulerButton.addActionListener(new ButtonListener());
+        validerButton.addActionListener(new EcouteurBouton());
+        annulerButton.addActionListener(new EcouteurBouton());
     }
-
 
     private Boolean validationFormulaire() {
         Boolean estValide = true;
@@ -54,7 +53,7 @@ public class PanneauProprio {
         return panneauContainerPrincipal;
     }
 
-    private class ButtonListener implements ActionListener {
+    private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == validerButton) {
                 try {
@@ -69,7 +68,8 @@ public class PanneauProprio {
                         fenetreProprio.dispose();
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Certains champs obligatoires ne sont pas remplis !", "Erreur !",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);

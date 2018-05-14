@@ -30,28 +30,24 @@ public class PanneauMedicament{
         this.fenetreMedicament = fenetreMedicament;
         this.panneauFicheDeSoin = panneauFicheDeSoin;
 
-        buttonAnnuler.addActionListener(new ButtonListener());
-        buttonValider.addActionListener(new ButtonListener());
-    }
-
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
+        buttonAnnuler.addActionListener(new EcouteurBouton());
+        buttonValider.addActionListener(new EcouteurBouton());
     }
 
     private Boolean validationFormulaire()throws MedicamentException {
-        if (textFieldNom.getText().equals("") || isDigit(textFieldNom.getText())) {
+        if (textFieldNom.getText().equals("") || sontDesChiffres(textFieldNom.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldNom.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(5, 5, 5, 5)));
             throw new MedicamentException("Nom invalide - Le nom doit être une chaine de caractères non vide !");
         }
-        if (textFieldStockage.getText().equals("") || isDigit(textFieldStockage.getText())) {
+        if (textFieldStockage.getText().equals("") || sontDesChiffres(textFieldStockage.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldStockage.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(5, 5, 5, 5)));
             throw new MedicamentException("Stockage invalide - Le stockage doit être une chaine de caractères non vide !");
         }
-        if (textFieldDosage.getText().equals("") || isDigit(textFieldDosage.getText())) {
+        if (textFieldDosage.getText().equals("") || sontDesChiffres(textFieldDosage.getText())) {
             Border border = BorderFactory.createLineBorder(Color.red);
             textFieldDosage.setBorder(BorderFactory.createCompoundBorder(border,
                     BorderFactory.createEmptyBorder(5, 5, 5, 5)));
@@ -60,7 +56,7 @@ public class PanneauMedicament{
         return true;
     }
 
-    private boolean isDigit(String chaine) {
+    private Boolean sontDesChiffres(String chaine) {
         try {
             Integer.parseInt(chaine);
         } catch (NumberFormatException e){
@@ -68,7 +64,11 @@ public class PanneauMedicament{
         }return true;
     }
 
-    private class ButtonListener implements ActionListener {
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
+    }
+
+    private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == buttonValider){
                 try {
