@@ -1,8 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Proprietaire;
 
 import javax.swing.*;
@@ -73,7 +73,7 @@ public class PanneauProprio {
                     }
                 } catch (ProprietaireException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                } catch (SingletonConnectionException e) {
+                } catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             } else if (event.getSource() == annulerButton) {

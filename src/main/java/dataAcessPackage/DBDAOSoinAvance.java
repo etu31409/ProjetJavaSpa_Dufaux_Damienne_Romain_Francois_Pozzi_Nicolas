@@ -1,8 +1,7 @@
 package dataAcessPackage;
 
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
-import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
 
 import java.sql.*;
@@ -15,7 +14,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
     private ResultSet data;
 
     //get
-    public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException {
+    public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, ConnexionException {
         try {
 
             if (connectionUnique == null) {
@@ -55,7 +54,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException {
+    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -87,7 +86,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException {
+    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -135,7 +134,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
     }
 
     //ajout/suppression/modification
-    public Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException{
+    public Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, ConnexionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -174,7 +173,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
+    public void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -192,7 +191,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException {
+    public void modifierSoin(SoinAvance soin) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();

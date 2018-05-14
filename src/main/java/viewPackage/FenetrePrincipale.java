@@ -2,14 +2,12 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.ConnexionException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 
 public class FenetrePrincipale extends JFrame {
     private Controller controller;
@@ -20,7 +18,7 @@ public class FenetrePrincipale extends JFrame {
             rechercheProprietaires, rechercheAnimaux, statMedicaments;
     private JPanel panneauBienvenue;
 
-    public FenetrePrincipale() throws SingletonConnectionException, ConnexionException{
+    public FenetrePrincipale() throws ConnexionException{
         super("S.P.A, Société Protectrice des Animaux");
         setBounds(100, 0, 1200, 750);
         this.addWindowListener(new WindowAdapter() {
@@ -28,10 +26,7 @@ public class FenetrePrincipale extends JFrame {
                 try{
                     controller.closeBaseDeDonnees();
                     System.exit(0);
-                }catch (SingletonConnectionException s) {
-                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }
-                catch(ConnexionException s){
+                }catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -61,10 +56,7 @@ public class FenetrePrincipale extends JFrame {
                 try{
                     controller.closeBaseDeDonnees();
                     System.exit(0);
-                }catch (SingletonConnectionException s) {
-                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }
-                catch(ConnexionException s){
+                }catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }

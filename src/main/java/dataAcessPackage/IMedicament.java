@@ -2,8 +2,6 @@ package dataAcessPackage;
 
 import exceptionPackage.ConnexionException;
 import exceptionPackage.MedicamentException;
-import exceptionPackage.OrdonnanceException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Medicament;
 import modelPackage.StatMedicament;
 

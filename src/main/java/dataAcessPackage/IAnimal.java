@@ -2,8 +2,6 @@ package dataAcessPackage;
 
 import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
-import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;

@@ -2,7 +2,7 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
@@ -80,7 +80,7 @@ public class PanneauListingAnimaux extends JPanel {
                 catch (AnimalException s) {
                     JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux", "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
-                catch (SingletonConnectionException s) {
+                catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -113,7 +113,7 @@ public class PanneauListingAnimaux extends JPanel {
                         } catch (SoinException e) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !",
                                     JOptionPane.ERROR_MESSAGE);
-                        } catch (SingletonConnectionException e) {
+                        } catch (ConnexionException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                         } catch (Exception e) {
                             System.out.println("Exception: " + e.getMessage());
@@ -139,7 +139,7 @@ public class PanneauListingAnimaux extends JPanel {
                     } catch (AnimalException e) {
                         JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
                                 JOptionPane.ERROR_MESSAGE);
-                    } catch (SingletonConnectionException e) {
+                    } catch (ConnexionException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                     catch(Exception e){

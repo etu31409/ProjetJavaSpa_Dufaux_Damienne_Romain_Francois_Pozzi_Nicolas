@@ -1,7 +1,6 @@
 package dataAcessPackage;
 
 import exceptionPackage.ConnexionException;
-import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;

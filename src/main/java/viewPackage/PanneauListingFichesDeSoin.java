@@ -1,7 +1,7 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
@@ -78,7 +78,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins", "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
-                catch (SingletonConnectionException s) {
+                catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -103,7 +103,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         } catch (SoinException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage());
-                        } catch (SingletonConnectionException e) {
+                        } catch (ConnexionException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         } catch (Exception exception) {
                             System.out.println("Exception : " + exception.getMessage());
@@ -129,7 +129,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SoinException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                    } catch (SingletonConnectionException e) {
+                    } catch (ConnexionException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (Exception e) {
                         System.out.println("Exception : " + e.getMessage());

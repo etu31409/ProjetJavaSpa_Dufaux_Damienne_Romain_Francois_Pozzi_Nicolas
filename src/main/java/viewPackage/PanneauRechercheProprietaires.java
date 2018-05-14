@@ -1,8 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.ProprietaireAnimal;
 import modelPackage.Veterinaire;
@@ -37,7 +37,7 @@ public class PanneauRechercheProprietaires{
             }
         } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -68,7 +68,7 @@ public class PanneauRechercheProprietaires{
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     resultatRecherche.setFillsViewportHeight(true);
                 }
-                catch (SingletonConnectionException e) {
+                catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (ProprietaireException e) {
