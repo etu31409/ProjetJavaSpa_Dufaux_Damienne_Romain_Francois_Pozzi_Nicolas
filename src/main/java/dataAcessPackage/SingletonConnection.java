@@ -2,7 +2,6 @@ package dataAcessPackage;
 
 import exceptionPackage.*;
 import java.sql.*;
-import java.util.*;
 
 public class SingletonConnection {
     private static Connection connectionUnique;

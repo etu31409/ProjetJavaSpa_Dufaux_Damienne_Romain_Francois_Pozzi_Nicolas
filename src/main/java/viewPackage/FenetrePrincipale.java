@@ -34,7 +34,7 @@ public class FenetrePrincipale extends JFrame {
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
 
-        PanneauChargement panneauChargement = new PanneauChargement(new PanneauBienvenue().getPanneauContainerPrincipal(), FenetrePrincipale.this);
+        PanneauChargement panneauChargement = new PanneauChargement(FenetrePrincipale.this);
         frameContainer.add(panneauChargement);
         panneauChargement.getG().start();
         barMenu = new JMenuBar();

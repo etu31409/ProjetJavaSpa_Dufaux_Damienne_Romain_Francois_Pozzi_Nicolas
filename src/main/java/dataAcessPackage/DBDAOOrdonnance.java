@@ -6,8 +6,6 @@ import modelPackage.Ordonnance;
 import modelPackage.SoinAvance;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class DBDAOOrdonnance implements IOrdonnance {
     private Connection connectionUnique;

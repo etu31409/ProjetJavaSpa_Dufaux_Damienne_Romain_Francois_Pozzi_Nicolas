@@ -12,7 +12,6 @@ public interface IVeterinaire {
 
     //get
     ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, ConnexionException;
-    Veterinaire getUnVeterinaire(Integer identifiantVeto) throws ConnexionException, VeterinaireException;
 
     //recherche
     ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)

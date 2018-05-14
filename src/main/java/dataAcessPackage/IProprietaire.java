@@ -12,7 +12,6 @@ public interface IProprietaire {
 
     //get
     ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, ConnexionException;
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws ConnexionException, ProprietaireException;
 
     //recherche
     ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException,

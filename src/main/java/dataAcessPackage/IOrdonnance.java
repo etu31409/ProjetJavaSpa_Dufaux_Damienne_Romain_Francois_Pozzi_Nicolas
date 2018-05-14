@@ -5,14 +5,7 @@ import modelPackage.Medicament;
 import modelPackage.Ordonnance;
 import modelPackage.SoinAvance;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-
 public interface IOrdonnance {
-
-    //get
-    /*ArrayList<Ordonnance> getOrdonnances(Integer ficheDeSoin) throws OrdonnanceException, SingletonConnectionException,
-            MedicamentException, AnimalException, SoinException;*/
 
     //ajout
     void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, ConnexionException;

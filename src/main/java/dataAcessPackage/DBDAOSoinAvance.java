@@ -1,9 +1,7 @@
 package dataAcessPackage;
 
 import exceptionPackage.ConnexionException;
-import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
-import exceptionPackage.VeterinaireException;
 import modelPackage.SoinAvance;
 
 import java.sql.*;
@@ -16,46 +14,6 @@ public class DBDAOSoinAvance implements ISoinAvance {
     private ResultSet data;
 
     //get
-    public ArrayList<SoinAvance> getSoinsAvances() throws SoinException, ConnexionException {
-        try {
-
-            if (connectionUnique == null) {
-                connectionUnique = SingletonConnection.getUniqueInstance();
-            }
-
-            sqlInstruction = "select * from spabd.soinAvance";
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            data = statement.executeQuery();
-
-            ArrayList<SoinAvance> tousLesSoins = new ArrayList<SoinAvance>();
-
-            while (data.next()) {
-                GregorianCalendar dateSoin = new GregorianCalendar();
-                SoinAvance soin = new SoinAvance();
-                soin.setNumRegistre(data.getInt("numSoin"));
-                soin.setNumRegistre(data.getInt("numRegistre"));
-                soin.setIntitule(data.getString("intitule"));
-                soin.setPartieDuCorps(data.getString("partieDuCorps"));
-                dateSoin.setTime(data.getDate("dateSoin"));
-                soin.setDateSoin(dateSoin);
-                soin.setVeterinaire(data.getInt("identifiantVeto"));
-                soin.setEstUrgent(data.getBoolean("estUrgent"));
-
-                String remarque = data.getString("remarque");
-                if (!data.wasNull()) {
-                    soin.setRemarque(remarque);
-                }
-                tousLesSoins.add(soin);
-            }
-
-            connectionUnique.close();
-            return tousLesSoins;
-
-        } catch (SQLException e) {
-            throw new SoinException();
-        }
-    }
-
     public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {

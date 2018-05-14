@@ -12,7 +12,6 @@ public interface IMedicament {
 
     //get
     ArrayList<Medicament> getMedicaments() throws MedicamentException, ConnexionException;
-    Medicament getUnMedicament(int identifiantMed)throws MedicamentException, ConnexionException;
 
     ArrayList<Medicament> getMedicamentsDeLaFiche(Integer numSoin) throws MedicamentException, ConnexionException;
 

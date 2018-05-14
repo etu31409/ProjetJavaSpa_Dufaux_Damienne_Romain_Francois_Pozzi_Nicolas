@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
 public class FenetreMedicament extends JFrame {
     private Container frameContainer ;
     private JPanel panneauMedicament;

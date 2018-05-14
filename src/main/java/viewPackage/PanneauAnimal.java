@@ -23,7 +23,6 @@ public class PanneauAnimal extends JPanel {
     private JSpinner spinnerPoids;
     private JSpinner spinnerDateNaissance;
     private JSpinner spinnerDatePuce;
-
     private JTextField nomTextField;
     private JTextField especeTextField;
     private JTextField raceTextField;
@@ -32,13 +31,9 @@ public class PanneauAnimal extends JPanel {
     private JTextField couleurTextField;
     private JTextField numPuceTextField;
     private JTextField localisationPuceTextField;
-
     private JRadioButton femelleRadioButton, maleRadioButton, steriliseRadioButton, nonSteriliseRadioButton;
-
     private JButton ajouterUnProprietaireButton, validerButton, reinitialiserButton, retourButton;
-
     private JComboBox comboBoxListeProprietaires;
-
     private JCheckBox dateDeNaissanceCheckBox;
     private JCheckBox dateDAttributionPuceCheckBox;
     private JCheckBox proprioCheckBox;
@@ -143,66 +138,6 @@ public class PanneauAnimal extends JPanel {
             comboBoxListeProprietaires.setSelectedIndex(animalModif.getProprietaire()-1);
             comboBoxListeProprietaires.setEnabled(true);
         }
-    }
-
-    private Animal creationAnimal(){
-        Animal animal = new Animal();
-        try {
-            if(nomTextField.getText().isEmpty())animal.setNom(null);
-            else animal.setNom(nomTextField.getText());
-            animal.setPoids((Double) spinnerPoids.getValue());
-            if (femelleRadioButton.isSelected()) animal.setSexe("F");
-            else animal.setSexe("M");
-            animal.setEspece(especeTextField.getText());
-            animal.setRace(raceTextField.getText());
-            if (dateDeNaissanceCheckBox.isSelected()) {
-                GregorianCalendar date = new GregorianCalendar();
-                date.setTime((Date) spinnerDateNaissance.getValue());
-                animal.setDateNaissance(date);
-            }
-            animal.setCouleurDePeau(couleurTextField.getText());
-            try {
-                animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
-            }
-            catch (Exception error) {
-                animal.setNumPuce(null);
-            }
-            if(localisationPuceTextField.getText().isEmpty())animal.setLocalisationPuce(null);
-            else animal.setLocalisationPuce(localisationPuceTextField.getText());
-            if (dateDAttributionPuceCheckBox.isSelected()) {
-                GregorianCalendar date = new GregorianCalendar();
-                date.setTime((Date) spinnerDatePuce.getValue());
-                animal.setDateAttributionPuce(date);
-            }
-            try {
-                animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
-            }
-            catch (Exception erreur) {
-                animal.setNumTatouage(null);
-            }
-            if(localisationTatouageTextField.getText().isEmpty())animal.setLocalisationTatouage(null);
-            else animal.setLocalisationTatouage(localisationTatouageTextField.getText());
-            if(steriliseRadioButton.isSelected()){
-                animal.setEstSterilise(true);
-            }else{
-                animal.setEstSterilise(false);
-            }
-            if(proprioCheckBox.isSelected()){
-                try {
-                    Proprietaire proprietaire = (Proprietaire) comboBoxListeProprietaires.getSelectedItem();
-                    animal.setProprietaire(proprietaire.getIdentifiantProprio());
-                } catch (Exception erreur) {
-                    comboBoxListeProprietaires = null;
-                }
-            }
-        }
-        catch(AnimalException exception){
-            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        }
-        if(modification){
-            animal.setNumRegistre(animalModif.getNumRegistre());
-        }
-        return animal;
     }
 
     private Boolean validationFormulaire(){
@@ -332,7 +267,7 @@ public class PanneauAnimal extends JPanel {
     }
 
     private void reinitialisation(){
-        reinitialiserBorder();
+        reinitialiserLesBords();
         instanciationSpinnerPoids(0);
         instanciationSpinnerDate(spinnerDateNaissance);
         instanciationSpinnerDate(spinnerDatePuce);
@@ -357,7 +292,7 @@ public class PanneauAnimal extends JPanel {
         spinnerDateNaissance.setEnabled(false);
     }
 
-    private void reinitialiserBorder(){
+    private void reinitialiserLesBords(){
         spinnerDatePuce.setBorder(baseBorder);
         spinnerDateNaissance.setBorder(baseBorder);
         spinnerPoids.setBorder(baseBorder);
@@ -397,6 +332,70 @@ public class PanneauAnimal extends JPanel {
         spinnerPoids.setModel(new SpinnerNumberModel(valeur, 0.00, 10000, 0.10));
     }
 
+    private Animal creationAnimal(){
+        Animal animal = new Animal();
+        try {
+            if(nomTextField.getText().isEmpty())animal.setNom(null);
+            else animal.setNom(nomTextField.getText());
+            animal.setPoids((Double) spinnerPoids.getValue());
+            if (femelleRadioButton.isSelected()) animal.setSexe("F");
+            else animal.setSexe("M");
+            animal.setEspece(especeTextField.getText());
+            animal.setRace(raceTextField.getText());
+            if (dateDeNaissanceCheckBox.isSelected()) {
+                GregorianCalendar date = new GregorianCalendar();
+                date.setTime((Date) spinnerDateNaissance.getValue());
+                animal.setDateNaissance(date);
+            }
+            animal.setCouleurDePeau(couleurTextField.getText());
+            try {
+                animal.setNumPuce(Integer.parseInt(numPuceTextField.getText()));
+            }
+            catch (Exception error) {
+                animal.setNumPuce(null);
+            }
+            if(localisationPuceTextField.getText().isEmpty())animal.setLocalisationPuce(null);
+            else animal.setLocalisationPuce(localisationPuceTextField.getText());
+            if (dateDAttributionPuceCheckBox.isSelected()) {
+                GregorianCalendar date = new GregorianCalendar();
+                date.setTime((Date) spinnerDatePuce.getValue());
+                animal.setDateAttributionPuce(date);
+            }
+            try {
+                animal.setNumTatouage(Integer.parseInt(numTatouageTextField.getText()));
+            }
+            catch (Exception erreur) {
+                animal.setNumTatouage(null);
+            }
+            if(localisationTatouageTextField.getText().isEmpty())animal.setLocalisationTatouage(null);
+            else animal.setLocalisationTatouage(localisationTatouageTextField.getText());
+            if(steriliseRadioButton.isSelected()){
+                animal.setEstSterilise(true);
+            }else{
+                animal.setEstSterilise(false);
+            }
+            if(proprioCheckBox.isSelected()){
+                try {
+                    Proprietaire proprietaire = (Proprietaire) comboBoxListeProprietaires.getSelectedItem();
+                    animal.setProprietaire(proprietaire.getIdentifiantProprio());
+                } catch (Exception erreur) {
+                    comboBoxListeProprietaires = null;
+                }
+            }
+        }
+        catch(AnimalException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }
+        if(modification){
+            animal.setNumRegistre(animalModif.getNumRegistre());
+        }
+        return animal;
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
+    }
+
     private class EcouteurDeCheckBox implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == proprioCheckBox){
@@ -432,7 +431,7 @@ public class PanneauAnimal extends JPanel {
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == validerButton){
                 erreurMessage = "Certains champs sont invalides !\n";
-                reinitialiserBorder();
+                reinitialiserLesBords();
                 if (validationFormulaire()) {
                     try{
                         if (modification){
@@ -475,10 +474,6 @@ public class PanneauAnimal extends JPanel {
                 new FenetreProprio(controller,PanneauAnimal.this);
             }
         }
-    }
-
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
     }
 }
 

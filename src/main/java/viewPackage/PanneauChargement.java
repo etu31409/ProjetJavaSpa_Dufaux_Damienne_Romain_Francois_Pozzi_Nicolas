@@ -8,7 +8,7 @@ public class PanneauChargement extends JPanel {
     private JProgressBar barreDeChargement;
     private JPanel container;
 
-    public PanneauChargement(JPanel panneauACharger, FenetrePrincipale fenetrePrincipale){
+    public PanneauChargement(FenetrePrincipale fenetrePrincipale){
 
         setLayout(new BorderLayout());
         add(barreDeChargement, BorderLayout.CENTER);
