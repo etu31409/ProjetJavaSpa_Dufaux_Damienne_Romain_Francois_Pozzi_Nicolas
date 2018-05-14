@@ -1,7 +1,7 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import exceptionPackage.SingletonConnectionException;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.VeterinaireOrdonnance;
 import viewPackage.tableModele.TableModeleRechercheVeterinaires;
@@ -98,7 +98,7 @@ public class PanneauRechercheVeterinaires{
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                     resultatRecherche.setFillsViewportHeight(true);
                 }
-                catch (SingletonConnectionException e) {
+                catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
                 catch (VeterinaireException e) {

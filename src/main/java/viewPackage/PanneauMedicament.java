@@ -4,8 +4,8 @@ import controllerPackage.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import exceptionPackage.ConnexionException;
 import exceptionPackage.MedicamentException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Medicament;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -86,7 +86,7 @@ public class PanneauMedicament{
                     }
                 }catch (MedicamentException e){
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }catch (SingletonConnectionException e){
+                }catch (ConnexionException e){
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
 

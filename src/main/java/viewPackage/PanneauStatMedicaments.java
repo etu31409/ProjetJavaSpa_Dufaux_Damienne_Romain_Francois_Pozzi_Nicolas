@@ -1,8 +1,8 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.MedicamentException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.StatMedicament;
 import viewPackage.tableModele.TableModeleStatistiquesMed;
 
@@ -102,7 +102,7 @@ public class PanneauStatMedicaments {
                     scrollPane.createVerticalScrollBar();
 
                 }
-                catch (SingletonConnectionException e) {
+                catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (MedicamentException e){

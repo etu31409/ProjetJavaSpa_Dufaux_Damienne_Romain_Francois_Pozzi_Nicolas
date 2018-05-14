@@ -2,8 +2,8 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
+import exceptionPackage.ConnexionException;
 import exceptionPackage.MedicamentException;
-import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.VeterinaireException;
 import modelPackage.Animal;
 import modelPackage.Medicament;
@@ -54,7 +54,7 @@ public class PanneauRechercheAnimaux {
             }
         } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -117,7 +117,7 @@ public class PanneauRechercheAnimaux {
                 catch (AnimalException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
-                catch (SingletonConnectionException e) {
+                catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
             }

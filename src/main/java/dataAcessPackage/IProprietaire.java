@@ -2,12 +2,10 @@ package dataAcessPackage;
 
 import exceptionPackage.ConnexionException;
 import exceptionPackage.ProprietaireException;
-import exceptionPackage.SingletonConnectionException;
 import modelPackage.Proprietaire;
 import modelPackage.ProprietaireAnimal;
 import modelPackage.Veterinaire;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IProprietaire {
