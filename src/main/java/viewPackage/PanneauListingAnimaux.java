@@ -10,8 +10,12 @@ import modelPackage.SoinAvance;
 import viewPackage.tableModele.TableModeleListeAnimaux;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.*;
 
 public class PanneauListingAnimaux extends JPanel {
@@ -59,6 +63,7 @@ public class PanneauListingAnimaux extends JPanel {
             if(event.getSource() == buttonTri){
                 try {
                     String critere = (String)comboBoxTriAnimaux.getSelectedItem();
+
                     animauxTries = controller.getAnimauxTries(critere);
 
                     modele = new TableModeleListeAnimaux(animauxTries);
@@ -74,6 +79,9 @@ public class PanneauListingAnimaux extends JPanel {
 
                     listingScrollPane.createHorizontalScrollBar();
                     listingScrollPane.createVerticalScrollBar();
+
+                    resultatRecherche.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
                     resultatRecherche.setFillsViewportHeight(true);
                 }
                 catch (AnimalException s) {

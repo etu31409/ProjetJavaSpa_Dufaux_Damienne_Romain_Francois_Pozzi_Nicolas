@@ -76,6 +76,7 @@ public class PanneauFicheDeSoin extends JPanel {
             urgenceCheckBox.setSelected(true);
         }
         comboBoxAnimaux.setSelectedIndex(soinAvanceAvantModification.getNumRegistre()-1);
+        comboBoxAnimaux.setEnabled(false);
         comboBoxVeterinaires.setSelectedIndex(soinAvanceAvantModification.getVeterinaire()-1);
 
         try {
@@ -288,8 +289,7 @@ public class PanneauFicheDeSoin extends JPanel {
                             SoinAvance soinAvanceAModifier = nouveauSoinAvance();
                             soinAvanceAModifier.setNumSoin(soinAvanceAvantModification.getNumSoin());
                             soinAvanceAModifier.setDateSoin(soinAvanceAvantModification.getDateSoin());
-                            if(soinAvanceAModifier.getNumRegistre() != soinAvanceAvantModification.getNumRegistre())
-                                controller.modifierOrdonnances(soinAvanceAModifier);
+
                             controller.modifierSoin(soinAvanceAModifier);
 
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
