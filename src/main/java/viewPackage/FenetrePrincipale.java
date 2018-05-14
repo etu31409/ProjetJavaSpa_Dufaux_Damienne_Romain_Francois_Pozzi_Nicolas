@@ -1,12 +1,15 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.ConnexionException;
+import exceptionPackage.SingletonConnectionException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class FenetrePrincipale extends JFrame {
     private Controller controller;
@@ -17,13 +20,20 @@ public class FenetrePrincipale extends JFrame {
             rechercheProprietaires, rechercheAnimaux, statMedicaments;
     private JPanel panneauBienvenue;
 
-    public FenetrePrincipale() {
+    public FenetrePrincipale() throws SingletonConnectionException, ConnexionException{
         super("S.P.A, Société Protectrice des Animaux");
         setBounds(100, 0, 1200, 750);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                //controller.closeBaseDeDonnees();
-                System.exit(0);
+                try{
+                    controller.closeBaseDeDonnees();
+                    System.exit(0);
+                }catch (SingletonConnectionException s) {
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+                catch(ConnexionException s){
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         frameContainer = this.getContentPane();
@@ -44,7 +54,21 @@ public class FenetrePrincipale extends JFrame {
         spa.add(accueil);
 
         quitter = new JMenuItem("Quitter");
-        quitter.addActionListener(new ExitListener());
+        //quitter.addActionListener(new ExitListener());
+        quitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try{
+                    controller.closeBaseDeDonnees();
+                    System.exit(0);
+                }catch (SingletonConnectionException s) {
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+                catch(ConnexionException s){
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         spa.add(quitter);
 
@@ -142,13 +166,20 @@ public class FenetrePrincipale extends JFrame {
         FenetrePrincipale.this.setVisible(true);
     }
 
-    private class ExitListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            //controller.closeBaseDeDonnees();
-            System.exit(0);
+    /*private class ExitListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) throws SingletonConnectionException, ConnexionException{
+            try{
+                controller.closeBaseDeDonnees();
+                System.exit(0);
+            }catch (SingletonConnectionException s) {
+                JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(ConnexionException s){
+                JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-
+    */
     private class EcouteurBarMenu implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == accueil) {

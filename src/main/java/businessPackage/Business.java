@@ -4,17 +4,21 @@ import dataAcessPackage.*;
 import exceptionPackage.*;
 import modelPackage.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class Business {
-    IAnimal daoAnimal;
-    IMedicament daoMedicament;
-    IProprietaire daoProprietaire;
-    IVeterinaire daoVeterinaire;
-    ISoinAvance daoSoinAvance;
-    IOrdonnance daoOrdonnance;
+    private IAnimal daoAnimal;
+    private IMedicament daoMedicament;
+    private IProprietaire daoProprietaire;
+    private IVeterinaire daoVeterinaire;
+    private ISoinAvance daoSoinAvance;
+    private IOrdonnance daoOrdonnance;
+    private SingletonConnection singletonConnection;
+    private Connection connectionUnique;
 
     public Business() {
         daoAnimal = new DBDAOAnimal();
@@ -214,5 +218,19 @@ public class Business {
             return  base / compteurGlobal;
         else
             throw  new IllegalArgumentException("La division par 0 est impossible !");
+    }
+    //fermer connexion
+    public void closeBaseDeDonnees() throws SingletonConnectionException, ConnexionException{
+        try{
+            if(connectionUnique == null){
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            connectionUnique.close();
+        }catch (SingletonConnectionException e) {
+            throw new SingletonConnectionException();
+        }
+        catch(SQLException e){
+            throw new ConnexionException("Erreur lors de la fermeture de la connexion !");
+        }
     }
 }

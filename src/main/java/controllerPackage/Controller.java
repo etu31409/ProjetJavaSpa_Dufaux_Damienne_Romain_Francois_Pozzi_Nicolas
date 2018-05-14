@@ -142,4 +142,9 @@ public class Controller {
             throws SingletonConnectionException, MedicamentException{
         return business.getStatistiquesMedicaments(dateDebutZoneRecherche, dateFinZoneRecherche);
     }
+
+    //fermer connexion
+    public void closeBaseDeDonnees() throws SingletonConnectionException, ConnexionException{
+        business.closeBaseDeDonnees();
+    }
 }

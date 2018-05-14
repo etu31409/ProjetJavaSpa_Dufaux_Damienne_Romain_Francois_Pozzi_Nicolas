@@ -473,17 +473,14 @@ public class DBDAOAnimal implements IAnimal {
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
-            sqlInstruction = "delete from SoinAvance where numRegistre = ?;";
+            sqlInstruction = "delete from spabd.SoinAvance where numRegistre = ?;";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
-            sqlInstruction = "delete from Animal where numRegistre = ?;";
+            sqlInstruction = "delete from spabd.Animal where numRegistre = ?;";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
             preparedStatement.setInt(1, animal.getNumRegistre());
             preparedStatement.executeUpdate();
-        }
-        catch(SingletonConnectionException exception){
-            throw new SingletonConnectionException();
         }
         catch (SQLException e) {
             throw new AnimalException("Impossible de supprimer l'animal");
