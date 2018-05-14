@@ -27,7 +27,7 @@
     <rowspec value="center:max(d;32px):noGrow"/>
     <rowspec value="top:5dlu:noGrow"/>
     <rowspec value="fill:max(d;26px):noGrow"/>
-    <rowspec value="top:32dlu:noGrow"/>
+    <rowspec value="top:32px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="center:34px:noGrow"/>
@@ -40,7 +40,7 @@
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="fill:m:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:m:grow"/>
+    <colspec value="fill:46px:grow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="left:5dlu:noGrow"/>
@@ -48,7 +48,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:m:grow"/>
+    <colspec value="fill:46px:grow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:32dlu:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>

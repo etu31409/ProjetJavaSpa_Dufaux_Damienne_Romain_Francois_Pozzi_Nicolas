@@ -156,6 +156,13 @@ public class FenetrePrincipale extends JFrame {
         frameContainer.validate();
     }
 
+    public void afficherListingFichesDeSoin() {
+        frameContainer.removeAll();
+        frameContainer.add(new PanneauListingFichesDeSoin(controller, FenetrePrincipale.this).getPanneauContainerPrincipal());
+        frameContainer.repaint();
+        frameContainer.validate();
+    }
+
     public void retourAccueil() {
         frameContainer.removeAll();
         frameContainer.setLayout(new BorderLayout());
