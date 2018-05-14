@@ -70,7 +70,9 @@ public class PanneauAnimal extends JPanel {
     public PanneauAnimal(Controller controller, FenetrePrincipale fenetre, Animal animalModif) throws NullPointerException{
         modification = animalModif != null;
         if (modification == false){
-            throw new NullPointerException("Erreur lors de la modification de l'animal!\nContacter votre administrateur système!");
+            throw new NullPointerException("Erreur lors de la modification de l'animal!\n" +
+                    "Contactez votre administrateur système!");
+
         }
         baseBorder = nomTextField.getBorder();
         this.fenetre = fenetre;

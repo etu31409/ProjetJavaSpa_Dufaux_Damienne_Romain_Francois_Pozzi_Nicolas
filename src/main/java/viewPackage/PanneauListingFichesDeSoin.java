@@ -51,7 +51,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
 
             ListSelectionModel listeSelectionnee;
             TableModeleListeSoins modele;
-            ArrayList<SoinAvance> soinsTries = new ArrayList<>();
+            ArrayList<SoinAvance> soinsTries;
 
             if(event.getSource() == trierButton){
                 try {
@@ -86,7 +86,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 if (resultatRecherche != null) {
                     int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. " +
                                     "Êtes-vous sûr.e de vouloir continuer ?",
-                            "Veuillez confirmer votre choix",
+                                    "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {
                         listeSelectionnee = resultatRecherche.getSelectionModel();
@@ -124,8 +124,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                         soinsTries = controller.getSoinsTries(critere);
                         SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
                         fenetrePrincipale.afficherPanneauSoinPourModifier(soinAModif);
-                        trierButton.doClick();
-                        //JOptionPane.showMessageDialog(null, "Le soin a été correctement modifié dans la base de données !");
+
                     } catch (VeterinaireException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (SoinException e) {
@@ -137,7 +136,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !",
+                    JOptionPane.showMessageDialog(null,"Vous devez sélectionner un élément dans la liste !",  "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }

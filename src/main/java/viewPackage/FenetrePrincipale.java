@@ -22,6 +22,7 @@ public class FenetrePrincipale extends JFrame {
         setBounds(100, 0, 1200, 750);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                controller.closeBaseDeDonnees();
                 System.exit(0);
             }
         });
@@ -143,6 +144,7 @@ public class FenetrePrincipale extends JFrame {
 
     private class ExitListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            controller.closeBaseDeDonnees();
             System.exit(0);
         }
     }
