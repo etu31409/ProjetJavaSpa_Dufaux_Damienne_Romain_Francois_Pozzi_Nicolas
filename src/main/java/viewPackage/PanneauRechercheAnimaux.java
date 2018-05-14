@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class PanneauRechercheAnimaux {
 
-
     private JCheckBox veterinairesCheckBox;
     private JCheckBox medicamentsCheckBox;
     private JButton rechercherButton;
@@ -38,10 +37,6 @@ public class PanneauRechercheAnimaux {
         instancieComboBox();
     }
 
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
-    }
-
     private void instancieComboBox() {
         veterinairesComboBox.removeAllItems();
         medicamentsComboBox.removeAllItems();
@@ -59,6 +54,10 @@ public class PanneauRechercheAnimaux {
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class RechercheListener implements ActionListener {

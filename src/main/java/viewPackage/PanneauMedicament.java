@@ -18,7 +18,6 @@ public class PanneauMedicament{
     private FenetreMedicament fenetreMedicament;
     private PanneauFicheDeSoin panneauFicheDeSoin;
     private JPanel panneauContainerPrincipal;
-
     private JButton buttonAnnuler;
     private JButton buttonValider;
     private JTextField textFieldNom;

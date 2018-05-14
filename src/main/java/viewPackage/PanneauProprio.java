@@ -18,7 +18,6 @@ public class PanneauProprio {
     private Proprietaire proprietaire;
     private PanneauAnimal panneauAnimal;
     private JPanel panneauContainerPrincipal;
-
     private JTextField textFieldNom;
     private JTextField textFieldPrenom;
     private JButton annulerButton;

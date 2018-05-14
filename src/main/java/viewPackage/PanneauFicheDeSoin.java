@@ -90,10 +90,6 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    public JPanel getPanneauContainerPrincipal() {
-        return panneauContainerPrincipal;
-    }
-
     public void instancieListeVeterinaire() {
         comboBoxVeterinaires.removeAllItems();
         try {
@@ -140,31 +136,6 @@ public class PanneauFicheDeSoin extends JPanel {
         }
     }
 
-    private boolean validerChamps() throws TextAreaException {
-        textAreaIntituleSoin.setBorder(null);
-        if (textAreaIntituleSoin.getText().isEmpty() || isDigit(textAreaIntituleSoin.getText())) {
-            throw new TextAreaException(textAreaIntituleSoin, "L'intitulé du soin doit être une chaîne de caractères non vide !");
-        }
-        textAreaPartieDuCorps.setBorder(null);
-        if (textAreaPartieDuCorps.getText().isEmpty() || isDigit(textAreaPartieDuCorps.getText())) {
-            throw new TextAreaException(textAreaPartieDuCorps, "La partie du corps doit être une chaîne de caractères non vide !");
-        }
-        return true;
-    }
-
-    private boolean isDigit(String chaine) {
-        try {
-            Integer.parseInt(chaine);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public void ajouterMedicamentAListeMedicamentsDispos(Medicament medicament) {
-        medicamentsDisposModele.addElement(medicament);
-    }
-
     private void reinitialiser() {
         urgenceCheckBox.setSelected(false);
         instancieListeVeterinaire();
@@ -180,6 +151,31 @@ public class PanneauFicheDeSoin extends JPanel {
             fenetreMedicament.dispose();
             fenetreMedicament = null;
         }
+    }
+
+    private boolean validerChamps() throws TextAreaException {
+        textAreaIntituleSoin.setBorder(null);
+        if (textAreaIntituleSoin.getText().isEmpty() || estUnNombre(textAreaIntituleSoin.getText())) {
+            throw new TextAreaException(textAreaIntituleSoin, "L'intitulé du soin doit être une chaîne de caractères non vide !");
+        }
+        textAreaPartieDuCorps.setBorder(null);
+        if (textAreaPartieDuCorps.getText().isEmpty() || estUnNombre(textAreaPartieDuCorps.getText())) {
+            throw new TextAreaException(textAreaPartieDuCorps, "La partie du corps doit être une chaîne de caractères non vide !");
+        }
+        return true;
+    }
+
+    private boolean estUnNombre (String chaine) {
+        try {
+            Integer.parseInt(chaine);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public void ajouterMedicamentAListeMedicamentsDispos(Medicament medicament) {
+        medicamentsDisposModele.addElement(medicament);
     }
 
     private SoinAvance nouveauSoinAvance() {
@@ -208,6 +204,10 @@ public class PanneauFicheDeSoin extends JPanel {
         } catch (Exception e) {
             throw new SoinException("Erreur création ordonnance");
         }
+    }
+
+    public JPanel getPanneauContainerPrincipal() {
+        return panneauContainerPrincipal;
     }
 
     private class EcouteurBouton implements ActionListener {

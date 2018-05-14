@@ -15,7 +15,6 @@ import java.util.*;
 
 public class PanneauListingAnimaux extends JPanel {
     private Controller controller;
-
     private JPanel panneauContainerPrincipal;
     private JComboBox comboBoxTriAnimaux;
     private JButton buttonTri;

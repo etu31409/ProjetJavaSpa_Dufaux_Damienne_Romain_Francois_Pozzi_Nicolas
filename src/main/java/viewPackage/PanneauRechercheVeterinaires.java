@@ -28,7 +28,6 @@ public class PanneauRechercheVeterinaires{
     private JButton rechercherButton;
     private JScrollPane scrollPane;
 
-
     public PanneauRechercheVeterinaires(Controller controller){
         this.controller = controller;
         rechercherButton.addActionListener(new RechercheListener());
