@@ -44,32 +44,6 @@ public class DBDAOMedicament implements IMedicament {
         }
     }
 
-    /*public Medicament getUnMedicament(int identifiantMed)throws MedicamentException, ConnexionException{
-        try {
-            if (connectionUnique == null) {
-                connectionUnique = SingletonConnection.getUniqueInstance();
-            }
-
-            sqlInstruction = "select * from spabd.medicament where identifiantMed = ?";
-            PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, identifiantMed);
-            data = statement.executeQuery();
-
-            Medicament medicament = new Medicament();
-
-            while (data.next()) {
-                medicament.setIdentifiantMed(data.getInt("identifiantMed"));
-                medicament.setStockage(data.getString("stockage"));
-                medicament.setDosage(data.getString("dosage"));
-                medicament.setNomMedic(data.getString("nomMedic"));
-            }
-            return medicament;
-        }
-        catch (SQLException e) {
-            throw new MedicamentException("Impossible de récuperer un, médicament dans la base de données");
-        }
-    }*/
-
     public ArrayList <Medicament> getMedicamentsDeLaFiche(Integer ficheDeSoin)throws MedicamentException, ConnexionException{
         try {
             if (connectionUnique == null) {
@@ -77,6 +51,8 @@ public class DBDAOMedicament implements IMedicament {
             }
             sqlInstruction = "select * from spabd.medicament inner join spabd.ordonnance " +
                     "on (medicament.identifiantMed = ordonnance.identifiantMed) " +
+                    "inner join spabd.soinAvance " +
+                    "on (ordonnance.numSoin = soinAvance.numSoin) " +
                     "where ordonnance.numSoin = ?;";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             statement.setInt(1, ficheDeSoin);

@@ -49,13 +49,14 @@ public class PanneauFicheDeSoin extends JPanel {
     public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceModif) {
         titreDeLaPage.setText("Modifier une fiche de soin");
         modification = (soinAvanceModif != null);
-        if (modification == false) {
+        if (!modification) {
             throw new NullPointerException("Erreur lors de la modification de la fiche de soin!\n" +
                     "Contactez votre administrateur système!");
         }
         this.fenetre = fenetre;
         this.controller = controller;
         this.soinAvanceModif = soinAvanceModif;
+
         reinitialiser();
 
         ajouterButton.addActionListener(new EcouteurBouton());
@@ -78,10 +79,15 @@ public class PanneauFicheDeSoin extends JPanel {
         try {
             medicamentsDeLaFiche = controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
 
-            for (Medicament med : medicamentsDeLaFiche) {
-                medicamentsDisposModele.removeElement(med);
-                medicamentsChoisisModele.addElement(med);
+            for (int i = 0; i < medicamentsDeLaFiche.size() ; i++) {
+                Integer identifiantMedListe = ((Medicament) medicamentsDisposModele.get(i)).getIdentifiantMed();
+                if(medicamentsDeLaFiche.get(i).getIdentifiantMed().equals(identifiantMedListe)){
+                    //medicamentsDisposModele.remove(i);
+                    medicamentsDisposModele.removeElementAt(i);
+                }
+                medicamentsChoisisModele.addElement(medicamentsDeLaFiche.get(i));
             }
+
 
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -202,7 +208,7 @@ public class PanneauFicheDeSoin extends JPanel {
             ord.setSoinAvance(idSoinAvance);
             return ord;
         } catch (Exception e) {
-            throw new SoinException("Erreur création ordonnance");
+            throw new SoinException("Erreur lors de la création de l'ordonnance");
         }
     }
 
@@ -224,7 +230,6 @@ public class PanneauFicheDeSoin extends JPanel {
             }
             if (event.getSource() == validerButton) {
                 try {
-
                     if (validerChamps()) {
                         if (!modification) {
                             SoinAvance soinAvance = nouveauSoinAvance();
@@ -235,14 +240,13 @@ public class PanneauFicheDeSoin extends JPanel {
                             }
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement ajoutée à la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-
+                        }
+                        else {
                             ArrayList<Medicament>listeDeMedocsAvantModif =
                                     controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
 
                             for(int j = 0; j < listeDeMedocsAvantModif.size(); j++){
                                 for (int i = 0; i < medicamentsDisposModele.getSize(); i++) {
-
                                     int medocListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
                                     int medocListeDispo = ((Medicament)medicamentsDisposModele.getElementAt(i)).getIdentifiantMed();
                                     if(medocListeAvantModif == medocListeDispo)
