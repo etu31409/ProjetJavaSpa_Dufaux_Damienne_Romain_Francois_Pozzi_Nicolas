@@ -17,7 +17,6 @@ public class Business {
     private IVeterinaire daoVeterinaire;
     private ISoinAvance daoSoinAvance;
     private IOrdonnance daoOrdonnance;
-    private SingletonConnection singletonConnection;
     private Connection connectionUnique;
 
     public Business() {

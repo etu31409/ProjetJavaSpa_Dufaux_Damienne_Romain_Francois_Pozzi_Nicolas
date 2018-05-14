@@ -3,7 +3,6 @@ package dataAcessPackage;
 import exceptionPackage.*;
 import exceptionPackage.MedicamentException;
 import modelPackage.Medicament;
-import modelPackage.SoinAvance;
 import modelPackage.StatMedicament;
 
 import java.sql.*;

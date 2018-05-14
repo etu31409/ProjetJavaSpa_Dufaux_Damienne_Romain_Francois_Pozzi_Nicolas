@@ -70,7 +70,8 @@ public class DBDAOProprietaire implements IProprietaire{
     }
 
     //recherche
-    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, ConnexionException {
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire)
+            throws ProprietaireException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();

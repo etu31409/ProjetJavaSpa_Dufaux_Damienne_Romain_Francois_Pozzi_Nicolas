@@ -6,7 +6,6 @@ import modelPackage.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 public class Controller {
     private Business business;
@@ -25,13 +24,10 @@ public class Controller {
         return business.getAnimauxTries(critere);
     }
 
-    /*public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
-        return business.getUnAnimal(numRegistre);
-    }*/
-
     public void ajouterAnimal(Animal animal) throws AnimalException, ConnexionException{
         business.ajouterAnimal(animal);
     }
+
     public void supprimerAnimal(Animal animal) throws AnimalException, ConnexionException{
         business.supprimerAnimal(animal);
     }
@@ -75,6 +71,7 @@ public class Controller {
     public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException, VeterinaireException{
         return business.getSoinsTries(critere);
     }
+
     public void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException {
         business.supprimerSoin(soin);
     }
@@ -106,6 +103,7 @@ public class Controller {
             throws ConnexionException, VeterinaireException {
         return business.getResultatRechercheVeterinaireDate(dateDebut, dateFin);
     }
+
     public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
             ConnexionException{
         return business.getResultatRecherchAnimauxVeterinaire(selectionVeterinaire);
@@ -129,7 +127,7 @@ public class Controller {
     }
 
     //fermer connexion
-    public void closeBaseDeDonnees() throws ConnexionException, ConnexionException{
+    public void closeBaseDeDonnees() throws ConnexionException{
         business.closeBaseDeDonnees();
     }
 }

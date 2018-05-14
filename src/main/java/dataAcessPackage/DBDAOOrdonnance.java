@@ -12,9 +12,6 @@ import java.util.GregorianCalendar;
 public class DBDAOOrdonnance implements IOrdonnance {
     private Connection connectionUnique;
     private String sqlInstruction;
-    private ResultSet data;
-
-    //get
 
     //ajout
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, ConnexionException {
