@@ -1,5 +1,6 @@
 package dataAcessPackage;
 
+import exceptionPackage.ConnexionException;
 import exceptionPackage.ProprietaireException;
 import exceptionPackage.SingletonConnectionException;
 import modelPackage.Proprietaire;
@@ -12,13 +13,13 @@ import java.util.ArrayList;
 public interface IProprietaire {
 
     //get
-    ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException;
-    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws SingletonConnectionException, ProprietaireException;
+    ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, ConnexionException;
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire) throws ConnexionException, ProprietaireException;
 
     //recherche
     ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException,
-            SingletonConnectionException;
+            ConnexionException;
 
     //ajout
-    void ajouterNouveauProprio(Proprietaire proprietaire)throws SingletonConnectionException, ProprietaireException;
+    void ajouterNouveauProprio(Proprietaire proprietaire)throws ConnexionException, ProprietaireException;
 }
