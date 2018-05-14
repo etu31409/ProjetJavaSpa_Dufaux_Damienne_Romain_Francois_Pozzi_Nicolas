@@ -13,7 +13,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
     private ResultSet data;
 
     //get
-    public  ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, SingletonConnectionException {
+    public  ArrayList<Veterinaire> getVeterinaires() throws VeterinaireException, ConnexionException {
         try {
 
             if (connectionUnique == null) {
@@ -40,7 +40,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
         }
     }
 
-    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws SingletonConnectionException, VeterinaireException {
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws ConnexionException, VeterinaireException {
 
         try {
             if (connectionUnique == null) {
@@ -68,7 +68,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
 
     //recherche
     public ArrayList<VeterinaireOrdonnance> getResultatRechercheVeterinaireDate(GregorianCalendar dateDebut, GregorianCalendar dateFin)
-            throws SingletonConnectionException, VeterinaireException {
+            throws ConnexionException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();

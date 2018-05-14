@@ -15,8 +15,8 @@ public interface IOrdonnance {
             MedicamentException, AnimalException, SoinException;*/
 
     //ajout
-    void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException;
+    void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, ConnexionException;
 
     //suppression
-    void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, SingletonConnectionException;
+    void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, ConnexionException;
 }

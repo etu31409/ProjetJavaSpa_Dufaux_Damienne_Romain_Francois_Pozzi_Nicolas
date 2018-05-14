@@ -15,7 +15,7 @@ public class DBDAOProprietaire implements IProprietaire{
     private ResultSet data;
 
     //get
-    public  ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, SingletonConnectionException {
+    public  ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -43,7 +43,7 @@ public class DBDAOProprietaire implements IProprietaire{
     }
 
     public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
-            throws SingletonConnectionException, ProprietaireException {
+            throws ConnexionException, ProprietaireException {
 
         try {
             if (connectionUnique == null) {
@@ -67,13 +67,10 @@ public class DBDAOProprietaire implements IProprietaire{
         catch (SQLException e) {
             throw new ProprietaireException();
         }
-        catch (SingletonConnectionException e){
-            throw new SingletonConnectionException();
-        }
     }
 
     //recherche
-    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, SingletonConnectionException {
+    public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ProprietaireException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -112,7 +109,7 @@ public class DBDAOProprietaire implements IProprietaire{
     }
 
     //ajout
-    public void ajouterNouveauProprio(Proprietaire proprietaire) throws SingletonConnectionException, ProprietaireException{
+    public void ajouterNouveauProprio(Proprietaire proprietaire) throws ConnexionException, ProprietaireException{
         try {
             if (proprietaire != null && !proprietaire.getPrenom().isEmpty() && !proprietaire.getNom().isEmpty()) {
                 if (connectionUnique == null) {

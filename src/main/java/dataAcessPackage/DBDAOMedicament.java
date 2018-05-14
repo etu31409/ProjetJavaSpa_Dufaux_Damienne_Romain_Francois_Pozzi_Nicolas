@@ -16,7 +16,7 @@ public class DBDAOMedicament implements IMedicament {
     private ResultSet data;
 
     //get
-    public ArrayList<Medicament> getMedicaments() throws MedicamentException, SingletonConnectionException {
+    public ArrayList<Medicament> getMedicaments() throws MedicamentException, ConnexionException {
         try {
 
             if (connectionUnique == null) {
@@ -45,7 +45,7 @@ public class DBDAOMedicament implements IMedicament {
         }
     }
 
-    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException{
+    public Medicament getUnMedicament(int identifiantMed)throws MedicamentException, ConnexionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -66,12 +66,12 @@ public class DBDAOMedicament implements IMedicament {
             }
             return medicament;
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             throw new MedicamentException("Impossible de récuperer un, médicament dans la base de données");
         }
     }
 
-    public ArrayList <Medicament> getMedicamentsDeLaFiche(Integer ficheDeSoin)throws MedicamentException{
+    public ArrayList <Medicament> getMedicamentsDeLaFiche(Integer ficheDeSoin)throws MedicamentException, ConnexionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -95,13 +95,13 @@ public class DBDAOMedicament implements IMedicament {
             }
             return listeMedicamensDeLaFicheDeSoin;
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             throw new MedicamentException("Impossible de récuperer un médicament dans la base de données");
         }
     }
 
     //ajout
-    public void ajouterMedicament(Medicament medicament) throws MedicamentException, SingletonConnectionException {
+    public void ajouterMedicament(Medicament medicament) throws MedicamentException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -121,7 +121,7 @@ public class DBDAOMedicament implements IMedicament {
     //tâche metier
     public ArrayList<StatMedicament> getMedicamentsEntreDeuxDates(GregorianCalendar dateDebutZoneRecherche,
                                                                   GregorianCalendar dateFinZoneRecherche)
-            throws SingletonConnectionException, MedicamentException{
+            throws ConnexionException, MedicamentException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();

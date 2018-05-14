@@ -1,5 +1,6 @@
 package dataAcessPackage;
 
+import exceptionPackage.ConnexionException;
 import exceptionPackage.SingletonConnectionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
@@ -10,16 +11,16 @@ import java.util.ArrayList;
 public interface ISoinAvance {
 
     //get
-    ArrayList<SoinAvance> getSoinsAvances() throws SoinException, SingletonConnectionException, VeterinaireException;
-    SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException;
-    ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, SingletonConnectionException, VeterinaireException;
+    ArrayList<SoinAvance> getSoinsAvances() throws SoinException, ConnexionException, VeterinaireException;
+    SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException;
+    ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException, VeterinaireException;
 
     //ajout
-    Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, SingletonConnectionException;
+    Integer ajouterFicheDeSoins (SoinAvance soinAvance)throws SoinException, ConnexionException;
 
     //Suppression
-    void supprimerSoin(SoinAvance soin) throws SoinException, SingletonConnectionException;
+    void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException;
 
     //Modification
-    void modifierSoin(SoinAvance soin) throws SoinException, SingletonConnectionException;
+    void modifierSoin(SoinAvance soin) throws SoinException, ConnexionException;
 }
