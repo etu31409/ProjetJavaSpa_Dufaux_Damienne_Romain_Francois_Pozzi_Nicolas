@@ -2,6 +2,7 @@ package viewPackage;
 
 import controllerPackage.Controller;
 import exceptionPackage.ConnexionException;
+import exceptionPackage.ProprietaireException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
 

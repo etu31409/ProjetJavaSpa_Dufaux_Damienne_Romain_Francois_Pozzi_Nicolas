@@ -1,6 +1,7 @@
 package viewPackage.tableModele;
 
 import modelPackage.Animal;
+import modelPackage.AnimalProprietaire;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -12,12 +13,12 @@ import java.util.GregorianCalendar;
 public class TableModeleListeAnimaux  extends AbstractTableModel {
 
     private ArrayList<String> nomDesColonnes;
-    private ArrayList<Animal> animaux;
+    private ArrayList<AnimalProprietaire> listingAnimaux;
     private DefaultTableCellRenderer centerRenderer;
 
-    public TableModeleListeAnimaux(ArrayList<Animal> animaux){
+    public TableModeleListeAnimaux(ArrayList<AnimalProprietaire> listingAnimaux){
         nomDesColonnes = new ArrayList<>();
-        this.animaux = animaux;
+        this.listingAnimaux = listingAnimaux;
 
         nomDesColonnes.add("Identifiant de l'animal");
         nomDesColonnes.add("Date d'arrivée");
@@ -29,7 +30,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
         nomDesColonnes.add("Couleur");
         nomDesColonnes.add("Date de naissance");
         nomDesColonnes.add("Poids");
-        nomDesColonnes.add("Identifiant du propriétaire");
+        nomDesColonnes.add("Propriétaire");
         nomDesColonnes.add("Numéro de puce");
         nomDesColonnes.add("Localisation de la puce");
         nomDesColonnes.add("Date d'attribution de la puce");
@@ -45,7 +46,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return animaux.size();
+        return listingAnimaux.size();
     }
 
     public String getColumnName(int colonne) {
@@ -53,39 +54,39 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
     }
 
     public Object getValueAt(int ligne, int colonne) {
-        Animal animal = animaux.get(ligne);
+        AnimalProprietaire animalProprio = listingAnimaux.get(ligne);
         switch(colonne){
-            case 0 : return animal.getNumRegistre();
+            case 0 : return animalProprio.getNumRegistre();
             case 1 : {
-                if (animal.getDateArrivee()!= null)
-                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateArrivee().getTime());
+                if (animalProprio.getDateArrivee()!= null)
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animalProprio.getDateArrivee().getTime());
                 else
                     return null;
             }
-            case 2 : return animal.getNom();
-            case 3 : return animal.getEspece();
-            case 4 : return animal.getRace();
-            case 5 : return animal.getSexe();
-            case 6 : return animal.isEstSterilise();
-            case 7 : return animal.getCouleurDePeau();
+            case 2 : return animalProprio.getNom();
+            case 3 : return animalProprio.getEspece();
+            case 4 : return animalProprio.getRace();
+            case 5 : return animalProprio.getSexe();
+            case 6 : return animalProprio.isEstSterilise();
+            case 7 : return animalProprio.getCouleurDePeau();
             case 8 : {
-                if (animal.getDateNaissance()!= null)
-                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateNaissance().getTime());
+                if (animalProprio.getDateNaissance()!= null)
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animalProprio.getDateNaissance().getTime());
                 else
                     return null;
             }
-            case 9 : return animal.getPoids();
-            case 10 : return animal.getProprietaire();
-            case 11 : return animal.getNumPuce();
-            case 12 : return animal.getLocalisationPuce();
+            case 9 : return animalProprio.getPoids();
+            case 10 : return animalProprio.getDescriptionProprietaire();
+            case 11 : return animalProprio.getNumPuce();
+            case 12 : return animalProprio.getLocalisationPuce();
             case 13 : {
-                if (animal.getDateAttributionPuce()!= null)
-                    return new SimpleDateFormat("dd/MM/YYYY").format(animal.getDateAttributionPuce().getTime());
+                if (animalProprio.getDateAttributionPuce()!= null)
+                    return new SimpleDateFormat("dd/MM/YYYY").format(animalProprio.getDateAttributionPuce().getTime());
                 else
                     return null;
             }
-            case 14 : return animal.getNumTatouage();
-            case 15 : return animal.getLocalisationTatouage();
+            case 14 : return animalProprio.getNumTatouage();
+            case 15 : return animalProprio.getLocalisationTatouage();
             default : return null;
         }
     }
@@ -113,7 +114,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
                 break;
             case 9 : c = Double.class;
                 break;
-            case 10 : c = Integer.class;
+            case 10 : c = String.class;
                 break;
             case 11 : c = Integer.class;
                 break;
@@ -128,6 +129,10 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
             default : c = String.class;
         }
         return c;
+    }
+
+    public AnimalProprietaire getAnimalProprietaireSelectionne(int ligne){
+        return listingAnimaux.get(ligne);
     }
 
     public DefaultTableCellRenderer getCenterRenderer() {

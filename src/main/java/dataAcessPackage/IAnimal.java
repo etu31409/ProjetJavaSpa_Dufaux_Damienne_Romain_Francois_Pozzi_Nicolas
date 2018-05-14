@@ -2,7 +2,9 @@ package dataAcessPackage;
 
 import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
+import exceptionPackage.ProprietaireException;
 import modelPackage.Animal;
+import modelPackage.AnimalProprietaire;
 import modelPackage.Medicament;
 import modelPackage.Veterinaire;
 
@@ -13,7 +15,7 @@ public interface IAnimal {
     //get
     ArrayList<Animal> getAnimaux() throws AnimalException, ConnexionException;
     Animal getUnAnimal(Integer numRegistre) throws ConnexionException, AnimalException;
-    ArrayList<Animal>getAnimauxTries(String critere) throws AnimalException, ConnexionException;
+    ArrayList<AnimalProprietaire>getAnimauxTries(String critere) throws AnimalException, ConnexionException, ProprietaireException;
 
     //recherches
     ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
@@ -27,7 +29,7 @@ public interface IAnimal {
     void ajouterAnimal(Animal animal) throws AnimalException, ConnexionException;
 
     //supression
-    void supprimerAnimal(Animal animal) throws  AnimalException, ConnexionException;
+    void supprimerAnimal(Integer animal) throws  AnimalException, ConnexionException;
 
     //modification
     void modifierAnimal(Animal animal) throws  AnimalException, ConnexionException;

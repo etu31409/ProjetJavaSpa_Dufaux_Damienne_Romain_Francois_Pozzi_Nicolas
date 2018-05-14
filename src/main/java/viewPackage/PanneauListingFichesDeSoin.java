@@ -1,9 +1,12 @@
 package viewPackage;
 
 import controllerPackage.Controller;
+import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
+import modelPackage.AnimalProprietaire;
+import modelPackage.SoinAnimalVeto;
 import modelPackage.SoinAvance;
 import viewPackage.tableModele.TableModeleListeSoins;
 
@@ -49,15 +52,14 @@ public class PanneauListingFichesDeSoin extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-            ListSelectionModel listeSelectionnee;
             TableModeleListeSoins modele;
-            ArrayList<SoinAvance> soinsTries;
+            ArrayList<SoinAnimalVeto> soinsTries;
 
-            if(event.getSource() == trierButton){
+            if (event.getSource() == trierButton) {
                 try {
-                    String critere = (String)comboBoxListingFiches.getSelectedItem();
-
+                    String critere = (String) comboBoxListingFiches.getSelectedItem();
                     soinsTries = controller.getSoinsTries(critere);
+
                     modele = new TableModeleListeSoins(soinsTries);
                     resultatRecherche = new JTable(modele);
 
@@ -67,40 +69,36 @@ public class PanneauListingFichesDeSoin extends JPanel {
 
                     listingScrollPane.setViewportView(resultatRecherche);
                     resultatRecherche.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
                     listingScrollPane.createHorizontalScrollBar();
                     listingScrollPane.createVerticalScrollBar();
                     resultatRecherche.setFillsViewportHeight(true);
-                }
-                catch (VeterinaireException s) {
+                } catch (VeterinaireException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                }
-                catch (SoinException s) {
+                } catch (SoinException s) {
                     JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux soins", "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
-                }
-                catch (ConnexionException s) {
+                } catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                } catch (AnimalException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-            else if(event.getSource() == supprimerButton){
+            } else if (event.getSource() == supprimerButton) {
                 if (resultatRecherche != null) {
                     int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. " +
                                     "Êtes-vous sûr.e de vouloir continuer ?",
-                                    "Veuillez confirmer votre choix",
+                            "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {
-                        listeSelectionnee = resultatRecherche.getSelectionModel();
-                        int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                         try {
-                            String critere = (String) comboBoxListingFiches.getSelectedItem();
-                            soinsTries = controller.getSoinsTries(critere);
-                            SoinAvance soinASup = soinsTries.get(indiceLigneSelectionnee);
-                            controller.supprimerSoin(soinASup);
-                            trierButton.doClick();
+                            modele = (TableModeleListeSoins) resultatRecherche.getModel();
+                            Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                            SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
+                            controller.supprimerSoin(soinAnimalVeto.getNumSoin());
+
                             JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de" +
                                     " données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                        } catch (VeterinaireException e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
+                            trierButton.doClick();
                         } catch (SoinException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         } catch (ConnexionException e) {
@@ -109,24 +107,18 @@ public class PanneauListingFichesDeSoin extends JPanel {
                             System.out.println("Exception : " + exception.getMessage());
                         }
                     }
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Vous devez sélectionner un élément dans la liste !",  "Erreur !",
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous devez sélectionner un élément dans la liste !", "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
-            }
-            else if(event.getSource() == modifierButton){
+            } else if (event.getSource() == modifierButton) {
                 if (resultatRecherche != null) {
                     try {
-                        listeSelectionnee = resultatRecherche.getSelectionModel();
-                        int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
-                        String critere = (String) comboBoxListingFiches.getSelectedItem();
-                        soinsTries = controller.getSoinsTries(critere);
-                        SoinAvance soinAModif = soinsTries.get(indiceLigneSelectionnee);
-                        fenetrePrincipale.afficherPanneauSoinPourModifier(soinAModif);
+                        modele = (TableModeleListeSoins) resultatRecherche.getModel();
+                        Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                        SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
 
-                    } catch (VeterinaireException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        fenetrePrincipale.afficherPanneauSoinPourModifier(controller.getUnSoinAvance(soinAnimalVeto.getNumSoin()));
                     } catch (SoinException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (ConnexionException e) {
@@ -134,12 +126,12 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     } catch (Exception e) {
                         System.out.println("Exception : " + e.getMessage());
                     }
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Vous devez sélectionner un élément dans la liste !",  "Erreur !",
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous devez sélectionner un élément dans la liste !", "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
     }
 }
+

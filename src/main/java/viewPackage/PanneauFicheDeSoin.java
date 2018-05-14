@@ -28,7 +28,7 @@ public class PanneauFicheDeSoin extends JPanel {
     private JScrollPane listeMedicamentsChoisisJScrollPane, listeMedicamentsDisposJScrollPane;
     private JLabel titreDeLaPage;
     private boolean modification;
-    private SoinAvance soinAvanceModif;
+    private SoinAvance soinAvanceAvantModification;
 
 
     public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre) {
@@ -46,16 +46,16 @@ public class PanneauFicheDeSoin extends JPanel {
 
     }
 
-    public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceModif) {
+    public PanneauFicheDeSoin(Controller controller, FenetrePrincipale fenetre, SoinAvance soinAvanceAvantModification) {
         titreDeLaPage.setText("Modifier une fiche de soin");
-        modification = (soinAvanceModif != null);
+        modification = (soinAvanceAvantModification != null);
         if (!modification) {
             throw new NullPointerException("Erreur lors de la modification de la fiche de soin!\n" +
                     "Contactez votre administrateur système!");
         }
         this.fenetre = fenetre;
         this.controller = controller;
-        this.soinAvanceModif = soinAvanceModif;
+        this.soinAvanceAvantModification = soinAvanceAvantModification;
 
         reinitialiser();
 
@@ -66,24 +66,30 @@ public class PanneauFicheDeSoin extends JPanel {
         reinitialiserButton.addActionListener(new EcouteurBouton());
         retourButton.addActionListener(new EcouteurBouton());
 
-        textAreaIntituleSoin.setText(soinAvanceModif.getIntitule());
-        textAreaPartieDuCorps.setText(soinAvanceModif.getPartieDuCorps());
+        textAreaIntituleSoin.setText(soinAvanceAvantModification.getIntitule());
+        textAreaPartieDuCorps.setText(soinAvanceAvantModification.getPartieDuCorps());
 
-        if (soinAvanceModif.getRemarque() != null) {
-            textAreaRemarque.setText(soinAvanceModif.getRemarque());
+        if (soinAvanceAvantModification.getRemarque() != null) {
+            textAreaRemarque.setText(soinAvanceAvantModification.getRemarque());
         }
-        if (soinAvanceModif.getEstUrgent()) {
+        if (soinAvanceAvantModification.getEstUrgent()) {
             urgenceCheckBox.setSelected(true);
         }
+        comboBoxAnimaux.setSelectedIndex(soinAvanceAvantModification.getNumRegistre()-1);
+        comboBoxVeterinaires.setSelectedIndex(soinAvanceAvantModification.getVeterinaire()-1);
 
         try {
-            medicamentsDeLaFiche = controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
 
-            for (int i = 0; i < medicamentsDeLaFiche.size() ; i++) {
-                Integer identifiantMedListe = ((Medicament) medicamentsDisposModele.get(i)).getIdentifiantMed();
-                if(medicamentsDeLaFiche.get(i).getIdentifiantMed().equals(identifiantMedListe)){
-                    //medicamentsDisposModele.remove(i);
-                    medicamentsDisposModele.removeElementAt(i);
+            medicamentsDeLaFiche = controller.getMedicamentsDeLaFiche(soinAvanceAvantModification.getNumSoin());
+            Integer tallieJlist = medicamentsDisposModele.size();
+            for (int i = 0; i < medicamentsDeLaFiche.size(); i++) {
+                for (int j = 0; j < tallieJlist; j++) {
+                    Medicament med = (Medicament) medicamentsDisposModele.getElementAt(j);
+                    if (med.getIdentifiantMed() == ( medicamentsDeLaFiche.get(i)).getIdentifiantMed()) {
+                        medicamentsDisposModele.removeElement(med);
+                        tallieJlist--;
+                        break;
+                    }
                 }
                 medicamentsChoisisModele.addElement(medicamentsDeLaFiche.get(i));
             }
@@ -91,7 +97,7 @@ public class PanneauFicheDeSoin extends JPanel {
 
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        }catch(ConnexionException e){
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -171,7 +177,7 @@ public class PanneauFicheDeSoin extends JPanel {
         return true;
     }
 
-    private boolean estUnNombre (String chaine) {
+    private boolean estUnNombre(String chaine) {
         try {
             Integer.parseInt(chaine);
         } catch (NumberFormatException e) {
@@ -195,7 +201,7 @@ public class PanneauFicheDeSoin extends JPanel {
         if (textAreaRemarque.getText().isEmpty()) soinAvance.setRemarque(null);
         else soinAvance.setRemarque(textAreaRemarque.getText());
         if (modification) {
-            soinAvance.setNumSoin(soinAvanceModif.getNumSoin());
+            soinAvance.setNumSoin(soinAvanceAvantModification.getNumSoin());
         }
         return soinAvance;
     }
@@ -220,13 +226,17 @@ public class PanneauFicheDeSoin extends JPanel {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == ajouterButton) {
                 Medicament elementSelectionne = (Medicament) listMedicamentsDispos.getSelectedValue();
-                medicamentsDisposModele.removeElement(elementSelectionne);
-                medicamentsChoisisModele.addElement(elementSelectionne);
+                if (elementSelectionne != null) {
+                    medicamentsDisposModele.removeElement(elementSelectionne);
+                    medicamentsChoisisModele.addElement(elementSelectionne);
+                }
             }
             if (event.getSource() == retirerButton) {
                 Medicament elementSelectionne = (Medicament) listMedicamentsChoisis.getSelectedValue();
-                medicamentsChoisisModele.removeElement(elementSelectionne);
-                medicamentsDisposModele.addElement(elementSelectionne);
+                if (elementSelectionne != null) {
+                    medicamentsChoisisModele.removeElement(elementSelectionne);
+                    medicamentsDisposModele.addElement(elementSelectionne);
+                }
             }
             if (event.getSource() == validerButton) {
                 try {
@@ -242,33 +252,46 @@ public class PanneauFicheDeSoin extends JPanel {
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                         }
                         else {
-                            ArrayList<Medicament>listeDeMedocsAvantModif =
-                                    controller.getMedicamentsDeLaFiche(soinAvanceModif.getNumSoin());
+                            ArrayList<Medicament> listeDeMedocsAvantModif =
+                                    controller.getMedicamentsDeLaFiche(soinAvanceAvantModification.getNumSoin());
 
-                            for(int j = 0; j < listeDeMedocsAvantModif.size(); j++){
+                            for (int j = 0; j < listeDeMedocsAvantModif.size(); j++) {
                                 for (int i = 0; i < medicamentsDisposModele.getSize(); i++) {
-                                    int medocListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
-                                    int medocListeDispo = ((Medicament)medicamentsDisposModele.getElementAt(i)).getIdentifiantMed();
-                                    if(medocListeAvantModif == medocListeDispo)
-                                        controller.supprimerOrdonnance(soinAvanceModif, (Medicament)medicamentsDisposModele.getElementAt(i));
+                                    int idMedocDeListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
+                                    int idMedocDeListeDispo = ((Medicament) medicamentsDisposModele.getElementAt(i)).getIdentifiantMed();
+                                    if (idMedocDeListeAvantModif == idMedocDeListeDispo)
+                                        controller.supprimerOrdonnance(soinAvanceAvantModification, (Medicament) medicamentsDisposModele.getElementAt(i));
                                 }
                             }
 
                             for (int i = 0; i < medicamentsChoisisModele.getSize(); i++) {
-                                if(listeDeMedocsAvantModif.isEmpty()){
-                                    controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceModif.getNumSoin(),
-                                            soinAvanceModif, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                                if (listeDeMedocsAvantModif.isEmpty()) {
+                                    controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceAvantModification.getNumSoin(),
+                                            soinAvanceAvantModification, (Medicament) medicamentsChoisisModele.getElementAt(i)));
                                 }
-                                for(int j = 0; j < listeDeMedocsAvantModif.size(); j++){
-                                    int medocListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
-                                    int medocListeChoisis = ((Medicament)medicamentsChoisisModele.getElementAt(i)).getIdentifiantMed();
-                                    if(medocListeAvantModif != medocListeChoisis)
-                                        controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceModif.getNumSoin(),
-                                                soinAvanceModif, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                                else {
+                                    Boolean estDejaEnBaseDeDonnees = false;
+                                    for (int j = 0; j < listeDeMedocsAvantModif.size(); j++) {
+                                        int idMedocDeListeAvantModif = listeDeMedocsAvantModif.get(j).getIdentifiantMed();
+                                        int idMedocDeListeChoisis = ((Medicament) medicamentsChoisisModele.getElementAt(i)).getIdentifiantMed();
+                                        if (idMedocDeListeAvantModif == idMedocDeListeChoisis) {
+                                            estDejaEnBaseDeDonnees = true;
+                                        }
+                                    }
+                                    if (!estDejaEnBaseDeDonnees) {
+                                        controller.ajouterOrdonnance(nouvelleOrdonance(soinAvanceAvantModification.getNumSoin(),
+                                                soinAvanceAvantModification, (Medicament) medicamentsChoisisModele.getElementAt(i)));
+                                    }
                                 }
                             }
 
-                            controller.modifierSoin(soinAvanceModif);
+                            SoinAvance soinAvanceAModifier = nouveauSoinAvance();
+                            soinAvanceAModifier.setNumSoin(soinAvanceAvantModification.getNumSoin());
+                            soinAvanceAModifier.setDateSoin(soinAvanceAvantModification.getDateSoin());
+                            if(soinAvanceAModifier.getNumRegistre() != soinAvanceAvantModification.getNumRegistre())
+                                controller.modifierOrdonnances(soinAvanceAModifier);
+                            controller.modifierSoin(soinAvanceAModifier);
+
                             JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                             fenetre.afficherListingFichesDeSoin();

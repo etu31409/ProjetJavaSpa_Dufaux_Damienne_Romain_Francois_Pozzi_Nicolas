@@ -1,5 +1,6 @@
 package viewPackage.tableModele;
 
+import modelPackage.SoinAnimalVeto;
 import modelPackage.SoinAvance;
 
 import javax.swing.*;
@@ -11,19 +12,21 @@ import java.util.GregorianCalendar;
 
 public class TableModeleListeSoins  extends AbstractTableModel {
     private ArrayList<String> nomDesColonnes;
-    private ArrayList<SoinAvance> soins;
+    private ArrayList<SoinAnimalVeto> listingSoins;
     private DefaultTableCellRenderer centerRenderer;
 
-    public TableModeleListeSoins(ArrayList<SoinAvance> soins){
+    public TableModeleListeSoins(ArrayList<SoinAnimalVeto> listingSoins){
         nomDesColonnes = new ArrayList<>();
-        this.soins = soins;
+        this.listingSoins = listingSoins;
 
         nomDesColonnes.add("Identifiant du soin");
-        nomDesColonnes.add("Identifiant de l'animal");
+        nomDesColonnes.add("Date du soin");
         nomDesColonnes.add("Intitulé du soin");
         nomDesColonnes.add("Partie du corps concernée");
-        nomDesColonnes.add("Date du soin");
+        nomDesColonnes.add("Identifiant de l'animal");
+        nomDesColonnes.add("Animal");
         nomDesColonnes.add("Identifiant du vétérinaire");
+        nomDesColonnes.add("Vétérinaire");
         nomDesColonnes.add("En urgence");
         nomDesColonnes.add("Remarque");
 
@@ -36,7 +39,7 @@ public class TableModeleListeSoins  extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return soins.size();
+        return listingSoins.size();
     }
 
     public String getColumnName(int colonne) {
@@ -44,21 +47,23 @@ public class TableModeleListeSoins  extends AbstractTableModel {
     }
 
     public Object getValueAt(int ligne, int colonne) {
-        SoinAvance soin = soins.get(ligne);
+        SoinAnimalVeto soin = listingSoins.get(ligne);
         switch(colonne){
             case 0 : return soin.getNumSoin();
-            case 1 : return soin.getNumRegistre();
-            case 2 : return soin.getIntitule();
-            case 3 : return soin.getPartieDuCorps();
-            case 4 : {
+            case 1 : {
                 if (soin.getDateSoin()!= null)
                     return new SimpleDateFormat("dd/MM/YYYY").format(soin.getDateSoin().getTime());
                 else
                     return null;
             }
-            case 5 : return soin.getVeterinaire();
-            case 6 : return soin.getEstUrgent();
-            case 7 : return soin.getRemarque();
+            case 2 : return soin.getIntitule();
+            case 3 : return soin.getPartieDuCorps();
+            case 4 : return soin.getNumRegistre();
+            case 5 : return soin.getDescriptionAnimal();
+            case 6 : return soin.getVeterinaire();
+            case 7 : return soin.getDescriptionVeterinaire();
+            case 8 : return soin.getEstUrgent();
+            case 9 : return soin.getRemarque();
             default : return null;
         }
     }
@@ -68,19 +73,23 @@ public class TableModeleListeSoins  extends AbstractTableModel {
         switch(colonne){
             case 0 : c = Integer.class;
                 break;
-            case 1 : c = Integer.class;
+            case 1 : c = GregorianCalendar.class;
                 break;
             case 2 : c = String.class;
                 break;
             case 3 : c = String.class;
                 break;
-            case 4 : c = GregorianCalendar.class;
+            case 4 : c = Integer.class;
                 break;
-            case 5 : c = Integer.class;
+            case 5 : c = String.class;
                 break;
-            case 6 : c = Boolean.class;
+            case 6 : c = Integer.class;
                 break;
             case 7 : c = String.class;
+                break;
+            case 8 : c = Boolean.class;
+                break;
+            case 9 : c = String.class;
                 break;
             default : c = String.class;
         }
@@ -88,10 +97,8 @@ public class TableModeleListeSoins  extends AbstractTableModel {
     }
 
 
-    //Permet de modifier les cellules
-    public boolean isCellEditable(int row, int col){
-        if (col == 0) return false;
-        return true;
+    public SoinAnimalVeto getSoinAnimalVetoSelectionne(int ligne){
+        return listingSoins.get(ligne);
     }
 
     public DefaultTableCellRenderer getCenterRenderer() {

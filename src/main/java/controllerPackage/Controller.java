@@ -20,15 +20,20 @@ public class Controller {
         return business.getAnimaux();
     }
 
-    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, ConnexionException {
+    public ArrayList<AnimalProprietaire> getAnimauxTries(String critere) throws AnimalException,
+            ConnexionException, ProprietaireException {
         return business.getAnimauxTries(critere);
+    }
+
+    public Animal getUnAnimal(Integer numRegistre) throws ConnexionException, AnimalException{
+        return business.getUnAnimal(numRegistre);
     }
 
     public void ajouterAnimal(Animal animal) throws AnimalException, ConnexionException{
         business.ajouterAnimal(animal);
     }
 
-    public void supprimerAnimal(Animal animal) throws AnimalException, ConnexionException{
+    public void supprimerAnimal(Integer animal) throws AnimalException, ConnexionException{
         business.supprimerAnimal(animal);
     }
 
@@ -59,20 +64,26 @@ public class Controller {
         business.ajouterOrdonnance(ordonnance);
     }
 
+    public void modifierOrdonnances(SoinAvance nouveauSoin)
+            throws OrdonnanceException, ConnexionException {
+        business.modifierOrdonnances(nouveauSoin);
+    }
+
     //soins
     public Integer ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, ConnexionException{
         return business.ajouterFicheDeSoins(soinAvance);
     }
 
-    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException{
-        return business.getUnSoinAvance(numRegistre);
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, ConnexionException{
+        return business.getUnSoinAvance(numSoin);
     }
 
-    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException, VeterinaireException{
+    public ArrayList<SoinAnimalVeto> getSoinsTries(String critere) throws SoinException,
+            ConnexionException, VeterinaireException, AnimalException {
         return business.getSoinsTries(critere);
     }
 
-    public void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException {
+    public void supprimerSoin(Integer soin) throws SoinException, ConnexionException {
         business.supprimerSoin(soin);
     }
 
@@ -85,9 +96,18 @@ public class Controller {
         return business.getVeterinaires();
     }
 
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws VeterinaireException, ConnexionException{
+        return business.getUnVeterinaire(identifiantVeto);
+    }
+
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, ConnexionException{
         return business.getProprietaires();
+    }
+
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
+            throws ConnexionException, ProprietaireException{
+        return business.getUnProprietaire(identifiantProprietaire);
     }
 
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws ConnexionException, ProprietaireException {

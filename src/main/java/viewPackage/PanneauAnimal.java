@@ -62,7 +62,7 @@ public class PanneauAnimal extends JPanel {
 
     }
 
-    public PanneauAnimal(Controller controller, FenetrePrincipale fenetre, Animal animalModif) throws NullPointerException{
+    public PanneauAnimal(Controller controller, FenetrePrincipale fenetre, Animal animalModif) throws NullPointerException {
         modification = animalModif != null;
         if (modification == false){
             throw new NullPointerException("Erreur lors de la modification de l'animal!\n" +
@@ -135,7 +135,7 @@ public class PanneauAnimal extends JPanel {
         if(animalModif.getProprietaire() != null){
             proprioCheckBox.setSelected(true);
             ajouterUnProprietaireButton.setEnabled(true);
-            comboBoxListeProprietaires.setSelectedIndex(animalModif.getProprietaire()-1);
+            comboBoxListeProprietaires.setSelectedIndex(animalModif.getProprietaire());
             comboBoxListeProprietaires.setEnabled(true);
         }
     }

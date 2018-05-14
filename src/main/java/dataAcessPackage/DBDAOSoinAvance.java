@@ -1,8 +1,13 @@
 package dataAcessPackage;
 
+import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
+import exceptionPackage.VeterinaireException;
+import modelPackage.Animal;
+import modelPackage.SoinAnimalVeto;
 import modelPackage.SoinAvance;
+import modelPackage.Veterinaire;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,16 +19,16 @@ public class DBDAOSoinAvance implements ISoinAvance {
     private ResultSet data;
 
     //get
-    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException {
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
             GregorianCalendar dateSoin = new GregorianCalendar();
             SoinAvance soin = new SoinAvance();
-            sqlInstruction = "select * from spabd.soinAvance where numRegistre = ?";
+            sqlInstruction = "select * from spabd.soinAvance where numSoin = ?";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
-            statement.setInt(1, numRegistre);
+            statement.setInt(1, numSoin);
             data = statement.executeQuery();
             while (data.next()) {
                 soin.setNumSoin(data.getInt("numSoin"));
@@ -46,13 +51,13 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException {
+    public ArrayList<SoinAnimalVeto> getSoinsTries(String critere) throws SoinException, ConnexionException, AnimalException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
 
-            ArrayList<SoinAvance> tousLesSoinsTries = new ArrayList<>();
+            ArrayList<SoinAnimalVeto> tousLesSoinsTries = new ArrayList<>();
 
             String ordre = "asc";
             String critereColonne;
@@ -69,22 +74,37 @@ public class DBDAOSoinAvance implements ISoinAvance {
             else
                 critereColonne = "numSoin";
 
-            sqlInstruction = "select * from spabd.soinAvance order by "+ critereColonne + " " + ordre + ";";
+            sqlInstruction = "select * from spabd.soinAvance " +
+                    "order by "+ critereColonne + " " + ordre + ";";
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);
             data = statement.executeQuery();
 
             while (data.next()) {
                 GregorianCalendar dateSoin = new GregorianCalendar();
-                SoinAvance soin = new SoinAvance();
+                SoinAnimalVeto soin = new SoinAnimalVeto();
                 soin.setNumSoin(data.getInt("numSoin"));
-                soin.setNumRegistre(data.getInt("numRegistre"));
-                soin.setRemarque(data.getString("remarque"));
-                soin.setEstUrgent(data.getBoolean("estUrgent"));
-                soin.setPartieDuCorps(data.getString("partieDuCorps"));
-                soin.setVeterinaire(data.getInt("identifiantVeto"));
                 dateSoin.setTime(data.getDate("dateSoin"));
                 soin.setDateSoin(dateSoin);
                 soin.setIntitule(data.getString("intitule"));
+                soin.setPartieDuCorps(data.getString("partieDuCorps"));
+                Integer numRegistre = data.getInt("numRegistre");
+                soin.setNumRegistre(numRegistre);
+
+                soin.setRemarque(data.getString("remarque"));
+                soin.setEstUrgent(data.getBoolean("estUrgent"));
+                Integer identifiantVeto = data.getInt("identifiantVeto");
+                soin.setVeterinaire(identifiantVeto);
+
+                IAnimal modeleAnimal = new DBDAOAnimal();
+                Animal animal = modeleAnimal.getUnAnimal(numRegistre);
+                soin.setNomAnimal(animal.getNom());
+                soin.setEspece(animal.getEspece());
+
+                IVeterinaire modeleVeterinaire = new DBDAOVeterinaire();
+                Veterinaire veterinaire = modeleVeterinaire.getUnVeterinaire(identifiantVeto);
+                soin.setNomVeto(veterinaire.getNom());
+                soin.setPrenomVeto(veterinaire.getPrenom());
+
                 tousLesSoinsTries.add(soin);
             }
             return tousLesSoinsTries;
@@ -133,18 +153,18 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException {
+    public void supprimerSoin(Integer soin) throws SoinException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
             sqlInstruction = "delete from spabd.ordonnance where numSoin = ?";
             PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setInt(1,soin.getNumSoin());
+            preparedStatement.setInt(1,soin);
             preparedStatement.executeUpdate();
             sqlInstruction = "delete from spabd.soinavance where numSoin = ?";
             preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
-            preparedStatement.setInt(1, soin.getNumSoin());
+            preparedStatement.setInt(1, soin);
             preparedStatement.executeUpdate();
         }catch (SQLException e) {
             throw new SoinException("Erreur lors de la suppression du soin !");

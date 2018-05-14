@@ -48,4 +48,21 @@ public class DBDAOOrdonnance implements IOrdonnance {
                 throw new OrdonnanceException("Problème lors de la suppression de l'ordonnance");
         }
     }
+
+    //modification
+    public void modifierOrdonnances(SoinAvance nouveauSoin) throws OrdonnanceException, ConnexionException {
+        try {
+            if (connectionUnique == null) {
+                connectionUnique = SingletonConnection.getUniqueInstance();
+            }
+            sqlInstruction = "update ordonnance set numRegistre = ? where numSoin = ?";
+            PreparedStatement preparedStatement = connectionUnique.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1,nouveauSoin.getNumRegistre());
+            preparedStatement.setInt(2,nouveauSoin.getNumSoin());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new OrdonnanceException("Erreur lors de la modification de l'ordonnance");
+        }
+    }
 }

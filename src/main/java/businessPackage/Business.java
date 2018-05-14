@@ -33,7 +33,8 @@ public class Business {
         return daoAnimal.getAnimaux();
     }
 
-    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, ConnexionException {
+    public ArrayList<AnimalProprietaire> getAnimauxTries(String critere) throws AnimalException,
+            ConnexionException, ProprietaireException {
         return daoAnimal.getAnimauxTries(critere);
     }
 
@@ -48,7 +49,8 @@ public class Business {
     public void ajouterAnimal(Animal animal) throws AnimalException, ConnexionException{
         daoAnimal.ajouterAnimal(animal);
     }
-    public void supprimerAnimal(Animal animal) throws AnimalException, ConnexionException{
+
+    public void supprimerAnimal(Integer animal) throws AnimalException, ConnexionException{
         daoAnimal.supprimerAnimal(animal);
     }
 
@@ -78,23 +80,30 @@ public class Business {
         daoOrdonnance.ajouterOrdonnance(ordonnance);
     }
 
+    public void modifierOrdonnances(SoinAvance nouveauSoin)
+            throws OrdonnanceException, ConnexionException {
+        daoOrdonnance.modifierOrdonnances(nouveauSoin);
+    }
+
     //soins
     public Integer ajouterFicheDeSoins(SoinAvance soinAvance) throws SoinException, ConnexionException{
         return daoSoinAvance.ajouterFicheDeSoins(soinAvance);
     }
 
-    public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, ConnexionException{
-        if(numRegistre <= 0)
+    public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, ConnexionException{
+        if(numSoin <= 0)
             throw new SoinException("Le numero de registre ne peut être plus petit que 0 !");
-        if(numRegistre > 2147483647)
+        if(numSoin > 2147483647)
             throw new SoinException("Le numero de registre ne peut être plus grand que 2147483647 !");
-        return daoSoinAvance.getUnSoinAvance(numRegistre);
+        return daoSoinAvance.getUnSoinAvance(numSoin);
     }
 
-    public ArrayList<SoinAvance> getSoinsTries(String critere) throws SoinException, ConnexionException, VeterinaireException{
+    public ArrayList<SoinAnimalVeto> getSoinsTries(String critere) throws SoinException,
+            ConnexionException, VeterinaireException, AnimalException {
         return daoSoinAvance.getSoinsTries(critere);
     }
-    public void supprimerSoin(SoinAvance soin) throws SoinException, ConnexionException {
+
+    public void supprimerSoin(Integer soin) throws SoinException, ConnexionException {
         daoSoinAvance.supprimerSoin(soin);
     }
 
@@ -107,9 +116,18 @@ public class Business {
         return daoVeterinaire.getVeterinaires();
     }
 
+    public Veterinaire getUnVeterinaire(Integer identifiantVeto) throws VeterinaireException, ConnexionException{
+        return daoVeterinaire.getUnVeterinaire(identifiantVeto);
+    }
+
     //proprietaires
     public ArrayList<Proprietaire> getProprietaires() throws ProprietaireException, ConnexionException{
         return daoProprietaire.getProprietaires();
+    }
+
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
+            throws ConnexionException, ProprietaireException{
+        return daoProprietaire.getUnProprietaire(identifiantProprietaire);
     }
 
     public void ajouterNouveauProprio(Proprietaire proprietaire)throws ConnexionException, ProprietaireException {

@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 
 public class Animal {
     private Integer numRegistre;
-
     private String nom;
     private GregorianCalendar dateArrivee;
     private String espece;

@@ -42,7 +42,7 @@ public class DBDAOProprietaire implements IProprietaire{
         }
     }
 
-    /*public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
+    public Proprietaire getUnProprietaire(Integer identifiantProprietaire)
             throws ConnexionException, ProprietaireException {
 
         try {
@@ -67,7 +67,7 @@ public class DBDAOProprietaire implements IProprietaire{
         catch (SQLException e) {
             throw new ProprietaireException();
         }
-    }*/
+    }
 
     //recherche
     public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire)

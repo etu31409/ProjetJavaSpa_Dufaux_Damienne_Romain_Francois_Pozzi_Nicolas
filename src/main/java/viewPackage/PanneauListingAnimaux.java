@@ -3,8 +3,9 @@ package viewPackage;
 import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
+import exceptionPackage.ProprietaireException;
 import exceptionPackage.SoinException;
-import modelPackage.Animal;
+import modelPackage.AnimalProprietaire;
 import modelPackage.SoinAvance;
 import viewPackage.tableModele.TableModeleListeAnimaux;
 
@@ -52,9 +53,8 @@ public class PanneauListingAnimaux extends JPanel {
     private class EcouteurBouton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
-            ListSelectionModel listeSelectionnee;
             TableModeleListeAnimaux modele;
-            ArrayList<Animal> animauxTries = new ArrayList<>();
+            ArrayList<AnimalProprietaire> animauxTries;
 
             if(event.getSource() == buttonTri){
                 try {
@@ -82,35 +82,28 @@ public class PanneauListingAnimaux extends JPanel {
                 catch (ConnexionException s) {
                     JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 }
+                catch (ProprietaireException s) {
+                    JOptionPane.showMessageDialog(null, s.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            if(event.getSource() == supprimerButton) {
+            else if(event.getSource() == supprimerButton) {
                 if (resultatRecherche != null) {
                     int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible." +
                                     " Êtes-vous sûr.e de vouloir continuer ?",
                                     "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
                     if (confirmation == 0) {
-                        listeSelectionnee = resultatRecherche.getSelectionModel();
-                        int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                         try {
-                            String critere = (String) comboBoxTriAnimaux.getSelectedItem();
-                            animauxTries = controller.getAnimauxTries(critere);
-                            Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
-                            SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                            //TODO
-                            while (soinASup.getNumRegistre() != null) {
-                                controller.supprimerSoin(soinASup);
-                                soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-                            }
-                            controller.supprimerAnimal(animalASup);
-                            buttonTri.doClick();
+                            modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
+                            Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                            AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
+                            controller.supprimerAnimal(animalProprietaire.getNumRegistre());
+
                             JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de données !",
                                     "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                            buttonTri.doClick();
                         } catch (AnimalException e) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
-                                    JOptionPane.ERROR_MESSAGE);
-                        } catch (SoinException e) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux fiches de soin !", "Erreur !",
                                     JOptionPane.ERROR_MESSAGE);
                         } catch (ConnexionException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -126,15 +119,12 @@ public class PanneauListingAnimaux extends JPanel {
             }
             if(event.getSource() == modifierButton){
                 if(resultatRecherche != null){
-                    listeSelectionnee = resultatRecherche.getSelectionModel();
-                    int indiceLigneSelectionnee = listeSelectionnee.getMinSelectionIndex();
                     try {
-                        String critere = (String) comboBoxTriAnimaux.getSelectedItem();
-                        animauxTries = controller.getAnimauxTries(critere);
-                        Animal animalModif = animauxTries.get(indiceLigneSelectionnee);
-                        fenetrePrincipale.afficherPanneauAnimalPourModifier(animalModif);
-                        buttonTri.doClick();
+                        modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
+                        Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                        AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
 
+                        fenetrePrincipale.afficherPanneauAnimalPourModifier(controller.getUnAnimal(animalProprietaire.getNumRegistre()));
                     } catch (AnimalException e) {
                         JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
                                 JOptionPane.ERROR_MESSAGE);
