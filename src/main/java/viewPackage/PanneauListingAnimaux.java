@@ -97,7 +97,7 @@ public class PanneauListingAnimaux extends JPanel {
                             animauxTries = controller.getAnimauxTries(critere);
                             Animal animalASup = animauxTries.get(indiceLigneSelectionnee);
                             SoinAvance soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
-
+                            //TODO
                             while (soinASup.getNumRegistre() != null) {
                                 controller.supprimerSoin(soinASup);
                                 soinASup = controller.getUnSoinAvance(animalASup.getNumRegistre());
