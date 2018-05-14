@@ -5,9 +5,11 @@ import exceptionPackage.ConnexionException;
 import modelPackage.Animal;
 import modelPackage.SoinAvance;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class FenetrePrincipale extends JFrame {
     private Controller controller;
@@ -115,6 +117,14 @@ public class FenetrePrincipale extends JFrame {
         controller = new Controller();
         setVisible(true);
         barMenu.setVisible(false);
+
+        //ajout d'un icone pour l'application
+        try{
+            setIconImage(ImageIO.read(new File("src\\resources\\german-shepherd.png")));
+        }
+        catch(Exception e){
+            System.out.println("Erreur lors du chargement de l'icone");
+        }
     }
 
     public void afficherPanneauAnimalPourModifier(Animal animalModif) {
