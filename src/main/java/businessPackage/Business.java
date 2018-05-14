@@ -39,6 +39,10 @@ public class Business {
     }
 
     public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException{
+        if(numRegistre <= 0)
+            throw new AnimalException("Le numero de registre doit être supérieur à 0");
+        if(numRegistre > 2147483647)
+            throw new AnimalException("Le numero de registre ne peut etre superieur à 2 147 483 647");
         return daoAnimal.getUnAnimal(numRegistre);
     }
 
@@ -81,6 +85,10 @@ public class Business {
     }
 
     public SoinAvance getUnSoinAvance(Integer numRegistre) throws SoinException, SingletonConnectionException{
+        if(numRegistre <= 0)
+            throw new SoinException("Le numero de registre ne peut être plus petit que 0 !");
+        if(numRegistre > 2147483647)
+            throw new SoinException("Le numero de registre ne peut être plus grand que 2147483647 !");
         return daoSoinAvance.getUnSoinAvance(numRegistre);
     }
 
@@ -205,14 +213,14 @@ public class Business {
     }
 
     //fermer connexion
-    public void closeBaseDeDonnees() throws SingletonConnectionException, ConnexionException{
+    public void closeBaseDeDonnees() throws ConnexionException{
         try{
             if(connectionUnique == null){
                 connectionUnique = SingletonConnection.getUniqueInstance();
             }
             connectionUnique.close();
-        }catch (SingletonConnectionException e) {
-            throw new SingletonConnectionException();
+        }catch (ConnexionException e) {
+            throw new ConnexionException("Erreur lors de la fermeture de la connexion !");
         }
         catch(SQLException e){
             throw new ConnexionException("Erreur lors de la fermeture de la connexion !");

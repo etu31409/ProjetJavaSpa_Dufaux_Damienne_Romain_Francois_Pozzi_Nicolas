@@ -15,7 +15,7 @@ public class DBDAOAnimal implements IAnimal {
     private ResultSet data;
 
     //get
-    public ArrayList<Animal> getAnimaux() throws AnimalException, SingletonConnectionException {
+    public ArrayList<Animal> getAnimaux() throws AnimalException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -91,7 +91,7 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    public Animal getUnAnimal(Integer numRegistre) throws SingletonConnectionException, AnimalException {
+    public Animal getUnAnimal(Integer numRegistre) throws ConnexionException, AnimalException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -167,7 +167,7 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, SingletonConnectionException {
+    public ArrayList<Animal> getAnimauxTries(String critere) throws AnimalException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -266,7 +266,7 @@ public class DBDAOAnimal implements IAnimal {
 
     //recherches
     public ArrayList<Animal> getResultatRecherchAnimauxVeterinaire(Veterinaire selectionVeterinaire) throws AnimalException,
-            SingletonConnectionException {
+            ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -302,7 +302,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     public ArrayList<Animal> getResultatRecherchAnimauxMedicamentVeto(Medicament selectionMedicament,
-                               Veterinaire selectionVeterinaire) throws AnimalException, SingletonConnectionException {
+                               Veterinaire selectionVeterinaire) throws AnimalException, ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -345,7 +345,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     public ArrayList<Animal> getResultatRecherchAnimauxMedicament(Medicament selectionMedicament) throws AnimalException,
-            SingletonConnectionException {
+            ConnexionException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -383,7 +383,7 @@ public class DBDAOAnimal implements IAnimal {
     }
 
     //ajout/suppression/modification
-    public void ajouterAnimal(Animal animal) throws SingletonConnectionException, AnimalException {
+    public void ajouterAnimal(Animal animal) throws ConnexionException, AnimalException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -455,15 +455,12 @@ public class DBDAOAnimal implements IAnimal {
             }
             preparedStatement.executeUpdate();
         }
-        catch(SingletonConnectionException exception){
-            throw new SingletonConnectionException();
-        }
         catch (SQLException e) {
             throw new AnimalException("Impossible d'ajouter l'animal");
         }
     }
 
-    public void supprimerAnimal(Animal animal) throws AnimalException, SingletonConnectionException{
+    public void supprimerAnimal(Animal animal) throws AnimalException, ConnexionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -487,7 +484,7 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    public void modifierAnimal(Animal animal) throws  AnimalException, SingletonConnectionException{
+    public void modifierAnimal(Animal animal) throws  AnimalException, ConnexionException{
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -554,9 +551,6 @@ public class DBDAOAnimal implements IAnimal {
             }
             preparedStatement.setInt(15, animal.getNumRegistre());
             preparedStatement.executeUpdate();
-        }
-        catch(SingletonConnectionException exception){
-            throw new SingletonConnectionException();
         }
         catch (SQLException e) {
             throw new AnimalException("Impossible de modifier l'animal");

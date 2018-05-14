@@ -82,8 +82,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             }
             return soin;
         }
-
-        catch (Exception e) {
+        catch (SQLException e) {
             throw new SoinException("Erreur lors de la récupération d'un soin");
         }
     }
