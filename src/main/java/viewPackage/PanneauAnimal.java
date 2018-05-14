@@ -378,7 +378,7 @@ public class PanneauAnimal extends JPanel {
             }
         } catch (ProprietaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -451,7 +451,7 @@ public class PanneauAnimal extends JPanel {
                     catch(AnimalException exception){
                         JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
                     }
-                    catch(SingletonConnectionException exception){
+                    catch(ConnexionException exception){
                         JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
                     }
                     catch(Exception exception){

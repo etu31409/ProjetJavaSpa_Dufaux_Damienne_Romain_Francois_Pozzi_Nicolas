@@ -85,6 +85,8 @@ public class PanneauFicheDeSoin extends JPanel {
 
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+        }catch(ConnexionException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -100,7 +102,7 @@ public class PanneauFicheDeSoin extends JPanel {
             }
         } catch (VeterinaireException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -113,7 +115,7 @@ public class PanneauFicheDeSoin extends JPanel {
             }
         } catch (AnimalException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -131,7 +133,7 @@ public class PanneauFicheDeSoin extends JPanel {
             listMedicamentsChoisis = new JList(medicamentsChoisisModele);
             listeMedicamentsChoisisJScrollPane.setViewportView(listMedicamentsChoisis);
 
-        } catch (SingletonConnectionException e) {
+        } catch (ConnexionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
         } catch (MedicamentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
@@ -273,7 +275,7 @@ public class PanneauFicheDeSoin extends JPanel {
                     }
                 } catch (SoinException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                } catch (SingletonConnectionException e) {
+                } catch (ConnexionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                 } catch (TextAreaException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
