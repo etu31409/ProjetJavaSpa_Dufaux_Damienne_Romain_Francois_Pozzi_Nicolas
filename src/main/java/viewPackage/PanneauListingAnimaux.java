@@ -4,18 +4,12 @@ import controllerPackage.Controller;
 import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
 import exceptionPackage.ProprietaireException;
-import exceptionPackage.SoinException;
 import modelPackage.AnimalProprietaire;
-import modelPackage.SoinAvance;
 import viewPackage.tableModele.TableModeleListeAnimaux;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.util.*;
 
 public class PanneauListingAnimaux extends JPanel {

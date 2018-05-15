@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 public class PanneauStatMedicaments {
 
     private GregorianCalendar dateDebutZoneRecherche, dateFinZoneRecherche;

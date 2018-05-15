@@ -1,7 +1,6 @@
 package viewPackage.tableModele;
 
 import modelPackage.SoinAnimalVeto;
-import modelPackage.SoinAvance;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

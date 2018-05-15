@@ -1,7 +1,6 @@
 package viewPackage;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GestionChargement extends Thread{
     private JProgressBar barre;

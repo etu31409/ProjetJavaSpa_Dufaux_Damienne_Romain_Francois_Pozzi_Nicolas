@@ -5,9 +5,7 @@ import exceptionPackage.AnimalException;
 import exceptionPackage.ConnexionException;
 import exceptionPackage.SoinException;
 import exceptionPackage.VeterinaireException;
-import modelPackage.AnimalProprietaire;
 import modelPackage.SoinAnimalVeto;
-import modelPackage.SoinAvance;
 import viewPackage.tableModele.TableModeleListeSoins;
 
 import javax.swing.*;

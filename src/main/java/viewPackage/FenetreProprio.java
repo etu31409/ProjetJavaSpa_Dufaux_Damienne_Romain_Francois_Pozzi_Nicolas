@@ -1,7 +1,6 @@
 package viewPackage;
 
 import controllerPackage.Controller;
-import modelPackage.Proprietaire;
 
 import javax.swing.*;
 import java.awt.*;
