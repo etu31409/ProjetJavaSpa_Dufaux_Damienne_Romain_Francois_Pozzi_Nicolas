@@ -40,9 +40,9 @@ public class Business {
 
     public Animal getUnAnimal(Integer numRegistre) throws ConnexionException, AnimalException{
         if(numRegistre <= 0)
-            throw new AnimalException("Le numero de registre doit être supérieur à 0");
+            throw new AnimalException("Le numéro de registre doit être supérieur à 0");
         if(numRegistre > 2147483647)
-            throw new AnimalException("Le numero de registre ne peut etre superieur à 2 147 483 647");
+            throw new AnimalException("Le numéro de registre ne peut être supérieur à 2 147 483 647");
         return daoAnimal.getUnAnimal(numRegistre);
     }
 
@@ -57,6 +57,7 @@ public class Business {
     public void modifierAnimal(Animal animal) throws  AnimalException, ConnexionException{
         daoAnimal.modifierAnimal(animal);
     }
+
     //medicaments
     public ArrayList<Medicament>getMedicaments() throws MedicamentException, ConnexionException {
         return daoMedicament.getMedicaments();
@@ -71,18 +72,12 @@ public class Business {
     }
 
     //ordonnances
-
     public void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, ConnexionException {
         daoOrdonnance.supprimerOrdonnance(soin, medicament);
     }
 
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, ConnexionException{
         daoOrdonnance.ajouterOrdonnance(ordonnance);
-    }
-
-    public void modifierOrdonnances(SoinAvance nouveauSoin)
-            throws OrdonnanceException, ConnexionException {
-        daoOrdonnance.modifierOrdonnances(nouveauSoin);
     }
 
     //soins
@@ -92,9 +87,9 @@ public class Business {
 
     public SoinAvance getUnSoinAvance(Integer numSoin) throws SoinException, ConnexionException{
         if(numSoin <= 0)
-            throw new SoinException("Le numero de registre ne peut être plus petit que 0 !");
+            throw new SoinException("Le numéro de registre ne peut être plus petit que 0 !");
         if(numSoin > 2147483647)
-            throw new SoinException("Le numero de registre ne peut être plus grand que 2147483647 !");
+            throw new SoinException("Le numéro de registre ne peut être plus grand que 2147483647 !");
         return daoSoinAvance.getUnSoinAvance(numSoin);
     }
 
@@ -135,7 +130,6 @@ public class Business {
     }
 
     //recherches
-
     public ArrayList<ProprietaireAnimal> getResultatRechercheProprietaire(Veterinaire selectionVeterinaire) throws ConnexionException, ProprietaireException {
         return daoProprietaire.getResultatRechercheProprietaire(selectionVeterinaire);
     }
@@ -160,9 +154,7 @@ public class Business {
         return daoAnimal.getResultatRecherchAnimauxMedicament(selectionMedicament);
     }
 
-
     //tache metier
-
     public ArrayList<StatMedicament> getStatistiquesMedicaments(GregorianCalendar dateDebutZoneRecherche,
                                                                 GregorianCalendar dateFinZoneRecherche)
             throws ConnexionException, MedicamentException {

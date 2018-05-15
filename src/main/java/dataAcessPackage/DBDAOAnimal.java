@@ -345,7 +345,7 @@ public class DBDAOAnimal implements IAnimal {
             }
             return listeResultatRecherche;
         } catch (SQLException e) {
-            throw new AnimalException("Erreur lors de la récupération de la recherche des animaux en fonction du " +
+            throw new AnimalException("Erreur lors de la récupération de la recherche des animaux en fonction d'un " +
                     "vétérinaire et d'un médicament!");
         }
     }

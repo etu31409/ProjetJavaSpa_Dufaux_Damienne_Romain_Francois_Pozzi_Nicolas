@@ -14,7 +14,6 @@ public class Controller {
         business = new Business();
     }
 
-
     //animaux
     public ArrayList<Animal>getAnimaux() throws AnimalException, ConnexionException {
         return business.getAnimaux();
@@ -62,11 +61,6 @@ public class Controller {
 
     public void ajouterOrdonnance(Ordonnance ordonnance) throws OrdonnanceException, ConnexionException{
         business.ajouterOrdonnance(ordonnance);
-    }
-
-    public void modifierOrdonnances(SoinAvance nouveauSoin)
-            throws OrdonnanceException, ConnexionException {
-        business.modifierOrdonnances(nouveauSoin);
     }
 
     //soins
