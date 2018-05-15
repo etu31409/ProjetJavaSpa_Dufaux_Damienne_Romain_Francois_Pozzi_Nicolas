@@ -4,9 +4,7 @@ public class ConnexionException extends Exception {
     String message;
 
     public ConnexionException(){
-
-        message = "Erreur lors de l'acces à la connexion.";
-
+        message = "Erreur lors de l'accès à la connexion.";
     }
 
     public ConnexionException(String message){

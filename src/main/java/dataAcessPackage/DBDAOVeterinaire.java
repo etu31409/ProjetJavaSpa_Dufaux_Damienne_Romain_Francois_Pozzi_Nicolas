@@ -103,7 +103,7 @@ public class DBDAOVeterinaire implements IVeterinaire{
 
         } catch (SQLException e) {
             throw new VeterinaireException("Erreur lors de la récupération du résultat de la recherche des vétérinaires" +
-                    " en fonction de deux dates");
+                    " qui ont préscrit des ordonnances entre de deux dates");
         }
     }
 }

@@ -90,28 +90,36 @@ public class PanneauListingAnimaux extends JPanel {
             }
             else if(event.getSource() == supprimerButton) {
                 if (resultatRecherche != null) {
-                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible." +
-                                    " Êtes-vous sûr.e de vouloir continuer ?",
-                                    "Veuillez confirmer votre choix",
-                            JOptionPane.YES_NO_OPTION);
-                    if (confirmation == 0) {
-                        try {
-                            modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
-                            Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
-                            AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
-                            controller.supprimerAnimal(animalProprietaire.getNumRegistre());
+                    modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
+                    Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                    if(ligne != -1){
+                        int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible." +
+                                        " Êtes-vous sûr.e de vouloir continuer ?",
+                                "Veuillez confirmer votre choix",
+                                JOptionPane.YES_NO_OPTION);
+                        if (confirmation == 0) {
+                            try {
 
-                            JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de données !",
-                                    "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                            buttonTri.doClick();
-                        } catch (AnimalException e) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
-                                    JOptionPane.ERROR_MESSAGE);
-                        } catch (ConnexionException e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
-                        } catch (Exception e) {
-                            System.out.println("Exception: " + e.getMessage());
+                                AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
+                                controller.supprimerAnimal(animalProprietaire.getNumRegistre());
+
+                                JOptionPane.showMessageDialog(null, "L'animal a été correctement supprimé de la base de données !",
+                                        "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                                buttonTri.doClick();
+                            } catch (AnimalException e) {
+                                JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
+                                        JOptionPane.ERROR_MESSAGE);
+                            } catch (ConnexionException e) {
+                                JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
                         }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Vous devez sélectionner une ligne !", "Erreur !",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -121,20 +129,26 @@ public class PanneauListingAnimaux extends JPanel {
             }
             if(event.getSource() == modifierButton){
                 if(resultatRecherche != null){
-                    try {
-                        modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
-                        Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
-                        AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
+                    modele = (TableModeleListeAnimaux)resultatRecherche.getModel();
+                    Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                    if(ligne != -1){
+                        try {
+                            AnimalProprietaire animalProprietaire = modele.getAnimalProprietaireSelectionne(ligne);
 
-                        fenetrePrincipale.afficherPanneauAnimalPourModifier(controller.getUnAnimal(animalProprietaire.getNumRegistre()));
-                    } catch (AnimalException e) {
-                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
-                                JOptionPane.ERROR_MESSAGE);
-                    } catch (ConnexionException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                            fenetrePrincipale.afficherPanneauAnimalPourModifier(controller.getUnAnimal(animalProprietaire.getNumRegistre()));
+                        } catch (AnimalException e) {
+                            JOptionPane.showMessageDialog(null, "Erreur lors de l'accès aux animaux !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
+                        } catch (ConnexionException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        }
+                        catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !",
+                    else{
+                        JOptionPane.showMessageDialog(null, "Vous devez sélectionner une ligne !", "Erreur !",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }

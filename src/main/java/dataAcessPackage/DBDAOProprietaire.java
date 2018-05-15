@@ -105,7 +105,8 @@ public class DBDAOProprietaire implements IProprietaire{
 
             return listeResultatRecherche;
         } catch (SQLException e) {
-            throw new ProprietaireException("Erreur lors de la récupération de la recherche de propriétaire en fonction du vétérinaire!");
+            throw new ProprietaireException("Erreur lors de la récupération de la recherche des propriétaires en " +
+                    "fonction d'un vétérinaire!");
         }
     }
 
