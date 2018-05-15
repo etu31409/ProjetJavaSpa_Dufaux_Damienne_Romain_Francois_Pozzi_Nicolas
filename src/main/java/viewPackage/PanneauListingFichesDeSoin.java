@@ -83,29 +83,35 @@ public class PanneauListingFichesDeSoin extends JPanel {
                 }
             } else if (event.getSource() == supprimerButton) {
                 if (resultatRecherche != null) {
-                    int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. " +
-                                    "Êtes-vous sûr.e de vouloir continuer ?",
-                            "Veuillez confirmer votre choix",
-                            JOptionPane.YES_NO_OPTION);
-                    if (confirmation == 0) {
-                        try {
-                            modele = (TableModeleListeSoins) resultatRecherche.getModel();
-                            Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
-                            SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
-                            controller.supprimerSoin(soinAnimalVeto.getNumSoin());
-
-                            JOptionPane.showMessageDialog(null, "Le soin a été correctement supprimé de la base de" +
-                                    " données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                            trierButton.doClick();
-                        } catch (SoinException e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
-                        } catch (ConnexionException e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
-                        } catch (Exception exception) {
-                            System.out.println("Exception : " + exception.getMessage());
+                    try {
+                        modele = (TableModeleListeSoins) resultatRecherche.getModel();
+                        Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
+                        if (ligne != -1) {
+                            int confirmation = JOptionPane.showConfirmDialog(null, "La suppression est irréversible. " +
+                                            "Êtes-vous sûr.e de vouloir continuer ?",
+                                    "Veuillez confirmer votre choix",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (confirmation == 0) {
+                                SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
+                                controller.supprimerSoin(soinAnimalVeto.getNumSoin());
+                                JOptionPane.showMessageDialog(null, "Le soin a été correctement supprimé de la base de" +
+                                        " données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                                trierButton.doClick();
+                            }
                         }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Vous devez sélectionner un élément dans la liste !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SoinException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (ConnexionException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (Exception exception) {
+                        JOptionPane.showMessageDialog(null, "Une erreur inattendue est survenue");
                     }
-                } else {
+                }
+                else {
                     JOptionPane.showMessageDialog(null, "Vous devez sélectionner un élément dans la liste !", "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -114,9 +120,14 @@ public class PanneauListingFichesDeSoin extends JPanel {
                     try {
                         modele = (TableModeleListeSoins) resultatRecherche.getModel();
                         Integer ligne = resultatRecherche.getSelectionModel().getMinSelectionIndex();
-                        SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
-
-                        fenetrePrincipale.afficherPanneauSoinPourModifier(controller.getUnSoinAvance(soinAnimalVeto.getNumSoin()));
+                        if (ligne != -1) {
+                            SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
+                            fenetrePrincipale.afficherPanneauSoinPourModifier(controller.getUnSoinAvance(soinAnimalVeto.getNumSoin()));
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Vous devez sélectionner un élément dans la liste !", "Erreur !",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
                     } catch (SoinException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
                     } catch (ConnexionException e) {
