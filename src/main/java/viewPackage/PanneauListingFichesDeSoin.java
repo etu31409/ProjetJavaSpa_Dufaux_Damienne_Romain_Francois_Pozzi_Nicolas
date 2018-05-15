@@ -94,7 +94,7 @@ public class PanneauListingFichesDeSoin extends JPanel {
                             SoinAnimalVeto soinAnimalVeto = modele.getSoinAnimalVetoSelectionne(ligne);
                             controller.supprimerSoin(soinAnimalVeto.getNumSoin());
 
-                            JOptionPane.showMessageDialog(null, "Le soin a été correctemen supprimé de la base de" +
+                            JOptionPane.showMessageDialog(null, "Le soin a été correctement supprimé de la base de" +
                                     " données !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                             trierButton.doClick();
                         } catch (SoinException e) {

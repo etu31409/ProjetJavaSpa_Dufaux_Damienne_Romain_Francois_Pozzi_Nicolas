@@ -436,25 +436,30 @@ public class PanneauAnimal extends JPanel {
                     try{
                         if (modification){
                             controller.modifierAnimal(creationAnimal());
-                                JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié de la base de donnée !",
+                                JOptionPane.showMessageDialog(null, "L'animal a été correctement modifié dans la base " +
+                                                "de donnée !",
                                     "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                             fenetre.afficherListingAnimaux();
                         }
                         else {
                             controller.ajouterAnimal(creationAnimal());
-                            JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à la base de données !",
+                            JOptionPane.showMessageDialog(null, "La fiche de l'animal a été correctement ajoutée à " +
+                                            "la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                             reinitialisation();
                         }
                     }
                     catch(AnimalException exception){
-                        JOptionPane.showMessageDialog(null, "Animal exception :" + exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès à l'animal :"
+                                + exception.getMessage());
                     }
                     catch(ConnexionException exception){
-                        JOptionPane.showMessageDialog(null, "Singleton exception :" + exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Erreur lors de l'accès à la base de données :"
+                                + exception.getMessage());
                     }
                     catch(Exception exception){
-                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Une erreur imprévue semble être survenue !",
+                                "Erreur !", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else {

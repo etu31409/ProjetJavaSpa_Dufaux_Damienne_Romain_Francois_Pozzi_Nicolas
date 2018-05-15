@@ -59,7 +59,7 @@ public class PanneauRechercheVeterinaires{
         public void actionPerformed(ActionEvent event){
 
             TableModeleRechercheVeterinaires modele;
-            ArrayList<VeterinaireOrdonnance> resultatRequeteRecherche = new ArrayList<>();
+            ArrayList<VeterinaireOrdonnance> resultatRequeteRecherche;
 
             if(event.getSource() == rechercherButton){
                 try {
@@ -78,7 +78,8 @@ public class PanneauRechercheVeterinaires{
                         dateFinZoneRecherche.setTime((Date)dateDeFinSpinner.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
-                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin", "Erreur !", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "La date de début ne peut être postérieure à la date de fin",
+                                "Erreur !", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 

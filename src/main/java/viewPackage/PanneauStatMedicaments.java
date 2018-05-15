@@ -75,14 +75,14 @@ public class PanneauStatMedicaments {
                         dateFinZoneRecherche.setTime((Date) spinnerDateFin.getValue());
                     }
                     if (dateDebutZoneRecherche.getTimeInMillis() > dateFinZoneRecherche.getTimeInMillis()) {
-                        JOptionPane.showMessageDialog(null, "La date de debut ne peut être postérieure à la date de fin",
+                        JOptionPane.showMessageDialog(null, "La date de début ne peut être postérieure à la date de fin",
                         "Attention!", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
                     TableColumn colonne;
                     TableModeleStatistiquesMed modele;
-                    ArrayList<StatMedicament> stats = new ArrayList<>();
+                    ArrayList<StatMedicament> stats;
 
                     stats = controller.getStatistiquesMedicaments(dateDebutZoneRecherche,
                             dateFinZoneRecherche);

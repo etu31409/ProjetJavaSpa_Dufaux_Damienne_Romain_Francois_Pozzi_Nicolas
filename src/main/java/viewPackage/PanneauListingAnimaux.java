@@ -139,7 +139,7 @@ public class PanneauListingAnimaux extends JPanel {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Vous devez selectionner un élément dans la liste !",  "Erreur !",
+                    JOptionPane.showMessageDialog(null,"Vous devez sélectionner un élément dans la liste !",  "Erreur !",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }

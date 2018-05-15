@@ -292,7 +292,7 @@ public class PanneauFicheDeSoin extends JPanel {
 
                             controller.modifierSoin(soinAvanceAModifier);
 
-                            JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée à la base de données !",
+                            JOptionPane.showMessageDialog(null, "La fiche de soin a été correctement modifiée dans la base de données !",
                                     "Confirmation!", JOptionPane.INFORMATION_MESSAGE);
                             fenetre.afficherListingFichesDeSoin();
                         }

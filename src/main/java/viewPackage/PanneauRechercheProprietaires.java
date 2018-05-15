@@ -50,7 +50,7 @@ public class PanneauRechercheProprietaires{
         public void actionPerformed(ActionEvent event) {
 
             TableModeleRechercheProprietaires modele;
-            ArrayList<ProprietaireAnimal> resultatRequeteRecherche = new ArrayList<>();
+            ArrayList<ProprietaireAnimal> resultatRequeteRecherche;
 
             if (event.getSource() == rechercheButton) {
                 try {
