@@ -167,7 +167,8 @@ public class DBDAOAnimal implements IAnimal {
         }
     }
 
-    public ArrayList<AnimalProprietaire> getAnimauxTries(String critere) throws AnimalException, ConnexionException, ProprietaireException {
+    public ArrayList<AnimalProprietaire> getAnimauxTries(String critere)
+            throws AnimalException, ConnexionException, ProprietaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -280,13 +281,13 @@ public class DBDAOAnimal implements IAnimal {
 
             ArrayList<Animal> listeResultatRecherche = new ArrayList<>();
 
-            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, spabd.animal.race, \n" +
-                    "spabd.soinAvance.dateSoin\n" +
-                    "from spabd.veterinaire\n" +
-                    "inner join spabd.soinAvance\n" +
-                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto)\n" +
-                    "inner join spabd.animal\n" +
-                    "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre)\n" +
+            sqlInstruction = "select distinct spabd.animal.numRegistre, spabd.animal.nom\n, spabd.animal.espece, " +
+                    "spabd.animal.race, spabd.soinAvance.dateSoin \n" +
+                    "from spabd.veterinaire \n" +
+                    "inner join spabd.soinAvance \n" +
+                    "on (spabd.veterinaire.identifiantVeto = spabd.soinAvance.identifiantVeto) \n" +
+                    "inner join spabd.animal \n" +
+                    "on (spabd.animal.numRegistre = spabd.soinAvance.numRegistre) \n" +
                     "where spabd.veterinaire.identifiantVeto = ?;";
 
             PreparedStatement statement = connectionUnique.prepareStatement(sqlInstruction);

@@ -88,7 +88,9 @@ public class PanneauRechercheVeterinaires{
 
                     modele = new TableModeleRechercheVeterinaires(resultatRequeteRecherche);
                     resultatRecherche = new JTable(modele);
-                    resultatRecherche.setAutoCreateRowSorter(true);
+
+                    //resultatRecherche.setAutoCreateRowSorter(true);
+                    //ne fonctionne pas sur les Gregorian Calendar
 
                     resultatRecherche.setDefaultRenderer(String.class, modele.getCenterRenderer());
                     resultatRecherche.setDefaultRenderer(Integer.class, modele.getCenterRenderer());

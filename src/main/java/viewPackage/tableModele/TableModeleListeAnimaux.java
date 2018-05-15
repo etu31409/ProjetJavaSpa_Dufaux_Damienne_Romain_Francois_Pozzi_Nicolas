@@ -28,7 +28,7 @@ public class TableModeleListeAnimaux  extends AbstractTableModel {
         nomDesColonnes.add("Stérilisé.e");
         nomDesColonnes.add("Couleur");
         nomDesColonnes.add("Date de naissance");
-        nomDesColonnes.add("Poids");
+        nomDesColonnes.add("Poids (kg)");
         nomDesColonnes.add("Propriétaire");
         nomDesColonnes.add("Numéro de puce");
         nomDesColonnes.add("Localisation de la puce");
