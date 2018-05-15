@@ -51,7 +51,8 @@ public class DBDAOSoinAvance implements ISoinAvance {
         }
     }
 
-    public ArrayList<SoinAnimalVeto> getSoinsTries(String critere) throws SoinException, ConnexionException, AnimalException, VeterinaireException {
+    public ArrayList<SoinAnimalVeto> getSoinsTries(String critere) throws SoinException, ConnexionException,
+            AnimalException, VeterinaireException {
         try {
             if (connectionUnique == null) {
                 connectionUnique = SingletonConnection.getUniqueInstance();
@@ -149,7 +150,7 @@ public class DBDAOSoinAvance implements ISoinAvance {
             return numSoinMax;
 
         } catch (SQLException e) {
-            throw new SoinException("Erreur lors de l'insertion d'un soin avancé");
+            throw new SoinException("Erreur lors de l'insertion du soin");
         }
     }
 

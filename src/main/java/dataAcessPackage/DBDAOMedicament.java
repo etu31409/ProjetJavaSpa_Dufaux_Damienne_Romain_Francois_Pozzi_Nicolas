@@ -71,7 +71,7 @@ public class DBDAOMedicament implements IMedicament {
             return listeMedicamensDeLaFicheDeSoin;
         }
         catch (SQLException e) {
-            throw new MedicamentException("Impossible de récuperer un médicament dans la base de données");
+            throw new MedicamentException("Impossible de récupérer un médicament dans la base de données");
         }
     }
 

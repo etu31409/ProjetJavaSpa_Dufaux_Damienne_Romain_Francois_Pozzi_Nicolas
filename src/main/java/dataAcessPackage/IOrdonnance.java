@@ -12,7 +12,4 @@ public interface IOrdonnance {
 
     //suppression
     void supprimerOrdonnance(SoinAvance soin, Medicament medicament) throws OrdonnanceException, ConnexionException;
-
-    //modification
-    void modifierOrdonnances(SoinAvance nouveauSoin) throws OrdonnanceException, ConnexionException;
 }

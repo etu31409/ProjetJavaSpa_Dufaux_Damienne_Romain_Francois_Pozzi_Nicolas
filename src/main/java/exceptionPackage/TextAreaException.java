@@ -21,6 +21,4 @@ public class TextAreaException extends Exception{
         {
             return message;
         }
-
-
 }
